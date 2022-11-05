@@ -185,6 +185,29 @@ class BasePage {
     async scrollUpOrDown(vertical){
         await this.driver.executeScript(`window.scrollBy(0,${vertical}), ""`);
     }
+
+    async sentKeysToChildByIndexAndParentIndex(locator, parentIndex, childIndex, keys) {
+        let parent = await this.findAll(locator);
+        let children = await parent[parentIndex].findElements(By.xpath("./child::*"));
+        return await children[childIndex].sendKeys(keys);
+    }
+
+    async returnImgSrcAttribute(locator){
+        await this.timeout(2000)
+        let img = await this.find(locator);
+        return await img.getAttribute('src');
+    }
+
+    async getPlaceholderTextFromInputByIndex(locator, index){
+        let inputs =  await this.findAll(locator);
+        let input = inputs[index];
+        return input.getAttribute("placeholder");
+    }
+
+    async getSubstringOfPriceString(locator){
+        let result = await this.getElementText(locator);
+        return result.substring(1);
+    }
     
 }
 

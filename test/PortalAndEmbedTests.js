@@ -21,6 +21,10 @@
     const TicketsComponent = require("../embed/embedComponents/TicketsComponent");
     const EmbeddingPage = require("../portal/eventOverview/DesignNav/EmbeddingPage");
     const Files = require('../dummy/Files')
+    const SummaryComponent = require("../embed/embedComponents/SummaryComponent");
+    const AddMoneyComponent = require("../embed/embedComponents/AddMoneyComponent")
+    const PaymentPage = require('../embed/embedPages/PaymentPage')
+    const EmbedOrderDetailsPage = require("../embed/embedPages/EmbedOrderDetailsPage");
 
     describe('Should do embed tests', function () {
         this.timeout(500000);
@@ -47,6 +51,10 @@
         let ticketSettings;
         let taxesAndFees;
         let eventTickets;
+        let summary;
+        let addMoney;
+        let payment;
+        let orderDetails;
         
         let base = 855130 // Math.floor(100000 + Math.random() * 900000);
         let eventName =  base.toString() + " FullEventName";
@@ -60,10 +68,8 @@
         let customerPassword = base.toString() + 'Password';
 
         beforeEach(async function(){
-           
             driver = new Builder().forBrowser('chrome')
-                 .setChromeOptions(new chrome.Options().addArguments('--headless'))
-                .build();
+            .setChromeOptions(new chrome.Options().addArguments('--headless')).build();
             await driver.manage().window().setRect({width: 1300, height: 1080});
         });
 
@@ -71,7 +77,7 @@
             await driver.quit()
         })
 
-       
+       /*
         //PORTAL
         it('Test_01 - should create new event and verify data in events page and General Details',async function () {
             portalLogin = new PortalLoginPage(driver);
@@ -88,7 +94,7 @@
             await createEvent.createEventModalIsDisplayed();
             await createEvent.fillFormWithValidDataAndSave(eventName,shortName);
         });
-        
+        */
         //PORTAL
         it('Test_02 - should create first ticket and check data in tickets table and update modal ',async function () {
 
@@ -119,7 +125,7 @@
             await createTicket.createFirstTicketAndAssertDataOnTicketsAndUpdate(ticketOneName,ticketOnePrice,embedTicketQuantity);
 
         });
-        
+        /*
         //PORTAL -> EMBED
         it('Test_03 - should make embed view for event', async function () {
             portalLogin = new PortalLoginPage(driver);
@@ -157,7 +163,7 @@
             await main.isInFrame(eventName);
 
         });
-        
+        */
         //EMBED
         it('Test_04 - should get no tickets available message on embed when tickets are not activated ',async function () {
 
@@ -395,6 +401,124 @@
             await createTicket.assertBuyerTotalEqualsTicketPriceMultipliedByTaxPercentageAndAdded$Fee(savedTaxValue, saved$FeeValue);
 
         });
+
+        //EMBED
+        it('Test_11 - should calculate subtotal and total on one ticket quantity 2 with tax and fee in embed', async function () {
+
+            main = new EmbedMainPage(driver);
+            embedTickets = new TicketsComponent(driver);
+            summary = new SummaryComponent(driver);
+
+            await main.openEmbedPage();
+            await main.switchToIframe();
+            await main.isInFrame(eventName);
+            await embedTickets.sentKeysToTicketInputByTicketName(ticketOneName, '2');
+            await summary.calculateSubtotalAndTotalBeforeDonationIsAdded();
+        });
+
+        //EMBED
+        it('Test_12 - should check if subtotal equals before and after login on embed', async function () {
+
+            main = new EmbedMainPage(driver);
+            embedTickets = new TicketsComponent(driver);
+            summary = new SummaryComponent(driver);
+            embedLogin = new LoginPage(driver);
+
+            await main.openEmbedPage();
+            await main.switchToIframe();
+            await main.isInFrame(eventName);
+            await embedTickets.sentKeysToTicketInputByTicketName(ticketOneName, '2');
+            let ticketsTotal = await summary.getTicketsTotal();
+            let ticketsSubtotal = await summary.getSubtotalValue();
+            let taxes = await summary.getTaxesValue();
+            let fees = await summary.getFeesValue();
+            let total = await summary.getTotalValue();
+            await main.clickNextPageButton();
+            await embedLogin.isAtLoginPage();
+            await embedLogin.loginWithVerifiedAccount(customerEmail, customerPassword);
+            await embedTickets.ticketListIsDisplayed();
+            await summary.assertSummaryEqualsBeforeSignIn( ticketsTotal, ticketsSubtotal, taxes, fees, total);
+
+        });
+
+        //EMBED
+        it('Test_13 - should assert elements on Add Money component in embed', async function () {
+
+            main = new EmbedMainPage(driver);
+            embedTickets = new TicketsComponent(driver);
+            embedLogin = new LoginPage(driver);
+            addMoney = new AddMoneyComponent(driver)
+
+            await main.openEmbedPage();
+            await main.switchToIframe();
+            await main.isInFrame(eventName);
+            await embedTickets.sentKeysToTicketInputByTicketName(ticketOneName, '2');
+            await main.clickNextPageButton();
+            await embedLogin.isAtLoginPage();
+            await embedLogin.loginWithVerifiedAccount(customerEmail, customerPassword);
+            await embedTickets.ticketListIsDisplayed();
+            await main.clickNextPageButton();
+            await addMoney.assertAddMoneyComponentElements();
+
+        });
+
+        //EMBED
+        it('Test_14 - should assert elements on Payment screen component in embed when user has no cards', async function () {
+
+            main = new EmbedMainPage(driver);
+            embedTickets = new TicketsComponent(driver);
+            embedLogin = new LoginPage(driver);
+            addMoney = new AddMoneyComponent(driver)
+            payment = new PaymentPage(driver);
+
+            await main.openEmbedPage();
+            await main.switchToIframe();
+            await main.isInFrame(eventName);
+            await embedTickets.sentKeysToTicketInputByTicketName(ticketOneName, '2');
+            await main.clickNextPageButton();
+            await embedLogin.isAtLoginPage();
+            await embedLogin.loginWithVerifiedAccount(customerEmail, customerPassword);
+            await embedTickets.ticketListIsDisplayed();
+            await main.clickNextPageButton();
+            await addMoney.addMoneyComponentIsDisplayed();
+            await main.clickNextPageButton();
+            await payment.isAtPaymentPage();
+            await payment.confirmElementsOnPayWithCardOrServiceTab();
+            await payment.clickNewCardTab();
+            await payment.isOnPayWithNewCardTab();
+            await payment.confirmElementsOnPayWithNewCardTab();
+
+        });
+
+        //EMBED
+        it('Test_15 - should assert elements on Order Details screen when payment with wallet', async function () {
+
+            main = new EmbedMainPage(driver);
+            embedTickets = new TicketsComponent(driver);
+            embedLogin = new LoginPage(driver);
+            addMoney = new AddMoneyComponent(driver)
+            payment = new PaymentPage(driver);
+            orderDetails = new EmbedOrderDetailsPage(driver);
+
+            await main.openEmbedPage();
+            await main.switchToIframe();
+            await main.isInFrame(eventName);
+            await embedTickets.sentKeysToTicketInputByTicketName(ticketOneName, '2');
+            await main.clickNextPageButton();
+            await embedLogin.isAtLoginPage();
+            await embedLogin.loginWithVerifiedAccount(customerEmail, customerPassword);
+            await embedTickets.ticketListIsDisplayed();
+            await main.clickNextPageButton();
+            await addMoney.addMoneyComponentIsDisplayed();
+            await main.clickNextPageButton();
+            await payment.isAtPaymentPage();
+            await payment.clickPayWithWalletButton();
+            await main.clickNextPageButton();
+            await orderDetails.isOnOrderDetailsPage();
+            await orderDetails.assertElementsWhenOneTicketIsSelected(ticketOneName);
+
+        });
+
 
 
     });
