@@ -1,7 +1,6 @@
-﻿const {By, Key} = require("selenium-webdriver");
+﻿const {By} = require("selenium-webdriver");
 const until = require('selenium-webdriver').until;
 const moment = require('moment');
-const path = require('path');
 
 
 class BasePage {
@@ -12,39 +11,7 @@ class BasePage {
     async visit(url) {
         await this.driver.get(url)
     }
-
-
-    async loginWithFacebookEmailAndPassword(emailLocator,email,passwordLocator,password,loginButton){
-        await this.sentKeys(emailLocator,email);
-        await this.sentKeys(passwordLocator,password);
-        await this.click(loginButton);
-    }
-
-    async switchToFacebookWindow(locator){
-        const originalWindow = await this.driver.getWindowHandle();
-        await this.timeout(2000)
-        await this.click(locator);
-        await this.driver.wait(
-            async () => (await this.driver.getAllWindowHandles()).length === 2,
-            10000
-        );
-        const windows = await this.driver.getAllWindowHandles();
-        for (const window of windows) {
-            if (window !== originalWindow) {
-                await this.driver.switchTo().window(window);
-            }
-        }
-    }
-
-    async switchToNewlyOpenedWindowOrTab(originalWindow){
-        const windows = await this.driver.getAllWindowHandles();
-        for (const window of windows) {
-            if (window !== originalWindow) {
-                await this.driver.switchTo().window(window);
-            }
-        }
-    }
-
+    
     find(locator) {
         return this.driver.findElement(locator)
     }
@@ -63,33 +30,11 @@ class BasePage {
         await this.find(locator).click()
     }
 
-    async locateElementByTextAndClick(text){
-        let element = await this.driver.findElement(By.xpath("//*[text()='"+text+"']"));
-        await element.click();
-    }
-
     async clickElementByLinkText(text){
         let element = await this.driver.findElement(By.linkText(text));
         await element.click();
     }
     
-    async locateSingleElementByText(text){
-        return await this.driver.findElement(By.xpath("//*[text()='" + text + "']"));
-    }
-
-    async returnImgSrcAttribute(locator){
-        await this.timeout(2000)
-        let img = await this.find(locator);
-        return await img.getAttribute('src');
-    }
-
-    async returnImgSrcAttributeByIndex(locator, index){
-        await this.timeout(2000);
-        let images = await this.findAll(locator);
-        let img = await images[index];
-        return await img.getAttribute('src');
-    }
-
     async numberWithCommas(locator) {
         let x = await this.getEnteredTextInTheInput(locator);
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -117,78 +62,19 @@ class BasePage {
         return '$'+number;
     }
 
-    async elementByTextIsDisplayed(text){
-        await this.isDisplayed(this.driver.findElement(By.xpath("//*[text()=' "+text+" ']")));
-    }
-    async elementByTextWithoutSpacesIsDisplayed(text){
-        await this.isDisplayed(this.driver.findElement(By.xpath("//*[text()='"+text+"']")));
-    }
-
-    async clickBackspaceKey(locator){
-        await this.sentKeys(locator, Key.BACK_SPACE);
-    }
-
     async getEnteredTextInTheInput(locator){
         let input =  await this.find(locator);
         return input.getAttribute("value");
     }
-    async getEnteredTextInTheInputByIndex(locator, index){
-        let inputs =  await this.findAll(locator);
-        let input = inputs[index];
-        return input.getAttribute("value");
-    }
-    async getPlaceholderTextFromInputByIndex(locator, index){
-        let inputs =  await this.findAll(locator);
-        let input = inputs[index];
-        return input.getAttribute("placeholder");
-    }
-
-
-    async getTextValueFromElementOfArray(locator, index){
-        let inputs =  await this.findAll(locator);
-        return inputs[index].getAttribute("value");
-    }
-    async getTextFromElementOfArray(locator, index){
-        let elements =  await this.findAll(locator);
-        return await elements[index].getText();
-    }
+    
 
     async clearInputField(locator){
         let element = await this.find(locator);
         await element.clear();
         await this.timeout(500)
     }
-    async clearInputFieldByIndex(locator,index){
-        let elements = await this.findAll(locator);
-        let element = await elements[index];
-        await element.clear();
-    }
-
-    async clearInputFieldByIndexAndSendKeys(locator , index, keys){
-        let elements = await this.findAll(locator);
-        let element = elements[index];
-        await element.clear();
-        await element.sendKeys(keys);
-    }
-
-    async getRawTicketPrice(locator, index){
-        let tickets = await this.findAll(locator);
-        return await tickets[index].getText();
-    }
-
-    async getChildTextByParentIndexAndChildIndex(locator, parentIndex, childIndex) {
-        let parent = await this.findAll(locator);
-        let children = await parent[parentIndex].findElements(By.xpath("./child::*"));
-        return await children[childIndex].getText();
-    }
-
-    async sentKeysToChildByIndexAndParentIndex(locator, parentIndex, childIndex, keys) {
-        let parent = await this.findAll(locator);
-        let children = await parent[parentIndex].findElements(By.xpath("./child::*"));
-        return await children[childIndex].sendKeys(keys);
-    }
-
-
+    
+   
     async getElementFromAnArrayByIndex(locator, index){
         let elements = await this.findAll(locator);
         return await elements[index];
@@ -202,51 +88,12 @@ class BasePage {
         let element = await this.getElementFromAnArrayByIndex(locator, index);
         await element.sendKeys(keys);
     }
-    async elementFromArrayOfElementsIsDisplayed(locator,index){
-        let element = await this.getElementFromAnArrayByIndex(locator, index);
-        await this.isDisplayed(locator,5000);
-    }
-
+    
     async getElementText(locator) {
         return await this.find(locator).getText();
     }
 
-    async getFontColorFromAnArray(locator, index){
-        let elements = await this.findAll(locator)
-        return elements[index].getCssValue('color')
-    }
-
-    async getFontTextDecorationFromAnArray(locator, index){
-        let elements = await this.findAll(locator)
-        return elements[index].getCssValue('text-decoration')
-    }
-
-    async getBackgroundFromAnArray(locator, index){
-        let elements = await this.findAll(locator)
-        return elements[index].getCssValue('background-color')
-    }
-
-
-
-    async checkIfClassIsApplied(locator, index, clas){
-        await this.timeout(1000);
-        let seperated = [];
-        let elements = await this.findAll(locator);
-        let element = elements[index];
-        let classes = await element.getAttribute('class');
-        let clases = classes.split(' ');
-        for (const item of clases) {
-            seperated.push(item)
-        }
-        let i = seperated.length;
-        while (i--){
-            if(seperated[i] === clas){
-                return true;
-            }
-        }
-        return false;
-    }
-
+    
     async returnIndexWhenTextIsKnown(locator,text){
         let array = await this.findAll(locator)
         for(let i = 0; i < array.length; i++){
@@ -260,94 +107,11 @@ class BasePage {
         let elements = await this.findAll(locator);
         return await elements[index].getText();
     }
-
-    async getElementTextForTheLastElementFromAnArray(locator){
-        let elements = await this.findAll(locator);
-        let element = await elements[elements.length - 1]
-        return element.getText();
-    }
-
-    async returnArrayOfStrings(locator){
-        let array = [];
-        let elements = await this.findAll(locator);
-        for(let i = 0; i < elements.length; i++){
-            let string = await elements[i].getText();
-            array.push(string);
-        }
-        return array;
-    }
     
-
-    async getSubstringOfPriceString(locator){
-        let result = await this.getElementText(locator);
-        return result.substring(1);
-    }
-
-    async getSubstringOfBracketedPriceString(locator,index){
-        let result = await this.getRawTicketPrice(locator,index);
-        return result.substring(2, result.length - 1);
-    }
-
-    async convertStringArrayToNumberWithLocator(locator){
-        let converted = [];
-        let original = await this.findAll(locator);
-        for (let i = 0; i < original.length ; i++){
-            let elementText = await this.getElementTextFromAnArrayByIndex(locator, i);
-            if(elementText.includes('$')){
-                elementText = elementText.substring(1);
-            }
-            let elementNumber = await parseFloat(elementText);
-            converted.push(elementNumber);
-        }
-        return converted;
-    }
-
-    async convertAndCalculateStringArrayToNumberWithArray(array){
-        let total = 0;
-
-        for (let i = 0; i < array.length ; i++){
-            let stringNumber = parseInt(array[i]);
-            total = total + stringNumber;
-        }
-        return total;
-    }
-
-   
     async sentKeys(locator, inputText) {
         await this.find(locator).sendKeys(inputText)
     }
-
-    async convertPriceStringToDouble(priceString){
-        if(priceString[0] === "$"){
-            priceString = priceString.substring(1);
-        }
-        let convertedPrice = await parseFloat(priceString);
-        let price = await convertedPrice.toFixed(2)
-        return price;
-    }
-
-   
-    async dragAndDropWithLocators(sourceLocator, targetLocator){
-        let source = await this.find(sourceLocator);
-        let target = await this.find(targetLocator);
-        const actions = this.driver.actions();
-        await actions.move({duration:1000,origin:source,x:3,y:3}).press().perform();
-        await actions.dragAndDrop(source, target).perform();
-    }
-
-    async dragAndDropWithElements(source, target){
-        const actions = this.driver.actions();
-        await actions.move({duration:1000,origin:source,x:3,y:3}).press().perform();
-        await actions.dragAndDrop(source, target).perform();
-    }
-
-   
-
-    async clickEnterKey(locator){
-        let element = await this.find(locator);
-        await element.sendKeys(Key.ENTER)
-    }
-
+    
     async moveToElement(locator) {
         const actions = this.driver.actions({bridge: true});
         let element = await this.find(locator);
@@ -360,50 +124,18 @@ class BasePage {
         let element = elements[index];
         await actions.move({duration:1000,origin:element,x:0,y:0}).perform();
     }
-
+    
    
-
-    async scrollUpOrDown(vertical){
-        await this.driver.executeScript(`window.scrollBy(0,${vertical}), ""`);
-    }
-
-   
-
     async scrollToView(locator){
         let element = await this.find(locator)
         await this.driver.executeScript("arguments[0].scrollIntoView();", element);
     }
-
-   
-
+    
     async switchToAnIframe(locator){
         let frame = await this.find(locator)
         await this.driver.switchTo().frame(frame);
     }
-
-    async acceptAlert(){
-        await this.driver.wait(until.alertIsPresent());
-        let alert = await this.driver.switchTo().alert();
-        await alert.accept();
-        await this.timeout(500);
-    }
-
-    async getOriginalWindowOrTab(){
-        return await this.driver.getWindowHandle();
-    }
     
-
-    async elementIsEnabled(locator){
-        let element = await this.find(locator);
-        return element.isEnabled();
-    }
-
-    async elementIsEnabledByIndexOfArray(locator,index){
-        let elements = await this.findAll(locator);
-        let element = elements[index];
-        return element.isEnabled();
-    }
-
     async isDisplayed(locator,timeout) {
         if (timeout){
             await this.driver.wait(until.elementLocated(locator), timeout)
@@ -419,21 +151,10 @@ class BasePage {
             }
         }
     }
-
-   
-
     async timeout(ms) {
         return await new Promise(resolve => setTimeout(resolve, ms));
     }
-
-    async dateTimeNow(){
-        let timeOffset = moment().utcOffset();
-        let gmt = "GMT" + (timeOffset/60).toString();
-        let dateTime = moment().format('MMMM DD, h:mm A');
-        return dateTime + " " + gmt;
-    }
-
-
+    
 }
 
 module.exports = BasePage;

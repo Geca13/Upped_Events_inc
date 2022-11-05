@@ -1,14 +1,9 @@
     const BasePage = require('../../BasePage');
     const NEXT_MONTH_BUTTON = { css: "button[aria-label='Next month']" };
-    const PREVIOUS_MONTH_BUTTON = { css: "button[aria-label='Previous month']" };
     const DAY_13_OF_MONTH = { xpath: "//*[text()='13']"};
     const SET_DATE_TIME_BUTTON = { xpath: "//*[normalize-space(text())='Set']"};
-    const CANCEL_DATE_TIME_BUTTON = { xpath: "//*[text()='Cancel']"};
     const HOUR_MINUTES_INPUTS = { className: "owl-dt-timer-input" }; //list
-    const PM_BUTTON = { xpath: "//*[text()=' PM ']"};
-    const SELECTED_DAY_BUTTON = { className: "owl-dt-calendar-cell-selected" };
     const TODAY_DAY_BUTTON = { xpath: "//span[contains(@class , 'owl-dt-calendar-cell-today')]" };
-    const MONTH_YEAR_BUTTON = { xpath: "//button[@aria-label='Choose month and year']//span[contains(@class, 'owl-dt-control-content')]" };
     const ADD_HOURS_BUTTON = { css: "button[aria-label='Add a hour']" };
 
 

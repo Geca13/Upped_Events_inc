@@ -2,7 +2,6 @@
     const { By } = require('selenium-webdriver');
     const assert = require('assert')
     const EVENTS_TABLE = { xpath: "//dashboard-events-page" }
-    //const EVENTS_NAMES_SPANS = { xpath: "//td/a/span"}
     const EVENTS_NAMES_SPANS = { xpath: "//td[contains(@class , 'column-eventname')]//a[contains(@class , 'table-ticket-name')]//span" };
     const EVENTS_ADDRESSES = { xpath: "//td[contains(@class , 'column-eventaddress ')]//span" }
     const ADDRESS_TOOLTIP = { xpath: "//div[@class='tooltip-inner']//p"}
