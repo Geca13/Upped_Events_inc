@@ -10,6 +10,8 @@
     const TICKET_START_DATE_INPUT = { id: 'startDate' }
     const TICKET_END_DATE_INPUT = { id: 'endDate' }
     const SAVE_TICKET_BUTTON = { xpath: "//*[text()=' Save ']"};
+    const CANCEL_BUTTON = { xpath: "//button[@type='reset']" };
+    const BUYER_TOTAL_VALUE = { xpath: "//span[contains(@class , 'price')]" }
 
 
 
@@ -91,6 +93,60 @@
             assert.equal(descriptionOnUpdate,description);
             assert.equal(rulesOnUpdate,rules);
 
+        }
+
+        async assertBuyerTotalEqualsTicketPricePlus$Fee(saved$FeeValue){
+            let price = await this.getTicketPriceValue();
+            let priceFloated = parseFloat(price);
+            let substringFee = saved$FeeValue.substring(1);
+            let feeFloated = parseFloat(substringFee);
+            let calculatedBuyer = priceFloated + feeFloated;
+            let fixedFee = calculatedBuyer.toFixed(2);
+            let buyerTotal = await this.getTicketBuyerPriceValue();
+            assert.equal(fixedFee, buyerTotal )
+        }
+
+        async assertTicketPriceEqualsBuyerTotalPriceWhenNoTaxesOrFees(){
+            let price = await this.getTicketPriceValue();
+            let buyerTotal = await this.getTicketBuyerPriceValue();
+            assert.equal(price, buyerTotal);
+        }
+
+        async closeCreateUpdateTicketModal(){
+            await this.click(CANCEL_BUTTON);
+            await this.timeout(1500);
+        }
+
+        async assertBuyerTotalEqualsTicketPriceMultipliedByTaxPercentage(savedTaxValue){
+            await this.ticketNameInputIsDisplayed();
+            let price = await this.getTicketPriceValue();
+            let buyerCalculated = parseFloat(price) + parseFloat(price) / 100 * savedTaxValue ;
+            let fixedBuyerCalculated = buyerCalculated.toFixed(2);
+            let buyerTotal = await this.getTicketBuyerPriceValue();
+            assert.equal(fixedBuyerCalculated, buyerTotal);
+
+        }
+
+        async assertBuyerTotalEqualsTicketPriceMultipliedByTaxPercentageAndAdded$Fee(savedTaxValue, saved$FeeValue){
+            await this.ticketNameInputIsDisplayed();
+            let price = await this.getTicketPriceValue();
+            let feeSubstring = saved$FeeValue.substring(1);
+            let feeParsed = parseFloat(feeSubstring);
+            let buyerCalculated = (parseFloat(price) + parseFloat(price) / 100 * savedTaxValue) + feeParsed ;
+            let buyerTotal = await this.getTicketBuyerPriceValue();
+            assert.equal(buyerCalculated.toFixed(2), buyerTotal )
+        }
+
+        async getTicketPriceValue(){
+            let price = await this.getEnteredTextInTheInput(TICKET_PRICE_INPUT);
+            let float = parseFloat(price);
+            return float.toFixed(2);
+        }
+
+        async getTicketBuyerPriceValue(){
+            let rawBuyerTotal = await this.getElementText(BUYER_TOTAL_VALUE);
+            let buyerTotalString = rawBuyerTotal.substring(1);
+            return parseFloat(buyerTotalString);
         }
         
     }

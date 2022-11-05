@@ -3,6 +3,7 @@
    const IFRAME = { id: "uwWidget"}
    const EVENT_NAME = { className: 'event-title' }
    const NO_TICKETS_MESSAGE = { xpath: "//p[contains(@class, 'pt-5')]" }
+   const NEXT_BUTTON = { xpath: "//*[text()='Next']"}
 
    class EmbedMainPage extends BasePage {
       constructor(driver) {
@@ -18,7 +19,9 @@
 
       }
 
-      
+      async getNewlyOpenedTab(originalWindow){
+         await this.switchToNewlyOpenedWindowOrTab(originalWindow);
+      }
 
       async isInFrame(eventName){
          await this.driver.executeScript("document.body.style.transform='scale(0.8, 0.8)'");
@@ -30,12 +33,22 @@
 
       }
 
-     
-
       async assertNoTicketsMessageIsDisplayed(){
          await this.isDisplayed(NO_TICKETS_MESSAGE,5000);
          let message = await this.getElementText(NO_TICKETS_MESSAGE);
          assert.equal(message, "No tickets are currently available for this event");
+      }
+
+      async nextButtonIsVisible(){
+         await this.isDisplayed(NEXT_BUTTON,5000);
+         await this.timeout(500);
+
+      }
+      async clickNextPageButton(){
+         await this.nextButtonIsVisible();
+         await this.moveToElement(NEXT_BUTTON);
+         await this.click(NEXT_BUTTON)
+         await this.timeout(500);
       }
 
       

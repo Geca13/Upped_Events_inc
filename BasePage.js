@@ -154,6 +154,37 @@ class BasePage {
     async timeout(ms) {
         return await new Promise(resolve => setTimeout(resolve, ms));
     }
+    async elementByTextWithoutSpacesIsDisplayed(text){
+        await this.isDisplayed(this.driver.findElement(By.xpath("//*[text()='"+text+"']")));
+    }
+
+    async locateElementByTextAndClick(text){
+        let element = await this.driver.findElement(By.xpath("//*[text()='"+text+"']"));
+        await element.click();
+    }
+
+    async getOriginalWindowOrTab(){
+        return await this.driver.getWindowHandle();
+    }
+
+    async switchToNewlyOpenedWindowOrTab(originalWindow){
+        const windows = await this.driver.getAllWindowHandles();
+        for (const window of windows) {
+            if (window !== originalWindow) {
+                await this.driver.switchTo().window(window);
+            }
+        }
+    }
+
+    async getChildTextByParentIndexAndChildIndex(locator, parentIndex, childIndex) {
+        let parent = await this.findAll(locator);
+        let children = await parent[parentIndex].findElements(By.xpath("./child::*"));
+        return await children[childIndex].getText();
+    }
+
+    async scrollUpOrDown(vertical){
+        await this.driver.executeScript(`window.scrollBy(0,${vertical}), ""`);
+    }
     
 }
 

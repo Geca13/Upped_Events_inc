@@ -6,7 +6,7 @@
     const END_DATE_TIME_PICKER = { xpath: "//input[@formcontrolname='eventEndDate']" };
     const EVENT_ATTENDEES_INPUT = { xpath: "//input[@formcontrolname='eventAttendees']" };
     const EVENT_DESCRIPTION_INPUT = { xpath: "//textarea[@formcontrolname='eventDescription']" };
-    const PUBLISH_EVENT_BUTTON = { xpath: "//a[@class='primary-btn']"}
+    const PUBLISH_EVENT_BUTTON = { xpath: "//*[text()='Publish']"}
     const UNPUBLISH_EVENT_BUTTON = { xpath: "//*[text()='Unpublish']"}
     const SAVE_BUTTON = { xpath: "//button[text()='Save']"};
 

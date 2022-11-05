@@ -50,17 +50,11 @@
             await this.timeout(1500)
         }
 
-
-       
-
         async clickEditTicketButton(index){
             await this.isDisplayed(EDIT_TICKET_BUTTONS,5000);
             await this.clickElementReturnedFromAnArray(EDIT_TICKET_BUTTONS,index)
         }
         
-
-       
-
         async clickActivateTicketToggle(ticketName){
             await this.isDisplayed(TICKETS_NAMES,5000);
             let i = await this.returnIndexWhenTextIsKnown(TICKETS_NAMES, ticketName);
@@ -80,8 +74,14 @@
             await this.addTicketButtonIsDisplayed();
             await this.click(ADD_TICKET_BUTTON);
         }
-        
-       
+
+        async clickEditTicketButtonByTicketName(ticketOneName){
+            await this.isDisplayed(TICKETS_NAMES,5000);
+            let i = await this.returnIndexWhenTextIsKnown(TICKETS_NAMES, ticketOneName);
+            await this.timeout(2000);
+            await this.clickElementReturnedFromAnArray(EDIT_TICKET_BUTTONS,i);
+            await this.timeout(1000);
+        }
         
 
     }
