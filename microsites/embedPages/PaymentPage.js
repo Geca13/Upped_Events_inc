@@ -1,6 +1,6 @@
     const BasePage = require('../../BasePage');
     const assert = require('assert');
-    const NewCardComponent = require('../../embed/embedComponents/NewCardComponent');
+    const NewCardComponent = require('../../microsites/components/NewCardComponent');
     const CARD_SERVICE_TAB = { xpath: "//*[text()='Pay with Card or Service']"}
     const NEW_CARD_TAB = { xpath: "//*[text()='Pay with New Card']"}
     const DISCOUNT_LABEL = { xpath: "//div[contains(@class , 'form-group')]//label" }
@@ -68,6 +68,12 @@
             await newCardComponent.assertFieldsLabelsOnEmbed();
             await newCardComponent.assertFieldsAreDisplayed();
             await newCardComponent.assertCountryOptionsAndSaveButtonNames();
+        }
+
+        async fillValidDataOnCardOnTheEmbed(firstName,lastName){
+            let newCard = new NewCardComponent(this.driver);
+            await newCard.fillNewCardWithVisaData(firstName, lastName);
+            await newCard.clickEmbedSaveCardButton();
         }
 
       

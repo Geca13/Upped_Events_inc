@@ -4,6 +4,8 @@
    const EVENT_NAME = { className: 'event-title' }
    const NO_TICKETS_MESSAGE = { xpath: "//p[contains(@class, 'pt-5')]" }
    const NEXT_BUTTON = { xpath: "//*[text()='Next']"}
+   const SOLD_OUT_MESSAGE = { xpath: "//div[contains(@class , 'quantity-container')]//span" }
+
 
    class EmbedMainPage extends BasePage {
       constructor(driver) {
@@ -31,6 +33,12 @@
          assert.equal(eventName,extractedEventName)
          await this.timeout(1000)
 
+      }
+
+      async assertSoldOutMessageIsDisplayed(){
+         await this.isDisplayed(SOLD_OUT_MESSAGE,5000);
+         let message = await this.getElementText(SOLD_OUT_MESSAGE);
+         assert.equal(message, "Sold out!");
       }
 
       async assertNoTicketsMessageIsDisplayed(){

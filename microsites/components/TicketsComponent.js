@@ -5,7 +5,10 @@
     const TICKET_NAME_AND_PRICE = { className: "name" }
     const TICKET_QUANTITY_CONTAINER = { xpath: "//div[contains(@class, 'quantity-container')]" }
     const TICKETS_LIST = { className: "tickets-list" }
-    
+    const TICKET_SELECT = { xpath: "//div[contains(@class, 'quantity-container')]//select"};
+    const TICKET_SELECT_OPTIONS = { xpath: "//select//option"}
+
+
     class TicketsComponent extends BasePage {
         constructor(driver) {
             super(driver);
@@ -13,6 +16,11 @@
 
         async ticketListIsDisplayed(){
             await this.isDisplayed(TICKETS_LIST, 5000);
+        }
+
+        async sentKeysToTicketInput(index, quantity){
+            let input = await this.getElementFromAnArrayByIndex(TICKET_SELECT, index);
+            await input.sendKeys(quantity);
         }
 
 
@@ -48,6 +56,20 @@
                     return i
                 }
             }
+        }
+
+        async assertDropDownElementsEqualsAvailableTickets(availableTickets){
+            await this.isDisplayed(TICKET_SELECT_OPTIONS,5000);
+            let dropdownOptions = await this.getElementTextForTheLastElementFromAnArray(TICKET_SELECT_OPTIONS);
+            let converted = parseInt(dropdownOptions);
+            assert.equal(converted, availableTickets);
+        }
+
+        async assertDropDownElementsEquals(number){
+            await this.isDisplayed(TICKET_SELECT_OPTIONS,5000);
+            let dropdownOptions = await this.getElementTextForTheLastElementFromAnArray(TICKET_SELECT_OPTIONS);
+            console.log(dropdownOptions)
+            assert.equal(dropdownOptions, number);
         }
         
     }

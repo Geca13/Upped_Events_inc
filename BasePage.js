@@ -208,6 +208,19 @@ class BasePage {
         let result = await this.getElementText(locator);
         return result.substring(1);
     }
+
+    async clearInputFieldByIndexAndSendKeys(locator , index, keys){
+        let elements = await this.findAll(locator);
+        let element = elements[index];
+        await element.clear();
+        await element.sendKeys(keys);
+    }
+
+    async getElementTextForTheLastElementFromAnArray(locator){
+        let elements = await this.findAll(locator);
+        let element = await elements[elements.length - 1]
+        return element.getText();
+    }
     
 }
 

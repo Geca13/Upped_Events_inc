@@ -82,6 +82,24 @@
             await this.clickElementReturnedFromAnArray(EDIT_TICKET_BUTTONS,i);
             await this.timeout(1000);
         }
+
+        async assertQuantityEqualsSoldColumnByTicket(ticketName){
+            await this.addTicketButtonIsDisplayed();
+            await this.isDisplayed(TICKETS_NAMES,5000);
+            let i = await this.returnIndexWhenTextIsKnown(TICKETS_NAMES, ticketName);
+            let quantity = await this.getElementTextFromAnArrayByIndex(TICKETS_QUANTITIES,i);
+            let sold = await this.getElementTextFromAnArrayByIndex(SOLD_TICKETS_NUMBER,i);
+            assert.equal(quantity, sold);
+        }
+
+        async calculateAvailableTicketsByTicket(ticketOneName){
+            let i = await this.returnIndexWhenTextIsKnown(TICKETS_NAMES, ticketOneName);
+            let quantity = await this.getElementTextFromAnArrayByIndex(TICKETS_QUANTITIES,i);
+            let parsedQty = parseInt(quantity);
+            let sold = await this.getElementTextFromAnArrayByIndex(SOLD_TICKETS_NUMBER,i);
+            let parsedSold = parseInt(sold);
+            return parsedQty - parsedSold;
+        }
         
 
     }

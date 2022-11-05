@@ -1,5 +1,6 @@
     const BasePage = require('../../BasePage')
     const assert = require('assert');
+    const PaymentPage = require('../embedPages/PaymentPage');
     const ORDER_DETAILS_HEADER = { xpath: "//div[@class='order-heading']//div"};
     const ORDER_DETAILS_SUBTITLE = { xpath: "//div[@class='ord-desc']"};
     const PAYMENT_INFO = { xpath: "//div[@class='payment-info']"};
@@ -8,6 +9,8 @@
     const TICKETS_PRICES = { id: "ticketPrice" }
     const SUBTOTAL_TEXT = { id: "subtotal" }
     const SUBTOTAL_VALUE = { id: "subtotalAmt" }
+    const EDIT_PAYMENT_INFO_LINK = { id: "editInfo"};
+    const PLACE_ORDER_BUTTON = { xpath: "//*[text()='Place your order']"};
     
 
     class EmbedOrderDetailsPage extends BasePage{
@@ -16,7 +19,12 @@
         }
         async isOnOrderDetailsPage(){
             await this.isDisplayed(ORDER_DETAILS_HEADER,5000);
-            await this.timeout(500)
+        }
+
+        async clickPlaceOrderButton(){
+            await this.isOnOrderDetailsPage();
+            await this.isDisplayed(PLACE_ORDER_BUTTON,5000);
+            await this.click(PLACE_ORDER_BUTTON);
         }
 
         async assertElementsWhenOneTicketIsSelected(ticketOneName){
@@ -37,6 +45,12 @@
             assert.equal(subtotalText, "Subtotal:");
             let subtotalValue = await this.getElementText(SUBTOTAL_VALUE);
             assert.equal(subtotalValue,  "$2.00");
+        }
+
+        async clickEditPaymentLinkAndAssertItIsOnPaymentPage(){
+            await this.click(EDIT_PAYMENT_INFO_LINK);
+            let payment = new PaymentPage(this.driver);
+            await payment.isAtPaymentPage();
         }
 
     }
