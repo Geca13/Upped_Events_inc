@@ -27,6 +27,8 @@
     const EmbedOrderDetailsPage = require("../microsites/embedPages/EmbedOrderDetailsPage");
     const ConfirmPage = require("../microsites/embedPages/ConfirmPage");
     const ExtrasPage = require("../microsites/embedPages/ExtrasPage");
+    const EventCapacitySubNav = require('../portal/ticketing/SettingsNav/EventCapacitySubNav')
+    const AttendeesTab = require('../portal/eventOverview/AttendeesTab')
 
 
     describe('Should do embed tests', function () {
@@ -60,8 +62,10 @@
         let orderDetails;
         let extras;
         let confirm;
+        let capacity;
+        let attendees;
         
-        let base =  Math.floor(100000 + Math.random() * 900000);
+        let base = 746213//  Math.floor(100000 + Math.random() * 900000);
         let eventName =  base.toString() + " FullEventName";
         let shortName = base.toString();
         let ticketOneName = base.toString() +"T1";
@@ -686,4 +690,175 @@
 
         });
 
+        //PORTAL -> EMBED
+        it('Test_21 - should limit the tickets per account and check if all dropdowns are at that maximum in the embed', async function () {
+
+            portalLogin = new PortalLoginPage(driver);
+            dashboard = new DashboardPage(driver);
+            myEvents = new MyEventsPage(driver);
+            eventDetails = new GeneralDetailsTab(driver);
+            sideMenu = new SideMenu(driver);
+            sectionsNavs = new SectionsNavs(driver)
+            capacity = new EventCapacitySubNav(driver);
+            ticketsNav = new TicketsNav(driver);
+            main = new EmbedMainPage(driver);
+            embedTickets = new TicketsComponent(driver);
+
+            await portalLogin.loadPortalUrl();
+            await portalLogin.isAtPortalLoginPage();
+            await portalLogin.enterValidCredentialsAndLogin();
+            await dashboard.isAtDashboardPage();
+            await sectionsNavs.clickNavByText("My Events");
+            await myEvents.eventsTableIsDisplayed();
+            await driver.sleep(1000);
+            await myEvents.createdEventIsInTheTable(eventName);
+            await myEvents.clickTheNewCreatedEventInTheTable(eventName);
+            await eventDetails.unpublishButtonIsDisplayed();
+            await sideMenu.clickTicketingTab();
+            await ticketsNav.addTicketButtonIsDisplayed();
+            await sectionsNavs.clickNavByText("Settings");
+            await sectionsNavs.taxesAndFeesNavIsDisplayed();
+            await sectionsNavs.clickSubNavByText("Event Capacity");
+            await capacity.setLimitPerAccount("26");
+            await main.openEmbedPage();
+            await main.switchToIframe();
+            await main.isInFrame(eventName);
+            await embedTickets.assertDropDownElementsEquals("26");
+        });
+
+        // PORTAL -> EMBED
+        it('Test_22 - should get exceeding limitation message when user have already purchased tickets and asks for more then limit', async function () {
+            portalLogin = new PortalLoginPage(driver);
+            dashboard = new DashboardPage(driver);
+            myEvents = new MyEventsPage(driver);
+            sideMenu = new SideMenu(driver);
+            sectionsNavs = new SectionsNavs(driver);
+            attendees = new AttendeesTab(driver);
+            main = new EmbedMainPage(driver);
+            embedTickets = new TicketsComponent(driver);
+            embedLogin = new LoginPage(driver);
+            addMoney = new AddMoneyComponent(driver)
+
+            await portalLogin.loadPortalUrl();
+            await portalLogin.isAtPortalLoginPage();
+            await portalLogin.enterValidCredentialsAndLogin();
+            await dashboard.isAtDashboardPage();
+            await sectionsNavs.clickNavByText("My Events");
+            await myEvents.eventsTableIsDisplayed();
+            await myEvents.createdEventIsInTheTable(eventName);
+            await myEvents.clickTheNewCreatedEventInTheTable(eventName);
+            await sideMenu.ticketingTabIsDisplayed();
+            await sectionsNavs.clickNavByText("Attendees")
+            await attendees.isOnAttendeesTab();
+            let purchasedTickets = await attendees.getAlreadyPurchasedByCustomerFullName(customerFirstName, customerLastName);
+            await main.openEmbedPage();
+            await main.switchToIframe();
+            await main.isInFrame(eventName);
+            await embedTickets.sentKeysToTicketInput(0, 26);
+            let accountAvailable = 26-parseInt(purchasedTickets);
+            await main.clickNextPageButton();
+            await embedLogin.isAtLoginPage();
+            await embedLogin.loginWithVerifiedAccount(customerEmail, customerPassword);
+            await embedTickets.ticketListIsDisplayed();
+            await main.clickNextPageButton();
+            await main.limitInfoMessageIsDisplayed(accountAvailable);
+            await embedTickets.sentKeysToTicketInput(0, accountAvailable);
+            await main.clickNextPageButton();
+            await addMoney.addMoneyComponentIsDisplayed();
+        });
+
+        //PORTAL
+        it('Test_23 - should remove limitation on tickets per account ',async function () {
+            portalLogin = new PortalLoginPage(driver);
+            dashboard = new DashboardPage(driver);
+            myEvents = new MyEventsPage(driver);
+            eventDetails = new GeneralDetailsTab(driver);
+            sideMenu = new SideMenu(driver);
+            sectionsNavs = new SectionsNavs(driver);
+            capacity = new EventCapacitySubNav(driver);
+            ticketsNav = new TicketsNav(driver);
+
+            await portalLogin.loadPortalUrl();
+            await portalLogin.isAtPortalLoginPage();
+            await portalLogin.enterValidCredentialsAndLogin();
+            await dashboard.isAtDashboardPage();
+            await sectionsNavs.clickNavByText("My Events");
+            await myEvents.eventsTableIsDisplayed();
+            await driver.sleep(1000);
+            await myEvents.createdEventIsInTheTable(eventName);
+            await myEvents.clickTheNewCreatedEventInTheTable(eventName);
+            await driver.sleep(2000);
+            await eventDetails.unpublishButtonIsDisplayed();
+            await sideMenu.clickTicketingTab();
+            await ticketsNav.addTicketButtonIsDisplayed();
+            await sectionsNavs.clickNavByText("Settings")
+            await sectionsNavs.taxesAndFeesNavIsDisplayed();
+            await sectionsNavs.clickSubNavByText("Event Capacity");
+            await capacity.removeLimit();
+
+        });
+
+        //EMBED
+        it('Test_24 - should assert when wallet was selected on start then edited to card , the card info is in Order Details', async function () {
+
+            main = new EmbedMainPage(driver);
+            embedTickets = new TicketsComponent(driver);
+            embedLogin = new LoginPage(driver);
+            addMoney = new AddMoneyComponent(driver)
+            payment = new PaymentPage(driver);
+            orderDetails = new EmbedOrderDetailsPage(driver);
+
+            await main.openEmbedPage();
+            await main.switchToIframe();
+            await main.isInFrame(eventName);
+            await embedTickets.sentKeysToTicketInputByTicketName(ticketOneName, '2');
+            await main.clickNextPageButton();
+            await embedLogin.isAtLoginPage();
+            await embedLogin.loginWithVerifiedAccount(customerEmail, customerPassword);
+            await embedTickets.ticketListIsDisplayed();
+            await main.clickNextPageButton();
+            await addMoney.addMoneyComponentIsDisplayed();
+            await main.clickNextPageButton();
+            await payment.isAtPaymentPage();
+            await payment.clickPayWithWalletButton();
+            await main.clickNextPageButton();
+            await orderDetails.isOnOrderDetailsPage();
+            await orderDetails.walletOptionIsDisplayedAndAssertText();
+            await orderDetails.clickEditPaymentLinkAndAssertItIsOnPaymentPage();
+            await payment.clickSavedCardByIndex(0);
+            let cardData = await payment.getSelectedCardData();
+            await main.clickNextPageButton();
+            await orderDetails.isOnOrderDetailsPage();
+            await orderDetails.assertSelectedCardIsDisplayedAndAssertData(cardData);
+
+        });
+
+        //EMBED
+        it('Test_25 - should click ticket edit link on Order Details and assert landing on Ticketing screen', async function () {
+
+            main = new EmbedMainPage(driver);
+            embedTickets = new TicketsComponent(driver);
+            embedLogin = new LoginPage(driver);
+            addMoney = new AddMoneyComponent(driver)
+            payment = new PaymentPage(driver);
+            orderDetails = new EmbedOrderDetailsPage(driver);
+
+            await main.openEmbedPage();
+            await main.switchToIframe();
+            await main.isInFrame(eventName);
+            await embedTickets.sentKeysToTicketInputByTicketName(ticketOneName, '2');
+            await main.clickNextPageButton();
+            await embedLogin.isAtLoginPage();
+            await embedLogin.loginWithVerifiedAccount(customerEmail, customerPassword);
+            await embedTickets.ticketListIsDisplayed();
+            await main.clickNextPageButton();
+            await addMoney.addMoneyComponentIsDisplayed();
+            await main.clickNextPageButton();
+            await payment.isAtPaymentPage();
+            await payment.clickPayWithWalletButton();
+            await main.clickNextPageButton();
+            await orderDetails.isOnOrderDetailsPage();
+            await orderDetails.clickEditLinkOnDisplayedTicketAssertIsOnTicketsPage(embedTickets);
+
+        });
     });

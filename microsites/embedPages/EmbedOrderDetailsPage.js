@@ -11,7 +11,13 @@
     const SUBTOTAL_VALUE = { id: "subtotalAmt" }
     const EDIT_PAYMENT_INFO_LINK = { id: "editInfo"};
     const PLACE_ORDER_BUTTON = { xpath: "//*[text()='Place your order']"};
-    
+    const WALLET_AS_PAYMENT = { xpath : "//ng-conatiner//div[@class='ng-star-inserted']"};
+    const CARD_AS_PAYMENT = { xpath: "//div[contains(@class , 'selected-card')]"}
+    const CARD_BRAND = { id: "serviceName"}
+    const CARD_NUMBER= { id: "cardNumber"};
+    const EDIT_TICKET_LINK = { id: "editDetail" }
+
+
 
     class EmbedOrderDetailsPage extends BasePage{
         constructor(driver) {
@@ -51,6 +57,28 @@
             await this.click(EDIT_PAYMENT_INFO_LINK);
             let payment = new PaymentPage(this.driver);
             await payment.isAtPaymentPage();
+        }
+
+        async walletOptionIsDisplayedAndAssertText(){
+            await this.isDisplayed(WALLET_AS_PAYMENT, 5000);
+            let wallet = await this.getElementText(WALLET_AS_PAYMENT);
+            assert.equal(wallet, "Wallet")
+        }
+
+        async assertSelectedCardIsDisplayedAndAssertData(cardData){
+            await this.isDisplayed(CARD_AS_PAYMENT, 5000);
+            let brand = await this.getElementText(CARD_BRAND);
+            let number = await this.getElementText(CARD_NUMBER);
+            assert.equal(brand + " " + number, cardData);
+        }
+
+        async clickEditLinkOnDisplayedTicketAssertIsOnTicketsPage(embedTickets){
+            await this.isOnOrderDetailsPage();
+            await this.isDisplayed(EDIT_TICKET_LINK,5000);
+            await this.timeout(500);
+            await this.click(EDIT_TICKET_LINK);
+            await embedTickets.ticketListIsDisplayed();
+            await this.timeout(1000);
         }
 
     }

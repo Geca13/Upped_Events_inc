@@ -1,4 +1,5 @@
    const BasePage = require('../../BasePage');
+   const Alerts = require('../../portal/portalComponents/Alerts')
    const assert = require('assert')
    const IFRAME = { id: "uwWidget"}
    const EVENT_NAME = { className: 'event-title' }
@@ -57,6 +58,12 @@
          await this.moveToElement(NEXT_BUTTON);
          await this.click(NEXT_BUTTON)
          await this.timeout(500);
+      }
+
+      async limitInfoMessageIsDisplayed(number){
+         let info = new Alerts(this.driver);
+         await info.correctInfoMessageIsDisplayed("You have exceeded maximum (" + number + ") limit to buy tickets");
+         await this.timeout(5000);
       }
 
       

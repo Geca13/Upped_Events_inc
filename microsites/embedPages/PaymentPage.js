@@ -10,6 +10,7 @@
     const SAVED_CARD = { className: "user-card" } //list
     const TABS = { xpath: "//div[contains(@class , 'pay-container')]//div[@class='box-container']" }
     const SECTION_HEADERS = { xpath: "//div[@class='title']" }
+    const SELECTED_CARD = { xpath: "//div[contains(@class , 'selected-user-card')]"}
 
 
     class PaymentPage extends BasePage {
@@ -74,6 +75,17 @@
             let newCard = new NewCardComponent(this.driver);
             await newCard.fillNewCardWithVisaData(firstName, lastName);
             await newCard.clickEmbedSaveCardButton();
+        }
+
+        async clickSavedCardByIndex(index){
+            await this.clickElementReturnedFromAnArray(SAVED_CARD,index);
+            await this.isDisplayed(SELECTED_CARD, 5000);
+        }
+
+        async getSelectedCardData(){
+            let brand = await this.getChildTextByParentIndexAndChildIndex(SELECTED_CARD,0, 0);
+            let number = await this.getChildTextByParentIndexAndChildIndex(SELECTED_CARD,0, 1);
+            return brand + " " + number;
         }
 
       

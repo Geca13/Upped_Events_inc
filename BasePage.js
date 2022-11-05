@@ -1,4 +1,4 @@
-﻿const {By} = require("selenium-webdriver");
+﻿const {By, Key} = require("selenium-webdriver");
 const until = require('selenium-webdriver').until;
 const moment = require('moment');
 
@@ -41,17 +41,17 @@ class BasePage {
     }
 
     async formatDateTimeInputToIncludeComma(locator) {
-        let array = []
-        let fullDate = []
+        let array;
+        let fullDate;
         let value = await this.getEnteredTextInTheInput(locator);
         array = value.split(" ");
         fullDate = array[0].split("/")
-        let formatedYear = fullDate[2].substring(2);
-        return array[0].substring(0, array[0].length - 4) + formatedYear + ', ' + array[1] + ' ' + array[2];
+        let formattedYear = fullDate[2].substring(2);
+        return array[0].substring(0, array[0].length - 4) + formattedYear + ', ' + array[1] + ' ' + array[2];
     }
 
     async getOnlyFullDateFromDateTimeInput(locator){
-        let fullDateTime = []
+        let fullDateTime;
         let dateTimeValue = await this.getEnteredTextInTheInput(locator);
         fullDateTime = dateTimeValue.split(" ")
         let date = fullDateTime[0];
@@ -220,6 +220,10 @@ class BasePage {
         let elements = await this.findAll(locator);
         let element = await elements[elements.length - 1]
         return element.getText();
+    }
+
+    async clickBackspaceKey(locator){
+        await this.sentKeys(locator, Key.BACK_SPACE);
     }
     
 }
