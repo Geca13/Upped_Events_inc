@@ -71,7 +71,7 @@
             await driver.quit()
         })
 
-       /*
+       
         //PORTAL
         it('Test_01 - should create new event and verify data in events page and General Details',async function () {
             portalLogin = new PortalLoginPage(driver);
@@ -88,7 +88,7 @@
             await createEvent.createEventModalIsDisplayed();
             await createEvent.fillFormWithValidDataAndSave(eventName,shortName);
         });
-        */
+        
         //PORTAL
         it('Test_02 - should create first ticket and check data in tickets table and update modal ',async function () {
 
@@ -119,7 +119,7 @@
             await createTicket.createFirstTicketAndAssertDataOnTicketsAndUpdate(ticketOneName,ticketOnePrice,embedTicketQuantity);
 
         });
-        /*
+        
         //PORTAL -> EMBED
         it('Test_03 - should make embed view for event', async function () {
             portalLogin = new PortalLoginPage(driver);
@@ -157,7 +157,7 @@
             await main.isInFrame(eventName);
 
         });
-        */
+        
         //EMBED
         it('Test_04 - should get no tickets available message on embed when tickets are not activated ',async function () {
 
