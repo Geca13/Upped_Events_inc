@@ -135,7 +135,6 @@
             await driver.manage().window().maximize();
         });
 
-        
         afterEach(async function(){
             await driver.quit()
         })
