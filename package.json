@@ -1,0 +1,22 @@
+{
+  "name": "upped_events_inc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "BasePage.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Marjan Karafiloski",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.3.6",
+    "chromedriver": "^107.0.3",
+    "dotenv": "^16.0.3",
+    "mocha": "^10.1.0",
+    "moment": "^2.29.4",
+    "selenium-webdriver": "^4.6.0"
+  }
+}
