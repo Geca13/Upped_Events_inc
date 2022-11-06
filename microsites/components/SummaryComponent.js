@@ -6,6 +6,9 @@
     const FEES_TOTAL = { id: "feesAmt" }
     const TOTAL_TOTAL = { id: "totalDuesAmt" }
     const DONATIONS_TOTAL = { id: "donationsTotal" }
+    const DISCOUNT_TITLE = { id: "discount"}
+    const DISCOUNT_VALUE = { id: "discountAmt" }
+    const APPLIED_DISCOUNT_CODE = { id: "promocode" }
 
 
     class SummaryComponent extends BasePage{
@@ -88,6 +91,40 @@
             let total = await this.getTotalValue();
             assert.equal(calculatedTotal.toFixed(2),total);
 
+        }
+
+        async assertDiscountElementsAreNotDisplayed(){
+            let title = await this.returnElementsCount(DISCOUNT_TITLE);
+            let value = await this.returnElementsCount(DISCOUNT_VALUE);
+            let code = await this.returnElementsCount(APPLIED_DISCOUNT_CODE);
+            assert.equal(title, 0);
+            assert.equal(value, 0);
+            assert.equal(code, 0);
+        }
+
+        async assertDiscountElementsAreDisplayed(promoCodeOne){
+            let title = await this.returnElementsCount(DISCOUNT_TITLE);
+            let value = await this.returnElementsCount(DISCOUNT_VALUE);
+            let code = await this.returnElementsCount(APPLIED_DISCOUNT_CODE);
+            let appliedMessage = await this.getElementText(APPLIED_DISCOUNT_CODE);
+            assert.equal(appliedMessage, "Discounts Code: " + promoCodeOne);
+            assert.equal(title, 1);
+            assert.equal(value, 1);
+            assert.equal(code, 1);
+        }
+
+        async assertNewPricePlusDiscountEqualTicketPrice(ticketOnePrice){
+            let ticket = await this.getTicketsTotal();
+            let discount = await this.getDiscountValue();
+            let total = (parseFloat(ticket) + parseFloat(discount));
+            let ticketParsed = parseFloat(ticketOnePrice);
+            assert.equal(total.toFixed(2),ticketParsed.toFixed(2) )
+        }
+
+        async getDiscountValue(){
+            let rawDiscount = await this.getSubstringOfPriceString(DISCOUNT_VALUE);
+            let discount = parseFloat(rawDiscount);
+            return discount.toFixed(2);
         }
 
        

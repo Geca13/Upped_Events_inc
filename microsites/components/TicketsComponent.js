@@ -7,6 +7,9 @@
     const TICKETS_LIST = { className: "tickets-list" }
     const TICKET_SELECT = { xpath: "//div[contains(@class, 'quantity-container')]//select"};
     const TICKET_SELECT_OPTIONS = { xpath: "//select//option"}
+    const TICKET_PRICE = { xpath: "//span[@class='ticket-price']" }
+    const DISCOUNTED_TICKET_PRICE = { xpath: "//span[contains(@class, 'has-discount')]" }
+
 
 
     class TicketsComponent extends BasePage {
@@ -58,6 +61,29 @@
             }
         }
 
+        async getTicketPriceByTicketName(ticketName) {
+            let tickets = await this.findAll(TICKET_NAME_AND_PRICE);
+            let prices = await this.findAll(TICKET_PRICE);
+            for(let i = 0; i < tickets.length; i++){
+                let ticket = await this.getElementTextFromAnArrayByIndex(TICKET_NAME_AND_PRICE,i);
+                let ticketname = ticket.split(" ")[0]
+                if(await ticketname === ticketName){
+                    return await prices[i].getText();
+                }
+            }
+        }
+
+        async getFullTicketLayoutByTicketName(ticketName) {
+            let tickets = await this.findAll(TICKET_NAME_AND_PRICE);
+            for(let i = 0; i < tickets.length; i++){
+                let ticket = await this.getElementTextFromAnArrayByIndex(TICKET_NAME_AND_PRICE,i);
+                let ticketname = ticket.split(" ")[0]
+                if(await ticketname === ticketName){
+                    return ticket
+                }
+            }
+        }
+
         async assertDropDownElementsEqualsAvailableTickets(availableTickets){
             await this.isDisplayed(TICKET_SELECT_OPTIONS,5000);
             let dropdownOptions = await this.getElementTextForTheLastElementFromAnArray(TICKET_SELECT_OPTIONS);
@@ -70,6 +96,25 @@
             let dropdownOptions = await this.getElementTextForTheLastElementFromAnArray(TICKET_SELECT_OPTIONS);
             console.log(dropdownOptions)
             assert.equal(dropdownOptions, number);
+        }
+
+        async assertTheNewTicketPriceEqualsDiscountedPrice(ticketName, discountedPrice){
+            let price = await this.getTicketPriceByTicketName(ticketName);
+            assert.equal( price , "($" + parseFloat(discountedPrice).toFixed(2) + ")");
+        }
+
+        async assertNewTicketNamePricesLayout(ticketName, originalPrice, discountedPrice){
+            let fullTicketLayout = await this.getFullTicketLayoutByTicketName(ticketName);
+            assert.equal(fullTicketLayout, ticketName + " " + originalPrice + "($" + parseFloat(discountedPrice).toFixed(2) + ")")
+        }
+
+        async assertFontColorAndStrikeOnOriginalPrice(ticketName){
+            let index = await this.getTicketIndexByTicketName(ticketName)
+            let fontColor = await this.getFontColorFromAnArray(DISCOUNTED_TICKET_PRICE,index);
+            assert.equal(fontColor,'rgba(173, 3, 3, 1)');
+            let decoration = await this.getFontTextDecorationFromAnArray(DISCOUNTED_TICKET_PRICE,index);
+            let strike = decoration.split(" ")[0]
+            assert.equal(strike,"line-through");
         }
         
     }

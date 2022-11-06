@@ -33,6 +33,8 @@
     const TicketTermsModal = require('../microsites/components/TicketTermsModal');
     const DonationPage = require('../portal/eventOverview/eventSettings/DonationsPage')
     const DonateComponent = require('../microsites/components/DonateComponent')
+    const PromotionsPage = require('../portal/promotions/PromotionsPage');
+    const CreatePromotionModal = require('../portal/portalModals/CreatePromotionModal')
 
 
     describe('Should do embed tests', function () {
@@ -72,8 +74,10 @@
         let termsModal;
         let donation;
         let donate;
+        let promotions;
+        let newPromotion;
 
-        let base =  Math.floor(100000 + Math.random() * 900000);
+        let base = 392451 // Math.floor(100000 + Math.random() * 900000);
         let eventName =  base.toString() + " FullEventName";
         let shortName = base.toString();
         let ticketOneName = base.toString() +"T1";
@@ -89,6 +93,10 @@
         let ticketFourName = base.toString() +"T4";
         let ticketFourQuantity = 666;
         let ticketFourPrice = "0.40";
+        let promoOneName = base.toString() +"PN1";
+        let promoThreeName = base.toString() +"PN3";
+        let promoCodeOne = base.toString() +"PC1";
+        let promoCodeThree = base.toString() +"PC3";
         let ticketGroupOne = base.toString() +"TG1";
         let ticketGroupTwo = base.toString() +"TG2";
         let ticketGroupThree = base.toString() +"TG3";
@@ -1406,5 +1414,221 @@
             await orderDetails.clickEditDonationLinkAndAssertItIsOnExtrasPage(donate);
 
         });
+
+        //PORTAL
+        it('Test_44 - should create first promotion with $ value and assert data on promotions page and update promotion modal', async function () {
+
+            portalLogin = new PortalLoginPage(driver);
+            dashboard = new DashboardPage(driver);
+            myEvents = new MyEventsPage(driver);
+            eventDetails = new GeneralDetailsTab(driver);
+            sideMenu = new SideMenu(driver);
+            promotions = new PromotionsPage(driver);
+            newPromotion = new CreatePromotionModal(driver);
+            sectionsNavs = new SectionsNavs(driver)
+
+            await portalLogin.loadPortalUrl();
+            await portalLogin.isAtPortalLoginPage();
+            await portalLogin.enterValidCredentialsAndLogin();
+            await dashboard.isAtDashboardPage();
+            await sectionsNavs.clickNavByText("My Events");
+            await myEvents.eventsTableIsDisplayed();
+            await myEvents.createdEventIsInTheTable(eventName);
+            await myEvents.clickTheNewCreatedEventInTheTable(eventName);
+            await eventDetails.unpublishButtonIsDisplayed();
+            await sideMenu.clickPromotionsTab();
+            await promotions.addPromotionButtonIsVisible();
+            await promotions.clickAddPromotionButton();
+            await newPromotion.addPromotionModalIsDisplayed();
+            let promotion = await newPromotion.createPromotionForOneTicketWith$Value(ticketTwoName, promoOneName, promoCodeOne);
+            await promotions.assertThe$PromotionIsSavedCorrectOnPromotionsPage(promotion);
+            await promotions.findPromotionByNameAndClickUpdateButton(promotion[0]);
+            await newPromotion.assertDataFromCreateEqualsUpdateData(promotion)
+        });
+
+        //PORTAL
+        it('Test_45 - should create promotion for 3 tickets and limit qty on two', async function () {
+
+            portalLogin = new PortalLoginPage(driver);
+            dashboard = new DashboardPage(driver);
+            myEvents = new MyEventsPage(driver);
+            eventDetails = new GeneralDetailsTab(driver);
+            sideMenu = new SideMenu(driver);
+            promotions = new PromotionsPage(driver);
+            newPromotion = new CreatePromotionModal(driver);
+            sectionsNavs = new SectionsNavs(driver)
+
+            await portalLogin.loadPortalUrl();
+            await portalLogin.isAtPortalLoginPage();
+            await portalLogin.enterValidCredentialsAndLogin();
+            await dashboard.isAtDashboardPage();
+            await sectionsNavs.clickNavByText("My Events");
+            await myEvents.eventsTableIsDisplayed();
+            await myEvents.createdEventIsInTheTable(eventName);
+            await myEvents.clickTheNewCreatedEventInTheTable(eventName);
+            await eventDetails.unpublishButtonIsDisplayed();
+            await sideMenu.clickPromotionsTab();
+            await promotions.clickAddPromotionButton();
+            await newPromotion.addPromotionModalIsDisplayed();
+            await newPromotion.newPromotionForThreeWithLimitOnTwo(ticketTwoName, ticketThreeName, ticketFourName, promoThreeName, promoCodeThree);
+            await promotions.assertDataForPromotionWithThreeTicketsAndLimitOnTwoWithoutDateTime(promoThreeName, ticketTwoName,ticketTwoPrice);
+            await promotions.findPromotionByNameAndClickUpdateButton(promoThreeName);
+            await newPromotion.assertDataOnUpdateModalForPromotionWithThreeTicketsAndLimit(ticketTwoName, ticketThreeName, ticketFourName, promoThreeName, promoCodeThree)
+
+        });
+
+        //PORTAL -> EMBED
+        it('Test_46 - should disable promotion and check for error message on embed', async function () {
+            portalLogin = new PortalLoginPage(driver);
+            dashboard = new DashboardPage(driver);
+            myEvents = new MyEventsPage(driver);
+            eventDetails = new GeneralDetailsTab(driver);
+            sideMenu = new SideMenu(driver);
+            promotions = new PromotionsPage(driver);
+            main = new EmbedMainPage(driver);
+            embedLogin = new LoginPage(driver);
+            embedTickets = new TicketsComponent(driver);
+            extras = new ExtrasPage(driver);
+            payment = new PaymentPage(driver);
+            sectionsNavs = new SectionsNavs(driver)
+
+            await portalLogin.loadPortalUrl();
+            await portalLogin.isAtPortalLoginPage();
+            await portalLogin.enterValidCredentialsAndLogin();
+            await dashboard.isAtDashboardPage();
+            await sectionsNavs.clickNavByText("My Events");
+            await myEvents.eventsTableIsDisplayed();
+            await myEvents.createdEventIsInTheTable(eventName);
+            await myEvents.clickTheNewCreatedEventInTheTable(eventName);
+            await eventDetails.unpublishButtonIsDisplayed();
+            await sideMenu.clickPromotionsTab();
+            await promotions.addPromotionButtonIsVisible();
+            await promotions.disablePromotionByPromoName(promoOneName);
+            await main.openEmbedPage();
+            await main.switchToIframe();
+            await main.isInFrame(eventName);
+            await main.clickNextPageButton();
+            await embedLogin.isAtLoginPage();
+            await embedLogin.loginWithVerifiedAccount(customerEmail, customerPassword);
+            await embedTickets.ticketListIsDisplayed();
+            await embedTickets.sentKeysToTicketInput(0, 2);
+            await main.clickTicketTermsCheckbox();
+            await main.clickNextPageButton();
+            await extras.isAtExtrasPage();
+            await main.clickNextPageButton();
+            await payment.isAtPaymentPage();
+            await payment.enterPromoCode(promoCodeOne);
+            await payment.clickApplyDiscountButton();
+            await payment.invalidCodeMessagesAreShown("The entered promotion code does not exist.")
+
+        });
+
+        //PORTAL -> EMBED
+        it('Test_47 - should enable promotion and check promotion is applied and input is hidden', async function () {
+            portalLogin = new PortalLoginPage(driver);
+            dashboard = new DashboardPage(driver);
+            myEvents = new MyEventsPage(driver);
+            eventDetails = new GeneralDetailsTab(driver);
+            sideMenu = new SideMenu(driver);
+            promotions = new PromotionsPage(driver);
+            main = new EmbedMainPage(driver);
+            embedLogin = new LoginPage(driver);
+            embedTickets = new TicketsComponent(driver);
+            extras = new ExtrasPage(driver);
+            payment = new PaymentPage(driver);
+            sectionsNavs = new SectionsNavs(driver)
+
+            await portalLogin.loadPortalUrl();
+            await portalLogin.isAtPortalLoginPage();
+            await portalLogin.enterValidCredentialsAndLogin();
+            await dashboard.isAtDashboardPage();
+            await sectionsNavs.clickNavByText("My Events");
+            await myEvents.eventsTableIsDisplayed();
+            await myEvents.createdEventIsInTheTable(eventName);
+            await myEvents.clickTheNewCreatedEventInTheTable(eventName);
+            await eventDetails.unpublishButtonIsDisplayed();
+            await sideMenu.clickPromotionsTab();
+            await promotions.addPromotionButtonIsVisible();
+            await promotions.enablePromotionByPromoName(promoOneName);
+            await main.openEmbedPage();
+            await main.switchToIframe();
+            await main.isInFrame(eventName);
+            await main.clickNextPageButton();
+            await embedLogin.isAtLoginPage();
+            await embedLogin.loginWithVerifiedAccount(customerEmail, customerPassword);
+            await embedTickets.ticketListIsDisplayed();
+            await embedTickets.sentKeysToTicketInputByTicketName(ticketTwoName, '2');
+            await main.clickTicketTermsCheckbox();
+            await main.clickNextPageButton();
+            await extras.isAtExtrasPage();
+            await main.clickNextPageButton();
+            await payment.isAtPaymentPage();
+            await payment.successfullyAddedPromotionElementsAreShown(promoCodeOne);
+            await payment.assertDiscountFormIsNotDisplayed();
+
+        });
+
+        //EMBED
+        it('Test_48 - should add promo code and assert donation value + new price equals original ticket price in summary', async function () {
+
+            main = new EmbedMainPage(driver);
+            embedLogin = new LoginPage(driver);
+            embedTickets = new TicketsComponent(driver);
+            extras = new ExtrasPage(driver);
+            payment = new PaymentPage(driver);
+
+            await main.openEmbedPage();
+            await main.switchToIframe();
+            await main.isInFrame(eventName);
+            await main.clickNextPageButton();
+            await embedLogin.isAtLoginPage();
+            await embedLogin.loginWithVerifiedAccount(customerEmail, customerPassword);
+            await embedTickets.ticketListIsDisplayed();
+            await embedTickets.sentKeysToTicketInputByTicketName(ticketTwoName, '1');
+            await main.clickTicketTermsCheckbox();
+            await main.clickNextPageButton();
+            await extras.isAtExtrasPage();
+            await main.clickNextPageButton();
+            await payment.isAtPaymentPage();
+            await payment.applyPromotionAndCheckTicketPriceEqualsNewPricePlusDiscount(promoCodeOne,ticketTwoPrice);
+
+        });
+
+        //EMBED
+        it('Test_49 - should add promo code and assert new price and original price are displayed on tickets page next to ticket name', async function () {
+
+            main = new EmbedMainPage(driver);
+            embedLogin = new LoginPage(driver);
+            embedTickets = new TicketsComponent(driver);
+            extras = new ExtrasPage(driver);
+            payment = new PaymentPage(driver);
+            summary = new SummaryComponent(driver);
+
+            await main.openEmbedPage();
+            await main.switchToIframe();
+            await main.isInFrame(eventName);
+            await main.clickNextPageButton();
+            await embedLogin.isAtLoginPage();
+            await embedLogin.loginWithVerifiedAccount(customerEmail, customerPassword);
+            await embedTickets.ticketListIsDisplayed();
+            await embedTickets.sentKeysToTicketInputByTicketName(ticketTwoName, '1');
+            let originalPrice = await embedTickets.getTicketPriceByTicketName(ticketTwoName);
+            await main.clickTicketTermsCheckbox();
+            await main.clickNextPageButton();
+            await extras.isAtExtrasPage();
+            await main.clickNextPageButton();
+            await payment.isAtPaymentPage();
+            await payment.applyPromotion(promoCodeOne);
+            let discountedPrice = await summary.getTicketsTotal();
+            await main.clickPreviousPageButton();
+            await extras.isAtExtrasPage();
+            await main.clickPreviousPageButton();
+            await embedTickets.ticketListIsDisplayed();
+            await embedTickets.assertTheNewTicketPriceEqualsDiscountedPrice(ticketTwoName, discountedPrice);
+            await embedTickets.assertNewTicketNamePricesLayout(ticketTwoName, originalPrice, discountedPrice);
+            await embedTickets.assertFontColorAndStrikeOnOriginalPrice(ticketOneName);
+
+        });
+
 
     });

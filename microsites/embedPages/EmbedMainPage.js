@@ -8,6 +8,8 @@
    const SOLD_OUT_MESSAGE = { xpath: "//div[contains(@class , 'quantity-container')]//span" }
    const TERMS_LABEL = { xpath: "//label[@for='isSavedCheck']"}
    const TERMS_CHECKBOX = { xpath: "//input[@type='checkbox']"}
+   const PREVIOUS_PAGE_BUTTON = { xpath: "//button[contains(@class, 'embed-previous-btn')]"}
+
 
 
 
@@ -114,6 +116,11 @@
          await this.isDisplayed(TERMS_CHECKBOX, 5000);
          await this.timeout(500);
          await this.click(TERMS_CHECKBOX)
+      }
+
+      async clickPreviousPageButton(){
+         await this.click(PREVIOUS_PAGE_BUTTON);
+         await this.timeout(1000);
       }
 
       

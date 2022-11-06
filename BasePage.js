@@ -249,6 +249,11 @@ class BasePage {
         await alert.accept();
         await this.timeout(500);
     }
+
+    async getFontTextDecorationFromAnArray(locator, index){
+        let elements = await this.findAll(locator)
+        return elements[index].getCssValue('text-decoration')
+    }
     
 }
 

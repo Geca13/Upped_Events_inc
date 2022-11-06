@@ -1,5 +1,6 @@
     const BasePage = require('../../BasePage');
     const assert = require("assert");
+    const root = require('rootrequire');
     const SetImageModal = require('../portalComponents/SetImageModal');
     const Alerts = require('../portalComponents/Alerts');
     const {Key} = require("selenium-webdriver");
@@ -80,7 +81,7 @@
         async setBannerImageInThePortalAndAssertElements(){
             await this.scrollToView(EVENT_BANNER_INPUT);
             await this.moveToElement(EVENT_BANNER_INPUT);
-            await this.sentKeys(EVENT_BANNER_INPUT,"D:\\Upped_Events_Inc\\static\\image.jpg");
+            await this.sentKeys(EVENT_BANNER_INPUT,root+"\\static\\image.jpg");
             let cropper = new SetImageModal(this.driver);
             await cropper.setImageModalIsDisplayed();
             await cropper.clickSetButton();
