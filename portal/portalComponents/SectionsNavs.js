@@ -24,6 +24,10 @@
         async taxesAndFeesNavIsDisplayed(){
             await this.isDisplayed(SUB_NAVS, 5000);
         }
+        
+        async subNavsAreDisplayed(){
+            await this.isDisplayed(SUB_NAVS, 5000);
+        }
 
         async clickSubNavByText(text){
             await this.isDisplayed(SUB_NAVS, 5000);

@@ -109,6 +109,13 @@
          assert.equal(labelColor,'rgba(33, 37, 41, 1)');
       }
 
+      async clickTicketTermsCheckbox(){
+         await this.timeout(500);
+         await this.isDisplayed(TERMS_CHECKBOX, 5000);
+         await this.timeout(500);
+         await this.click(TERMS_CHECKBOX)
+      }
+
       
    }
    module.exports = EmbedMainPage;

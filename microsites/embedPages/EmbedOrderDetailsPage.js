@@ -16,6 +16,8 @@
     const CARD_BRAND = { id: "serviceName"}
     const CARD_NUMBER= { id: "cardNumber"};
     const EDIT_TICKET_LINK = { id: "editDetail" }
+    const EDIT_DONATION_LINK = { id: "editDonations"}
+
 
 
 
@@ -78,6 +80,15 @@
             await this.timeout(500);
             await this.click(EDIT_TICKET_LINK);
             await embedTickets.ticketListIsDisplayed();
+            await this.timeout(1000);
+        }
+
+        async clickEditDonationLinkAndAssertItIsOnExtrasPage(embedDonate){
+            await this.isOnOrderDetailsPage();
+            await this.isDisplayed(EDIT_DONATION_LINK,5000);
+            await this.timeout(500);
+            await this.click(EDIT_DONATION_LINK);
+            await embedDonate.donateScreenIsVisible();
             await this.timeout(1000);
         }
 
