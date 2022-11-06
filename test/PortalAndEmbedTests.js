@@ -67,7 +67,7 @@
         let attendees;
         let ticketTerms;
 
-        let base = Math.floor(100000 + Math.random() * 900000);
+        let base = 741162 // Math.floor(100000 + Math.random() * 900000);
         let eventName =  base.toString() + " FullEventName";
         let shortName = base.toString();
         let ticketOneName = base.toString() +"T1";
@@ -101,7 +101,7 @@
             await driver.quit()
         })
 
-       
+       /*
         //PORTAL
         it('Test_01 - should create new event and verify data in events page and General Details',async function () {
             portalLogin = new PortalLoginPage(driver);
@@ -118,7 +118,7 @@
             await createEvent.createEventModalIsDisplayed();
             await createEvent.fillFormWithValidDataAndSave(eventName,shortName);
         });
-        
+       */ 
         //PORTAL
         it('Test_02 - should create first ticket and check data in tickets table and update modal ',async function () {
 

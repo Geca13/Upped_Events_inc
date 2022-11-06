@@ -5,7 +5,7 @@
     const EVENT_NAME_LABEL = { xpath: "//*[text()='Event Name ']"}
     const EVENT_NAME_INPUT = { xpath: "//lint-modal-window//input[@formcontrolname='eventName']" };
     const OCCUR_SELECT = { xpath: "//button[@role='combobox']" };
-    const OCCUR_OPTIONS = { xpath: "//select-picker//ul//span"}; //array
+    const OCCUR_OPTIONS = { xpath: "//a[@role='option']"}; //array
     const START_DATE_TIME_PICKER = { xpath: "//input[@formcontrolname='eventStartDate']" };
     const END_DATE_TIME_PICKER = { xpath: "//input[@formcontrolname='eventEndDate']" };
     const EVENT_ATTENDEES_INPUT = { xpath: "//input[@formcontrolname='eventAttendees']" };
