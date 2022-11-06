@@ -30,6 +30,7 @@
     const EventCapacitySubNav = require('../portal/ticketing/SettingsNav/EventCapacitySubNav')
     const AttendeesTab = require('../portal/eventOverview/AttendeesTab')
     const TicketTermsPage = require('../portal/ticketing/SettingsNav/TicketTermsPage')
+    const TicketTermsModal = require('../microsites/components/TicketTermsModal')
 
 
     describe('Should do embed tests', function () {
@@ -66,8 +67,9 @@
         let capacity;
         let attendees;
         let ticketTerms;
+        let termsModal;
 
-        let base = 741162 // Math.floor(100000 + Math.random() * 900000);
+        let base =  Math.floor(100000 + Math.random() * 900000);
         let eventName =  base.toString() + " FullEventName";
         let shortName = base.toString();
         let ticketOneName = base.toString() +"T1";
@@ -101,7 +103,7 @@
             await driver.quit()
         })
 
-       /*
+       
         //PORTAL
         it('Test_01 - should create new event and verify data in events page and General Details',async function () {
             portalLogin = new PortalLoginPage(driver);
@@ -118,7 +120,7 @@
             await createEvent.createEventModalIsDisplayed();
             await createEvent.fillFormWithValidDataAndSave(eventName,shortName);
         });
-       */ 
+        
         //PORTAL
         it('Test_02 - should create first ticket and check data in tickets table and update modal ',async function () {
 
@@ -1049,6 +1051,132 @@
             await embedLogin.loginWithVerifiedAccount(customerEmail, customerPassword);
             await embedTickets.ticketListIsDisplayed();
             await main.ticketTermsCheckBoxAndLabelAreDisplayed();
+
+        });
+
+        // EMBED
+        it('Test_31 - should assert correct ticket terms behaviour and image placeholder', async function () {
+            main = new EmbedMainPage(driver);
+            embedTickets = new TicketsComponent(driver);
+            embedLogin = new LoginPage(driver);
+            termsModal = new TicketTermsModal(driver);
+            addMoney = new AddMoneyComponent(driver)
+            await main.openEmbedPage();
+            await main.switchToIframe();
+            await main.isInFrame(eventName);
+            await main.clickNextPageButton();
+            await embedLogin.isAtLoginPage();
+            await embedLogin.loginWithVerifiedAccount(customerEmail, customerPassword);
+            await embedTickets.ticketListIsDisplayed();
+            await main.ticketTermsLabelIsDisplayedAndAssertText();
+            await main.assertLabelColorChangedToRedAfterClickNextAndNoTicketsSelected();
+            await main.clickTermsLabel();
+            await termsModal.checkFirstTicketTermsScenarioElementsAndClose();
+            await main.clickTermsCheckboxAndAssertFontColorIsBlack();
+            await main.clickTermsLabel();
+            await termsModal.termsModalIsDisplayed();
+            await main.clickTermsLabel();
+            await termsModal.termsModalIsNotDisplayed();
+            await embedTickets.sentKeysToTicketInput(0, 2);
+            await main.clickNextPageButton();
+            await addMoney.addMoneyComponentIsDisplayed();
+
+        });
+
+        // PORTAL
+        it('Test_32 - should set event banner in the portal', async function () {
+
+            portalLogin = new PortalLoginPage(driver);
+            dashboard = new DashboardPage(driver);
+            myEvents = new MyEventsPage(driver);
+            eventDetails = new GeneralDetailsTab(driver);
+            sectionsNavs = new SectionsNavs(driver)
+
+            await portalLogin.loadPortalUrl();
+            await portalLogin.isAtPortalLoginPage();
+            await portalLogin.enterValidCredentialsAndLogin();
+            await dashboard.isAtDashboardPage();
+            await sectionsNavs.clickNavByText("My Events");
+            await myEvents.eventsTableIsDisplayed();
+            await myEvents.createdEventIsInTheTable(eventName);
+            await myEvents.clickTheNewCreatedEventInTheTable(eventName);
+            await eventDetails.unpublishButtonIsDisplayed();
+            await eventDetails.setBannerImageInThePortalAndAssertElements();
+
+        });
+
+        // PORTAL -> EMBED
+        it('Test_33 - should assert event banner image is present in the ticket terms modal', async function () {
+            main = new EmbedMainPage(driver);
+            embedTickets = new TicketsComponent(driver);
+            embedLogin = new LoginPage(driver);
+            termsModal = new TicketTermsModal(driver);
+            portalLogin = new PortalLoginPage(driver);
+            dashboard = new DashboardPage(driver);
+            myEvents = new MyEventsPage(driver);
+            eventDetails = new GeneralDetailsTab(driver);
+            sectionsNavs = new SectionsNavs(driver)
+
+            await portalLogin.loadPortalUrl();
+            await portalLogin.isAtPortalLoginPage();
+            await portalLogin.enterValidCredentialsAndLogin();
+            await dashboard.isAtDashboardPage();
+            await sectionsNavs.clickNavByText("My Events");
+            await myEvents.eventsTableIsDisplayed();
+            await myEvents.createdEventIsInTheTable(eventName);
+            await myEvents.clickTheNewCreatedEventInTheTable(eventName);
+            await eventDetails.unpublishButtonIsDisplayed();
+            let src = await eventDetails.getBannerImageSrc();
+            await main.openEmbedPage();
+            await main.switchToIframe();
+            await main.isInFrame(eventName);
+            await main.clickNextPageButton();
+            await embedLogin.isAtLoginPage();
+            await embedLogin.loginWithVerifiedAccount(customerEmail, customerPassword);
+            await embedTickets.ticketListIsDisplayed();
+            await main.clickTermsLabel();
+            await termsModal.assertTicketTermsImageSrcMatchBannerImageSrc(src);
+
+        });
+
+        // PORTAL
+        it('Test_34 - should remove event banner in the portal', async function () {
+            portalLogin = new PortalLoginPage(driver);
+            dashboard = new DashboardPage(driver);
+            myEvents = new MyEventsPage(driver);
+            eventDetails = new GeneralDetailsTab(driver);
+            sectionsNavs = new SectionsNavs(driver)
+
+            await portalLogin.loadPortalUrl();
+            await portalLogin.isAtPortalLoginPage();
+            await portalLogin.enterValidCredentialsAndLogin();
+            await dashboard.isAtDashboardPage();
+            await sectionsNavs.clickNavByText("My Events");
+            await myEvents.eventsTableIsDisplayed();
+            await myEvents.createdEventIsInTheTable(eventName);
+            await myEvents.clickTheNewCreatedEventInTheTable(eventName);
+            await eventDetails.unpublishButtonIsDisplayed();
+            await eventDetails.removeBannerImageAndAssertPreviewAndAlertAreNotDisplayed();
+
+        });
+
+        // EMBED
+        it('Test_35 - should assert terms image placeholder is returned after banner is removed in the portal', async function () {
+            main = new EmbedMainPage(driver);
+            embedLogin = new LoginPage(driver);
+            termsModal = new TicketTermsModal(driver);
+            embedTickets = new TicketsComponent(driver);
+            await main.openEmbedPage();
+            await main.switchToIframe();
+            await main.isInFrame(eventName);
+            await main.clickNextPageButton();
+            await embedLogin.isAtLoginPage();
+            await embedLogin.loginWithVerifiedAccount(customerEmail, customerPassword);
+            await embedTickets.ticketListIsDisplayed();
+            await main.ticketTermsLabelIsDisplayedAndAssertText();
+            await main.assertLabelColorChangedToRedAfterClickNextAndNoTicketsSelected();
+            await main.clickTermsLabel();
+            await termsModal.assertImagePlaceholderIsDisplayedInTheModal("https://events.dev.uppedevents.com/assets/images/placeholder2.png");
 
         });
 

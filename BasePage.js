@@ -216,6 +216,13 @@ class BasePage {
         await element.sendKeys(keys);
     }
 
+    async returnImgSrcAttributeByIndex(locator, index){
+        await this.timeout(2000);
+        let images = await this.findAll(locator);
+        let img = await images[index];
+        return await img.getAttribute('src');
+    }
+
     async getElementTextForTheLastElementFromAnArray(locator){
         let elements = await this.findAll(locator);
         let element = await elements[elements.length - 1]
@@ -229,6 +236,18 @@ class BasePage {
     async clickEnterKey(locator){
         let element = await this.find(locator);
         await element.sendKeys(Key.ENTER)
+    }
+
+    async getFontColorFromAnArray(locator, index){
+        let elements = await this.findAll(locator)
+        return elements[index].getCssValue('color')
+    }
+
+    async acceptAlert(){
+        await this.driver.wait(until.alertIsPresent());
+        let alert = await this.driver.switchTo().alert();
+        await alert.accept();
+        await this.timeout(500);
     }
     
 }

@@ -84,6 +84,31 @@
          assert.equal(termsLabel, 1);
       }
 
+      async ticketTermsLabelIsDisplayedAndAssertText(){
+         await this.isDisplayed(TERMS_LABEL, 5000);
+         await this.timeout(500)
+         let label = await this.getElementText(TERMS_LABEL);
+         assert.equal(label, "Ticket Terms and Conditions");
+      }
+
+      async assertLabelColorChangedToRedAfterClickNextAndNoTicketsSelected(){
+         await this.timeout(500);
+         await this.clickNextPageButton();
+         let labelColor = await this.getFontColorFromAnArray(TERMS_LABEL,0);
+         assert.equal(labelColor,'rgba(255, 0, 0, 1)');
+      }
+
+      async clickTermsLabel(){
+         await this.click(TERMS_LABEL);
+      }
+
+      async clickTermsCheckboxAndAssertFontColorIsBlack(){
+         await this.click(TERMS_CHECKBOX);
+         await this.timeout(500);
+         let labelColor = await this.getFontColorFromAnArray(TERMS_LABEL,0);
+         assert.equal(labelColor,'rgba(33, 37, 41, 1)');
+      }
+
       
    }
    module.exports = EmbedMainPage;
