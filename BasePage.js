@@ -55,7 +55,7 @@ class BasePage {
         let dateTimeValue = await this.getEnteredTextInTheInput(locator);
         fullDateTime = dateTimeValue.split(" ")
         let date = fullDateTime[0];
-        return moment().format(date, 'M/D/YYYY');
+        return moment(date).format( 'M/D/YYYY');
     }
     async returnNumberWith$Sign(locator){
         let number = await this.getEnteredTextInTheInput(locator);
@@ -224,6 +224,11 @@ class BasePage {
 
     async clickBackspaceKey(locator){
         await this.sentKeys(locator, Key.BACK_SPACE);
+    }
+
+    async clickEnterKey(locator){
+        let element = await this.find(locator);
+        await element.sendKeys(Key.ENTER)
     }
     
 }

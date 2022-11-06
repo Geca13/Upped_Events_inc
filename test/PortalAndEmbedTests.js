@@ -29,6 +29,7 @@
     const ExtrasPage = require("../microsites/embedPages/ExtrasPage");
     const EventCapacitySubNav = require('../portal/ticketing/SettingsNav/EventCapacitySubNav')
     const AttendeesTab = require('../portal/eventOverview/AttendeesTab')
+    const TicketTermsPage = require('../portal/ticketing/SettingsNav/TicketTermsPage')
 
 
     describe('Should do embed tests', function () {
@@ -64,14 +65,27 @@
         let confirm;
         let capacity;
         let attendees;
-        
-        let base =  Math.floor(100000 + Math.random() * 900000);
+        let ticketTerms;
+
+        let base = Math.floor(100000 + Math.random() * 900000);
         let eventName =  base.toString() + " FullEventName";
         let shortName = base.toString();
         let ticketOneName = base.toString() +"T1";
-        let ticketOneQuantity = 999;
         let embedTicketQuantity = 2;
+        let ticketOneQuantity = 999;
         let ticketOnePrice = "1.00";
+        let ticketTwoName = base.toString() +"T2";
+        let ticketTwoQuantity = 888;
+        let ticketTwoPrice = "1.20";
+        let ticketThreeName = base.toString() +"T3";
+        let ticketThreeQuantity = 777;
+        let ticketThreePrice = "0.75";
+        let ticketFourName = base.toString() +"T4";
+        let ticketFourQuantity = 666;
+        let ticketFourPrice = "0.40";
+        let ticketGroupOne = base.toString() +"TG1";
+        let ticketGroupTwo = base.toString() +"TG2";
+        let ticketGroupThree = base.toString() +"TG3";
         let customerFirstName = 'cfn'+base.toString();
         let customerLastName = 'cln'+base.toString();
         let customerEmail = customerFirstName + '@' + customerLastName+'.com';
@@ -861,4 +875,181 @@
             await orderDetails.clickEditLinkOnDisplayedTicketAssertIsOnTicketsPage(embedTickets);
 
         });
+
+        //EMBED
+        it('Test_26 - should make payment with wallet and assert elements on Confirmation page', async function () {
+
+            main = new EmbedMainPage(driver);
+            embedTickets = new TicketsComponent(driver);
+            embedLogin = new LoginPage(driver);
+            addMoney = new AddMoneyComponent(driver)
+            payment = new PaymentPage(driver);
+            orderDetails = new EmbedOrderDetailsPage(driver);
+            confirm = new ConfirmPage(driver);
+
+            await main.openEmbedPage();
+            await main.switchToIframe();
+            await main.isInFrame(eventName);
+            await embedTickets.sentKeysToTicketInputByTicketName(ticketOneName, '2');
+            await main.clickNextPageButton();
+            await embedLogin.isAtLoginPage();
+            await embedLogin.loginWithVerifiedAccount(customerEmail, customerPassword);
+            await embedTickets.ticketListIsDisplayed();
+            await main.clickNextPageButton();
+            await addMoney.addMoneyComponentIsDisplayed();
+            await main.clickNextPageButton();
+            await payment.isAtPaymentPage();
+            await payment.clickPayWithWalletButton();
+            await main.clickNextPageButton();
+            await orderDetails.isOnOrderDetailsPage();
+            await orderDetails.clickPlaceOrderButton();
+            await confirm.isAtConfirmPage();
+            await confirm.assertElementsOnConfirmPage();
+
+        });
+
+        //PORTAL
+        it('Test_27 - should create three more tickets and ticket groups, then assert data in tickets table ',async function () {
+
+            portalLogin = new PortalLoginPage(driver);
+            dashboard = new DashboardPage(driver);
+            myEvents = new MyEventsPage(driver);
+            eventDetails = new GeneralDetailsTab(driver);
+            sideMenu = new SideMenu(driver);
+            ticketsNav = new TicketsNav(driver);
+            createTicket = new CreateTicketModal(driver);
+            sectionsNavs = new SectionsNavs(driver)
+
+            await portalLogin.loadPortalUrl();
+            await portalLogin.isAtPortalLoginPage();
+            await portalLogin.enterValidCredentialsAndLogin();
+            await dashboard.isAtDashboardPage();
+            await sectionsNavs.clickNavByText("My Events");
+            await myEvents.eventsTableIsDisplayed();
+            await myEvents.createdEventIsInTheTable(eventName);
+            await myEvents.clickTheNewCreatedEventInTheTable(eventName);
+            await eventDetails.unpublishButtonIsDisplayed();
+            await sideMenu.clickTicketingTab();
+            await ticketsNav.addTicketButtonIsDisplayed();
+            await ticketsNav.createTicketsGroup(ticketGroupOne);
+            await ticketsNav.successTicketGroupBannerIsDisplayed();
+            await ticketsNav.addTicketButtonIsDisplayed();
+            await ticketsNav.createTicketsGroup(ticketGroupTwo);
+            await ticketsNav.clickGroupTabByIndex(2);
+            await ticketsNav.addTicketButtonIsDisplayed();
+            await ticketsNav.clickAddTicketButton();
+            await createTicket.ticketNameInputIsDisplayed();
+            await createTicket.createNewTicket(ticketTwoName,ticketTwoPrice,ticketTwoQuantity);
+            await ticketsNav.addTicketButtonIsDisplayed();
+            await ticketsNav.createdTicketIsInTheTable(ticketTwoName);
+            await ticketsNav.clickActivateTicketToggle(ticketTwoName);
+            await ticketsNav.addTicketButtonIsDisplayed();
+            await ticketsNav.clickAddTicketButton();
+            await createTicket.ticketNameInputIsDisplayed();
+            await createTicket.createNewTicket(ticketThreeName,ticketThreePrice,ticketThreeQuantity);
+            await ticketsNav.addTicketButtonIsDisplayed();
+            await ticketsNav.createdTicketIsInTheTable(ticketThreeName);
+            await ticketsNav.clickActivateTicketToggle(ticketThreeName);
+            await ticketsNav.addTicketButtonIsDisplayed();
+            await ticketsNav.createTicketsGroup(ticketGroupThree);
+            await ticketsNav.clickGroupTabByIndex(3);
+            await ticketsNav.addTicketButtonIsDisplayed();
+            await ticketsNav.clickAddTicketButton();
+            await createTicket.ticketNameInputIsDisplayed();
+            await createTicket.createNewTicket(ticketFourName,ticketFourPrice,ticketFourQuantity);
+            await ticketsNav.addTicketButtonIsDisplayed();
+            await ticketsNav.createdTicketIsInTheTable(ticketFourName);
+            await ticketsNav.clickActivateTicketToggle(ticketFourName);
+            await ticketsNav.clickGroupTabByIndex(0);
+            await ticketsNav.assertTicketGroupNames(ticketGroupOne, ticketGroupTwo, ticketGroupThree);
+            await ticketsNav.assertTicketNamePriceAndQuantity(ticketOneName,ticketOnePrice,ticketOneQuantity);
+            await ticketsNav.assertTicketNamePriceAndQuantity(ticketTwoName,ticketTwoPrice,ticketTwoQuantity);
+            await ticketsNav.assertTicketNamePriceAndQuantity(ticketThreeName,ticketThreePrice,ticketThreeQuantity);
+            await ticketsNav.assertTicketNamePriceAndQuantity(ticketFourName,ticketFourPrice,ticketFourQuantity);
+
+        });
+
+        // PORTAL -> EMBED
+        it('Test_28 - should assert that ticket terms elements in embed are not displayed when not created in portal', async function () {
+            main = new EmbedMainPage(driver);
+            embedTickets = new TicketsComponent(driver);
+            embedLogin = new LoginPage(driver);
+            portalLogin = new PortalLoginPage(driver);
+            dashboard = new DashboardPage(driver);
+            myEvents = new MyEventsPage(driver);
+            sideMenu = new SideMenu(driver);
+            ticketsNav = new TicketsNav(driver);
+            eventTickets = new EventTickets(driver);
+            ticketTerms = new TicketTermsPage(driver);
+            sectionsNavs = new SectionsNavs(driver)
+
+            await portalLogin.loadPortalUrl();
+            await portalLogin.isAtPortalLoginPage();
+            await portalLogin.enterValidCredentialsAndLogin();
+            await dashboard.isAtDashboardPage();
+            await sectionsNavs.clickNavByText("My Events");
+            await myEvents.eventsTableIsDisplayed();
+            await myEvents.createdEventIsInTheTable(eventName);
+            await myEvents.clickTheNewCreatedEventInTheTable(eventName);
+            await sideMenu.clickTicketingTab();
+            await ticketsNav.addTicketButtonIsDisplayed();
+            await eventTickets.clickSettingsTab();
+            await ticketTerms.termsPageIsDisplayed();
+            await ticketTerms.assertTicketTermsIsEmpty();
+            await main.openEmbedPage();
+            await main.switchToIframe();
+            await main.isInFrame(eventName);
+            await main.ticketTermsCheckBoxAndLabelAreNotDisplayed();
+            await main.clickNextPageButton();
+            await embedLogin.isAtLoginPage();
+            await embedLogin.loginWithVerifiedAccount(customerEmail, customerPassword);
+            await embedTickets.ticketListIsDisplayed();
+            await main.ticketTermsCheckBoxAndLabelAreNotDisplayed()
+
+        });
+
+        // PORTAL
+        it('Test_29 - should set ticket terms in the portal and assert entered tags and text', async function () {
+            portalLogin = new PortalLoginPage(driver);
+            dashboard = new DashboardPage(driver);
+            myEvents = new MyEventsPage(driver);
+            sideMenu = new SideMenu(driver);
+            ticketsNav = new TicketsNav(driver);
+            eventTickets = new EventTickets(driver);
+            ticketTerms = new TicketTermsPage(driver);
+            sectionsNavs = new SectionsNavs(driver)
+
+            await portalLogin.loadPortalUrl();
+            await portalLogin.isAtPortalLoginPage();
+            await portalLogin.enterValidCredentialsAndLogin();
+            await dashboard.isAtDashboardPage();
+            await sectionsNavs.clickNavByText("My Events");
+            await myEvents.eventsTableIsDisplayed();
+            await myEvents.createdEventIsInTheTable(eventName);
+            await myEvents.clickTheNewCreatedEventInTheTable(eventName);
+            await sideMenu.clickTicketingTab();
+            await ticketsNav.addTicketButtonIsDisplayed();
+            await eventTickets.clickSettingsTab();
+            await ticketTerms.termsPageIsDisplayed();
+            await ticketTerms.saveTerms();
+            await ticketTerms.assertElementsInTheTermsBoxAfterSavingTerms();
+        });
+
+        // EMBED
+        it('Test_30 - should assert that ticket terms are displayed only when user is logged in', async function () {
+            main = new EmbedMainPage(driver);
+            embedTickets = new TicketsComponent(driver);
+            embedLogin = new LoginPage(driver);
+            await main.openEmbedPage();
+            await main.switchToIframe();
+            await main.isInFrame(eventName);
+            await main.ticketTermsCheckBoxAndLabelAreNotDisplayed();
+            await main.clickNextPageButton();
+            await embedLogin.isAtLoginPage();
+            await embedLogin.loginWithVerifiedAccount(customerEmail, customerPassword);
+            await embedTickets.ticketListIsDisplayed();
+            await main.ticketTermsCheckBoxAndLabelAreDisplayed();
+
+        });
+
     });

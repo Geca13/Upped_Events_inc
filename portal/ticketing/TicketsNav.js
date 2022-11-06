@@ -1,5 +1,7 @@
     const BasePage = require('../../BasePage');
+    const {By} = require("selenium-webdriver");
     const assert = require('assert')
+    const Alerts = require('../portalComponents/Alerts')
     const ADD_TICKET_BUTTON = { xpath: "//*[text()='Add']" }
     const DEACTIVATED_TICKET_TOGGLE = {className: 'lc_off' }
     const ACTIVATED_TICKET_TOGGLE = {className: 'lc_on' }
@@ -11,7 +13,15 @@
     const TICKETS_PRICES = { className: "column-price" };
     const TICKETS_QUANTITIES = { className: "column-quantity" };
     const SOLD_TICKETS_NUMBER = { className: 'column-sold'} //list
-    const EDIT_TICKET_BUTTONS = { className: 'text-second'} 
+    const EDIT_TICKET_BUTTONS = { className: 'text-second'}
+    const ADD_TICKETS_GROUP_BUTTON = { xpath: "//*[text()=' Add Group']" }
+    const TICKETS_GROUP_NAME_INPUT = { xpath: "//input[@placeholder='Group Name']" }
+    const SAVE_TICKETS_GROUP_BUTTON = { xpath: "//i[@aria-hidden='true']" }
+    const TICKET_GROUP_TAB = { xpath: "//a[@role='tab']" }
+
+
+
+
 
 
 
@@ -99,6 +109,54 @@
             let sold = await this.getElementTextFromAnArrayByIndex(SOLD_TICKETS_NUMBER,i);
             let parsedSold = parseInt(sold);
             return parsedQty - parsedSold;
+        }
+
+        async createTicketsGroup(groupName){
+            await this.timeout(1000);
+            await this.click(ADD_TICKETS_GROUP_BUTTON);
+            await this.isDisplayed(TICKETS_GROUP_NAME_INPUT,15000);
+            await this.sentKeys(TICKETS_GROUP_NAME_INPUT, groupName);
+            await this.click(SAVE_TICKETS_GROUP_BUTTON);
+            await this.timeout(1500)
+        }
+
+        async successTicketGroupBannerIsDisplayed(){
+            let success = new Alerts(this.driver);
+            await success.successAlertIsDisplayed('Saved successfully');
+        }
+
+        async clickGroupTabByIndex(index){
+            await this.clickElementReturnedFromAnArray(TICKET_GROUP_TAB,index);
+            await this.timeout(1000);
+        }
+
+        async createdTicketIsInTheTable(ticketName){
+            await this.isDisplayed(By.xpath("//*[text()='"+ticketName+"']"),15000);
+        }
+
+        async assertTicketGroupNames(one, two, three){
+            let grOne = await this.getElementTextFromAnArrayByIndex(TICKET_GROUP_TAB, 0);
+            let grTwo = await this.getElementTextFromAnArrayByIndex(TICKET_GROUP_TAB, 1);
+            let grThree = await this.getElementTextFromAnArrayByIndex(TICKET_GROUP_TAB, 2);
+            let grFour = await this.getElementTextFromAnArrayByIndex(TICKET_GROUP_TAB, 3);
+            assert.equal(grOne, "All")
+            assert.equal(grTwo, one)
+            assert.equal(grThree, two)
+            assert.equal(grFour, three);
+        }
+
+        async assertTicketNamePriceAndQuantity(name,price,quantity){
+            await this.isDisplayed(TICKETS_NAMES,5000);
+            await this.timeout(500)
+            let i = await this.returnIndexWhenTextIsKnown(TICKETS_NAMES, name);
+            await this.timeout(2000)
+            let savedName = await this.getElementTextFromAnArrayByIndex(TICKETS_NAMES, i);
+            let savedPrice = await this.getElementTextFromAnArrayByIndex(TICKETS_PRICES, i);
+            let savedQuantity = await this.getElementTextFromAnArrayByIndex(TICKETS_QUANTITIES, i);
+            assert.equal(savedName,name);
+            assert.equal(savedPrice.substring(1),price);
+            assert.equal(savedQuantity,quantity);
+            await this.timeout(500)
         }
         
 

@@ -6,6 +6,9 @@
    const NO_TICKETS_MESSAGE = { xpath: "//p[contains(@class, 'pt-5')]" }
    const NEXT_BUTTON = { xpath: "//*[text()='Next']"}
    const SOLD_OUT_MESSAGE = { xpath: "//div[contains(@class , 'quantity-container')]//span" }
+   const TERMS_LABEL = { xpath: "//label[@for='isSavedCheck']"}
+   const TERMS_CHECKBOX = { xpath: "//input[@type='checkbox']"}
+
 
 
    class EmbedMainPage extends BasePage {
@@ -64,6 +67,21 @@
          let info = new Alerts(this.driver);
          await info.correctInfoMessageIsDisplayed("You have exceeded maximum (" + number + ") limit to buy tickets");
          await this.timeout(5000);
+      }
+
+      async ticketTermsCheckBoxAndLabelAreNotDisplayed(){
+         let termsCheckbox = await this.returnElementsCount(TERMS_CHECKBOX)
+         assert.equal(termsCheckbox, 0);
+         let termsLabel = await this.returnElementsCount(TERMS_LABEL);
+         assert.equal(termsLabel, 0);
+         await this.timeout(1000);
+      }
+
+      async ticketTermsCheckBoxAndLabelAreDisplayed(){
+         let termsCheckbox = await this.returnElementsCount(TERMS_CHECKBOX)
+         assert.equal(termsCheckbox, 1);
+         let termsLabel = await this.returnElementsCount(TERMS_LABEL);
+         assert.equal(termsLabel, 1);
       }
 
       

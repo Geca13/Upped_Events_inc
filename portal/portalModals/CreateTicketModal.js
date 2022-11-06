@@ -155,6 +155,29 @@
             await this.click(SAVE_TICKET_BUTTON);
             await this.timeout(1000);
         }
+
+        async createNewTicket(ticketName,ticketPrice,ticketQuantity){
+            await this.ticketNameInputIsDisplayed();
+            await this.sentKeys(TICKET_NAME_INPUT, ticketName);
+            await this.sentKeys(TICKET_DESCRIPTION_INPUT, ticketName + ' description');
+            await this.sentKeys(TICKET_RULES_INPUT, ticketName + ' rules');
+            await this.clearInputField(TICKET_QUANTITY_INPUT);
+            await this.sentKeys(TICKET_QUANTITY_INPUT, ticketQuantity);
+            await this.sentKeys(TICKET_PRICE_INPUT, ticketPrice);
+            await this.click(TICKET_START_DATE_INPUT);
+            await this.timeout(1500)
+            let startDatePicker = new DateTimePickerModal(this.driver);
+            await startDatePicker.datePickerIsVisible();
+            await startDatePicker.selectTodayDate();
+            await startDatePicker.enterTimeNow();
+            await this.timeout(1500)
+            await startDatePicker.clickSetButton();
+            await this.timeout(1500)
+            await this.saveTicketButtonIsVisible();
+            await this.click(SAVE_TICKET_BUTTON);
+            await this.timeout(1500);
+
+        }
         
     }
     module.exports = CreateTicketModal;
