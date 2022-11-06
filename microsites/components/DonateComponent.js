@@ -1,6 +1,6 @@
     const BasePage = require('../../BasePage');
     const assert = require('assert')
-    const SummaryComponent = require('../embedComponents/SummaryComponent')
+    const SummaryComponent = require('../components/SummaryComponent')
     const DONATION_INPUT = { name: 'donation'};
     const DONATE_HEADER = { className: 'donate-heading' };
     const DONATE_TO_HEADER = { xpath: "//div[@class='text-container']//span" };
@@ -10,7 +10,6 @@
     const DOLLAR_INPUT_SYMBOL = { xpath: "//div[@class='text-container']//div[6]//span" }
     const USD_TEXT = { xpath: "//div[@class='text-container']//div[7]" };
     const MINIMUM_DONATION_TEXT = { xpath: "//div[@class='text-container']//div[8]" };
-    const DONATE_BUTTON_CONTAINER = { className: 'donations-buttons-box' };
     const DONATE_BUTTONS = { className: 'donations-button' }; //list
     const ADD_DONATION_BUTTON = { className: 'donation-order-button' };
     const RESET_DONATION_BUTTON = { className: 'donation-reset-button' };
@@ -119,14 +118,6 @@
             assert.equal(parsedEntered.toFixed(2),addedDonation);
         }
 
-        async addCustomDonationToInputAndAddItToOrder(){
-            await this.donateScreenIsVisible()
-            await this.clearInputField(DONATION_INPUT);
-            await this.sentKeys(DONATION_INPUT, "7.77");
-            await this.click(ADD_DONATION_BUTTON);
-            await this.timeout(500);
-        }
-
         async addCustomDonationAndReturnValue() {
             await this.donateScreenIsVisible()
             await this.clearInputField(DONATION_INPUT);
@@ -137,12 +128,6 @@
             assert.equal(enteredDonation, "777");
             await this.click(ADD_DONATION_BUTTON);
             return parsedEntered;
-        }
-
-        async assertOnceSetDonationIsSavedCorrectlyInBox_OfficeModal(value){
-            let input = await this.getEnteredTextInTheInput(DONATION_INPUT);
-            assert.equal(input, value);
-            await this.timeout(500)
         }
 
         async calculateTheOrderTotalAfterDonationIsAdded(){

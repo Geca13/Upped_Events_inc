@@ -5,6 +5,7 @@
     const TAXES_TOTAL = { id: "taxesAmt" }
     const FEES_TOTAL = { id: "feesAmt" }
     const TOTAL_TOTAL = { id: "totalDuesAmt" }
+    const DONATIONS_TOTAL = { id: "donationsTotal" }
 
 
     class SummaryComponent extends BasePage{
@@ -66,6 +67,27 @@
             assert.equal(afterFees,fees);
             assert.equal(afterTotal,total);
             await this.timeout(1000);
+        }
+
+        async getDonationValue(){
+            await this.timeout(1000)
+            let rawDonation = await this.getSubstringOfPriceString(DONATIONS_TOTAL)
+            let donation = parseFloat(rawDonation);
+            return  donation.toFixed(2);
+        }
+
+        async calculateSubtotalAndTotalAfterDonationIsAdded(){
+            let ticketsTotal = await this.getTicketsTotal();
+            let donation = await this.getDonationValue();
+            let calculatedDonation = parseFloat(ticketsTotal) + parseFloat(donation);
+            let subTotal = await this.getSubtotalValue();
+            assert.equal(calculatedDonation.toFixed(2),subTotal);
+            let taxes = await this.getTaxesValue();
+            let fees = await this.getFeesValue();
+            let calculatedTotal = parseFloat(subTotal) + parseFloat(taxes) + parseFloat(fees);
+            let total = await this.getTotalValue();
+            assert.equal(calculatedTotal.toFixed(2),total);
+
         }
 
        
