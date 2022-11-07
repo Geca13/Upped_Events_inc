@@ -254,6 +254,25 @@ class BasePage {
         let elements = await this.findAll(locator)
         return elements[index].getCssValue('text-decoration')
     }
+
+    async checkIfClassIsApplied(locator, index, clas){
+        await this.timeout(1000);
+        let seperated = [];
+        let elements = await this.findAll(locator);
+        let element = elements[index];
+        let classes = await element.getAttribute('class');
+        let clases = classes.split(' ');
+        for (const item of clases) {
+            seperated.push(item)
+        }
+        let i = seperated.length;
+        while (i--){
+            if(seperated[i] === clas){
+                return true;
+            }
+        }
+        return false;
+    }
     
 }
 
