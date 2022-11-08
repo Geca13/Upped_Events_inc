@@ -41,7 +41,6 @@
     const TicketQuestionsPage = require('../portal/ticketing/SettingsNav/TicketQuestionsPage')
     
 
-
     describe('Should do embed tests', function () {
         this.timeout(500000);
         let driver;

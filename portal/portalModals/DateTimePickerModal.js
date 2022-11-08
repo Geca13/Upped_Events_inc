@@ -61,9 +61,9 @@
             let today = new Date();
             let hour = today.getUTCHours();
             if (hour > 12) {
-                return (hour-12).toString();
+                return ((hour-12)-5).toString();
             }else{
-                return hour.toString();
+                return (hour - 5).toString();
             }
         }
 
