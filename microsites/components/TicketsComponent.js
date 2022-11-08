@@ -181,6 +181,11 @@
             assert.equal(thirdSelectValue,1);
 
         }
+
+        async getCleanTicketPriceFromPriceWithBrackets(ticketName){
+            let price = await this.getTicketPriceByTicketName(ticketName);
+            return price.substring(2, price.length - 1);
+        }
         
     }
 

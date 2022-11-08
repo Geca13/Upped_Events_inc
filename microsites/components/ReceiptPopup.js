@@ -5,7 +5,16 @@
     const PURCHASE_DETAILS = { id: 'purchaseTime' };
     const TICKETS_NAMES_QUANTITY_DISCOUNT = { id: 'itemName' }; //list
     const TAXES_TOTAL = { id: "taxAmt" }
-    
+    const DONATIONS_TOTAL = { id: "donationAmt" }
+    const SUBTOTAL_TOTAL = { xpath: "//span[@id='subtotalAmt']" }
+    const FEES_TOTAL = { id: "feesAmt" }
+    const DISCOUNT_VALUE = { id: "discountAmt" }
+    const TOTAL_VALUE = { id: "grandTotalAmt" }
+    const DISCOUNT_BY_TICKET_TYPE = { id: "itemAmt" }
+    const TICKETS_PRICES = { id: 'itemPrice' }; //list
+
+
+
 
     class ReceiptPopup extends BasePage {
         constructor(driver) {
@@ -48,11 +57,75 @@
             return cleaned;
         }
 
+        async getCleanTicketPrices(){
+            let cleaned = []
+            let prices = await this.findAll(TICKETS_PRICES);
+            for(let i = 0; i < prices.length; i++){
+                let price = await this.getElementTextFromAnArrayByIndex(TICKETS_PRICES, i)
+                cleaned.push(price.substring(1))
+            }
+            return cleaned;
+        }
+
+        async getCleanedTicketsDiscounts(){
+            let cleaned = []
+            let rawDiscounts = await this.findAll(DISCOUNT_BY_TICKET_TYPE);
+            for(let i = 0; i < rawDiscounts.length; i++){
+                let discount = await this.getElementTextFromAnArrayByIndex(DISCOUNT_BY_TICKET_TYPE, i)
+                let dis = discount.substring(3,discount.length - 1)
+                cleaned.push(dis)
+            }
+            return cleaned;
+        }
+
         async timeDateAndEventName(timeDate, eventName){
             let publishedEventName = await this.getElementText(EVENT_NAME);
             expect(publishedEventName).to.equal(eventName);
             let publishedTimeDate = await this.getElementText(PURCHASE_DETAILS);
             assert.equal(publishedTimeDate ,"Purchased on " + timeDate);
+        }
+
+        async assertDataFromSummaryEqualReceiptValues(tickets,donations,subtotal,taxes,fees,discount,total){
+            await this.timeout(500)
+            let extDonation = await this.getElementText(DONATIONS_TOTAL);
+            let extSubtotal = await this.getElementText(SUBTOTAL_TOTAL);
+            let extFees = await this.getElementText(FEES_TOTAL)
+            let extTaxes = await this.getElementText(TAXES_TOTAL);
+            let extDiscount = await this.getElementText(DISCOUNT_VALUE);
+            let extTotal = await this.getElementText(TOTAL_VALUE);
+
+            expect(extDonation.substring(1)).to.equal(donations);
+            expect(extSubtotal.substring(1)).to.equal(tickets);
+            expect(extFees.substring(1)).to.equal(fees);
+            expect(extTaxes.substring(1)).to.equal(taxes);
+            expect(extDiscount.substring(1)).to.equal(discount);
+            expect(extTotal.substring(1)).to.equal(total);
+
+        }
+
+        async calculateAndAssertOriginalTicketPriceAndDiscountIsCalculatedAndDisplayedCorrectlyNextToEachTicketByTicketName(ticketName, notDiscounted){
+            await this.isDisplayed(EVENT_NAME, 5000);
+            let tickets = await this.getCleanTicketNames();
+            let quantities = await this.getCleanTicketQuantity();
+            let prices = await this.getCleanTicketPrices();
+            let discounts = await this.getCleanedTicketsDiscounts();
+            let totalDiscount = 0.00;
+            for(let i = 0; i < tickets.length; i++){
+                if(tickets[i] === ticketName){
+                    let price = parseFloat(prices[i]);
+                    let quantity = parseInt(quantities[i]) - parseInt(notDiscounted);
+                    for(let i = 0; i < quantity; i++ ){
+                        let calculated = (price * 0.75).toFixed(2);
+                        let parsed = parseFloat(calculated)
+                        totalDiscount = totalDiscount + parsed;
+                    }
+                    let rawDiscount = await this.getElementTextFromAnArrayByIndex(DISCOUNT_BY_TICKET_TYPE, i);
+                    let discount = parseFloat(discounts[i]);
+                    assert.equal(discount, totalDiscount.toFixed(2));
+                    assert.equal(rawDiscount,"(-$" + totalDiscount.toFixed(2) + ")");
+
+                }
+            }
         }
         
     }

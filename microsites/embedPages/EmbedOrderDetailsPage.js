@@ -141,5 +141,11 @@
             return await this.dateTimeNow();
         }
 
+        async assertPromotedPlusRegularPriceTotalIsDisplayed(originalPrice, promotedPrice){
+            let prices = await this.getElementText(TICKETS_PRICES);
+            let total = (parseFloat(promotedPrice) * 3) + parseFloat(originalPrice);
+            assert.equal(prices, "$" + total.toFixed(2));
+        }
+
     }
     module.exports = EmbedOrderDetailsPage;

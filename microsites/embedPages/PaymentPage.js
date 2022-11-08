@@ -1,5 +1,6 @@
     const BasePage = require('../../BasePage');
     const assert = require('assert');
+    const Alerts = require('../../portal/portalComponents/Alerts')
     const NewCardComponent = require('../../microsites/components/NewCardComponent');
     const SummaryComponent = require('../components/SummaryComponent');
     const CARD_SERVICE_TAB = { xpath: "//*[text()='Pay with Card or Service']"}
@@ -139,6 +140,21 @@
         async applyPromotion(promoCode){
             await this.enterPromoCode(promoCode);
             await this.clickApplyDiscountButton();
+        }
+
+        async exceedingPromotionQuantityAlertIsDisplayed(){
+            let alert = new Alerts(this.driver);
+            await alert.correctInfoMessageIsDisplayed("You have exceeded the number of tickets you are eligible to purchase with this code.")
+        }
+
+        async promotionNoLongerValidDangerMessageIsVisible(){
+            let alert = new Alerts(this.driver);
+            await alert.errorInfoMessageIsDisplayed("This promotion code is no longer valid")
+        }
+
+        async exceedingPromotionQuantityAlertIsNotDisplayed(){
+            let alert = new Alerts(this.driver);
+            await alert.assertInfoMessageIsNotDisplayed();
         }
       
     }

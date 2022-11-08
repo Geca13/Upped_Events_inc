@@ -2,6 +2,7 @@
     const {By} = require("selenium-webdriver");
     const assert = require('assert');
     const DateTimePickerModal = require("./DateTimePickerModal");
+    const PortalValidations = require('../portalComponents/PortalValidations')
     const PROMOTION_TITLE_INPUT = { name: "name" };
     const PROMOTION_DESCRIPTION_INPUT = { name: "description" };
     const SELECT_TICKET_DROPDOWN = { id: "tickets" };
@@ -43,6 +44,7 @@
     const END_DATE_LABEL = { xpath: "//input[@name='endDate']/following-sibling::label"}
     const CURRENT_PRICE = { tagName: "del"}
     const DISCOUNTED_PRICE = { xpath: "//del/..//following-sibling::div"}
+    const TICKET_DROPDOWN_OPTIONS = { xpath: "//multi-dropdown[@id='tickets']//label[@class='pl-4']" }
 
 
     class CreatePromotionModal extends BasePage {
@@ -304,6 +306,19 @@
         
         async savePromotionButtonIsDisplayed() {
             await this.isDisplayed(SAVE_PROMOTION_BUTTON, 5000, "savePromotionBtn");
+        }
+
+        async errorValidationIsReturnedWhenExistingCodeIsEnteredAsPromoCodeForNewPromotion(promoCodeThree){
+            await this.addPromotionModalIsDisplayed();
+            await this.click(SELECT_TICKET_DROPDOWN);
+            await this.isDisplayed(TICKET_DROPDOWN_OPTIONS,5000);
+            await this.clickElementReturnedFromAnArray(TICKET_DROPDOWN_OPTIONS,1);
+            await this.click(SELECT_TICKET_DROPDOWN);
+            await this.moveToElement(PROMOTION_START_DATE_INPUT)
+            await this.sentKeys(PROMO_CODE_NAME_INPUT,promoCodeThree);
+            await this.click(PROMO_PERCENT_VALUE_INPUT);
+            let validation = new PortalValidations(this.driver);
+            await validation.getInputValidationMessage(0,"Promo code exists, please write another promo code name.")
         }
         
 

@@ -12,6 +12,15 @@
     const SAVE_TICKET_BUTTON = { xpath: "//*[text()=' Save ']"};
     const CANCEL_BUTTON = { xpath: "//button[@type='reset']" };
     const BUYER_TOTAL_VALUE = { xpath: "//span[contains(@class , 'price')]" }
+    const STAFF_TYPE_DROPDOWNS = { xpath: "(//button[@role='combobox'])[1]" }
+    const STAFF_DEPARTMENT_DROPDOWNS = { xpath: "(//button[@role='combobox'])[2]" }
+    const TICKET_TYPE_OPTIONS_BUTTON = { xpath: "//button[@aria-controls='panelOne']" }
+    const TICKET_TYPE_OFF_BUTTON = { xpath: "//ngb-accordion//span[@class='lc_off']"};
+    const TICKET_STAFF_OPTION= { xpath: "//*[text()='STAFF']"}
+    const TICKET_STAFF_WILL_SELECT_DEPARTMENT = { xpath: "//*[text()='Staff Will Select Department']"}
+
+
+
 
 
 
@@ -177,6 +186,40 @@
             await this.click(SAVE_TICKET_BUTTON);
             await this.timeout(1500);
 
+        }
+
+        async createStaffTicket(ticketName,ticketPrice, quantity){
+            await this.ticketNameInputIsDisplayed()
+            await this.sentKeys(TICKET_NAME_INPUT, ticketName);
+            await this.sentKeys(TICKET_DESCRIPTION_INPUT, ticketName + ' description');
+            await this.sentKeys(TICKET_RULES_INPUT, ticketName + ' rules');
+            await this.clearInputField(TICKET_QUANTITY_INPUT);
+            await this.sentKeys(TICKET_QUANTITY_INPUT, quantity);
+            await this.sentKeys(TICKET_PRICE_INPUT, ticketPrice);
+            await this.click(TICKET_TYPE_OPTIONS_BUTTON);
+            await this.timeout(500)
+            await this.click(TICKET_TYPE_OFF_BUTTON);
+            await this.isDisplayed(STAFF_TYPE_DROPDOWNS, 5000);
+            await this.click(STAFF_TYPE_DROPDOWNS);
+            await this.isDisplayed(TICKET_STAFF_OPTION,5000);
+            await this.click(TICKET_STAFF_OPTION);
+            await this.isDisplayed(STAFF_DEPARTMENT_DROPDOWNS,5000);
+            await this.click(STAFF_DEPARTMENT_DROPDOWNS);
+            await this.isDisplayed(TICKET_STAFF_WILL_SELECT_DEPARTMENT,5000);
+            await this.click(TICKET_STAFF_WILL_SELECT_DEPARTMENT);
+            await this.saveTicketButtonIsVisible();
+            await this.click(TICKET_START_DATE_INPUT);
+            await this.timeout(500)
+            let startDatePicker = new DateTimePickerModal(this.driver);
+            await startDatePicker.datePickerIsVisible();
+            await startDatePicker.selectTodayDate();
+            await startDatePicker.enterTimeNow();
+            await this.timeout(500)
+            await startDatePicker.clickSetButton();
+            await this.timeout(500)
+            await this.saveTicketButtonIsVisible();
+            await this.click(SAVE_TICKET_BUTTON);
+            await this.timeout(1500)
         }
         
     }
