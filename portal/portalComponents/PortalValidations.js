@@ -1,4 +1,4 @@
-    const BasePage = require('../BasePage')
+    const BasePage = require('../../BasePage')
     const assert = require('assert')
     const INPUT_VALIDATIONS = { xpath: "//div[contains(@class , 'invalid-feedback')]" }
 
