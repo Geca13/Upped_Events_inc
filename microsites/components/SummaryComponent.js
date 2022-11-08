@@ -9,6 +9,7 @@
     const DISCOUNT_TITLE = { id: "discount"}
     const DISCOUNT_VALUE = { id: "discountAmt" }
     const APPLIED_DISCOUNT_CODE = { id: "promocode" }
+    const TICKETS_COUNT = { id: "ticketCount" }
 
 
     class SummaryComponent extends BasePage{
@@ -125,6 +126,11 @@
             let rawDiscount = await this.getSubstringOfPriceString(DISCOUNT_VALUE);
             let discount = parseFloat(rawDiscount);
             return discount.toFixed(2);
+        }
+
+        async returnTicketCount(){
+            let tickets = await this.getElementText(TICKETS_COUNT);
+            return tickets.substring(0, 1);
         }
 
        

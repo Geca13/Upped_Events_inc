@@ -9,6 +9,7 @@
    const TERMS_LABEL = { xpath: "//label[@for='isSavedCheck']"}
    const TERMS_CHECKBOX = { xpath: "//input[@type='checkbox']"}
    const PREVIOUS_PAGE_BUTTON = { xpath: "//button[contains(@class, 'embed-previous-btn')]"}
+   const EVENT_INFO_BANNER = { xpath: "//span[@class='title-new']" }
 
 
 
@@ -121,6 +122,23 @@
       async clickPreviousPageButton(){
          await this.click(PREVIOUS_PAGE_BUTTON);
          await this.timeout(1000);
+      }
+
+      async assertNavbarText(text){
+         await this.isDisplayed(EVENT_INFO_BANNER, 5000);
+         let navbar = await this.getElementText(EVENT_INFO_BANNER);
+         assert.equal(navbar, text);
+      }
+
+      async assertPreviousPageButtonText(text){
+         await this.isDisplayed(PREVIOUS_PAGE_BUTTON, 5000 );
+         let button = await this.getElementText(PREVIOUS_PAGE_BUTTON);
+         assert.equal(button, text);
+      }
+
+      async assertAlertVisibleAndText(text){
+         let alert = new Alerts(this.driver);
+         await alert.alertDangerIsDisplayAndAssertText(text)
       }
 
       

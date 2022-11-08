@@ -273,6 +273,36 @@ class BasePage {
         }
         return false;
     }
+
+    async getEnteredTextInTheInputByIndex(locator, index){
+        let inputs =  await this.findAll(locator);
+        let input = inputs[index];
+        return input.getAttribute("value");
+    }
+
+    async convertAndCalculateStringArrayToNumberWithArray(array){
+        let total = 0;
+        for (let i = 0; i < array.length ; i++){
+            let stringNumber = parseInt(array[i]);
+            total = total + stringNumber;
+        }
+        return total;
+    }
+
+    async convertPriceStringToDouble(priceString){
+        if(priceString[0] === "$"){
+            priceString = priceString.substring(1);
+        }
+        let convertedPrice = parseFloat(priceString);
+        return convertedPrice.toFixed(2);
+    }
+
+    async dateTimeNow(){
+        let timeOffset = moment().utcOffset();
+        let gmt = "GMT" + (timeOffset/60).toString();
+        let dateTime = moment().format('MMMM DD, h:mm A');
+        return dateTime + " " + gmt;
+    }
     
 }
 

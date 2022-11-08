@@ -92,5 +92,54 @@
             await this.timeout(1000);
         }
 
+        async assertNumberOfEditTicketsLinks(number){
+            let editTicketsLinks = await this.returnElementsCount(EDIT_TICKET_LINK);
+            assert.equal(editTicketsLinks, number);
+        }
+
+        async assertSelectedTicketsAreDisplayedInOrderDetails(tickets){
+            let displayed = await this.findAll(TICKETS_NAMES_AND_EDIT_CONTAINER)
+            for(let i = 0; i< displayed.length; i++){
+                await this.driver.executeScript(`document.querySelectorAll('#editDetail')[${i}].style.visibility='hidden'`);
+            }
+            for(let i = 0; i< displayed.length; i++){
+                assert.equal(await displayed[i].getText(), tickets[i])
+            }
+        }
+
+        async assertTicketTotalByTicketName(ticketName, ticketTotal){
+            let names = await this.findAll(TICKETS_NAMES_AND_EDIT_CONTAINER);
+            for(let i = 0; i< names.length; i++){
+                await this.driver.executeScript(`document.querySelectorAll('#editDetail')[${i}].style.visibility='hidden'`);
+            }
+            for(let i = 0; i< names.length; i++){
+                if(await names[i].getText() === ticketName){
+                    let price = await this.getElementTextFromAnArrayByIndex(TICKETS_PRICES,i)
+                    assert.equal(price, "$"+ticketTotal.toString())
+                }
+            }
+        }
+
+        async assertTicketsSumEqualsSubtotalAndOrderTotalTicketsAndSubtotalValues(summary){
+            await this.timeout(1000)
+            let total = 0;
+            let rawPrices = await this.findAll(TICKETS_PRICES);
+            for(let i = 0; i < rawPrices.length; i++){
+                let rawPrice = await this.getElementTextFromAnArrayByIndex(TICKETS_PRICES, i);
+                let price = await this.convertPriceStringToDouble(rawPrice);
+                total = total + parseFloat(price);
+            }
+            let subtotal = await this.convertPriceStringToDouble(await this.getElementText(SUBTOTAL_VALUE));
+            assert.equal(subtotal, total.toFixed(2));
+            let ticketsSummaryTotal = await summary.getTicketsTotal();
+            assert.equal(ticketsSummaryTotal, total.toFixed(2));
+            let summarySubTotal = await summary.getSubtotalValue();
+            assert.equal(summarySubTotal, total.toFixed(2));
+        }
+
+        async getTransactionTimeDate(){
+            return await this.dateTimeNow();
+        }
+
     }
     module.exports = EmbedOrderDetailsPage;
