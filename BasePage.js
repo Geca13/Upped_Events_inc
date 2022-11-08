@@ -303,6 +303,55 @@ class BasePage {
         let dateTime = moment().format('MMMM DD, h:mm A');
         return dateTime + " " + gmt;
     }
+
+    async elementIsEnabledByIndexOfArray(locator,index){
+        let elements = await this.findAll(locator);
+        let element = elements[index];
+        return element.isEnabled();
+    }
+
+    async switchToFacebookWindow(locator){
+        const originalWindow = await this.driver.getWindowHandle();
+        await this.timeout(2000)
+        await this.click(locator);
+        await this.driver.wait(
+            async () => (await this.driver.getAllWindowHandles()).length === 2,
+            10000
+        );
+        const windows = await this.driver.getAllWindowHandles();
+        for (const window of windows) {
+            if (window !== originalWindow) {
+                await this.driver.switchTo().window(window);
+            }
+        }
+    }
+
+    async loginWithFacebookEmailAndPassword(emailLocator,email,passwordLocator,password,loginButton){
+        await this.sentKeys(emailLocator,email);
+        await this.sentKeys(passwordLocator,password);
+        await this.click(loginButton);
+    }
+
+    async dragAndDropWithLocators(sourceLocator, targetLocator){
+        let source = await this.find(sourceLocator);
+        let target = await this.find(targetLocator);
+        const actions = this.driver.actions();
+        await actions.move({duration:1000,origin:source,x:3,y:3}).press().perform();
+        await actions.dragAndDrop(source, target).perform();
+    }
+
+    async dragAndDropWithElements(source, target){
+        const actions = this.driver.actions();
+        await actions.move({duration:1000,origin:source,x:3,y:3}).press().perform();
+        await actions.dragAndDrop(source, target).perform();
+    }
+
+    async getTextFromElementOfArray(locator, index){
+        let elements =  await this.findAll(locator);
+        return await elements[index].getText();
+    }
+    
+    
     
 }
 

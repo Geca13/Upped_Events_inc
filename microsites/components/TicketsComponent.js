@@ -1,6 +1,7 @@
     const BasePage = require("../../BasePage");
     const assert = require('assert');
     const {By} = require("selenium-webdriver");
+    const {expect} = require("chai");
     const TICKET_NOT_AVAILABLE_SOLD = { xpath: "//div[contains(@class, 'quantity-container')]//span" }
     const TICKET_CONTAINER = { xpath: "//li[contains(@class, 'list-group-item')]" }
     const TICKET_NAME_AND_PRICE = { className: "name" }
@@ -10,7 +11,9 @@
     const TICKET_SELECT_OPTIONS = { xpath: "//select//option"}
     const TICKET_PRICE = { xpath: "//span[@class='ticket-price']" }
     const DISCOUNTED_TICKET_PRICE = { xpath: "//span[contains(@class, 'has-discount')]" }
-    
+    const TICKET_GROUPS = { xpath: "//ul[@id='pills-tab']//li" }
+
+
 
 
 
@@ -143,6 +146,17 @@
             return ticketNames;
         }
 
+        async getCleanTicketsNames() {
+            let cleaned = [];
+            let tickets = await this.findAll(TICKET_NAME_AND_PRICE);
+            for(let i = 0; i < tickets.length; i++){
+                let ticket = await this.getElementTextFromAnArrayByIndex(TICKET_NAME_AND_PRICE,i);
+                let name = ticket.split(" ")[0]
+                cleaned.push(name)
+            }
+            return cleaned;
+        }
+
         async selectedTicketTotal(ticketName){
             let ticketRawPrice = await this.getTicketPriceByTicketName(ticketName);
             let ticketPrice = ticketRawPrice.substring(2, ticketRawPrice.length-1);
@@ -185,6 +199,110 @@
         async getCleanTicketPriceFromPriceWithBrackets(ticketName){
             let price = await this.getTicketPriceByTicketName(ticketName);
             return price.substring(2, price.length - 1);
+        }
+
+        async assertTicketSelectValueByName(staffTicket, value){
+            let tickets = await this.getSelectedQtyByTicketName(staffTicket);
+            expect(tickets).to.equal(value);
+        }
+
+        async assertGroupNamesAndCount(one, two, three){
+            let grOne = await this.getElementTextFromAnArrayByIndex(TICKET_GROUPS, 0);
+            let grTwo = await this.getElementTextFromAnArrayByIndex(TICKET_GROUPS, 1);
+            let grThree = await this.getElementTextFromAnArrayByIndex(TICKET_GROUPS, 2);
+            let grFour = await this.getElementTextFromAnArrayByIndex(TICKET_GROUPS, 3);
+            assert.equal(grOne, "All")
+            assert.equal(grTwo, one)
+            assert.equal(grThree, two)
+            assert.equal(grFour, three);
+            let count = await this.returnElementsCount(TICKET_GROUPS);
+            assert.equal(count, 4);
+        }
+
+        async assertTicketsByGroupsAndClassIsAppliedWhenClickedOnFullEmbed(base, clas){
+            let tickets ;
+            let allTab = await this.checkIfClassIsApplied(TICKET_GROUPS, 0, clas);
+            let first = await this.checkIfClassIsApplied(TICKET_GROUPS, 1, clas);
+            let second = await this.checkIfClassIsApplied(TICKET_GROUPS, 2, clas);
+            let third = await this.checkIfClassIsApplied(TICKET_GROUPS, 3, clas);
+            expect(allTab).to.be.true;
+            expect(first).to.be.false;
+            expect(second).to.be.false;
+            expect(third).to.be.false;
+            await this.clickGroupTabByIndexInEmbed(1);
+            let count = await this.returnElementsCount(TICKET_NAME_AND_PRICE);
+            expect(count).to.equal(2);
+            tickets = await this.getCleanTicketsNames();
+            expect(tickets[0]).to.equal(base.toString() +"T1");
+            expect(tickets[1]).to.equal(base.toString() +"staff");
+            allTab = await this.checkIfClassIsApplied(TICKET_GROUPS, 0, clas);
+            first = await this.checkIfClassIsApplied(TICKET_GROUPS, 1, clas);
+            second = await this.checkIfClassIsApplied(TICKET_GROUPS, 2, clas);
+            third = await this.checkIfClassIsApplied(TICKET_GROUPS, 3, clas);
+            expect(allTab).to.be.false;
+            expect(first).to.be.true;
+            expect(second).to.be.false;
+            expect(third).to.be.false;
+            await this.clickGroupTabByIndexInEmbed(2);
+            count = await this.returnElementsCount(TICKET_NAME_AND_PRICE);
+            expect(count).to.equal(2);
+            tickets = await this.getCleanTicketsNames();
+            expect(tickets[0]).to.equal(base.toString() + "T2");
+            expect(tickets[1]).to.equal(base.toString() + "T3");
+            allTab = await this.checkIfClassIsApplied(TICKET_GROUPS, 0, clas);
+            first = await this.checkIfClassIsApplied(TICKET_GROUPS, 1, clas);
+            second = await this.checkIfClassIsApplied(TICKET_GROUPS, 2, clas);
+            third = await this.checkIfClassIsApplied(TICKET_GROUPS, 3, clas);
+            expect(allTab).to.be.false;
+            expect(first).to.be.false;
+            expect(second).to.be.true;
+            expect(third).to.be.false;
+            await this.clickGroupTabByIndexInEmbed(3);
+            count = await this.returnElementsCount(TICKET_NAME_AND_PRICE);
+            expect(count).to.equal(1);
+            tickets = await this.getCleanTicketsNames();
+            expect(tickets[0]).to.equal(base.toString() + "T4");
+            allTab = await this.checkIfClassIsApplied(TICKET_GROUPS, 0, clas);
+            first = await this.checkIfClassIsApplied(TICKET_GROUPS, 1, clas);
+            second = await this.checkIfClassIsApplied(TICKET_GROUPS, 2, clas);
+            third = await this.checkIfClassIsApplied(TICKET_GROUPS, 3, clas);
+            expect(allTab).to.be.false;
+            expect(first).to.be.false;
+            expect(second).to.be.false;
+            expect(third).to.be.true;
+
+        }
+
+        async clickGroupTabByIndexInEmbed(index){
+            await this.clickElementReturnedFromAnArray(TICKET_GROUPS,index);
+            await this.timeout(1000);
+        }
+
+        async assertTicketsByGroupsWhenOrderIsChangedOnFullEmbed(base){
+            let tickets = await this.getCleanTicketsNames();
+            expect(tickets[0]).to.equal(base.toString() +"T4");
+            expect(tickets[1]).to.equal(base.toString() +"T1");
+            expect(tickets[2]).to.equal(base.toString() +"T2");
+            expect(tickets[3]).to.equal(base.toString() +"T3");
+            expect(tickets[4]).to.equal(base.toString() +"staff");
+            await this.clickGroupTabByIndexInEmbed(1);
+            let count = await this.returnElementsCount(TICKET_NAME_AND_PRICE);
+            tickets = await this.getCleanTicketsNames();
+            expect(count).to.equal(3);
+            expect(tickets[0]).to.equal(base.toString() +"T1");
+            expect(tickets[1]).to.equal(base.toString() +"T2");
+            expect(tickets[2]).to.equal(base.toString() +"staff");
+            await this.clickGroupTabByIndexInEmbed(2);
+            count = await this.returnElementsCount(TICKET_NAME_AND_PRICE);
+            tickets = await this.getCleanTicketsNames();
+            expect(count).to.equal(1);
+            expect(tickets[0]).to.equal(base.toString() + "T3");
+            await this.clickGroupTabByIndexInEmbed(3);
+            count = await this.returnElementsCount(TICKET_NAME_AND_PRICE);
+            tickets = await this.getCleanTicketsNames();
+            expect(count).to.equal(1);
+            expect(tickets[0]).to.equal(base.toString() + "T4");
+
         }
         
     }

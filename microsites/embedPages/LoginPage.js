@@ -6,16 +6,15 @@
     const LOGIN_BUTTON = { xpath: "//*[text()='Login Now']" }
     const AGREE_BUTTON = { xpath: "//*[text()='Agree']" }
     const REGISTER_NOW_LINK = { xpath: "//span[contains(@class, 'register')]" }
+    const FACEBOOK_CONTENT = { id: 'content' }
+    const FACEBOOK_EMAIL_INPUT = { id: 'email' }
+    const FACEBOOK_PASSWORD_INPUT = { id: 'pass' }
+    const FACEBOOK_LOGIN_BUTTON = { name: 'login' }
 
 
     class LoginPage extends BasePage {
         constructor(driver) {
             super(driver);
-        }
-
-        async clickAgreeButton(){
-            await this.isDisplayed(AGREE_BUTTON, 5000);
-            await this.click(AGREE_BUTTON);
         }
 
         async isAtLoginPage(){
@@ -39,6 +38,18 @@
             await this.sentKeys(PASSWORD_INPUT, password);
             await this.timeout(500);
             await this.click(LOGIN_BUTTON);
+        }
+
+        async completeSwitchTo(){
+            await this.switchToFacebookWindow(FACEBOOK_SIGN_IN_BUTTON);
+        }
+
+        async isAtFacebookPage(){
+            await this.isDisplayed(FACEBOOK_CONTENT, 5000);
+        }
+
+        async completeSignInWithFacebook(){
+            await this.loginWithFacebookEmailAndPassword(FACEBOOK_EMAIL_INPUT, process.env.FACEBOOK_EMAIL,FACEBOOK_PASSWORD_INPUT,process.env.FACEBOOK_PASSWORD,FACEBOOK_LOGIN_BUTTON);
         }
 
 

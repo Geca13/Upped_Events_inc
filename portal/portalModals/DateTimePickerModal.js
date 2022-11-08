@@ -57,6 +57,24 @@
           await hours.sendKeys(hour);
         }
 
+        getUtcHoursNow(){
+            let today = new Date();
+            let hour = today.getUTCHours();
+            if (hour > 12) {
+                return (hour-12).toString();
+            }else{
+                return hour.toString();
+            }
+        }
+
+        async enterUtcTimeNow(){
+            let hours = await this.getElementFromAnArrayByIndex(HOUR_MINUTES_INPUTS,0);
+            hours.clear();
+            await this.timeout(500)
+            let hour = this.getUtcHoursNow();
+            await hours.sendKeys(hour);
+        }
+
 
         async updateTimeToXMinLater(minutesToAdd){
             await this.isDisplayed(HOUR_MINUTES_INPUTS,5000);

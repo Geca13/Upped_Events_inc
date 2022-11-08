@@ -18,12 +18,8 @@
     const TICKETS_GROUP_NAME_INPUT = { xpath: "//input[@placeholder='Group Name']" }
     const SAVE_TICKETS_GROUP_BUTTON = { xpath: "//i[@aria-hidden='true']" }
     const TICKET_GROUP_TAB = { xpath: "//a[@role='tab']" }
-
-
-
-
-
-
+    const DRAG_ROW_FOUR = { xpath: "(//tr[@class='cdk-drag'])[4]"}
+    const DRAG_ROW_ONE= { xpath: "(//tr[@class='cdk-drag'])[1]"}
 
     class TicketsNav extends BasePage {
         constructor(driver) {
@@ -157,6 +153,55 @@
             assert.equal(savedPrice.substring(1),price);
             assert.equal(savedQuantity,quantity);
             await this.timeout(500)
+        }
+
+        async dragThirdTicketInTopPosition(){
+            await this.isDisplayed(DRAG_ROW_FOUR, 5000)
+            await this.dragAndDropWithLocators(DRAG_ROW_FOUR, DRAG_ROW_ONE)
+            await this.timeout(2000)
+        }
+
+        async clickGroupTabsByIndexAssertNumberOfTickets(ticketOneName, ticketTwoName, ticketThreeName, staffTicket){
+            await this.clickGroupTabByIndex(1);
+            let ticketsOne = await this.returnElementsCount(TICKETS_NAMES);
+            assert.equal(ticketsOne, 2);
+            let ticketOne = await this.getElementTextFromAnArrayByIndex(TICKETS_NAMES, 0);
+            assert.equal(ticketOne, ticketOneName);
+            let ticketStaff = await this.getElementTextFromAnArrayByIndex(TICKETS_NAMES, 1);
+            assert.equal(ticketStaff, staffTicket);
+            await this.clickGroupTabByIndex(2);
+            let ticketsTwo = await this.returnElementsCount(TICKETS_NAMES);
+            assert.equal(ticketsTwo, 2);
+            let ticketTwo = await this.getElementTextFromAnArrayByIndex(TICKETS_NAMES, 0);
+            assert.equal(ticketTwo, ticketTwoName);
+            let ticketThree = await this.getElementTextFromAnArrayByIndex(TICKETS_NAMES, 1);
+            assert.equal(ticketThree, ticketThreeName);
+        }
+
+        async dragTicketFromGroupTwoToGroupOne(){
+            let tickets = await this.findAll(TICKETS_NAMES);
+            let groups = await this.findAll(TICKET_GROUP_TAB);
+            await this.dragAndDropWithElements(tickets[0], groups[1]);
+            await this.timeout(1000);
+
+        }
+
+        async assertTicketIsRemovedFromGroupTwoAndAddedToGroupOne(ticketOneName, ticketTwoName, ticketThreeName, staffTicket){
+            await this.timeout(1000)
+            let ticketsTwo = await this.returnElementsCount(TICKETS_NAMES);
+            assert.equal(ticketsTwo, 1);
+            let ticketThree = await this.getElementTextFromAnArrayByIndex(TICKETS_NAMES, 0);
+            assert.equal(ticketThree, ticketThreeName);
+            await this.clickGroupTabByIndex(1);
+            let ticketsOne = await this.returnElementsCount(TICKETS_NAMES);
+            assert.equal(ticketsOne, 3);
+            let ticketOne = await this.getElementTextFromAnArrayByIndex(TICKETS_NAMES, 0);
+            assert.equal(ticketOne, ticketOneName);
+            let ticketTwo = await this.getElementTextFromAnArrayByIndex(TICKETS_NAMES, 1);
+            assert.equal(ticketTwo, ticketTwoName);
+            let ticketStaff = await this.getElementTextFromAnArrayByIndex(TICKETS_NAMES, 2);
+            assert.equal(ticketStaff, staffTicket);
+
         }
         
 

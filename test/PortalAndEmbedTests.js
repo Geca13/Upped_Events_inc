@@ -37,6 +37,9 @@
     const CreatePromotionModal = require('../portal/portalModals/CreatePromotionModal');
     const ReceiptPopup = require('../microsites/components/ReceiptPopup')
     const StepsComponent = require('../microsites/components/StepsComponent')
+    const TicketQuestionsModal = require('../microsites/components/TicketQuestionsModal')
+    const TicketQuestionsPage = require('../portal/ticketing/SettingsNav/TicketQuestionsPage')
+    
 
 
     describe('Should do embed tests', function () {
@@ -80,6 +83,8 @@
         let newPromotion;
         let receipt;
         let steps;
+        let questionsModal;
+        let questions;
 
         let base =  Math.floor(100000 + Math.random() * 900000);
         let eventName =  base.toString() + " FullEventName";
@@ -97,6 +102,9 @@
         let ticketFourName = base.toString() +"T4";
         let ticketFourQuantity = 666;
         let ticketFourPrice = "0.40";
+        let staffTicket = base.toString() +"staff";
+        let ticketStaffQuantity = 2;
+        let ticketStaffPrice = "0.25";
         let promoOneName = base.toString() +"PN1";
         let promoThreeName = base.toString() +"PN3";
         let promoCodeOne = base.toString() +"PC1";
@@ -2433,9 +2441,7 @@
 
         //PORTAL
         it('Test_72 - should create staff ticket in portal', async function () {
-            let staffTicket = base.toString() +"staff";
-            let ticketStaffQuantity = 2;
-            let ticketStaffPrice = "0.25";
+            
             portalLogin = new PortalLoginPage(driver);
             dashboard = new DashboardPage(driver);
             myEvents = new MyEventsPage(driver);
@@ -2821,6 +2827,401 @@
 
         });
 
+        //EMBED
+        it('Test_84 - should assert on staff ticket only one ticket can be selected', async function () {
 
+            main = new EmbedMainPage(driver);
+            embedTickets = new TicketsComponent(driver);
+
+            await main.openEmbedPage();
+            await main.switchToIframe();
+            await main.isInFrame(eventName);
+            await embedTickets.ticketListIsDisplayed();
+            await embedTickets.assertTicketSelectValueByName(staffTicket, "0");
+            await embedTickets.sentKeysToTicketInputByTicketName(staffTicket, 5);
+            await embedTickets.assertTicketSelectValueByName(staffTicket, "0");
+            await embedTickets.sentKeysToTicketInputByTicketName(staffTicket, 1);
+            await embedTickets.assertTicketSelectValueByName(staffTicket, "1");
+
+        });
+
+        //EMBED
+        it('Test_85 - should check staff modal elements and submit fully filled form', async function () {
+
+            main = new EmbedMainPage(driver);
+            embedTickets = new TicketsComponent(driver);
+            embedLogin = new LoginPage(driver);
+            extras = new ExtrasPage(driver);
+            payment = new PaymentPage(driver);
+            orderDetails = new EmbedOrderDetailsPage(driver);
+            confirm = new ConfirmPage(driver);
+            questionsModal = new TicketQuestionsModal(driver);
+
+            await main.openEmbedPage();
+            await main.switchToIframe();
+            await main.isInFrame(eventName);
+            await main.clickNextPageButton();
+            await embedLogin.isAtLoginPage();
+            await embedLogin.loginWithVerifiedAccount(customerEmail, customerPassword);
+            await embedTickets.ticketListIsDisplayed();
+            await embedTickets.sentKeysToTicketInputByTicketName(staffTicket, '1');
+            await main.clickTicketTermsCheckbox();
+            await main.clickNextPageButton();
+            await extras.isAtExtrasPage();
+            await main.clickNextPageButton();
+            await payment.isAtPaymentPage();
+            await payment.clickSavedCardByIndex(0);
+            await main.nextButtonIsVisible();
+            await main.clickNextPageButton();
+            await orderDetails.isOnOrderDetailsPage();
+            await orderDetails.clickPlaceOrderButton();
+            await questionsModal.assertElementsOnStaffModal(staffTicket);
+            await questionsModal.shouldAnswerStaffFormWithRandomButValidData(base);
+            await confirm.isAtConfirmPage()
+
+        });
+
+        //PORTAL
+        it('Test_86 - should set ticket Simple Yes No question and assert saved data on questions table in portal', async function () {
+            portalLogin = new PortalLoginPage(driver);
+            dashboard = new DashboardPage(driver);
+            myEvents = new MyEventsPage(driver);
+            sideMenu = new SideMenu(driver);
+            sectionsNavs = new SectionsNavs(driver)
+            eventDetails = new GeneralDetailsTab(driver);
+            questions = new TicketQuestionsPage(driver);
+
+            await portalLogin.loadPortalUrl();
+            await portalLogin.isAtPortalLoginPage();
+            await portalLogin.enterValidCredentialsAndLogin();
+            await dashboard.isAtDashboardPage();
+            await sectionsNavs.clickNavByText("My Events");
+            await myEvents.eventsTableIsDisplayed();
+            await myEvents.createdEventIsInTheTable(eventName);
+            await myEvents.clickTheNewCreatedEventInTheTable(eventName);
+            await eventDetails.unpublishButtonIsDisplayed();
+            await sideMenu.clickTicketingTab();
+            await sectionsNavs.clickNavByText("Settings")
+            await sectionsNavs.taxesAndFeesNavIsDisplayed();
+            await sectionsNavs.clickNavByText("Ticket Questions")
+            await questions.createSimpleYesNoQuestionAndAssertSavedDataAndElements(base, ticketOneName, ticketThreeName);
+
+        });
+
+        //EMBED
+        it('Test_87 - should check ticket questions modal for Yes/No question and submit answers in embed', async function () {
+
+            main = new EmbedMainPage(driver);
+            embedTickets = new TicketsComponent(driver);
+            embedLogin = new LoginPage(driver);
+            extras = new ExtrasPage(driver);
+            payment = new PaymentPage(driver);
+            orderDetails = new EmbedOrderDetailsPage(driver);
+            confirm = new ConfirmPage(driver);
+            questionsModal = new TicketQuestionsModal(driver);
+
+            await main.openEmbedPage();
+            await main.switchToIframe();
+            await main.isInFrame(eventName);
+            await main.clickNextPageButton();
+            await embedLogin.isAtLoginPage();
+            await embedLogin.loginWithVerifiedAccount(customerEmail, customerPassword);
+            await embedTickets.ticketListIsDisplayed();
+            await embedTickets.sentKeysToTicketInputByTicketName(ticketOneName, '1');
+            await main.clickTicketTermsCheckbox();
+            await main.clickNextPageButton();
+            await extras.isAtExtrasPage();
+            await main.clickNextPageButton();
+            await payment.isAtPaymentPage();
+            await payment.clickSavedCardByIndex(0);
+            await main.nextButtonIsVisible();
+            await main.clickNextPageButton();
+            await orderDetails.isOnOrderDetailsPage();
+            await orderDetails.clickPlaceOrderButton();
+            await questionsModal.answerSimpleYesNo(base,ticketOneName);
+            await confirm.isAtConfirmPage();
+
+        });
+
+        //PORTAL
+        it('Test_88 - should set ticket question with asked input text', async function () {
+            portalLogin = new PortalLoginPage(driver);
+            dashboard = new DashboardPage(driver);
+            myEvents = new MyEventsPage(driver);
+            sideMenu = new SideMenu(driver);
+            sectionsNavs = new SectionsNavs(driver);
+            eventDetails = new GeneralDetailsTab(driver);
+            questions = new TicketQuestionsPage(driver);
+
+            await portalLogin.loadPortalUrl();
+            await portalLogin.isAtPortalLoginPage();
+            await portalLogin.enterValidCredentialsAndLogin();
+            await dashboard.isAtDashboardPage();
+            await sectionsNavs.clickNavByText("My Events");
+            await myEvents.eventsTableIsDisplayed();
+            await myEvents.createdEventIsInTheTable(eventName);
+            await myEvents.clickTheNewCreatedEventInTheTable(eventName);
+            await driver.sleep(5000);
+            await eventDetails.unpublishButtonIsDisplayed();
+            await sideMenu.clickTicketingTab();
+            await sectionsNavs.clickNavByText("Settings")
+            await sectionsNavs.taxesAndFeesNavIsDisplayed();
+            await sectionsNavs.clickNavByText("Ticket Questions")
+            await questions.clickDeactivateQuestionButton(0);
+            await questions.createQuestionWithInput(base);
+
+        });
+
+        //EMBED
+        it('Test_89 - should answer ticket questions for question with input', async function () {
+
+            main = new EmbedMainPage(driver);
+            embedTickets = new TicketsComponent(driver);
+            embedLogin = new LoginPage(driver);
+            extras = new ExtrasPage(driver);
+            payment = new PaymentPage(driver);
+            orderDetails = new EmbedOrderDetailsPage(driver);
+            confirm = new ConfirmPage(driver);
+            questionsModal = new TicketQuestionsModal(driver);
+
+            await main.openEmbedPage();
+            await main.switchToIframe();
+            await main.isInFrame(eventName);
+            await embedTickets.sentKeysToTicketInput(0, 1)
+            await main.nextButtonIsVisible();
+            await main.clickNextPageButton();
+            await embedLogin.isAtLoginPage();
+            await driver.sleep(1000);
+            await embedLogin.loginWithVerifiedAccount(customerEmail, customerPassword);
+            await main.nextButtonIsVisible();
+            await main.clickTicketTermsCheckbox();
+            await main.clickNextPageButton();
+            await extras.isAtExtrasPage();
+            await main.clickNextPageButton();
+            await payment.isAtPaymentPage();
+            await payment.clickSavedCardByIndex(0);
+            await main.nextButtonIsVisible();
+            await main.clickNextPageButton();
+            await orderDetails.isOnOrderDetailsPage();
+            await orderDetails.clickPlaceOrderButton();
+            await questionsModal.answerTicketQuestionWithTextInput(base,ticketOneName);
+            await confirm.isAtConfirmPage();
+
+        });
+
+        //PORTAL
+        it('Test_90 - should check for first two ticket questions responses made in embed', async function () {
+
+            portalLogin = new PortalLoginPage(driver);
+            dashboard = new DashboardPage(driver);
+            myEvents = new MyEventsPage(driver);
+            sideMenu = new SideMenu(driver);
+            sectionsNavs = new SectionsNavs(driver);
+            attendees = new AttendeesTab(driver);
+
+            await portalLogin.loadPortalUrl();
+            await portalLogin.isAtPortalLoginPage();
+            await portalLogin.enterValidCredentialsAndLogin();
+            await dashboard.isAtDashboardPage();
+            await sectionsNavs.clickNavByText("My Events");
+            await myEvents.eventsTableIsDisplayed();
+            await driver.sleep(1000);
+            await myEvents.createdEventIsInTheTable(eventName);
+            await myEvents.clickTheNewCreatedEventInTheTable(eventName);
+            await driver.sleep(500);
+            await sideMenu.ticketingTabIsDisplayed();
+            await sectionsNavs.clickNavByText("Attendees");
+            await attendees.checkForTicketQuestionsResponsesForTheFirstTwoPurchases(base,0);
+
+        });
+
+        //PORTAL
+        it('Test_91 - should update first ticket question with asked input text', async function () {
+            portalLogin = new PortalLoginPage(driver);
+            dashboard = new DashboardPage(driver);
+            myEvents = new MyEventsPage(driver);
+            sideMenu = new SideMenu(driver);
+            sectionsNavs = new SectionsNavs(driver);
+            eventDetails = new GeneralDetailsTab(driver);
+            questions = new TicketQuestionsPage(driver);
+
+            await portalLogin.loadPortalUrl();
+            await portalLogin.isAtPortalLoginPage();
+            await portalLogin.enterValidCredentialsAndLogin();
+            await dashboard.isAtDashboardPage();
+            await sectionsNavs.clickNavByText("My Events");
+            await myEvents.eventsTableIsDisplayed();
+            await myEvents.createdEventIsInTheTable(eventName);
+            await myEvents.clickTheNewCreatedEventInTheTable(eventName);
+            await eventDetails.unpublishButtonIsDisplayed();
+            await sideMenu.clickTicketingTab();
+            await sectionsNavs.clickNavByText("Settings")
+            await sectionsNavs.taxesAndFeesNavIsDisplayed();
+            await sectionsNavs.clickNavByText("Ticket Questions")
+            await questions.clickActivateQuestionButton(0);
+            await questions.updateFirstQuestionToIncludeInputAndForEachTicket(base);
+
+        });
+
+        //EMBED
+        it('Test_92 - should login with facebook assert updated ticket questions for first question , answer and submit answers', async function () {
+
+            main = new EmbedMainPage(driver);
+            embedTickets = new TicketsComponent(driver);
+            embedLogin = new LoginPage(driver);
+            extras = new ExtrasPage(driver);
+            payment = new PaymentPage(driver);
+            orderDetails = new EmbedOrderDetailsPage(driver);
+            confirm = new ConfirmPage(driver);
+            questionsModal = new TicketQuestionsModal(driver);
+
+            await main.openEmbedPage();
+            await main.switchToIframe();
+            await main.isInFrame(eventName);
+            await embedTickets.sentKeysToTicketInput(0, 2);
+            await embedTickets.sentKeysToTicketInput(2, 1);
+            await main.nextButtonIsVisible();
+            await main.clickNextPageButton();
+            await embedLogin.isAtLoginPage();
+            await driver.sleep(1000);
+            await embedLogin.completeSwitchTo();
+            await embedLogin.isAtFacebookPage();
+            await driver.sleep(10000);
+            await embedLogin.completeSignInWithFacebook();
+            await driver.switchTo().window(originalWindow);
+            await driver.sleep(7000);
+            await main.switchToIframe();
+            await main.nextButtonIsVisible();
+            await main.clickTicketTermsCheckbox();
+            await main.clickNextPageButton();
+            await extras.isAtExtrasPage();
+            await main.clickNextPageButton();
+            await payment.isAtPaymentPage();
+            await payment.clickSavedCardByIndex(0);
+            await main.nextButtonIsVisible();
+            await main.clickNextPageButton();
+            await orderDetails.isOnOrderDetailsPage();
+            await orderDetails.clickPlaceOrderButton();
+            await questionsModal.assertFormAndInputAndOption(base,ticketOneName, ticketThreeName)
+            await questionsModal.answerTicketQuestionWithPerTicketQuestions();
+            await confirm.isAtConfirmPage();
+
+        });
+
+        //PORTAL
+        it('Test_93 - should check response provided for the updated question', async function () {
+
+            portalLogin = new PortalLoginPage(driver);
+            dashboard = new DashboardPage(driver);
+            myEvents = new MyEventsPage(driver);
+            sideMenu = new SideMenu(driver);
+            sectionsNavs = new SectionsNavs(driver);
+            attendees = new AttendeesTab(driver);
+
+            await portalLogin.loadPortalUrl();
+            await portalLogin.isAtPortalLoginPage();
+            await portalLogin.enterValidCredentialsAndLogin();
+            await dashboard.isAtDashboardPage();
+            await sectionsNavs.clickNavByText("My Events");
+            await myEvents.eventsTableIsDisplayed();
+            await driver.sleep(1000);
+            await myEvents.createdEventIsInTheTable(eventName);
+            await myEvents.clickTheNewCreatedEventInTheTable(eventName);
+            await sideMenu.ticketingTabIsDisplayed();
+            await sectionsNavs.clickNavByText("Attendees");
+            await attendees.checkForTicketQuestionsResponsesForTheUpdated(base,1);
+
+        });
+
+        //EMBED
+        it('Test_94 - should assert tickets groups in embed', async function () {
+
+            main = new EmbedMainPage(driver);
+            embedTickets = new TicketsComponent(driver);
+            await main.openEmbedPage();
+            await main.switchToIframe();
+            await main.isInFrame(eventName);
+            await embedTickets.ticketListIsDisplayed();
+            await embedTickets.assertGroupNamesAndCount(ticketGroupOne, ticketGroupTwo, ticketGroupThree);
+
+        });
+
+        //EMBED
+        it('Test_95 - should assert tickets by groups and active class is applied when clicked on group in embed', async function () {
+
+            main = new EmbedMainPage(driver);
+            embedTickets = new TicketsComponent(driver);
+            await main.openEmbedPage();
+            await main.switchToIframe();
+            await main.isInFrame(eventName);
+            await embedTickets.ticketListIsDisplayed();
+            await embedTickets.assertTicketsByGroupsAndClassIsAppliedWhenClickedOnFullEmbed(base, "active");
+
+        });
+
+        //PORTAL
+        it('Test_96 - should change ticket order in portal', async function () {
+            portalLogin = new PortalLoginPage(driver);
+            dashboard = new DashboardPage(driver);
+            myEvents = new MyEventsPage(driver);
+            eventDetails = new GeneralDetailsTab(driver);
+            ticketsNav = new TicketsNav(driver);
+            sectionsNavs = new SectionsNavs(driver)
+            sideMenu = new SideMenu(driver);
+
+            await portalLogin.loadPortalUrl();
+            await portalLogin.isAtPortalLoginPage();
+            await portalLogin.enterValidCredentialsAndLogin();
+            await dashboard.isAtDashboardPage();
+            await sectionsNavs.clickNavByText("My Events");
+            await myEvents.eventsTableIsDisplayed();
+            await myEvents.createdEventIsInTheTable(eventName);
+            await myEvents.clickTheNewCreatedEventInTheTable(eventName);
+            await eventDetails.unpublishButtonIsDisplayed();
+            await sideMenu.clickTicketingTab();
+            await ticketsNav.addTicketButtonIsDisplayed();
+            await ticketsNav.dragThirdTicketInTopPosition();
+
+        });
+
+        //PORTAL
+        it('Test_97 - should change ticket location from one group 2 to group 1 in portal and assert change', async function () {
+            portalLogin = new PortalLoginPage(driver);
+            dashboard = new DashboardPage(driver);
+            myEvents = new MyEventsPage(driver);
+            eventDetails = new GeneralDetailsTab(driver);
+            ticketsNav = new TicketsNav(driver);
+            sectionsNavs = new SectionsNavs(driver)
+            sideMenu = new SideMenu(driver);
+
+            await portalLogin.loadPortalUrl();
+            await portalLogin.isAtPortalLoginPage();
+            await portalLogin.enterValidCredentialsAndLogin();
+            await dashboard.isAtDashboardPage();
+            await sectionsNavs.clickNavByText("My Events");
+            await myEvents.eventsTableIsDisplayed();
+            await myEvents.createdEventIsInTheTable(eventName);
+            await myEvents.clickTheNewCreatedEventInTheTable(eventName);
+            await eventDetails.unpublishButtonIsDisplayed();
+            await sideMenu.clickTicketingTab();
+            await ticketsNav.addTicketButtonIsDisplayed();
+            await ticketsNav.clickGroupTabsByIndexAssertNumberOfTickets(ticketOneName, ticketTwoName, ticketThreeName, staffTicket);
+            await ticketsNav.dragTicketFromGroupTwoToGroupOne();
+            await ticketsNav.assertTicketIsRemovedFromGroupTwoAndAddedToGroupOne(ticketOneName, ticketTwoName, ticketThreeName, staffTicket);
+
+        });
+
+        //EMBED
+        it('Test_98 - should assert tickets by groups when order and ticket group is changed in embed', async function () {
+
+            main = new EmbedMainPage(driver);
+            embedTickets = new TicketsComponent(driver);
+            await main.openEmbedPage();
+            await main.switchToIframe();
+            await main.isInFrame(eventName);
+            await embedTickets.ticketListIsDisplayed();
+            await embedTickets.assertTicketsByGroupsWhenOrderIsChangedOnFullEmbed(base);
+
+        });
 
     });

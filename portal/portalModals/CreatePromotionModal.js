@@ -166,7 +166,7 @@
             await this.click(PROMOTION_START_DATE_INPUT)
             let startDatePicker = new DateTimePickerModal(this.driver);
             await startDatePicker.datePickerIsVisible();
-            await startDatePicker.enterTimeNow();
+            await startDatePicker.enterUtcTimeNow();
             await this.timeout(500)
             await startDatePicker.clickSetButton();
             await this.timeout(500)
@@ -260,8 +260,7 @@
             await this.click(PROMOTION_START_DATE_INPUT)
             let startDatePicker = new DateTimePickerModal(this.driver);
             await startDatePicker.datePickerIsVisible();
-            await startDatePicker.enterTimeNow();
-            //await startDatePicker.clickPMButton()
+            await startDatePicker.enterUtcTimeNow();
             await this.timeout(1000)
             await startDatePicker.clickSetButton();
             await this.timeout(1000)

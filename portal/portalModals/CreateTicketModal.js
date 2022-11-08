@@ -19,12 +19,6 @@
     const TICKET_STAFF_OPTION= { xpath: "//*[text()='STAFF']"}
     const TICKET_STAFF_WILL_SELECT_DEPARTMENT = { xpath: "//*[text()='Staff Will Select Department']"}
 
-
-
-
-
-
-
     class CreateTicketModal extends BasePage {
         constructor(driver) {
             super(driver);
@@ -65,7 +59,7 @@
             let startDatePicker = new DateTimePickerModal(this.driver);
             await startDatePicker.datePickerIsVisible();
             await startDatePicker.selectTodayDate();
-            await startDatePicker.enterTimeNow();
+            await startDatePicker.enterUtcTimeNow();
             await this.timeout(1500)
             await startDatePicker.clickSetButton();
             await this.timeout(1500)
@@ -178,7 +172,7 @@
             let startDatePicker = new DateTimePickerModal(this.driver);
             await startDatePicker.datePickerIsVisible();
             await startDatePicker.selectTodayDate();
-            await startDatePicker.enterTimeNow();
+            await startDatePicker.enterUtcTimeNow();
             await this.timeout(1500)
             await startDatePicker.clickSetButton();
             await this.timeout(1500)

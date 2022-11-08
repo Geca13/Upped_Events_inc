@@ -1,8 +1,11 @@
     const BasePage = require('../../BasePage');
+    const QuestionsResponseModal = require('../eventOverview/QuestionsResponseModal')
     const assert = require('assert')
     const ATTENDEES_TABLE = { id: "dataTable" }
     const ATTENDEES_NAMES = { xpath: "//td[contains(@class, 'column-fullname')]//a[contains(@class, 'table-ticket-name')]//span" } //list
     const PURCHASED_TICKETS = { xpath: "//td[@class='column-totaltickets']//span" }
+    const ATTENDEES_RESPONSES_COUNT = { xpath: "//td[contains(@class, 'column-totalquests')]//a[contains(@class, 'table-ticket-name')]//span" } //list
+
 
 
 
@@ -21,6 +24,21 @@
             assert.notEqual(purchasedTickets, "0");
             return purchasedTickets;
 
+        }
+
+        async checkForTicketQuestionsResponsesForTheFirstTwoPurchases(base, index){
+            await this.isOnAttendeesTab();
+            await this.clickElementReturnedFromAnArray(ATTENDEES_RESPONSES_COUNT, index);
+            let responses = new QuestionsResponseModal(this.driver)
+            await responses.assertTicketsForFirstTwoPurchases(base);
+
+        }
+
+        async checkForTicketQuestionsResponsesForTheUpdated(base,index){
+            await this.isOnAttendeesTab();
+            await this.clickElementReturnedFromAnArray(ATTENDEES_RESPONSES_COUNT, index);
+            let responses = new QuestionsResponseModal(this.driver)
+            await responses.assertForTicketQuestionsResponsesForTheUpdated(base);
         }
     }
     module.exports = AttendeesTab;
