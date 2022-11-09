@@ -25,5 +25,5 @@ jobs:
         cache: 'npm'
     - run: npm ci
       shell: cmd
-    - run: npm run test4
+    - run: npm run test1
       shell: cmd
