@@ -115,9 +115,9 @@
         let customerPassword = base.toString() + 'Password';
 
         beforeEach(async function(){
-            
-           driver = await new Builder().forBrowser('chrome').setChromeOptions(new chrome.Options().addArguments('--headless')).build();
-           await driver.manage().window().setRect({width: 1300, height: 1080});
+
+            driver = await new Builder().forBrowser('chrome').setChromeOptions(new chrome.Options().addArguments('--headless')).build();
+            await driver.manage().window().setRect({width: 1300, height: 1080});
 
         });
 
@@ -241,7 +241,7 @@
             await portalLogin.isAtPortalLoginPage();
             await portalLogin.enterValidCredentialsAndLogin();
             await dashboard.isAtDashboardPage();
-            await sectionsNavs.clickNavByText("My Events");
+            await sectionsNavs.clickNavByIndex(1);
             await myEvents.eventsTableIsDisplayed();
             await myEvents.createdEventIsInTheTable(eventName);
             await myEvents.clickTheNewCreatedEventInTheTable(eventName);
@@ -339,7 +339,7 @@
             await portalLogin.isAtPortalLoginPage();
             await portalLogin.enterValidCredentialsAndLogin();
             await dashboard.isAtDashboardPage();
-            await sectionsNavs.clickNavByText("My Events");
+            await sectionsNavs.clickNavByIndex(1);
             await myEvents.eventsTableIsDisplayed();
             await myEvents.createdEventIsInTheTable(eventName);
             await myEvents.clickTheNewCreatedEventInTheTable(eventName);
@@ -380,7 +380,7 @@
             await portalLogin.isAtPortalLoginPage();
             await portalLogin.enterValidCredentialsAndLogin();
             await dashboard.isAtDashboardPage();
-            await sectionsNavs.clickNavByText("My Events");
+            await sectionsNavs.clickNavByIndex(1);
             await myEvents.eventsTableIsDisplayed();
             await myEvents.createdEventIsInTheTable(eventName);
             await myEvents.clickTheNewCreatedEventInTheTable(eventName);
@@ -427,7 +427,7 @@
             await portalLogin.isAtPortalLoginPage();
             await portalLogin.enterValidCredentialsAndLogin();
             await dashboard.isAtDashboardPage();
-            await sectionsNavs.clickNavByText("My Events");
+            await sectionsNavs.clickNavByIndex(1);
             await myEvents.eventsTableIsDisplayed();
             await myEvents.createdEventIsInTheTable(eventName);
             await myEvents.clickTheNewCreatedEventInTheTable(eventName);
@@ -638,7 +638,7 @@
             await portalLogin.isAtPortalLoginPage();
             await portalLogin.enterValidCredentialsAndLogin();
             await dashboard.isAtDashboardPage();
-            await sectionsNavs.clickNavByText("My Events");
+            await sectionsNavs.clickNavByIndex(1);
             await myEvents.eventsTableIsDisplayed();
             await driver.sleep(1000);
             await myEvents.createdEventIsInTheTable(eventName);
@@ -669,7 +669,7 @@
             await portalLogin.isAtPortalLoginPage();
             await driver.sleep(1000);
             await portalLogin.enterValidCredentialsAndLogin();
-            await sectionsNavs.clickNavByText("My Events");
+            await sectionsNavs.clickNavByIndex(1);
             await myEvents.eventsTableIsDisplayed();
             await driver.sleep(1000);
             await myEvents.createdEventIsInTheTable(eventName);
@@ -706,7 +706,7 @@
             await portalLogin.isAtPortalLoginPage();
             await portalLogin.enterValidCredentialsAndLogin();
             await dashboard.isAtDashboardPage();
-            await sectionsNavs.clickNavByText("My Events");
+            await sectionsNavs.clickNavByIndex(1);
             await myEvents.eventsTableIsDisplayed();
             await driver.sleep(1000);
             await myEvents.createdEventIsInTheTable(eventName);
@@ -743,7 +743,7 @@
             await portalLogin.isAtPortalLoginPage();
             await portalLogin.enterValidCredentialsAndLogin();
             await dashboard.isAtDashboardPage();
-            await sectionsNavs.clickNavByText("My Events");
+            await sectionsNavs.clickNavByIndex(1);
             await myEvents.eventsTableIsDisplayed();
             await driver.sleep(1000);
             await myEvents.createdEventIsInTheTable(eventName);
@@ -778,7 +778,7 @@
             await portalLogin.isAtPortalLoginPage();
             await portalLogin.enterValidCredentialsAndLogin();
             await dashboard.isAtDashboardPage();
-            await sectionsNavs.clickNavByText("My Events");
+            await sectionsNavs.clickNavByIndex(1);
             await myEvents.eventsTableIsDisplayed();
             await myEvents.createdEventIsInTheTable(eventName);
             await myEvents.clickTheNewCreatedEventInTheTable(eventName);
@@ -817,7 +817,7 @@
             await portalLogin.isAtPortalLoginPage();
             await portalLogin.enterValidCredentialsAndLogin();
             await dashboard.isAtDashboardPage();
-            await sectionsNavs.clickNavByText("My Events");
+            await sectionsNavs.clickNavByIndex(1);
             await myEvents.eventsTableIsDisplayed();
             await driver.sleep(1000);
             await myEvents.createdEventIsInTheTable(eventName);
@@ -945,7 +945,7 @@
             await portalLogin.isAtPortalLoginPage();
             await portalLogin.enterValidCredentialsAndLogin();
             await dashboard.isAtDashboardPage();
-            await sectionsNavs.clickNavByText("My Events");
+            await sectionsNavs.clickNavByIndex(1);
             await myEvents.eventsTableIsDisplayed();
             await myEvents.createdEventIsInTheTable(eventName);
             await myEvents.clickTheNewCreatedEventInTheTable(eventName);
@@ -1007,7 +1007,7 @@
             await portalLogin.isAtPortalLoginPage();
             await portalLogin.enterValidCredentialsAndLogin();
             await dashboard.isAtDashboardPage();
-            await sectionsNavs.clickNavByText("My Events");
+            await sectionsNavs.clickNavByIndex(1);
             await myEvents.eventsTableIsDisplayed();
             await myEvents.createdEventIsInTheTable(eventName);
             await myEvents.clickTheNewCreatedEventInTheTable(eventName);
@@ -1042,7 +1042,7 @@
             await portalLogin.isAtPortalLoginPage();
             await portalLogin.enterValidCredentialsAndLogin();
             await dashboard.isAtDashboardPage();
-            await sectionsNavs.clickNavByText("My Events");
+            await sectionsNavs.clickNavByIndex(1);
             await myEvents.eventsTableIsDisplayed();
             await myEvents.createdEventIsInTheTable(eventName);
             await myEvents.clickTheNewCreatedEventInTheTable(eventName);
@@ -1113,7 +1113,7 @@
             await portalLogin.isAtPortalLoginPage();
             await portalLogin.enterValidCredentialsAndLogin();
             await dashboard.isAtDashboardPage();
-            await sectionsNavs.clickNavByText("My Events");
+            await sectionsNavs.clickNavByIndex(1);
             await myEvents.eventsTableIsDisplayed();
             await myEvents.createdEventIsInTheTable(eventName);
             await myEvents.clickTheNewCreatedEventInTheTable(eventName);
@@ -1138,7 +1138,7 @@
             await portalLogin.isAtPortalLoginPage();
             await portalLogin.enterValidCredentialsAndLogin();
             await dashboard.isAtDashboardPage();
-            await sectionsNavs.clickNavByText("My Events");
+            await sectionsNavs.clickNavByIndex(1);
             await myEvents.eventsTableIsDisplayed();
             await myEvents.createdEventIsInTheTable(eventName);
             await myEvents.clickTheNewCreatedEventInTheTable(eventName);
@@ -1168,7 +1168,7 @@
             await portalLogin.isAtPortalLoginPage();
             await portalLogin.enterValidCredentialsAndLogin();
             await dashboard.isAtDashboardPage();
-            await sectionsNavs.clickNavByText("My Events");
+            await sectionsNavs.clickNavByIndex(1);
             await myEvents.eventsTableIsDisplayed();
             await myEvents.createdEventIsInTheTable(eventName);
             await myEvents.clickTheNewCreatedEventInTheTable(eventName);
@@ -1212,7 +1212,7 @@
             await portalLogin.isAtPortalLoginPage();
             await portalLogin.enterValidCredentialsAndLogin();
             await dashboard.isAtDashboardPage();
-            await sectionsNavs.clickNavByText("My Events");
+            await sectionsNavs.clickNavByIndex(1);
             await myEvents.eventsTableIsDisplayed();
             await myEvents.createdEventIsInTheTable(eventName);
             await myEvents.clickTheNewCreatedEventInTheTable(eventName);
@@ -1244,7 +1244,7 @@
             await portalLogin.isAtPortalLoginPage();
             await portalLogin.enterValidCredentialsAndLogin();
             await dashboard.isAtDashboardPage();
-            await sectionsNavs.clickNavByText("My Events");
+            await sectionsNavs.clickNavByIndex(1);
             await myEvents.eventsTableIsDisplayed();
             await myEvents.createdEventIsInTheTable(eventName);
             await myEvents.clickTheNewCreatedEventInTheTable(eventName);
@@ -1436,7 +1436,7 @@
             await portalLogin.isAtPortalLoginPage();
             await portalLogin.enterValidCredentialsAndLogin();
             await dashboard.isAtDashboardPage();
-            await sectionsNavs.clickNavByText("My Events");
+            await sectionsNavs.clickNavByIndex(1);
             await myEvents.eventsTableIsDisplayed();
             await myEvents.createdEventIsInTheTable(eventName);
             await myEvents.clickTheNewCreatedEventInTheTable(eventName);
@@ -1467,7 +1467,7 @@
             await portalLogin.isAtPortalLoginPage();
             await portalLogin.enterValidCredentialsAndLogin();
             await dashboard.isAtDashboardPage();
-            await sectionsNavs.clickNavByText("My Events");
+            await sectionsNavs.clickNavByIndex(1);
             await myEvents.eventsTableIsDisplayed();
             await myEvents.createdEventIsInTheTable(eventName);
             await myEvents.clickTheNewCreatedEventInTheTable(eventName);
@@ -1501,7 +1501,7 @@
             await portalLogin.isAtPortalLoginPage();
             await portalLogin.enterValidCredentialsAndLogin();
             await dashboard.isAtDashboardPage();
-            await sectionsNavs.clickNavByText("My Events");
+            await sectionsNavs.clickNavByIndex(1);
             await myEvents.eventsTableIsDisplayed();
             await myEvents.createdEventIsInTheTable(eventName);
             await myEvents.clickTheNewCreatedEventInTheTable(eventName);
@@ -1547,7 +1547,7 @@
             await portalLogin.isAtPortalLoginPage();
             await portalLogin.enterValidCredentialsAndLogin();
             await dashboard.isAtDashboardPage();
-            await sectionsNavs.clickNavByText("My Events");
+            await sectionsNavs.clickNavByIndex(1);
             await myEvents.eventsTableIsDisplayed();
             await myEvents.createdEventIsInTheTable(eventName);
             await myEvents.clickTheNewCreatedEventInTheTable(eventName);
@@ -2390,7 +2390,7 @@
             await portalLogin.isAtPortalLoginPage();
             await portalLogin.enterValidCredentialsAndLogin();
             await dashboard.isAtDashboardPage();
-            await sectionsNavs.clickNavByText("My Events");
+            await sectionsNavs.clickNavByIndex(1);
             await myEvents.eventsTableIsDisplayed();
             await myEvents.createdEventIsInTheTable(eventName);
             await myEvents.clickTheNewCreatedEventInTheTable(eventName);
@@ -2448,7 +2448,7 @@
             await portalLogin.isAtPortalLoginPage();
             await portalLogin.enterValidCredentialsAndLogin();
             await dashboard.isAtDashboardPage();
-            await sectionsNavs.clickNavByText("My Events");
+            await sectionsNavs.clickNavByIndex(1);
             await myEvents.eventsTableIsDisplayed();
             await myEvents.createdEventIsInTheTable(eventName);
             await myEvents.clickTheNewCreatedEventInTheTable(eventName);
@@ -2888,7 +2888,7 @@
             await portalLogin.isAtPortalLoginPage();
             await portalLogin.enterValidCredentialsAndLogin();
             await dashboard.isAtDashboardPage();
-            await sectionsNavs.clickNavByText("My Events");
+            await sectionsNavs.clickNavByIndex(1);
             await myEvents.eventsTableIsDisplayed();
             await myEvents.createdEventIsInTheTable(eventName);
             await myEvents.clickTheNewCreatedEventInTheTable(eventName);
@@ -2950,7 +2950,7 @@
             await portalLogin.isAtPortalLoginPage();
             await portalLogin.enterValidCredentialsAndLogin();
             await dashboard.isAtDashboardPage();
-            await sectionsNavs.clickNavByText("My Events");
+            await sectionsNavs.clickNavByIndex(1);
             await myEvents.eventsTableIsDisplayed();
             await myEvents.createdEventIsInTheTable(eventName);
             await myEvents.clickTheNewCreatedEventInTheTable(eventName);
@@ -3016,7 +3016,7 @@
             await portalLogin.isAtPortalLoginPage();
             await portalLogin.enterValidCredentialsAndLogin();
             await dashboard.isAtDashboardPage();
-            await sectionsNavs.clickNavByText("My Events");
+            await sectionsNavs.clickNavByIndex(1);
             await myEvents.eventsTableIsDisplayed();
             await driver.sleep(1000);
             await myEvents.createdEventIsInTheTable(eventName);
@@ -3042,7 +3042,7 @@
             await portalLogin.isAtPortalLoginPage();
             await portalLogin.enterValidCredentialsAndLogin();
             await dashboard.isAtDashboardPage();
-            await sectionsNavs.clickNavByText("My Events");
+            await sectionsNavs.clickNavByIndex(1);
             await myEvents.eventsTableIsDisplayed();
             await myEvents.createdEventIsInTheTable(eventName);
             await myEvents.clickTheNewCreatedEventInTheTable(eventName);
@@ -3117,7 +3117,7 @@
             await portalLogin.isAtPortalLoginPage();
             await portalLogin.enterValidCredentialsAndLogin();
             await dashboard.isAtDashboardPage();
-            await sectionsNavs.clickNavByText("My Events");
+            await sectionsNavs.clickNavByIndex(1);
             await myEvents.eventsTableIsDisplayed();
             await driver.sleep(1000);
             await myEvents.createdEventIsInTheTable(eventName);
@@ -3168,7 +3168,7 @@
             await portalLogin.isAtPortalLoginPage();
             await portalLogin.enterValidCredentialsAndLogin();
             await dashboard.isAtDashboardPage();
-            await sectionsNavs.clickNavByText("My Events");
+            await sectionsNavs.clickNavByIndex(1);
             await myEvents.eventsTableIsDisplayed();
             await myEvents.createdEventIsInTheTable(eventName);
             await myEvents.clickTheNewCreatedEventInTheTable(eventName);
@@ -3193,7 +3193,7 @@
             await portalLogin.isAtPortalLoginPage();
             await portalLogin.enterValidCredentialsAndLogin();
             await dashboard.isAtDashboardPage();
-            await sectionsNavs.clickNavByText("My Events");
+            await sectionsNavs.clickNavByIndex(1);
             await myEvents.eventsTableIsDisplayed();
             await myEvents.createdEventIsInTheTable(eventName);
             await myEvents.clickTheNewCreatedEventInTheTable(eventName);
