@@ -83,7 +83,7 @@
         let questionsModal;
         let questions;
 
-        let base = 719973 // Math.floor(100000 + Math.random() * 900000);
+        let base =  Math.floor(100000 + Math.random() * 900000);
         let eventName =  base.toString() + " FullEventName";
         let shortName = base.toString();
         let ticketOneName = base.toString() +"T1";
@@ -116,11 +116,9 @@
 
         beforeEach(async function(){
             
-            //driver = await new Builder().forBrowser('chrome').setChromeOptions(new chrome.Options().addArguments('--headless')).build();
-            //await driver.manage().window().setRect({width: 1300, height: 1080});
+           driver = await new Builder().forBrowser('chrome').setChromeOptions(new chrome.Options().addArguments('--headless')).build();
+           await driver.manage().window().setRect({width: 1300, height: 1080});
 
-            driver = await new Builder().forBrowser('chrome').build();
-            await driver.manage().window().maximize();
         });
 
         afterEach(async function(){
