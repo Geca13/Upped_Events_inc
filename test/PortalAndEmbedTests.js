@@ -85,7 +85,7 @@
         let questionsModal;
         let questions;
 
-        let base =  Math.floor(100000 + Math.random() * 900000);
+        let base = Math.floor(100000 + Math.random() * 900000);
         let eventName =  base.toString() + " FullEventName";
         let shortName = base.toString();
         let ticketOneName = base.toString() +"T1";
@@ -117,9 +117,8 @@
         let customerPassword = base.toString() + 'Password';
 
         beforeEach(async function(){
-            driver = new Builder().forBrowser('chrome')
-                .setChromeOptions(new chrome.Options().addArguments('--headless'))
-                .build();
+            driver = await new Builder().forBrowser('chrome')
+                .setChromeOptions(new chrome.Options().addArguments('--headless')).build();
             await driver.manage().window().setRect({width: 1300, height: 1080});
         });
 
@@ -1756,7 +1755,7 @@
             await embedTickets.sentKeysToTicketInputByTicketName(ticketTwoName, '2');
             await embedTickets.sentKeysToTicketInputByTicketName(ticketThreeName, '3');
             await embedTickets.sentKeysToTicketInputByTicketName(ticketFourName, '4');
-            await embedTickets.assertTicketCountInOrderTotal(summary);
+            await embedTickets.assertTicketCountInOrderTotal();
 
         });
 
@@ -1769,6 +1768,7 @@
             extras = new ExtrasPage(driver);
             payment = new PaymentPage(driver);
             orderDetails = new EmbedOrderDetailsPage(driver);
+            summary = new SummaryComponent(driver);
 
             await main.openEmbedPage();
             await main.switchToIframe();

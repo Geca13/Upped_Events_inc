@@ -350,6 +350,11 @@ class BasePage {
         let elements =  await this.findAll(locator);
         return await elements[index].getText();
     }
+
+    async elementIsEnabled(locator){
+        let element = await this.find(locator);
+        return element.isEnabled();
+    }
     
     
     

@@ -1,5 +1,6 @@
     const BasePage = require("../../BasePage");
     const assert = require('assert');
+    const SummaryComponent = require('../components/SummaryComponent')
     const {By} = require("selenium-webdriver");
     const {expect} = require("chai");
     const TICKET_NOT_AVAILABLE_SOLD = { xpath: "//div[contains(@class, 'quantity-container')]//span" }
@@ -172,8 +173,9 @@
             return ticketQty.getAttribute("value");
         }
 
-        async assertTicketCountInOrderTotal(summary){
+        async assertTicketCountInOrderTotal(){
             await this.timeout(500);
+            let summary = new SummaryComponent(this.driver)
             let selected = [];
             let selects = await this.findAll(TICKET_SELECT);
             for(let i = 0; i < selects.length; i++){
@@ -187,9 +189,9 @@
 
         async confirmEnteredValuesBeforeLogin(){
 
-            let firstSelectValue =await this.getEnteredTextInTheInputByIndex(TICKET_SELECT, 1);
-            let secondSelectValue =await this.getEnteredTextInTheInputByIndex(TICKET_SELECT, 2);
-            let thirdSelectValue =await this.getEnteredTextInTheInputByIndex(TICKET_SELECT, 3);
+            let firstSelectValue =await this.getEnteredTextInTheInputByIndex(TICKET_SELECT, 2);
+            let secondSelectValue =await this.getEnteredTextInTheInputByIndex(TICKET_SELECT, 3);
+            let thirdSelectValue =await this.getEnteredTextInTheInputByIndex(TICKET_SELECT, 0);
             assert.equal(firstSelectValue,2);
             assert.equal(secondSelectValue,3);
             assert.equal(thirdSelectValue,1);

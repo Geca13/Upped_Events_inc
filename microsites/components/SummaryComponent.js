@@ -130,6 +130,7 @@
         }
 
         async returnTicketCount(){
+            await this.isDisplayed(TICKETS_COUNT, 5000)
             let tickets = await this.getElementText(TICKETS_COUNT);
             return tickets.substring(0, 1);
         }
