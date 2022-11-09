@@ -85,7 +85,7 @@
         let questionsModal;
         let questions;
 
-        let base = Math.floor(100000 + Math.random() * 900000);
+        let base =  Math.floor(100000 + Math.random() * 900000);
         let eventName =  base.toString() + " FullEventName";
         let shortName = base.toString();
         let ticketOneName = base.toString() +"T1";
@@ -117,9 +117,10 @@
         let customerPassword = base.toString() + 'Password';
 
         beforeEach(async function(){
+            
             driver = await new Builder().forBrowser('chrome')
                 .setChromeOptions(new chrome.Options().addArguments('--headless')).build();
-            await driver.manage().window().setRect({width: 1300, height: 1080});
+                await driver.manage().window().setRect({width: 1300, height: 1080});
         });
 
         afterEach(async function(){
@@ -3073,6 +3074,8 @@
             orderDetails = new EmbedOrderDetailsPage(driver);
             confirm = new ConfirmPage(driver);
             questionsModal = new TicketQuestionsModal(driver);
+            originalWindow =  driver.getWindowHandle();
+            
 
             await main.openEmbedPage();
             await main.switchToIframe();
@@ -3085,7 +3088,7 @@
             await driver.sleep(1000);
             await embedLogin.completeSwitchTo();
             await embedLogin.isAtFacebookPage();
-            await driver.sleep(10000);
+            await driver.sleep(5000);
             await embedLogin.completeSignInWithFacebook();
             await driver.switchTo().window(originalWindow);
             await driver.sleep(7000);

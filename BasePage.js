@@ -300,6 +300,9 @@ class BasePage {
     async dateTimeNow(){
         let timeOffset = moment().utcOffset();
         let gmt = "GMT" + (timeOffset/60).toString();
+        if(gmt.substring(gmt.length-1) === "0"){
+            gmt = "GMT+0"
+        }
         let dateTime = moment().format('MMMM DD, h:mm A');
         return dateTime + " " + gmt;
     }

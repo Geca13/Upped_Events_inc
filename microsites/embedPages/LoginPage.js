@@ -49,7 +49,7 @@
         }
 
         async completeSignInWithFacebook(){
-            await this.loginWithFacebookEmailAndPassword(FACEBOOK_EMAIL_INPUT, process.env.FACEBOOK_EMAIL,FACEBOOK_PASSWORD_INPUT,process.env.FACEBOOK_PASSWORD,FACEBOOK_LOGIN_BUTTON);
+            await this.loginWithFacebookEmailAndPassword(FACEBOOK_EMAIL_INPUT, "javageca@gmail.com",FACEBOOK_PASSWORD_INPUT,"Vardar13Negotino",FACEBOOK_LOGIN_BUTTON);
         }
 
 
