@@ -5,7 +5,6 @@
     const PortalLoginPage = require('../portal/portalPages/PortalLoginPage');
     const SettingsNav = require('../portal/ticketing/SettingsNav/SetingsNav');
     const TaxesAndFeesPage = require('../portal/ticketing/SettingsNav/TaxesAndFeesPage');
-    const EventTickets = require('../portal/ticketing/EventTickets');
     const LoginPage = require('../microsites/embedPages/LoginPage')
     const DashboardPage = require('../portal/dashboard/Dashboard');
     const CreateEventModal = require('../portal/portalModals/CreateEventModal');
@@ -65,7 +64,6 @@
         let originalWindow;
         let ticketSettings;
         let taxesAndFees;
-        let eventTickets;
         let summary;
         let addMoney;
         let payment;
@@ -85,7 +83,7 @@
         let questionsModal;
         let questions;
 
-        let base = Math.floor(100000 + Math.random() * 900000);
+        let base = 719973 // Math.floor(100000 + Math.random() * 900000);
         let eventName =  base.toString() + " FullEventName";
         let shortName = base.toString();
         let ticketOneName = base.toString() +"T1";
@@ -118,8 +116,11 @@
 
         beforeEach(async function(){
             
-            driver = await new Builder().forBrowser('chrome').setChromeOptions(new chrome.Options().addArguments('--headless')).build();
-            await driver.manage().window().setRect({width: 1300, height: 1080});
+            //driver = await new Builder().forBrowser('chrome').setChromeOptions(new chrome.Options().addArguments('--headless')).build();
+            //await driver.manage().window().setRect({width: 1300, height: 1080});
+
+            driver = await new Builder().forBrowser('chrome').build();
+            await driver.manage().window().maximize();
         });
 
         afterEach(async function(){
@@ -191,7 +192,7 @@
             await portalLogin.isAtPortalLoginPage();
             await portalLogin.enterValidCredentialsAndLogin();
             await dashboard.isAtDashboardPage();
-            await sectionsNavs.clickNavByText("My Events");
+            await sectionsNavs.clickNavByIndex(1);
             await myEvents.eventsTableIsDisplayed();
             await driver.sleep(1000);
             await myEvents.createdEventIsInTheTable(eventName);
@@ -335,7 +336,6 @@
             createTicket = new CreateTicketModal(driver);
             ticketSettings = new SettingsNav(driver);
             taxesAndFees = new TaxesAndFeesPage(driver);
-            eventTickets = new EventTickets(driver)
 
             await portalLogin.loadPortalUrl();
             await portalLogin.isAtPortalLoginPage();
@@ -359,7 +359,7 @@
             await taxesAndFees.addOneTaxForTickets();
             await taxesAndFees.clickSaveTaxesAndFeesButton();
             let savedTaxValue = await taxesAndFees.getFloatNumberForTaxOrFee(1,1);
-            await eventTickets.clickTicketsTab();
+            await sectionsNavs.clickNavByText("Tickets")
             await ticketsNav.clickEditTicketButtonByTicketName(ticketOneName);
             await createTicket.assertBuyerTotalEqualsTicketPriceMultipliedByTaxPercentage(savedTaxValue);
 
@@ -376,7 +376,6 @@
             createTicket = new CreateTicketModal(driver);
             ticketSettings = new SettingsNav(driver);
             taxesAndFees = new TaxesAndFeesPage(driver);
-            eventTickets = new EventTickets(driver)
             sectionsNavs = new SectionsNavs(driver)
 
             await portalLogin.loadPortalUrl();
@@ -390,24 +389,24 @@
             await eventDetails.unpublishButtonIsDisplayed();
             await sideMenu.clickTicketingTab();
             await ticketsNav.addTicketButtonIsDisplayed();
-            await eventTickets.clickSettingsTab();
+            await sectionsNavs.clickNavByText("Settings")
             await ticketSettings.taxesAndFeesSubTabIsDisplayed();
             await ticketSettings.clickTaxesAndFeesSubNav();
             await taxesAndFees.clickRemoveTaxOrFeeButtonByIndex(0);
             await taxesAndFees.clickSaveTaxesAndFeesButton();
-            await eventTickets.clickTicketsTab();
+            await sectionsNavs.clickNavByText("Tickets")
             await ticketsNav.clickEditTicketButtonByTicketName(ticketOneName);
             await createTicket.ticketNameInputIsDisplayed();
             await createTicket.assertTicketPriceEqualsBuyerTotalPriceWhenNoTaxesOrFees();
             await createTicket.closeCreateUpdateTicketModal();
             await ticketsNav.addTicketButtonIsDisplayed();
-            await eventTickets.clickSettingsTab();
+            await sectionsNavs.clickNavByText("Settings")
             await ticketSettings.taxesAndFeesSubTabIsDisplayed();
             await ticketSettings.clickTaxesAndFeesSubNav();
             await taxesAndFees.set$FeeForTickets("Check $ Fee", ".17");
             await taxesAndFees.clickSaveTaxesAndFeesButton();
             let saved$FeeValue = await taxesAndFees.get$FeeFromInputByIndex(1);
-            await eventTickets.clickTicketsTab();
+            await sectionsNavs.clickNavByText("Tickets")
             await ticketsNav.clickEditTicketButtonByTicketName(ticketOneName);
             await createTicket.assertBuyerTotalEqualsTicketPricePlus$Fee(saved$FeeValue);
 
@@ -424,7 +423,6 @@
             createTicket = new CreateTicketModal(driver);
             ticketSettings = new SettingsNav(driver);
             taxesAndFees = new TaxesAndFeesPage(driver);
-            eventTickets = new EventTickets(driver)
             sectionsNavs = new SectionsNavs(driver)
 
             await portalLogin.loadPortalUrl();
@@ -438,14 +436,14 @@
             await eventDetails.unpublishButtonIsDisplayed();
             await sideMenu.clickTicketingTab();
             await ticketsNav.addTicketButtonIsDisplayed();
-            await eventTickets.clickSettingsTab();
+            await sectionsNavs.clickNavByText("Settings")
             await ticketSettings.taxesAndFeesSubTabIsDisplayed();
             await ticketSettings.clickTaxesAndFeesSubNav();
             await taxesAndFees.addOneTaxForTickets();
             await taxesAndFees.clickSaveTaxesAndFeesButton();
             let savedTaxValue = await taxesAndFees.getFloatNumberForTaxOrFee(1,1);
             let saved$FeeValue = await taxesAndFees.get$FeeFromInputByIndex(2);
-            await eventTickets.clickTicketsTab();
+            await sectionsNavs.clickNavByText("Tickets")
             await ticketsNav.clickEditTicketButtonByTicketName(ticketOneName);
             await createTicket.assertBuyerTotalEqualsTicketPriceMultipliedByTaxPercentageAndAdded$Fee(savedTaxValue, saved$FeeValue);
 
@@ -1004,7 +1002,6 @@
             myEvents = new MyEventsPage(driver);
             sideMenu = new SideMenu(driver);
             ticketsNav = new TicketsNav(driver);
-            eventTickets = new EventTickets(driver);
             ticketTerms = new TicketTermsPage(driver);
             sectionsNavs = new SectionsNavs(driver)
 
@@ -1018,7 +1015,7 @@
             await myEvents.clickTheNewCreatedEventInTheTable(eventName);
             await sideMenu.clickTicketingTab();
             await ticketsNav.addTicketButtonIsDisplayed();
-            await eventTickets.clickSettingsTab();
+            await sectionsNavs.clickNavByText("Settings")
             await ticketTerms.termsPageIsDisplayed();
             await ticketTerms.assertTicketTermsIsEmpty();
             await main.openEmbedPage();
@@ -1040,7 +1037,6 @@
             myEvents = new MyEventsPage(driver);
             sideMenu = new SideMenu(driver);
             ticketsNav = new TicketsNav(driver);
-            eventTickets = new EventTickets(driver);
             ticketTerms = new TicketTermsPage(driver);
             sectionsNavs = new SectionsNavs(driver)
 
@@ -1054,7 +1050,7 @@
             await myEvents.clickTheNewCreatedEventInTheTable(eventName);
             await sideMenu.clickTicketingTab();
             await ticketsNav.addTicketButtonIsDisplayed();
-            await eventTickets.clickSettingsTab();
+            await sectionsNavs.clickNavByText("Settings")
             await ticketTerms.termsPageIsDisplayed();
             await ticketTerms.saveTerms();
             await ticketTerms.assertElementsInTheTermsBoxAfterSavingTerms();

@@ -1,4 +1,5 @@
     const BasePage = require('../../BasePage');
+    const DonationPage = require('../eventOverview/eventSettings/DonationsPage');
     const NAV_LINKS = { xpath: "(//ul[@role='tablist'])[1]//a"}
     const SUB_NAVS = { xpath: "(//ul[@role='tablist'])[2]//a" }
     
@@ -31,9 +32,19 @@
 
         async clickSubNavByText(text){
             await this.subNavsAreDisplayed()
-            await this.timeout(500);;
+            await this.timeout(500);
             await this.locateElementByTextAndClick(text)
             
+        }
+
+        async makeDonationActive(){
+            let donation = new DonationPage(this.driver);
+            await donation.createDonationForEvent();
+        }
+
+        async moveToEventNavs(){
+            await this.moveToElement(NAV_LINKS);
+            await this.isDisplayed(NAV_LINKS, 5000);
         }
         
     }

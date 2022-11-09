@@ -272,6 +272,38 @@
 
         }
 
+        async createPromotionWith100discountForAllTickets(ticketNameOne, promoName, promoCode){
+            await this.sentKeys(PROMOTION_TITLE_INPUT, promoName);
+            await this.sentKeys(PROMOTION_DESCRIPTION_INPUT, promoName + ' description');
+            await this.click(SELECT_TICKET_DROPDOWN);
+            await this.ticketsAreDisplayedInTheList(ticketNameOne);
+            await this.clickTicketInTheList("All");
+            await this.click(PROMOTION_DESCRIPTION_INPUT);
+            await this.clickElementReturnedFromAnArray(PROMOTION_STATUS_AND_DISTRIBUTION_SELECTS,0);
+            await this.enabledStatusIsDisplayed();
+            await this.click(ENABLED_STATUS_OPTION);
+            await this.sentKeys(PROMO_LIMIT_QUANTITY_INPUT,"50");
+            await this.sentKeys(PROMO_PERCENT_VALUE_INPUT,"100");
+            await this.sentKeys(PROMO_CODE_NAME_INPUT,promoCode);
+            await this.moveToElement(PROMOTION_START_DATE_INPUT);
+            await this.driver.executeScript("document.getElementsByClassName('btn-sticky')[0].style.visibility='hidden'");
+            //await this.driver.executeScript("document.body.style.zoom = '80%'")
+            await this.startDateInputIsDisplayed();
+            await this.timeout(1000)
+            await this.click(PROMOTION_START_DATE_INPUT)
+            let startDatePicker = new DateTimePickerModal(this.driver);
+            await startDatePicker.datePickerIsVisible();
+            await startDatePicker.enterTimeNow();
+            await this.timeout(1000)
+            await startDatePicker.clickSetButton();
+            await this.timeout(1000)
+            await this.driver.executeScript("document.getElementsByClassName('btn-sticky')[0].style.visibility='visible'");
+            await this.savePromotionButtonIsDisplayed();
+            await this.timeout(1000)
+            await this.click(SAVE_PROMOTION_BUTTON);
+            await this.timeout(1500)
+        }
+
         async selectLimitTicketDropdownIsDisplayed() {
             await this.isDisplayed(SELECT_LIMIT_TICKETS_DROPDOWN, 5000);
         }

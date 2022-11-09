@@ -73,5 +73,21 @@
             return await this.getEnteredTextInTheInput(DONATIONS_TEXTAREA);
         }
 
+        async createDonationForEvent(){
+            await this.donationsPageCheckBoxIsDisplayed();
+            await this.timeout(1000)
+            await this.clickDonationsCheckbox();
+            await this.timeout(1000)
+            await this.donationsPageTextareaIsDisplayed();
+            await this.timeout(1000)
+            await this.sendDonationsMessage();
+            await this.timeout(1000)
+            await this.clickDonationsSaveButton();
+        }
+
+        async donationsPageTextareaIsDisplayed(){
+            await this.isDisplayed(DONATIONS_TEXTAREA,5000, "donationTextArea");
+        }
+
     }
     module.exports = DonationsPage;

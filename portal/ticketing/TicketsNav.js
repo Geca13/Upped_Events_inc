@@ -20,10 +20,16 @@
     const TICKET_GROUP_TAB = { xpath: "//a[@role='tab']" }
     const DRAG_ROW_FOUR = { xpath: "(//tr[@class='cdk-drag'])[4]"}
     const DRAG_ROW_ONE= { xpath: "(//tr[@class='cdk-drag'])[1]"}
+    const DELETE_TICKET_BUTTONS = { xpath: "//a[@class='text-danger']"} //list
 
     class TicketsNav extends BasePage {
         constructor(driver) {
             super(driver);
+        }
+
+        async openTicketsPageDirectly(eventId){
+            await this.visit("https://dev.portal.uppedevents.com/dashboard/event/" + eventId + "/tickets")
+            await this.addTicketButtonIsDisplayed();
         }
         
         async addTicketButtonIsDisplayed(){
@@ -202,6 +208,28 @@
             let ticketStaff = await this.getElementTextFromAnArrayByIndex(TICKETS_NAMES, 2);
             assert.equal(ticketStaff, staffTicket);
 
+        }
+
+        async assertTicketsSoldInBoxOfficeEqualsSoldTicketsInTicketsNav(soldBoxOffice){
+            let ticketNavSold = await this.getSoldTicketsNumberForEachTicketInTicketsNav();
+            for(let i = 0; i < ticketNavSold.length; i++){
+                assert.equal(ticketNavSold[i], soldBoxOffice[i]);
+            }
+        }
+
+        async getSoldTicketsNumberForEachTicketInTicketsNav(){
+            return await this.returnArrayOfStrings(SOLD_TICKETS_NUMBER);
+        }
+
+        async clickDeleteTicketButtonByTicketName(ticketName){
+            let i = await this.getTicketIndexByTicketName(ticketName)
+            await this.clickElementReturnedFromAnArray(DELETE_TICKET_BUTTONS, i);
+            await this.acceptAlert();
+        }
+
+        async errorDeletingTicketMessage(){
+            let error = new Alerts(this.driver);
+            await error.errorInfoMessageIsDisplayed('Ticket cannot be deleted. It has already been sold or reserved.');
         }
         
 

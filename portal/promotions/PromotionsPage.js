@@ -14,12 +14,17 @@
     const PROMOTION_START_DATE = { xpath: "//td[contains(@class, 'column-startdate')]" };
     const PROMOTION_END_DATE = { xpath: "//td[contains(@class, 'column-enddate')]" };
     const EDIT_PROMO_BUTTON = { xpath: "//a[@class='text-second']//span[contains(@class, 'icon-edit')]"}
+    const PROMOTIONS_HEADER = { xpath: "//*[text()='Promotions']"}
 
 
 
     class PromotionsPage extends BasePage {
         constructor(driver) {
             super(driver);
+        }
+
+        async promotionsHeaderIsVisible(){
+            await this.isDisplayed(PROMOTIONS_HEADER,5000)
         }
         
         

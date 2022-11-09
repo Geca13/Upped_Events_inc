@@ -7,7 +7,8 @@
     "test": "test"
   },
   "scripts": {
-    "test4": "mocha './test/PortalAndEmbedTests.js'"
+    "test1": "mocha './test/PortalAndEmbedTests.js'",
+    "test2": "mocha './test/PortalBox-OfficeTests.js'"
   },
   "author": "Marjan Karafiloski",
   "license": "ISC",

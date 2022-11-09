@@ -360,10 +360,20 @@ class BasePage {
         return element.isEnabled();
     }
 
-    
-    
-    
-    
+    async returnArrayOfStrings(locator){
+        let array = [];
+        let elements = await this.findAll(locator);
+        for(let i = 0; i < elements.length; i++){
+            let string = await elements[i].getText();
+            array.push(string);
+        }
+        return array;
+    }
+
+    async getSubstringOfInboxEmailString(text){
+        return text.substring(1, text.length - 1);
+    }
+
 }
 
 module.exports = BasePage;

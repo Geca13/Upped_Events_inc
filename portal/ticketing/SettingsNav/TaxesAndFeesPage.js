@@ -19,6 +19,11 @@
             super(driver);
         }
 
+        async openTaxesAndFeesDirectly(eventId){
+            await this.visit("https://dev.portal.uppedevents.com/dashboard/event/" + eventId + "/ticket/settings?tab=taxes")
+            await this.includeExcludeIsVisible();
+        }
+
         async includeExcludeIsVisible(){
             await this.isDisplayed(INCLUDED_TAXES_RADIO, 5000);
         }

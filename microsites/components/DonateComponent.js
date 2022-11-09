@@ -159,5 +159,47 @@
             await this.isDisplayed(DONATION_INPUT, 5000);
             await this.timeout(500)
         }
+
+        async addCustomDonationToInputAndAddItToOrder(){
+            await this.donateScreenIsVisible()
+            await this.clearInputField(DONATION_INPUT);
+            await this.sentKeys(DONATION_INPUT, "7.77");
+            await this.click(ADD_DONATION_BUTTON);
+            await this.timeout(500);
+        }
+
+        async assertOnceSetDonationIsSavedCorrectlyInBox_OfficeModal(value){
+            let input = await this.getEnteredTextInTheInput(DONATION_INPUT);
+            assert.equal(input, value);
+            await this.timeout(500)
+        }
+
+        async isOnDonationScreen(){
+            await this.isDisplayed(ADD_DONATION_BUTTON,5000);
+        }
+
+        async click$20DonationButton(){
+            await this.clickElementReturnedFromAnArray(DONATE_BUTTONS,0)
+        }
+        async click$35DonationButton(){
+            await this.clickElementReturnedFromAnArray(DONATE_BUTTONS,1)
+        }
+        async click$50DonationButton(){
+            await this.clickElementReturnedFromAnArray(DONATE_BUTTONS,2)
+        }
+        async click$100DonationButton(){
+            await this.clickElementReturnedFromAnArray(DONATE_BUTTONS,3)
+        }
+        async clickAddDonationToOrderButton(){
+            await this.click(ADD_DONATION_BUTTON);
+            await this.timeout(500);
+        }
+
+        async enterCustomAmountInInput(donation){
+            let input = await this.find(DONATION_INPUT);
+            input.clear();
+            await this.timeout(500);
+            await input.sendKeys(donation);
+        }
     }
     module.exports = DonateComponent;

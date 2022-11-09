@@ -1,5 +1,6 @@
     const BasePage = require('../../BasePage');
     const QuestionsResponseModal = require('../eventOverview/QuestionsResponseModal')
+    const TableComponent = require('../portalComponents/TableComponent')
     const assert = require('assert')
     const ATTENDEES_TABLE = { id: "dataTable" }
     const ATTENDEES_NAMES = { xpath: "//td[contains(@class, 'column-fullname')]//a[contains(@class, 'table-ticket-name')]//span" } //list
@@ -39,6 +40,17 @@
             await this.clickElementReturnedFromAnArray(ATTENDEES_RESPONSES_COUNT, index);
             let responses = new QuestionsResponseModal(this.driver)
             await responses.assertForTicketQuestionsResponsesForTheUpdated(base);
+        }
+
+        async noAttendeesInTableMessage(){
+            let table = new TableComponent(this.driver);
+            await table.messageWhenTableIsEmpty("No record available");
+        }
+
+        async checkForCustomerFullNameByIndex(index , firstName, lastName){
+            await this.isOnAttendeesTab();
+            let customer = await this.getElementTextFromAnArrayByIndex(ATTENDEES_NAMES, index);
+            assert.equal(customer, firstName + " " + lastName);
         }
     }
     module.exports = AttendeesTab;
