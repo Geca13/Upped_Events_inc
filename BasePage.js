@@ -159,6 +159,7 @@ class BasePage {
     }
 
     async locateElementByTextAndClick(text){
+        await this.isDisplayed({xpath: "//*[text()='"+text+"']" }, 5000);
         let element = await this.driver.findElement(By.xpath("//*[text()='"+text+"']"));
         await element.click();
     }
@@ -358,6 +359,8 @@ class BasePage {
         let element = await this.find(locator);
         return element.isEnabled();
     }
+
+    
     
     
     

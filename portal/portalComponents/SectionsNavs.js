@@ -17,8 +17,8 @@
 
         async clickNavByText(text){
             await this.isDisplayed(NAV_LINKS, 5000);
-            await this.timeout(1500);
-            await this.clickElementByLinkText(text);
+            await this.timeout(500);
+            await this.locateElementByTextAndClick(text)
         }
 
         async taxesAndFeesNavIsDisplayed(){
@@ -30,9 +30,10 @@
         }
 
         async clickSubNavByText(text){
-            await this.isDisplayed(SUB_NAVS, 5000);
-            await this.timeout(1500);
-            await this.clickElementByLinkText(text);
+            await this.subNavsAreDisplayed()
+            await this.timeout(500);;
+            await this.locateElementByTextAndClick(text)
+            
         }
         
     }
