@@ -31,8 +31,7 @@
         }
 
         async clickSubNavByText(text){
-            await this.subNavsAreDisplayed()
-            await this.timeout(500);
+            await this.timeout(2500);
             await this.locateElementByTextAndClick(text)
             
         }
