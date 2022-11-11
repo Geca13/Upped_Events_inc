@@ -124,7 +124,7 @@
             await driver.quit()
         })
 
-       
+      
         //PORTAL
         it('Test_01 - should create new event and verify data in events page and General Details',async function () {
             portalLogin = new PortalLoginPage(driver);
@@ -356,7 +356,7 @@
             await taxesAndFees.addOneTaxForTickets();
             await taxesAndFees.clickSaveTaxesAndFeesButton();
             let savedTaxValue = await taxesAndFees.getFloatNumberForTaxOrFee(1,1);
-            await sectionsNavs.clickNavByText("Tickets")
+            await sectionsNavs.scrollAndClickOnNavLinkByText("Tickets")
             await ticketsNav.clickEditTicketButtonByTicketName(ticketOneName);
             await createTicket.assertBuyerTotalEqualsTicketPriceMultipliedByTaxPercentage(savedTaxValue);
 
@@ -391,7 +391,7 @@
             await ticketSettings.clickTaxesAndFeesSubNav();
             await taxesAndFees.clickRemoveTaxOrFeeButtonByIndex(0);
             await taxesAndFees.clickSaveTaxesAndFeesButton();
-            await sectionsNavs.clickNavByText("Tickets")
+            await sectionsNavs.scrollAndClickOnNavLinkByText("Tickets")
             await ticketsNav.clickEditTicketButtonByTicketName(ticketOneName);
             await createTicket.ticketNameInputIsDisplayed();
             await createTicket.assertTicketPriceEqualsBuyerTotalPriceWhenNoTaxesOrFees();
@@ -403,7 +403,7 @@
             await taxesAndFees.set$FeeForTickets("Check $ Fee", ".17");
             await taxesAndFees.clickSaveTaxesAndFeesButton();
             let saved$FeeValue = await taxesAndFees.get$FeeFromInputByIndex(1);
-            await sectionsNavs.clickNavByText("Tickets")
+            await sectionsNavs.scrollAndClickOnNavLinkByText("Tickets")
             await ticketsNav.clickEditTicketButtonByTicketName(ticketOneName);
             await createTicket.assertBuyerTotalEqualsTicketPricePlus$Fee(saved$FeeValue);
 
@@ -440,7 +440,7 @@
             await taxesAndFees.clickSaveTaxesAndFeesButton();
             let savedTaxValue = await taxesAndFees.getFloatNumberForTaxOrFee(1,1);
             let saved$FeeValue = await taxesAndFees.get$FeeFromInputByIndex(2);
-            await sectionsNavs.clickNavByText("Tickets")
+            await sectionsNavs.scrollAndClickOnNavLinkByText("Tickets")
             await ticketsNav.clickEditTicketButtonByTicketName(ticketOneName);
             await createTicket.assertBuyerTotalEqualsTicketPriceMultipliedByTaxPercentageAndAdded$Fee(savedTaxValue, saved$FeeValue);
 
@@ -591,6 +591,8 @@
             await orderDetails.clickEditPaymentLinkAndAssertItIsOnPaymentPage();
 
         });
+        
+        
 
         //EMBED
         it('Test_17 - should make payment with new card in embed and assert card is saved',async function () {
@@ -687,6 +689,9 @@
             await embedTickets.assertDropDownElementsEqualsAvailableTickets(availableTickets)
 
         });
+        
+        
+        
 
         //EMBED
         it('Test_20 - should update ticket quantity and check that if available tickets are more then 100 the tickets dropdown in embed is limited to 100', async function () {
@@ -2400,6 +2405,8 @@
             await newPromotion.errorValidationIsReturnedWhenExistingCodeIsEnteredAsPromoCodeForNewPromotion(promoCodeThree);
 
         });
+        
+        
 
         //EMBED
         it('Test_71 - should assert that percentage taxes are recalculated and dollar value fees are same when promotion is applied', async function () {
@@ -2430,6 +2437,8 @@
             await summary.assertTaxesAndFeesAreRefactoredToMatchNewPrice(fees,taxes);
 
         });
+        
+        
 
         //PORTAL
         it('Test_72 - should create staff ticket in portal', async function () {
@@ -2872,6 +2881,8 @@
             await confirm.isAtConfirmPage()
 
         });
+        
+        
 
         //PORTAL
         it('Test_86 - should set ticket Simple Yes No question and assert saved data on questions table in portal', async function () {
@@ -2895,10 +2906,12 @@
             await sideMenu.clickTicketingTab();
             await sectionsNavs.clickNavByText("Settings")
             await sectionsNavs.taxesAndFeesNavIsDisplayed();
-            await sectionsNavs.clickNavByText("Ticket Questions")
+            await sectionsNavs.clickSubNavByText("Ticket Questions")
             await questions.createSimpleYesNoQuestionAndAssertSavedDataAndElements(base, ticketOneName, ticketThreeName);
 
         });
+        
+        
 
         //EMBED
         it('Test_87 - should check ticket questions modal for Yes/No question and submit answers in embed', async function () {

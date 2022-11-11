@@ -49,7 +49,8 @@
         }
 
         async completeSignInWithFacebook(){
-            await this.loginWithFacebookEmailAndPassword(FACEBOOK_EMAIL_INPUT, "javageca@gmail.com",FACEBOOK_PASSWORD_INPUT,"Vardar13Negotino",FACEBOOK_LOGIN_BUTTON);
+            await this.loginWithFacebookEmailAndPassword(FACEBOOK_EMAIL_INPUT, "javageca@gmail.com",FACEBOOK_PASSWORD_INPUT,"Negotino13Vardar",FACEBOOK_LOGIN_BUTTON);
+            await this.timeout(3000)
         }
 
 

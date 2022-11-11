@@ -11,13 +11,20 @@
         
        
         async clickNavByIndex(index){
-            await this.isDisplayed(NAV_LINKS, 5000);
+            await this.isDisplayed(NAV_LINKS, 50000);
             await this.timeout(1000);
             await this.clickElementReturnedFromAnArray(NAV_LINKS,index);
         }
 
         async clickNavByText(text){
             await this.isDisplayed(NAV_LINKS, 5000);
+            await this.timeout(500);
+            await this.locateElementByTextAndClick(text)
+        }
+        
+        async scrollAndClickOnNavLinkByText(text){
+            await this.isDisplayed(NAV_LINKS, 5000);
+            await this.scrollUpOrDown(-150);
             await this.timeout(500);
             await this.locateElementByTextAndClick(text)
         }
