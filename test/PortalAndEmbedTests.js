@@ -2892,6 +2892,7 @@
             sideMenu = new SideMenu(driver);
             sectionsNavs = new SectionsNavs(driver)
             eventDetails = new GeneralDetailsTab(driver);
+            ticketTerms = new TicketTermsPage(driver);
             questions = new TicketQuestionsPage(driver);
 
             await portalLogin.loadPortalUrl();
@@ -2904,8 +2905,8 @@
             await myEvents.clickTheNewCreatedEventInTheTable(eventName);
             await eventDetails.unpublishButtonIsDisplayed();
             await sideMenu.clickTicketingTab();
-            await sectionsNavs.clickNavByText("Settings")
-            await sectionsNavs.taxesAndFeesNavIsDisplayed();
+            await sectionsNavs.clickNavByText("Settings");
+            await ticketTerms.termsPageIsDisplayed();
             await sectionsNavs.clickSubNavByText("Ticket Questions")
             await questions.createSimpleYesNoQuestionAndAssertSavedDataAndElements(base, ticketOneName, ticketThreeName);
 
@@ -2957,6 +2958,7 @@
             sectionsNavs = new SectionsNavs(driver);
             eventDetails = new GeneralDetailsTab(driver);
             questions = new TicketQuestionsPage(driver);
+            ticketTerms = new TicketTermsPage(driver);
 
             await portalLogin.loadPortalUrl();
             await portalLogin.isAtPortalLoginPage();
@@ -2970,7 +2972,7 @@
             await eventDetails.unpublishButtonIsDisplayed();
             await sideMenu.clickTicketingTab();
             await sectionsNavs.clickNavByText("Settings")
-            await sectionsNavs.taxesAndFeesNavIsDisplayed();
+            await ticketTerms.termsPageIsDisplayed();
             await sectionsNavs.clickSubNavByText("Ticket Questions")
             await questions.clickDeactivateQuestionButton(0);
             await questions.createQuestionWithInput(base);
@@ -3049,6 +3051,7 @@
             sectionsNavs = new SectionsNavs(driver);
             eventDetails = new GeneralDetailsTab(driver);
             questions = new TicketQuestionsPage(driver);
+            ticketTerms = new TicketTermsPage(driver);
 
             await portalLogin.loadPortalUrl();
             await portalLogin.isAtPortalLoginPage();
@@ -3061,8 +3064,8 @@
             await eventDetails.unpublishButtonIsDisplayed();
             await sideMenu.clickTicketingTab();
             await sectionsNavs.clickNavByText("Settings")
-            await sectionsNavs.taxesAndFeesNavIsDisplayed();
-            await sectionsNavs.clickNavByText("Ticket Questions")
+            await ticketTerms.termsPageIsDisplayed();
+            await sectionsNavs.clickSubNavByText("Ticket Questions")
             await questions.clickActivateQuestionButton(0);
             await questions.updateFirstQuestionToIncludeInputAndForEachTicket(base);
 

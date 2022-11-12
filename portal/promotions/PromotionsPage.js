@@ -40,8 +40,6 @@
             await this.timeout(2000);
         }
         
-
-
         async assertThe$PromotionIsSavedCorrectOnPromotionsPage(promotion){
             await this.isDisplayed(PROMOTION_NAME,5000);
             let i = await this.returnIndexWhenTextIsKnown(PROMOTION_NAME,promotion[0]);
