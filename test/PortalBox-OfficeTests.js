@@ -74,8 +74,8 @@
         let ticketGroupThree = base.toString() +"TG3";
 
         beforeEach(async function(){
-            driver = await new Builder().forBrowser('chrome').build();
-            await driver.manage().window().maximize();
+            driver = await new Builder().forBrowser('chrome').setChromeOptions(new chrome.Options().addArguments('--headless')).build();
+            await driver.manage().window().setRect({width: 1300, height: 1080});
             
             portalLogin = new PortalLoginPage(driver);
             dashboard = new DashboardPage(driver);
@@ -108,7 +108,7 @@
             }
 
         })
-/*
+
         it('should create new event',async function () {
             let split ;
             createEvent = new CreateEventModal(driver);
@@ -607,7 +607,7 @@
             await bosReview.makePaymentWithCash(base);
 
         });
-*/
+
         it('should return invalid promo code when wrong promo code', async function () {
 
             await bosTickets.openBoxOfficeDirectly(eventId);
