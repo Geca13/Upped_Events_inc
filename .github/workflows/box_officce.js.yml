@@ -23,6 +23,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+        timezoneWindows: "Eastern Standard Time"
     - run: npm ci
       shell: cmd
     - run: npm run test2
