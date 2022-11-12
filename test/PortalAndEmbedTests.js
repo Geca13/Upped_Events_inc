@@ -83,7 +83,7 @@
         let questionsModal;
         let questions;
 
-        let base =  Math.floor(100000 + Math.random() * 900000);
+        let base = 937830 //  Math.floor(100000 + Math.random() * 900000);
         let eventName =  base.toString() + " FullEventName";
         let shortName = base.toString();
         let ticketOneName = base.toString() +"T1";
@@ -1348,7 +1348,7 @@
         });
 
         //EMBED
-        it('Test_41 - should assert when donation is added to order calculates corectly in Order Total in the embed',async function () {
+        it('Test_41 - should assert when donation is added to order calculates correctly in Order Total in the embed',async function () {
 
             main = new EmbedMainPage(driver);
             embedLogin = new LoginPage(driver);
@@ -1742,7 +1742,7 @@
         });
 
         //EMBED
-        it('Test_53 - should assert selected ticket quantity is displayed in the Order Total corectly', async function () {
+        it('Test_53 - should assert selected ticket quantity is displayed in the Order Total correctly', async function () {
 
             main = new EmbedMainPage(driver);
             embedTickets = new TicketsComponent(driver);
@@ -2379,7 +2379,7 @@
         });
         
         //PORTAL
-        it('Test_70 - should get promocode error validation when promotion code exists for current event', async function () {
+        it('Test_70 - should get promoCode error validation when promotion code exists for current event', async function () {
 
             portalLogin = new PortalLoginPage(driver);
             dashboard = new DashboardPage(driver);
@@ -2971,7 +2971,7 @@
             await sideMenu.clickTicketingTab();
             await sectionsNavs.clickNavByText("Settings")
             await sectionsNavs.taxesAndFeesNavIsDisplayed();
-            await sectionsNavs.clickNavByText("Ticket Questions")
+            await sectionsNavs.clickSubNavByText("Ticket Questions")
             await questions.clickDeactivateQuestionButton(0);
             await questions.createQuestionWithInput(base);
 
