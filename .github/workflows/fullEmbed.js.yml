@@ -17,13 +17,15 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
+    - uses: szenius/set-timezone@v1.0
+      with:
+       timezoneWindows: "Eastern Standard Time"
     - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-        timezoneWindows: "Eastern Standard Time"
     - run: npm ci
       shell: cmd
     - run: npm run test1
