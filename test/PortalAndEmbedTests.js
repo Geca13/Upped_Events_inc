@@ -83,7 +83,7 @@
         let questionsModal;
         let questions;
 
-        let base =  Math.floor(100000 + Math.random() * 900000);
+        let base = Math.floor(100000 + Math.random() * 900000);
         let eventName =  base.toString() + " FullEventName";
         let shortName = base.toString();
         let ticketOneName = base.toString() +"T1";
