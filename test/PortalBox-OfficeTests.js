@@ -44,7 +44,7 @@
         let eventId ;
 
 
-        let base =  Math.floor(100000 + Math.random() * 900000);
+        let base = Math.floor(100000 + Math.random() * 900000);
         let eventName =  base.toString() + " FullEventName";
         let shortName = base.toString();
         let ticketOneName = base.toString() +"T1";
@@ -74,8 +74,8 @@
         let ticketGroupThree = base.toString() +"TG3";
 
         beforeEach(async function(){
-            driver = await new Builder().forBrowser('chrome').setChromeOptions(new chrome.Options().addArguments('--headless')).build();
-            await driver.manage().window().setRect({width: 1300, height: 1080});
+            driver = await new Builder().forBrowser('chrome').build();
+            await driver.manage().window().maximize();
             
             portalLogin = new PortalLoginPage(driver);
             dashboard = new DashboardPage(driver);
@@ -87,6 +87,7 @@
             bosDetails = new BOAddDetails(driver);
             bosReview = new BOReviewAndPay(driver);
             sideMenu = new SideMenu(driver);
+            sectionsNavs = new SectionsNavs(driver);
 
             await portalLogin.loadPortalUrl();
             await portalLogin.isAtPortalLoginPage();
@@ -107,7 +108,7 @@
             }
 
         })
-
+/*
         it('should create new event',async function () {
             let split ;
             createEvent = new CreateEventModal(driver);
@@ -144,10 +145,11 @@
             await createTicket.createNewTicket(ticketOneName,ticketOnePrice, ticketOneQuantity);
             await ticketsNav.addTicketButtonIsDisplayed();
             await ticketsNav.clickActivateTicketToggle(ticketOneName);
-            await sectionsNavs.clickNavByIndex(4);
+            await sectionsNavs.clickNavByText("Box Office");
             await bosTickets.assertTicketDataByTicketName(ticketOneName,ticketOnePrice.toFixed(2), ticketOneQuantity);
 
         });
+        
 
         it('should assert box-office navigation steps names',async function () {
 
@@ -417,6 +419,8 @@
             await ticketsNav.clickGroupTabByIndex(0);
 
         });
+        
+        
 
         it('should create promotion for 3 tickets with limit qty on two and create 100% promotion', async function () {
 
@@ -442,6 +446,8 @@
             await sideMenu.ticketingTabIsDisplayed();
             
         });
+        
+ 
 
         it('should return invalid promo code applied message when promo code start time is in the future', async function () {
 
@@ -454,6 +460,8 @@
             await bosDetails.assertReturnedValidationMessage("Invalid Discount Code");
 
         });
+        
+        
 
         it('Should create staff ticket in portal', async function () {
 
@@ -586,6 +594,8 @@
             await attendees.checkForCustomerFullNameByIndex(0 , base, base);
 
         });
+        
+        
 
         it('Should make purchase with cash when user has account and additional email is provided', async function () {
 
@@ -597,7 +607,7 @@
             await bosReview.makePaymentWithCash(base);
 
         });
-
+*/
         it('should return invalid promo code when wrong promo code', async function () {
 
             await bosTickets.openBoxOfficeDirectly(eventId);

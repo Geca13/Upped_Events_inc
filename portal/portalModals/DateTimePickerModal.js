@@ -60,6 +60,7 @@
         getUtcHoursNow(){
             let today = new Date();
             let hour = today.getUTCHours();
+            console.log(hour)
             if (hour > 12) {
                 return ((hour-12)-5).toString();
             }else{

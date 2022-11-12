@@ -59,7 +59,7 @@
             let startDatePicker = new DateTimePickerModal(this.driver);
             await startDatePicker.datePickerIsVisible();
             await startDatePicker.selectTodayDate();
-            await startDatePicker.enterUtcTimeNow();
+            await startDatePicker.enterTimeNow();
             await this.timeout(1500)
             await startDatePicker.clickSetButton();
             await this.timeout(1500)
@@ -172,7 +172,7 @@
             let startDatePicker = new DateTimePickerModal(this.driver);
             await startDatePicker.datePickerIsVisible();
             await startDatePicker.selectTodayDate();
-            await startDatePicker.enterUtcTimeNow();
+            await startDatePicker.enterTimeNow();
             await this.timeout(1500)
             await startDatePicker.clickSetButton();
             await this.timeout(1500)

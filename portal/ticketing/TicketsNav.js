@@ -222,10 +222,23 @@
         }
 
         async clickDeleteTicketButtonByTicketName(ticketName){
-            let i = await this.getTicketIndexByTicketName(ticketName)
+            let i = await this.getTicketIndexByTicketNameInPortal(ticketName)
             await this.clickElementReturnedFromAnArray(DELETE_TICKET_BUTTONS, i);
             await this.acceptAlert();
         }
+
+        async getTicketIndexByTicketNameInPortal(ticketName) {
+            let tickets = await this.findAll(TICKETS_NAMES);
+            for(let i = 0; i < tickets.length; i++){
+                let ticket = await this.getElementTextFromAnArrayByIndex(TICKETS_NAMES,i);
+                let ticketname = ticket.split(" ")[0]
+                if(await ticketname === ticketName){
+                    return i
+                }
+            }
+        }
+        
+        
 
         async errorDeletingTicketMessage(){
             let error = new Alerts(this.driver);
