@@ -3083,7 +3083,6 @@
             questionsModal = new TicketQuestionsModal(driver);
             originalWindow =  driver.getWindowHandle();
             
-
             await main.openEmbedPage();
             await main.switchToIframe();
             await main.isInFrame(eventName);
