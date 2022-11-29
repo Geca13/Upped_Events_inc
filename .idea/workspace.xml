@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="CMakePresetLoader">{
+  &quot;useNewFormat&quot;: true
+}</component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" ENABLED="true" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0f4661ab-f48b-4ba5-9b91-545ca496b723" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/microsites/embedPages/EmbedQuestionsPage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/portal/portalModals/CreateDonationModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/microsites/components/AddMoneyComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/microsites/components/AddMoneyComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/microsites/components/DonateComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/microsites/components/DonateComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/microsites/components/NewCardComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/microsites/components/NewCardComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/microsites/components/ReceiptPopup.js" beforeDir="false" afterPath="$PROJECT_DIR$/microsites/components/ReceiptPopup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/microsites/components/StepsComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/microsites/components/StepsComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/microsites/components/SummaryComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/microsites/components/SummaryComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/microsites/components/TicketTermsModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/microsites/components/TicketTermsModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/microsites/components/TicketsComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/microsites/components/TicketsComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/microsites/embedPages/ConfirmPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/microsites/embedPages/ConfirmPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/microsites/embedPages/CreateAccountPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/microsites/embedPages/CreateAccountPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/microsites/embedPages/EmbedMainPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/microsites/embedPages/EmbedMainPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/microsites/embedPages/EmbedOrderDetailsPage.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/microsites/embedPages/ExtrasPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/microsites/embedPages/ExtrasPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/microsites/embedPages/LoginPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/microsites/embedPages/LoginPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/microsites/embedPages/PaymentPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/microsites/embedPages/PaymentPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portal/eventOverview/eventSettings/DonationsPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/eventOverview/eventSettings/DonationsPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portal/portalComponents/Alerts.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/portalComponents/Alerts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portal/portalComponents/TableComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/portalComponents/TableComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portal/portalModals/CreateTicketModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/portalModals/CreateTicketModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portal/portalPages/PortalLoginPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/portalPages/PortalLoginPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOAddDetails.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOAddDetails.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOAddExtras.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOAddExtras.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOReviewAndPay.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOReviewAndPay.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOSelectTickets.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOSelectTickets.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portal/ticketing/SettingsNav/TaxesAndFeesPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/ticketing/SettingsNav/TaxesAndFeesPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portal/ticketing/SettingsNav/TicketQuestionsPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/ticketing/SettingsNav/TicketQuestionsPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/PortalAndEmbedTests.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/PortalAndEmbedTests.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/PortalBox-OfficeTests.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/PortalBox-OfficeTests.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectId" id="2HtbJoCsnDPgNUkY3vayBdzDDbm" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Upped-Events-Inc&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs.mocha.mocha_node_package_dir&quot;: &quot;D:/Upped_Events_Inc/node_modules/mocha&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  }
+}</component>
+  <component name="RunManager" selected="Mocha.Should do embed tests.Test_01 - should create new event and verify data in events page and General Details">
+    <configuration name="Should do box office related tests.should add custom donation add to order, open the modal and check if value is still in input" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <mocha-package>$PROJECT_DIR$/node_modules/mocha</mocha-package>
+      <working-directory>$PROJECT_DIR$</working-directory>
+      <pass-parent-env>true</pass-parent-env>
+      <ui>bdd</ui>
+      <extra-mocha-options />
+      <test-kind>TEST</test-kind>
+      <test-file>$PROJECT_DIR$/test/PortalBox-OfficeTests.js</test-file>
+      <test-names>
+        <name value="Should do box office related tests" />
+        <name value="should add custom donation add to order, open the modal and check if value is still in input" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="Should do box office related tests.should enter custom decimal amount, assert the input shows the digits only  " type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <mocha-package>$PROJECT_DIR$/node_modules/mocha</mocha-package>
+      <working-directory>$PROJECT_DIR$</working-directory>
+      <pass-parent-env>true</pass-parent-env>
+      <ui>bdd</ui>
+      <extra-mocha-options />
+      <test-kind>TEST</test-kind>
+      <test-file>$PROJECT_DIR$/test/PortalBox-OfficeTests.js</test-file>
+      <test-names>
+        <name value="Should do box office related tests" />
+        <name value="should enter custom decimal amount, assert the input shows the digits only  " />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="Should do embed tests.Test_01 - should create new event and verify data in events page and General Details" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <mocha-package>$PROJECT_DIR$/node_modules/mocha</mocha-package>
+      <working-directory>$PROJECT_DIR$</working-directory>
+      <pass-parent-env>true</pass-parent-env>
+      <ui>bdd</ui>
+      <extra-mocha-options />
+      <test-kind>TEST</test-kind>
+      <test-file>$PROJECT_DIR$/test/PortalAndEmbedTests.js</test-file>
+      <test-names>
+        <name value="Should do embed tests" />
+        <name value="Test_01 - should create new event and verify data in events page and General Details" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="Should do embed tests.Test_92 - should login with facebook assert updated ticket questions for first question , answer and submit answers" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <mocha-package>$PROJECT_DIR$/node_modules/mocha</mocha-package>
+      <working-directory>$PROJECT_DIR$</working-directory>
+      <pass-parent-env>true</pass-parent-env>
+      <ui>bdd</ui>
+      <extra-mocha-options />
+      <test-kind>TEST</test-kind>
+      <test-file>$PROJECT_DIR$/test/PortalAndEmbedTests.js</test-file>
+      <test-names>
+        <name value="Should do embed tests" />
+        <name value="Test_92 - should login with facebook assert updated ticket questions for first question , answer and submit answers" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="Should do embed tests.Test_93 - should check response provided for the updated question" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <mocha-package>$PROJECT_DIR$/node_modules/mocha</mocha-package>
+      <working-directory>$PROJECT_DIR$</working-directory>
+      <pass-parent-env>true</pass-parent-env>
+      <ui>bdd</ui>
+      <extra-mocha-options />
+      <test-kind>TEST</test-kind>
+      <test-file>$PROJECT_DIR$/test/PortalAndEmbedTests.js</test-file>
+      <test-names>
+        <name value="Should do embed tests" />
+        <name value="Test_93 - should check response provided for the updated question" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Mocha.Should do embed tests.Test_01 - should create new event and verify data in events page and General Details" />
+        <item itemvalue="Mocha.Should do embed tests.Test_93 - should check response provided for the updated question" />
+        <item itemvalue="Mocha.Should do embed tests.Test_92 - should login with facebook assert updated ticket questions for first question , answer and submit answers" />
+        <item itemvalue="Mocha.Should do box office related tests.should add custom donation add to order, open the modal and check if value is still in input" />
+        <item itemvalue="Mocha.Should do box office related tests.should enter custom decimal amount, assert the input shows the digits only  " />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0f4661ab-f48b-4ba5-9b91-545ca496b723" name="Changes" comment="" />
+      <created>1669107258543</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1669107258543</updated>
+      <workItem from="1669107260298" duration="807000" />
+      <workItem from="1669108082643" duration="19260000" />
+      <workItem from="1669185387888" duration="4175000" />
+      <workItem from="1669193365067" duration="1000" />
+      <workItem from="1669193627030" duration="19296000" />
+      <workItem from="1669297559343" duration="9990000" />
+      <workItem from="1669362166942" duration="12096000" />
+      <workItem from="1669475447186" duration="14336000" />
+      <workItem from="1669537161333" duration="18142000" />
+      <workItem from="1669642625531" duration="23243000" />
+      <workItem from="1669706825393" duration="8821000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/portal/portalModals/CreatePromotionModal.js</url>
+          <line>186</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/portal/portalModals/CreatePromotionModal.js</url>
+          <line>195</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/portal/portalModals/CreatePromotionModal.js</url>
+          <line>212</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/microsites/components/SummaryComponent.js</url>
+          <line>112</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/microsites/embedPages/PaymentPage.js</url>
+          <line>117</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/test/PortalAndEmbedTests.js</url>
+          <line>2006</line>
+          <option name="timeStamp" value="39" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/test/PortalAndEmbedTests.js</url>
+          <line>2007</line>
+          <option name="timeStamp" value="41" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/test/PortalAndEmbedTests.js</url>
+          <line>2108</line>
+          <option name="timeStamp" value="42" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/microsites/components/SummaryComponent.js</url>
+          <line>168</line>
+          <option name="timeStamp" value="43" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/microsites/components/SummaryComponent.js</url>
+          <line>169</line>
+          <option name="timeStamp" value="44" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/microsites/components/SummaryComponent.js</url>
+          <line>170</line>
+          <option name="timeStamp" value="45" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/microsites/components/SummaryComponent.js</url>
+          <line>171</line>
+          <option name="timeStamp" value="46" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/microsites/components/SummaryComponent.js</url>
+          <line>172</line>
+          <option name="timeStamp" value="47" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/microsites/components/SummaryComponent.js</url>
+          <line>173</line>
+          <option name="timeStamp" value="48" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/microsites/components/SummaryComponent.js</url>
+          <line>174</line>
+          <option name="timeStamp" value="49" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/microsites/components/SummaryComponent.js</url>
+          <line>175</line>
+          <option name="timeStamp" value="50" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/microsites/components/SummaryComponent.js</url>
+          <line>176</line>
+          <option name="timeStamp" value="51" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
