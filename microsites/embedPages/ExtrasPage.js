@@ -7,7 +7,7 @@
             super(driver);
         }
         async isAtExtrasPage(){
-            await this.isDisplayed(ADD_MONEY_TAB, 5000);
+            await this.isDisplayed(DONATE_TAB, 5000);
         }
         async clickAddMoneyTab(){
             await this.click(ADD_MONEY_TAB);

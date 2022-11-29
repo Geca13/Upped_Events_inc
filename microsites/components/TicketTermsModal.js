@@ -4,7 +4,7 @@
     const TICKETS_TERMS_MODAL = { id: "termsCond" };
     const TERMS_IMAGE = { xpath: "//div[@class='header']//img" }
     const TERMS_EVENT_NAME = { xpath: "//div[@class='content-title']" }
-    const TERMS_TEXT_WRAPPER = { xpath: "//div[@id='termsCond']//div[contains(@class , 'ng-star-inserted')]" }
+    const TERMS_TEXT_WRAPPER = { xpath: "//div[@class='content']" }
     const CLOSE_MODAL_BUTTON = { xpath: "//button[@type='button']" }
 
 
@@ -37,7 +37,7 @@
             assert.equal(strongHeaderText, "Bold Heading 1");
             let strongItalicText = await strongItalic.getText();
             assert.equal(strongItalicText, "Italic Paragraph");
-            await this.assertImagePlaceholderIsDisplayedInTheModal("https://events.dev.uppedevents.com/assets/images/placeholder2.png");
+            await this.assertImagePlaceholderIsDisplayedInTheModal("https://events.stage.uppedevents.com/assets/images/placeholder2.png");
             await this.click(CLOSE_MODAL_BUTTON);
             await this.timeout(500)
             await this.termsModalIsNotDisplayed();

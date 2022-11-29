@@ -26,7 +26,8 @@
         }
 
         async openBoxOfficeDirectly(eventId){
-            await this.visit("https://dev.portal.uppedevents.com/dashboard/event/" + eventId + "/ticket/box-office")
+            await this.timeout(1000)
+            await this.visit("https://stage.portal.uppedevents.com/dashboard/event/" + eventId + "/ticket/box-office")
             await this.isOnBoxOfficePage();
         }
 
@@ -152,7 +153,7 @@
             await override.clickSaveChangesButton();
             await this.timeout(1500);
             let newPrice = await this.getElementText(OVERRIDEN_TICKET_PRICE);
-            assert.equal(newPrice,'$15.00');
+            assert.equal(newPrice,'$0.15');
             let fontColor = await this.getFontColorFromAnArray(OVERRIDEN_TICKET_PRICE,0);
             assert.equal(fontColor,'rgba(255, 0, 0, 1)');
 

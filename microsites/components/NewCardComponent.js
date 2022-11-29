@@ -12,8 +12,7 @@
     const COUNTRY_SELECT = { css: "select[formControlName=country_id]" };
     const COUNTRY_OPTIONS = { xpath: "//select[@formControlName='country_id']//option" };
     const STATE_SELECT = { css: "select[formControlName=state]" };
-    const INPUT_LABELS = { tagName: 'label' }; //list
-    const EMBED_ADD_TO_SAVED_CARD_BUTTON = { xpath: "//div[contains(@class , 'save-btn-wrap')]//button"}
+    const INPUT_LABELS = { xpath: "//app-embed-ticketing-pay//label" }; //list
 
 
 
@@ -66,24 +65,18 @@
             assert.equal(canada, "Canada");
             let macedonia = await this.getElementTextFromAnArrayByIndex(COUNTRY_OPTIONS,2);
             assert.equal(macedonia, "Macedonia");
-            let savedButtons = await this.getElementText(EMBED_ADD_TO_SAVED_CARD_BUTTON);
-            assert.equal(savedButtons, "Add to Saved Cards");
         }
 
         async fillNewCardWithVisaData(firstName, lastName){
             await this.isAtNewCardTab();
             await this.sentKeys(CARDHOLDER_NAME_INPUT,firstName + ' ' + lastName);
-            await this.sentKeys(CARD_NUMBER_INPUT,"4111111111111111");
-            await this.sentKeys(CVV_INPUT,"900");
-            await this.sentKeys(STREET_ADDRESS_INPUT,"Main Street 1/14");
-            await this.sentKeys(MONTH_SELECT,"8");
-            await this.sentKeys(YEAR_SELECT,"2024");
-            await this.sentKeys(STATE_SELECT, "Minnesota");
-            await this.sentKeys(ZIP_CODE_INPUT,"14400");
-        }
-
-        async clickEmbedSaveCardButton(){
-            await this.click(EMBED_ADD_TO_SAVED_CARD_BUTTON)
+            await this.sentKeys(CARD_NUMBER_INPUT,"4436033112341299");
+            await this.sentKeys(CVV_INPUT,"645");
+            await this.sentKeys(STREET_ADDRESS_INPUT,"100 Timber Ridge Road, Newton PA");
+            await this.sentKeys(MONTH_SELECT,"3");
+            await this.sentKeys(YEAR_SELECT,"2025");
+            await this.sentKeys(STATE_SELECT, "Pennsylvania");
+            await this.sentKeys(ZIP_CODE_INPUT,"18940");
         }
 
     }

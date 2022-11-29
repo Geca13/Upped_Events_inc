@@ -5,11 +5,18 @@
    const EVENT_NAME = { className: 'event-title' }
    const NO_TICKETS_MESSAGE = { xpath: "//p[contains(@class, 'pt-5')]" }
    const NEXT_BUTTON = { xpath: "//*[text()='Next']"}
+   const CONFIRM_PAYMENT_BUTTON = { xpath: "//*[text()='Confirm Payment']"}
+   const SELECT_PAYMENT_BUTTON = { xpath: "//*[text()='Select Payment']"}
    const SOLD_OUT_MESSAGE = { xpath: "//div[contains(@class , 'quantity-container')]//span" }
    const TERMS_LABEL = { xpath: "//label[@for='isSavedCheck']"}
    const TERMS_CHECKBOX = { xpath: "//input[@type='checkbox']"}
    const PREVIOUS_PAGE_BUTTON = { xpath: "//button[contains(@class, 'embed-previous-btn')]"}
    const EVENT_INFO_BANNER = { xpath: "//span[@class='title-new']" }
+   const LOGIN_LINK = { linkText: "Login" }
+   const CREATE_LINK = { linkText: "Create" }
+   const CREATE_LOGIN_MODAL = { xpath: "//div[@class='modal-content']" }
+   const LOGOUT_LINK = { linkText: "Logout" }
+   const WELCOME_MESSAGE = { xpath: "//p[contains(@class, 'login_text')]" }
 
 
 
@@ -30,6 +37,10 @@
 
       async getNewlyOpenedTab(originalWindow){
          await this.switchToNewlyOpenedWindowOrTab(originalWindow);
+      }
+      
+      async login_createModalIsDisplayed(){
+         await this.isDisplayed(CREATE_LOGIN_MODAL, 5000);
       }
 
       async isInFrame(eventName){
@@ -64,6 +75,11 @@
          await this.moveToElement(NEXT_BUTTON);
          await this.click(NEXT_BUTTON)
          await this.timeout(500);
+      }
+      
+      async clickConfirmPaymentButton(){
+         await this.isDisplayed(CONFIRM_PAYMENT_BUTTON, 5000);
+         await this.click(CONFIRM_PAYMENT_BUTTON)
       }
 
       async limitInfoMessageIsDisplayed(number){
@@ -139,6 +155,37 @@
       async assertAlertVisibleAndText(text){
          let alert = new Alerts(this.driver);
          await alert.alertDangerIsDisplayAndAssertText(text)
+      }
+      
+      async clickLoginLink(){
+         await this.isDisplayed(LOGIN_LINK, 5000);
+         await this.click(LOGIN_LINK)
+         await this.login_createModalIsDisplayed();
+      }
+      
+      async clickCreateAccountLink(){
+         await this.isDisplayed(CREATE_LINK, 5000);
+         await this.click(CREATE_LINK);
+         await this.login_createModalIsDisplayed();
+      }
+      
+      async assertUserFirstNameAndLogoutLinkAreDisplayed(firstName){
+         await this.isDisplayed(LOGOUT_LINK, 15000);
+         let fullMessage = await this.getElementText(WELCOME_MESSAGE);
+         let message = fullMessage.split("L")[0];
+         let firstLetter = firstName.charAt(0)
+         let slicedName = firstName.substring(1);
+         let firstLetterCap = firstLetter.toUpperCase();
+         assert.equal('Welcome back, '+ firstLetterCap+slicedName +'! Not you?  ', message)
+      }
+      
+      async getTransactionTimeDate(){
+         return await this.dateTimeNow();
+      }
+      
+      async clickSelectPaymentButton(){
+         await this.isDisplayed(SELECT_PAYMENT_BUTTON, 5000)
+         await this.click(SELECT_PAYMENT_BUTTON);
       }
 
       

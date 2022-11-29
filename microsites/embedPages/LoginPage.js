@@ -1,8 +1,8 @@
     const BasePage = require('../../BasePage');
     require("dotenv").config();
     const FACEBOOK_SIGN_IN_BUTTON = { className: "facebook-login"}
-    const EMAIL_INPUT = { xpath: "//input[@formcontrolname='email']" };
-    const PASSWORD_INPUT = { xpath: "//input[@formcontrolname='password']" };
+    const EMAIL_INPUT = { xpath: "//input[@placeholder='Email or Username']" };
+    const PASSWORD_INPUT = { xpath: "//input[@placeholder='Enter Password']" };
     const LOGIN_BUTTON = { xpath: "//*[text()='Login Now']" }
     const AGREE_BUTTON = { xpath: "//*[text()='Agree']" }
     const REGISTER_NOW_LINK = { xpath: "//span[contains(@class, 'register')]" }
@@ -10,6 +10,7 @@
     const FACEBOOK_EMAIL_INPUT = { id: 'email' }
     const FACEBOOK_PASSWORD_INPUT = { id: 'pass' }
     const FACEBOOK_LOGIN_BUTTON = { name: 'login' }
+    const FORGET_PASSWORD = { xpath: "//*[text()='Forgot Password?']"}
 
 
     class LoginPage extends BasePage {
@@ -18,18 +19,23 @@
         }
 
         async isAtLoginPage(){
-            await this.isDisplayed(FACEBOOK_SIGN_IN_BUTTON, 5000);
+            await this.isDisplayed(FORGET_PASSWORD, 5000);
         }
 
-        async loginWithEmailAndPassword(email, password){
-            await this.sentKeys(EMAIL_INPUT, email);
-            await this.sentKeys(PASSWORD_INPUT, password);
-            await this.click(LOGIN_BUTTON);
+        async loginWithEmailAndPassword(email, password, index){
+            await this.sendKeysToElementReturnedFromAnArray(EMAIL_INPUT,index, email);
+            await this.sendKeysToElementReturnedFromAnArray(PASSWORD_INPUT,index, password);
+            await this.clickElementReturnedFromAnArray(LOGIN_BUTTON, index);
         }
 
         async clickRegisterLink(){
+            await this.registerNowButtonIsDisplayed()
             await this.click(REGISTER_NOW_LINK);
             await this.timeout(500);
+        }
+        
+        async registerNowButtonIsDisplayed(){
+            await this.isDisplayed(REGISTER_NOW_LINK, 5000);
         }
 
         async loginWithVerifiedAccount(email, password){
@@ -49,7 +55,7 @@
         }
 
         async completeSignInWithFacebook(){
-            await this.loginWithFacebookEmailAndPassword(FACEBOOK_EMAIL_INPUT, "javageca@gmail.com",FACEBOOK_PASSWORD_INPUT,"Negotino13Vardar",FACEBOOK_LOGIN_BUTTON);
+            await this.loginWithFacebookEmailAndPassword(FACEBOOK_EMAIL_INPUT, "javageca@gmail.com",FACEBOOK_PASSWORD_INPUT,"V@rdar13Negotino",FACEBOOK_LOGIN_BUTTON);
             await this.timeout(3000)
         }
 

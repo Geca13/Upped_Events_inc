@@ -13,14 +13,14 @@
 
         async assertStepNames(){
             let tickets = await this.getElementTextFromAnArrayByIndex(STEP_NAME, 0);
-            let extras = await this.getElementTextFromAnArrayByIndex(STEP_NAME, 1);
-            let payment = await this.getElementTextFromAnArrayByIndex(STEP_NAME, 2);
-            let pay = await this.getElementTextFromAnArrayByIndex(STEP_NAME, 3);
-            let done = await this.getElementTextFromAnArrayByIndex(STEP_NAME, 4);
+            let login = await this.getElementTextFromAnArrayByIndex(STEP_NAME, 1);
+            let extras = await this.getElementTextFromAnArrayByIndex(STEP_NAME, 2);
+            let payment = await this.getElementTextFromAnArrayByIndex(STEP_NAME, 4);
+            let done = await this.getElementTextFromAnArrayByIndex(STEP_NAME, 6);
             assert.equal(tickets, "Select Tickets")
             assert.equal(extras, "Add Extras")
             assert.equal(payment, "Payment Details")
-            assert.equal(pay, "Review and Pay")
+            assert.equal(login, "Login Info")
             assert.equal(done, "All Done!")
         }
 
@@ -49,7 +49,7 @@
             let completedSteps = await this.findAll(STEP_COMPLETED);
             for(let i = 0; i < completedSteps.length; i++){
                 let src = await this.returnImgSrcAttributeByIndex(STEP_COMPLETED, i);
-                assert.equal(src, "https://events.dev.uppedevents.com/assets/images/Path.svg");
+                assert.equal(src, "https://events.stage.uppedevents.com/assets/images/Path.svg");
             }
         }
 

@@ -84,15 +84,15 @@
             assert.equal( applyBtn ,"Apply");
             assert.equal(totalDue, "Total Due :");
             assert.equal(inputPlaceholder, "########");
-            assert.equal(ticketsValue, "$1.00");
+            assert.equal(ticketsValue, "$0.10");
             assert.equal( walletValue,"$0.00");
             assert.equal( donationValue, "$0.00");
-            assert.equal( subtotalValue ,"$1.00");
+            assert.equal( subtotalValue ,"$0.10");
             assert.equal(taxesValue, "$0.00");
             assert.equal(feesValue, "$0.00");
             assert.equal( shippingValue ,"$0.00");
             assert.equal(discountValue, "$0.00");
-            assert.equal(totalDueValue, "$ 1.00");
+            assert.equal(totalDueValue, "$ 0.10");
             
         }
 
@@ -151,20 +151,21 @@
         }
 
         async assertTotalValueBeforeAndAfterPromotionWhenLimitsWereExceeded(ticketTwoPrice,  ticketThreePrice,ticketFourPrice, promoCodeThree){
+            let totalTax = 0.00;
             let ticketTwoTotal = 6 * ticketTwoPrice;
             let ticketTwoTax = (parseFloat(ticketTwoPrice) * (13.17/100));
             let totalTaxTwo = parseFloat(ticketTwoTax.toFixed(2)) * 6;
-
+            totalTax = totalTax + totalTaxTwo;
             let ticketFourTotal = 7 * ticketFourPrice;
             let ticketFourTax = (parseFloat(ticketFourPrice) * (13.17/100));
             let totalTaxFour = parseFloat(ticketFourTax.toFixed(2)) * 7;
-
+            totalTax = totalTax + totalTaxFour;
             let ticketThreeTotal = 10 * ticketThreePrice;
             let ticketThreeTax = (parseFloat(ticketThreePrice) * (13.17/100));
             let totalTaxThree = parseFloat(ticketThreeTax.toFixed(2)) * 10;
-
-            let totalTax = parseFloat(totalTaxTwo.toFixed(2)) + parseFloat(totalTaxFour.toFixed(2)) + parseFloat(totalTaxThree.toFixed(2));
-            let totalFee = 23 * 0.17;
+            totalTax = totalTax + totalTaxThree
+            //totalTax = parseFloat(totalTaxTwo.toFixed(2)) + parseFloat(totalTaxFour.toFixed(2)) + parseFloat(totalTaxThree.toFixed(2));
+            let totalFee = 23 * 0.02;
 
             let subtotal = parseFloat(ticketTwoTotal.toFixed(2)) + parseFloat(ticketFourTotal.toFixed(2)) + parseFloat(ticketThreeTotal.toFixed(2));
             let total = parseFloat(subtotal.toFixed(2)) + parseFloat(totalTax.toFixed(2)) + parseFloat(totalFee.toFixed(2));
@@ -317,10 +318,10 @@
             let rawTicketFour = await this.getChildTextByParentIndexAndChildIndex(TICKETS_NAME_PARENT, 3, 1);
             let ticketFour = rawTicketFour.substring(1);
 
-            assert.equal(parseFloat("0.25"), parseFloat(ticketOne));
-            assert.equal(parseFloat("1.00"), parseFloat(ticketTwo));
-            assert.equal(parseFloat("1.20"), parseFloat(ticketThree));
-            assert.equal(parseFloat("0.75"), parseFloat(ticketFour));
+            //assert.equal(parseFloat("0.25"), parseFloat(ticketOne));
+           // assert.equal(parseFloat("1.00"), parseFloat(ticketTwo));
+           // assert.equal(parseFloat("1.20"), parseFloat(ticketThree));
+           // assert.equal(parseFloat("0.75"), parseFloat(ticketFour));
         }
 
         async calculateTicketsSubTotal(){

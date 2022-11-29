@@ -39,7 +39,7 @@
             let donation = new DonateComponent(this.driver);
             await donation.addCustomDonationToInputAndAddItToOrder();
             let alert = new Alerts(this.driver);
-            await alert.correctInfoMessageIsDisplayed("Donation Added")
+            await alert.correctInfoMessageIsDisplayed("Donation Added for UPPED EVENTS INC")
             
         }
 
@@ -61,6 +61,7 @@
             await this.clickElementReturnedFromAnArray(EXTRAS_OPTIONS,1);
             let donation = new DonateComponent(this.driver);
             let value = await donation.addCustomDonationAndReturnValue();
+            await donation.clickSaveDonationButtonInBoxOffice();
             await this.isDisplayed(EXTRAS_OPTIONS, 5000);
             await this.clickElementReturnedFromAnArray(EXTRAS_OPTIONS,1);
             await donation.assertOnceSetDonationIsSavedCorrectlyInBox_OfficeModal(value);
@@ -73,7 +74,7 @@
            await this.isDisplayed(EXTRAS_OPTIONS, 5000);
            await this.clickElementReturnedFromAnArray(EXTRAS_OPTIONS,1);
            let donation = new DonateComponent(this.driver);
-           await donation.assertElementsOnDonateTab(eventName, "I need money for Beer, a lot of MONEY");
+           await donation.assertElementsOnDonateModal("UPPED EVENTS INC", "UPPED EVENTS INC DESCRIPTION");
 
         }
 
@@ -82,7 +83,7 @@
             await this.isDisplayed(EXTRAS_OPTIONS, 5000);
             await this.clickElementReturnedFromAnArray(EXTRAS_OPTIONS,1);
             let alert = new Alerts(this.driver);
-            await alert.correctInfoMessageIsDisplayed("Event does not receive donations")
+            await alert.correctInfoMessageIsDisplayed("Event does not have active charity organizations")
             
         }
 
@@ -114,14 +115,15 @@
             await stepper.clickNavElementByIndex(index);
         }
 
-        async add20$ToOrderOnExtrasPage(){
+        async add10$ToOrderOnExtrasPage(){
             await this.isOnExtrasScreen();
             await this.clickElementReturnedFromAnArray(EXTRAS_OPTIONS,1);
             let donation = new DonateComponent(this.driver);
             await donation.isOnDonationScreen();
-            await donation.click$20DonationButton();
+            await donation.click$10DonationButtonForBoxOffice();
             await this.timeout(500);
             await donation.clickAddDonationToOrderButton();
+            await donation.clickSaveDonationButtonInBoxOffice();
             await this.clickNextButton()
         }
 

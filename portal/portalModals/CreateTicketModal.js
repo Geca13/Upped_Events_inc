@@ -14,7 +14,7 @@
     const BUYER_TOTAL_VALUE = { xpath: "//span[contains(@class , 'price')]" }
     const STAFF_TYPE_DROPDOWNS = { xpath: "(//button[@role='combobox'])[1]" }
     const STAFF_DEPARTMENT_DROPDOWNS = { xpath: "(//button[@role='combobox'])[2]" }
-    const TICKET_TYPE_OPTIONS_BUTTON = { xpath: "//button[@aria-controls='panelOne']" }
+    const TICKET_TYPE_OPTIONS_BUTTON = { xpath: "(//button[@aria-controls='panelOne'])[2]" }
     const TICKET_TYPE_OFF_BUTTON = { xpath: "//ngb-accordion//span[@class='lc_off']"};
     const TICKET_STAFF_OPTION= { xpath: "//*[text()='STAFF']"}
     const TICKET_STAFF_WILL_SELECT_DEPARTMENT = { xpath: "//*[text()='Staff Will Select Department']"}

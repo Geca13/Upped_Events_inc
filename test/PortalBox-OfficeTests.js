@@ -18,6 +18,8 @@
     const SideMenu = require('../portal/portalComponents/SideMenu');
     const SectionsNavs = require('../portal/portalComponents/SectionsNavs');
     const chrome = require("selenium-webdriver/chrome");
+    const DonationPage = require("../portal/eventOverview/eventSettings/DonationsPage");
+    const CreateDonationModal = require("../portal/portalModals/CreateDonationModal");
 
 
     describe('Should do box office related tests', function () {
@@ -41,24 +43,26 @@
         let bosReview;
         let sideMenu;
         let sectionsNavs;
-        let eventId ;
+        let donation;
+        let createDonation;
+        let eventId = "579";
 
 
-        let base = Math.floor(100000 + Math.random() * 900000);
+        let base = 898629 // Math.floor(100000 + Math.random() * 900000);
         let eventName =  base.toString() + " FullEventName";
         let shortName = base.toString();
         let ticketOneName = base.toString() +"T1";
         let ticketOneQuantity = 999;
-        let ticketOnePrice = 1.00;
+        let ticketOnePrice = 0.10;
         let ticketTwoName = base.toString() +"T2";
         let ticketTwoQuantity = 888;
-        let ticketTwoPrice = 1.20;
+        let ticketTwoPrice = 0.12;
         let ticketThreeName = base.toString() +"T3";
         let ticketThreeQuantity = 777;
-        let ticketThreePrice = 0.75;
+        let ticketThreePrice = 0.07;
         let ticketFourName = base.toString() +"T4";
         let ticketFourQuantity = 666;
-        let ticketFourPrice = 0.25;
+        let ticketFourPrice = 0.04;
         let staffTicket = base.toString() +"staff";
         let ticketStaffQuantity = 5;
         let ticketStaffPrice = 0.25;
@@ -74,7 +78,10 @@
         let ticketGroupThree = base.toString() +"TG3";
 
         beforeEach(async function(){
-            driver = await new Builder().forBrowser('chrome').setChromeOptions(new chrome.Options().addArguments('--headless')).build();
+            //driver = await new Builder().forBrowser('chrome').setChromeOptions(new chrome.Options().addArguments('--headless')).build();
+            //await driver.manage().window().setRect({width: 1300, height: 1080});
+
+            driver = await new Builder().forBrowser('chrome').build();
             await driver.manage().window().setRect({width: 1300, height: 1080});
             
             portalLogin = new PortalLoginPage(driver);
@@ -108,7 +115,6 @@
             }
 
         })
-
         it('should create new event',async function () {
             let split ;
             createEvent = new CreateEventModal(driver);
@@ -119,14 +125,6 @@
             let urlToSplit = await driver.getCurrentUrl();
             split = await urlToSplit.split('/')
             eventId = split[split.length - 2]
-        });
-
-        it('should verify box-office table headers and no tickets message', async function () {
-
-            await bosTickets.openBoxOfficeDirectly(eventId);
-            await bosTickets.assertBoxOfficeTicketsTableHeaders();
-            await bosTickets.assertNoTicketMessage();
-
         });
 
         it('should create first ticket and assert data in box-office table',async function () {
@@ -235,34 +233,33 @@
 
             
             sectionsNavs = new SectionsNavs(driver)
+            donation = new DonationPage(driver);
+            createDonation = new CreateDonationModal(driver);
             await dashboard.clickMyEventsTab();
             await myEvents.eventsTableIsDisplayed();
             await myEvents.createdEventIsInTheTable(eventName);
             await myEvents.clickTheNewCreatedEventInTheTable(eventName);
             await eventDetails.publishButtonIsDisplayed();
-            await sectionsNavs.moveToEventNavs();
-            await sectionsNavs.clickNavByIndex(3);
-            await sectionsNavs.subNavsAreDisplayed();
-            await sectionsNavs.makeDonationActive();
+            await sideMenu.ticketingTabIsDisplayed();
+            await sectionsNavs.clickNavByText("Settings");
+            await sectionsNavs.clickSubNavByText("Donations");
+            await donation.donationPageIsVisible();
+            await donation.activateDonationsOnEvent();
+            await donation.clickAddDonationButton();
+            await createDonation.createDonation();
+            await donation.donationPageIsVisible();
             await bosTickets.openBoxOfficeDirectly(eventId);
             await bosTickets.selectTicketByIndexSendQuantityAndSave(0, 2);
             await bosExtras.clickOnDonationOptionAndAssertElements(eventName)
 
         });
 
+
         it('should assert when donation value button is clicked the value is displayed in input',async function () {
 
             await bosTickets.openBoxOfficeDirectly(eventId);
             await bosTickets.selectTicketByIndexSendQuantityAndSave(0, 2);
             await bosExtras.clickDonationOptionAndAssertWhenDonationButtonClickedValueAddedToInput();
-
-        });
-
-        it('should enter custom decimal amount, assert the input shows the digits only  ',async function () {
-
-            await bosTickets.openBoxOfficeDirectly(eventId);
-            await bosTickets.selectTicketByIndexSendQuantityAndSave(0, 2);
-            await bosExtras.clickDonationOptionAddCustomDecimalDonationAndAssertOnlyFullNumberIsDisplayed();
 
         });
 
@@ -349,7 +346,7 @@
             await taxesAndFees.openTaxesAndFeesDirectly(eventId);
             await taxesAndFees.clickRemoveTaxOrFeeButtonByIndex(0);
             await taxesAndFees.clickSaveTaxesAndFeesButton();
-            await taxesAndFees.set$FeeForTickets("Check $ Fee", ".17");
+            await taxesAndFees.set$FeeForTickets("Check $ Fee", ".02");
             await taxesAndFees.clickSaveTaxesAndFeesButton();
             let saved$FeeValue = await taxesAndFees.get$FeeFromInputByIndex(1);
             await bosTickets.openBoxOfficeDirectly(eventId);
@@ -669,7 +666,7 @@
             await bosTickets.openBoxOfficeDirectly(eventId);
             await bosTickets.isOnBoxOfficePage();
             await bosTickets.select18Tickets();
-            await bosExtras.add20$ToOrderOnExtrasPage();
+            await bosExtras.add10$ToOrderOnExtrasPage();
             await bosDetails.assertValuesInOrderDetailsComponentEqualsOnAddDetailsAndReviewPage(promoCodeThree);
 
         });

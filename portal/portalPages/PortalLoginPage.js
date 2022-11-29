@@ -7,10 +7,26 @@
         constructor(driver){
             super(driver);
         }
+
+        async loadAndLoginToDevPortal(){
+            await this.visit('https://dev.portal.uppedevents.com/')
+            await this.isDisplayed(SIGN_IN_BUTTON, 90000);
+            await this.sentKeys(EMAIL_INPUT,"vardar123@vardar123.mk");
+            await this.sentKeys(PASSWORD_INPUT,"Test@123");
+            await this.click(SIGN_IN_BUTTON);
+        }
+
+        async loadAndLoginToStagePortal(){
+            await this.visit('https://stage.portal.uppedevents.com/')
+            await this.isDisplayed(SIGN_IN_BUTTON, 90000);
+            await this.sentKeys(EMAIL_INPUT,"louis@uppedevents.com");
+            await this.sentKeys(PASSWORD_INPUT,"Test@123");
+            await this.click(SIGN_IN_BUTTON);
+        }
        
 
         async loadPortalUrl(){
-            await this.visit('https://dev.portal.uppedevents.com/')
+            await this.visit('https://stage.portal.uppedevents.com/')
            await this.timeout(1000);
         }
         async isAtPortalLoginPage(){
@@ -19,7 +35,7 @@
 
 
         async enterValidCredentialsAndLogin(){
-            await this.sentKeys(EMAIL_INPUT,"vardar123@vardar123.mk");
+            await this.sentKeys(EMAIL_INPUT,"louis@uppedevents.com");
             await this.sentKeys(PASSWORD_INPUT,"Test@123");
             await this.click(SIGN_IN_BUTTON)
         }

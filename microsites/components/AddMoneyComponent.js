@@ -67,7 +67,7 @@
         async assertAddMoneyComponentElements(){
             await this.addMoneyComponentIsDisplayed()
             let logoSrc = await this.getLogoSrcText();
-            assert.equal(logoSrc, "https://events.dev.uppedevents.com/assets/images/wallet.png");
+            assert.equal(logoSrc, "https://events.pr-tickets.uppedevents.com/assets/images/wallet.png");
             let logoText = await this.getLogoWalletText();
             assert.equal(logoText, "Upped Wallet");
             let logoBalanceValue = await this.getLogoBalanceMoneyValue();

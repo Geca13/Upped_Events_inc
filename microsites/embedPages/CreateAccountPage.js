@@ -3,13 +3,17 @@
     const FIRST_NAME_INPUT = { id: 'firstName'}
     const LAST_NAME_INPUT = { id: 'lastName'}
     const EMAIL_INPUT = { id: 'email'}
+    const CONFIRM_EMAIL_INPUT = { id: 'confirmEmail'}
     const GENDER_SELECT = { id: 'gender'}
     const GENDER_MALE_OPTION = { xpath: "//option[@value='Male']"}
     const DOB_INPUT = { id: 'dob'}
     const PASSWORD_INPUT = { id: 'password'}
     const VERIFY_PASSWORD_INPUT = { name:'confirmPassword'}
-    const AGREE_TERMS_CHECKBOX = { id: "termsCheckbox" }
+    const AGREE_TERMS_CHECKBOX = { xpath: "//input[@formcontrolname='terms_agree_status']" }
     const CREATE_ACCOUNT_BUTTON = { xpath: "//*[text()=' Create Account ']"}
+    const SIGN_UP_BUTTON = { xpath: "//*[text()=' Sign Up ']"}
+    const SIGN_IN_LINK = { xpath: "//*[text()='Sign In']" }
+    const EMAIL_OPTION_BUTTON = { xpath: "//span[text()='Sign up with Email']"}
 
 
 
@@ -19,53 +23,74 @@
         }
 
         async isOnCreateAccountEmbedPage(){
-            await this.isDisplayed(FIRST_NAME_INPUT, 5000);
+            await this.isDisplayed(EMAIL_OPTION_BUTTON, 5000);
             await this.timeout(500);
         }
 
-        async assertCreateAccountButtonIsDisabledUntilFieldsArePopulated(){
+        async signInLinkIsDisplayed(){
+            await this.isDisplayed(SIGN_IN_LINK, 5000)
+        }
+        
+        async clickSignInButton(){
+            await this.click(SIGN_IN_LINK);
+        }
+
+        async openEmailSignUpForm(){
             await this.isOnCreateAccountEmbedPage();
+            await this.click(EMAIL_OPTION_BUTTON);
+            await this.isDisplayed(FIRST_NAME_INPUT, 5000)
+        }
+
+        async assertCreateAccountButtonIsDisabledUntilFieldsArePopulated(index){
+            await this.openEmailSignUpForm();
             let createButton = await this.find(CREATE_ACCOUNT_BUTTON);
             assert.equal(await createButton.isEnabled(), false);
-            await this.sentKeys(FIRST_NAME_INPUT, "firstName");
+            await this.sendKeysToElementReturnedFromAnArray(FIRST_NAME_INPUT,index , "firstName");
             assert.equal(await createButton.isEnabled(), false);
-            await this.sentKeys(LAST_NAME_INPUT, "lastName");
+            await this.sendKeysToElementReturnedFromAnArray(LAST_NAME_INPUT,index , "lastName");
             assert.equal(await createButton.isEnabled(), false);
-            await this.sentKeys(EMAIL_INPUT, "email@email.email");
+            await this.sendKeysToElementReturnedFromAnArray(EMAIL_INPUT,index , "email@email.email");
             assert.equal(await createButton.isEnabled(), false);
-            await this.click(GENDER_SELECT);
+            await this.sendKeysToElementReturnedFromAnArray(CONFIRM_EMAIL_INPUT,index , "email@email.email");
+            assert.equal(await createButton.isEnabled(), false);
+            await this.clickElementReturnedFromAnArray(GENDER_SELECT, index);
             assert.equal(await createButton.isEnabled(), false);
             await this.timeout(500)
-            await this.click(GENDER_MALE_OPTION);
+            await this.clickElementReturnedFromAnArray(GENDER_MALE_OPTION, index);
             assert.equal(await createButton.isEnabled(), false);
-            await this.sentKeys(DOB_INPUT, '11112000');
+            await this.sendKeysToElementReturnedFromAnArray(DOB_INPUT,index , '11112000');
             assert.equal(await createButton.isEnabled(), false);
-            await this.sentKeys(PASSWORD_INPUT, "P@ssword123");
+            await this.sendKeysToElementReturnedFromAnArray(PASSWORD_INPUT,index , "P@ssword123");
             assert.equal(await createButton.isEnabled(), false);
-            await this.sentKeys(VERIFY_PASSWORD_INPUT, "P@ssword123");
+            await this.sendKeysToElementReturnedFromAnArray(VERIFY_PASSWORD_INPUT,index , "P@ssword123");
             assert.equal(await createButton.isEnabled(), false);
-            await this.click(AGREE_TERMS_CHECKBOX);
+            await this.clickElementReturnedFromAnArray(AGREE_TERMS_CHECKBOX, index);
             await this.timeout(500)
             assert.equal(await createButton.isEnabled(), true);
             await this.timeout(1500);
-            await this.click(CREATE_ACCOUNT_BUTTON);
 
         }
 
-        async createAccountOnEmbed(firstName,lastName,email,password){
-            await this.isOnCreateAccountEmbedPage();
-            await this.sentKeys(FIRST_NAME_INPUT, firstName);
-            await this.sentKeys(LAST_NAME_INPUT, lastName);
-            await this.sentKeys(EMAIL_INPUT, email);
-            await this.click(GENDER_SELECT);
+        async createAccountOnEmbed(firstName,lastName,email,password, index){
+            await this.openEmailSignUpForm();
+            await this.sendKeysToElementReturnedFromAnArray(FIRST_NAME_INPUT, index, firstName);
+            await this.sendKeysToElementReturnedFromAnArray(LAST_NAME_INPUT, index, lastName);
+            await this.sendKeysToElementReturnedFromAnArray(EMAIL_INPUT, index, email);
+            await this.sendKeysToElementReturnedFromAnArray(CONFIRM_EMAIL_INPUT, index, email);
+            await this.clickElementReturnedFromAnArray(GENDER_SELECT, index);
             await this.timeout(500)
-            await this.click(GENDER_MALE_OPTION);
-            await this.sentKeys(DOB_INPUT, '11112000');
-            await this.sentKeys(PASSWORD_INPUT, password);
-            await this.sentKeys(VERIFY_PASSWORD_INPUT, password);
-            await this.click(AGREE_TERMS_CHECKBOX);
+            await this.clickElementReturnedFromAnArray(GENDER_MALE_OPTION, index);
+            await this.sendKeysToElementReturnedFromAnArray(DOB_INPUT, index, '11112000');
+            await this.sendKeysToElementReturnedFromAnArray(PASSWORD_INPUT, index, password);
+            await this.sendKeysToElementReturnedFromAnArray(VERIFY_PASSWORD_INPUT, index, password);
+            await this.clickElementReturnedFromAnArray(AGREE_TERMS_CHECKBOX, index);
             await this.timeout(1500);
-            await this.click(CREATE_ACCOUNT_BUTTON);
+            let createButtonCount = await this.returnElementsCount(CREATE_ACCOUNT_BUTTON);
+            if(createButtonCount > 0){
+                await this.click(CREATE_ACCOUNT_BUTTON);
+            }else{
+                await this.click(SIGN_UP_BUTTON);
+            }
             await this.timeout(1500);
             
         }

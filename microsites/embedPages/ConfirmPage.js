@@ -39,7 +39,7 @@
             "has been sent to your email. You can also view all of your orders in the purchases" +
             " page of your account whenever you want. You are on your way to experience the future of events!");
         let total = await this.getElementText(TOTAL);
-        assert.equal(total, "Total:$2.6");
+        assert.equal(total, "Total:$0.27");
         let receiptButton = await this.getElementText(VIEW_RECEIPT_BUTTON);
         assert.equal(receiptButton, "View Receipt");
         let shareHeader = await this.getElementText(SHARE_HEADER);
@@ -53,11 +53,11 @@
             "and is your portal to entering and purchasing items at upped events. " +
             "Download on the App Store or Google Play Store, or send a link to your phone!");
         let facebookSrc = await this.returnImgSrcAttributeByIndex(FACEBOOK_GOOGLE_APPLE,0);
-        assert.equal(facebookSrc, "https://events.dev.uppedevents.com/assets/images/facebook1.png");
+        assert.equal(facebookSrc, "https://events.pr-tickets.uppedevents.com/assets/images/facebook1.png");
         let googleSrc = await this.returnImgSrcAttributeByIndex(FACEBOOK_GOOGLE_APPLE,1);
-        assert.equal(googleSrc, "https://events.dev.uppedevents.com/assets/images/playstore.png");
+        assert.equal(googleSrc, "https://events.pr-tickets.uppedevents.com/assets/images/playstore.png");
         let appSrc = await this.returnImgSrcAttributeByIndex(FACEBOOK_GOOGLE_APPLE,2);
-        assert.equal(appSrc, "https://events.dev.uppedevents.com/assets/images/appstore.png");
+        assert.equal(appSrc, "https://events.pr-tickets.uppedevents.com/assets/images/appstore.png");
 
     }
     async goBackToStartPage(){

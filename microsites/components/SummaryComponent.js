@@ -2,14 +2,14 @@
     const assert = require('assert');
     const {expect} = require("chai");
     const TICKETS_TOTAL = { id: "ticketCountTotal" }
-    const SUBTOTAL_TOTAL = { xpath: "//div[contains(@class , 'sub-total')]//div[@id='subtotalAmt']" }
+    const SUBTOTAL_TOTAL = { xpath: "//div[contains(@class , 'sub-total')]//div[@id='subTotalAmt']" }
     const TAXES_TOTAL = { id: "taxesAmt" }
     const FEES_TOTAL = { id: "feesAmt" }
-    const TOTAL_TOTAL = { id: "totalDuesAmt" }
-    const DONATIONS_TOTAL = { id: "donationsTotal" }
+    const TOTAL_TOTAL = { xpath: "//div[contains(@class , 'grand-total')]//div[contains(@class , 'w-30')]" }
+    const DONATIONS_TOTAL = { xpath: "//div[@class='w-30']//div[@id='donationsTotal']" }
     const DISCOUNT_TITLE = { id: "discount"}
     const DISCOUNT_VALUE = { id: "discountAmt" }
-    const APPLIED_DISCOUNT_CODE = { id: "promocode" }
+    const APPLIED_DISCOUNT_CODE = { xpath: "//div[contains(@class , 'promo')]" }
     const TICKETS_COUNT = { id: "ticketCount" }
 
 
@@ -76,7 +76,7 @@
 
         async getDonationValue(){
             await this.timeout(1000)
-            let rawDonation = await this.getSubstringOfPriceString(DONATIONS_TOTAL)
+            let rawDonation = await this.getSubstringOfPriceString(DONATIONS_TOTAL);
             let donation = parseFloat(rawDonation);
             return  donation.toFixed(2);
         }
@@ -105,6 +105,7 @@
         }
 
         async assertDiscountElementsAreDisplayed(promoCodeOne){
+            await this.driver.executeScript("document.getElementsByClassName('total-screen-mobile')[0].style.display='none'");
             let title = await this.returnElementsCount(DISCOUNT_TITLE);
             let value = await this.returnElementsCount(DISCOUNT_VALUE);
             let code = await this.returnElementsCount(APPLIED_DISCOUNT_CODE);

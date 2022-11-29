@@ -44,6 +44,7 @@
         }
 
         async updateFirstQuestionToIncludeInputAndForEachTicket(base){
+            await this.timeout(5000)
             await this.isOnTicketQuestionsPage();
             await this.isDisplayed(EDIT_QUESTION_ICON,5000)
             await this.click(EDIT_QUESTION_ICON);

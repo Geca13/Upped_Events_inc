@@ -5,12 +5,12 @@
     const {expect} = require("chai");
     const TICKET_NOT_AVAILABLE_SOLD = { xpath: "//div[contains(@class, 'quantity-container')]//span" }
     const TICKET_CONTAINER = { xpath: "//li[contains(@class, 'list-group-item')]" }
-    const TICKET_NAME_AND_PRICE = { className: "name" }
+    const TICKET_NAME_AND_PRICE = { xpath: "//div[@class='name']" }
     const TICKET_QUANTITY_CONTAINER = { xpath: "//div[contains(@class, 'quantity-container')]" }
     const TICKETS_LIST = { className: "tickets-list" }
     const TICKET_SELECT = { xpath: "//div[contains(@class, 'quantity-container')]//select"};
-    const TICKET_SELECT_OPTIONS = { xpath: "//select//option"}
-    const TICKET_PRICE = { xpath: "//span[@class='ticket-price']" }
+    const TICKET_SELECT_OPTIONS = { xpath: "//select[contains(@class , 'select-number')]//option"}
+    const TICKET_PRICE = { xpath: "//span[contains(@id, 'discountedPrice')]" }
     const DISCOUNTED_TICKET_PRICE = { xpath: "//span[contains(@class, 'has-discount')]" }
     const TICKET_GROUPS = { xpath: "//ul[@id='pills-tab']//li" }
 

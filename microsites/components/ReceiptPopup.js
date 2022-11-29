@@ -2,11 +2,11 @@
     const { expect } = require('chai');
     const assert = require('assert');
     const EVENT_NAME = { xpath: "//p[@id='eventName']" };
-    const PURCHASE_DETAILS = { id: 'purchaseTime' };
+    const PURCHASE_DETAILS = { id: 'purchasedTime' };
     const TICKETS_NAMES_QUANTITY_DISCOUNT = { id: 'itemName' }; //list
     const TAXES_TOTAL = { id: "taxAmt" }
     const DONATIONS_TOTAL = { id: "donationAmt" }
-    const SUBTOTAL_TOTAL = { xpath: "//span[@id='subtotalAmt']" }
+    const SUBTOTAL_TOTAL = { xpath: "//span[@id='subTotalAmt']" }
     const FEES_TOTAL = { id: "feesAmt" }
     const DISCOUNT_VALUE = { id: "discountAmt" }
     const TOTAL_VALUE = { id: "grandTotalAmt" }

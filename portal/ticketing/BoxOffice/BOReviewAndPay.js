@@ -208,11 +208,11 @@
         async makePaymentWithCard(base){
             await this.isOnReviewPage();
             await this.sentKeys(CARDHOLDER_NAME,base +" Geca");
-            await this.sentKeys(CARD_NUMBER,"4111111111111111");
-            await this.sentKeys(CVC,"900");
-            await this.sentKeys(EXPIRATION,"August" + Key.TAB + "2025");
-            await this.sentKeys(ADDRESS,"Main Street " + base);
-            await this.sentKeys(ZIP,"90009");
+            await this.sentKeys(CARD_NUMBER,"4436033112341299");
+            await this.sentKeys(CVC,"645");
+            await this.sentKeys(EXPIRATION,"March" + Key.TAB + "2025");
+            await this.sentKeys(ADDRESS,"100 Timber Ridge Road, Newton PA");
+            await this.sentKeys(ZIP,"18940");
             await this.fillUserDataForCardAdditionalEmailNoCopy(base);
             await this.click(PLACE_ORDER_BUTTON);
             await this.isDisplayed(CONFIRMATION_MODAL,55000);
