@@ -126,6 +126,7 @@
         beforeEach(async function(){
             driver = await new Builder().forBrowser('chrome').setChromeOptions(new chrome.Options().addArguments('--headless')).build();
             await driver.manage().window().setRect({width: 1300, height: 1080});
+
         });
 
         afterEach(async function(){
