@@ -85,7 +85,7 @@
             let cropper = new SetImageModal(this.driver);
             await cropper.setImageModalIsDisplayed();
             await cropper.clickSetButton();
-            await this.isDisplayed(PREVIEW_IMAGE_WRAPPER, 5000, "previewImage");
+            await this.isDisplayed(PREVIEW_IMAGE_WRAPPER, 5000);
             let alerts = new Alerts(this.driver);
             await alerts.alertInfoMessageIsDisplayed("Files uploaded: (1)");
             await this.click(SAVE_BUTTON);

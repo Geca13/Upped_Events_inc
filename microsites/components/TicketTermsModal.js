@@ -37,7 +37,11 @@
             assert.equal(strongHeaderText, "Bold Heading 1");
             let strongItalicText = await strongItalic.getText();
             assert.equal(strongItalicText, "Italic Paragraph");
-            await this.assertImagePlaceholderIsDisplayedInTheModal("https://events.stage.uppedevents.com/assets/images/placeholder2.png");
+            if(await this.environment() === "stage"){
+                await this.assertImagePlaceholderIsDisplayedInTheModal("https://events.stage.uppedevents.com/assets/images/placeholder2.png");
+            }else{
+                await this.assertImagePlaceholderIsDisplayedInTheModal("https://events.dev.uppedevents.com/assets/images/placeholder2.png");
+            }
             await this.click(CLOSE_MODAL_BUTTON);
             await this.timeout(500)
             await this.termsModalIsNotDisplayed();

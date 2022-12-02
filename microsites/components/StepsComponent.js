@@ -49,7 +49,12 @@
             let completedSteps = await this.findAll(STEP_COMPLETED);
             for(let i = 0; i < completedSteps.length; i++){
                 let src = await this.returnImgSrcAttributeByIndex(STEP_COMPLETED, i);
-                assert.equal(src, "https://events.stage.uppedevents.com/assets/images/Path.svg");
+                if(await this.environment() === "stage"){
+                    assert.equal(src, "https://events.stage.uppedevents.com/assets/images/Path.svg");
+                }else{
+                    assert.equal(src, "https://events.dev.uppedevents.com/assets/images/Path.svg");
+                }
+
             }
         }
 

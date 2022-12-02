@@ -70,9 +70,9 @@
         async fillNewCardWithVisaData(firstName, lastName){
             await this.isAtNewCardTab();
             await this.sentKeys(CARDHOLDER_NAME_INPUT,firstName + ' ' + lastName);
-            await this.sentKeys(CARD_NUMBER_INPUT,"4436033112341299");
-            await this.sentKeys(CVV_INPUT,"645");
-            await this.sentKeys(STREET_ADDRESS_INPUT,"100 Timber Ridge Road, Newton PA");
+            await this.sentKeys(CARD_NUMBER_INPUT,"4111111111111111");
+            await this.sentKeys(CVV_INPUT,"900");
+            await this.sentKeys(STREET_ADDRESS_INPUT,"100 Main Street");
             await this.sentKeys(MONTH_SELECT,"3");
             await this.sentKeys(YEAR_SELECT,"2025");
             await this.sentKeys(STATE_SELECT, "Pennsylvania");

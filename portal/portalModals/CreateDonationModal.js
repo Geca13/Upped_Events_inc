@@ -38,7 +38,7 @@ class CreateDonationModal extends BasePage{
         await this.moveToElement(ATTEST_CHECKBOX);
         await this.driver.executeScript("document.getElementsByClassName('btn-sticky')[0].style.visibility='hidden'");
         await this.sentKeys(UPLOAD_PHOTO_INPUT, root+"\\static\\image.jpg");
-        await this.createNewDonationValue("100");
+        await this.createNewDonationValue("1");
         await this.fourthValueButtonIsDisplayed();
         await this.sentKeys(GOAL_VALUE_INPUT, "1000");
         await this.click(ATTEST_CHECKBOX);

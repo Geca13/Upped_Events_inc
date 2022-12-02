@@ -11,6 +11,10 @@ class BasePage {
     async visit(url) {
         await this.driver.get(url)
     }
+
+    async environment(){
+        return "stage1";
+    }
     
     find(locator) {
         return this.driver.findElement(locator)
@@ -67,18 +71,17 @@ class BasePage {
         return input.getAttribute("value");
     }
     
-
     async clearInputField(locator){
         let element = await this.find(locator);
         await element.clear();
         await this.timeout(500)
     }
     
-   
     async getElementFromAnArrayByIndex(locator, index){
         let elements = await this.findAll(locator);
         return await elements[index];
     }
+
     async clickElementReturnedFromAnArray(locator,index){
         let element = await this.getElementFromAnArrayByIndex(locator, index);
         await element.click();

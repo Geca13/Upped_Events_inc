@@ -39,6 +39,7 @@
     const TicketQuestionsPage = require('../portal/ticketing/SettingsNav/TicketQuestionsPage')
     const EmbedQuestionsPage = require('../microsites/embedPages/EmbedQuestionsPage')
     const CreateDonationModal = require('../portal/portalModals/CreateDonationModal')
+    const ForgotPassword = require('../microsites/components/ForgotPassword')
     
 
     describe('Should do embed tests', function () {
@@ -84,7 +85,7 @@
         let questions;
         let createDonation;
         let embedQuestions;
-        let environment = "dev";
+        let environment = "stage1";
 
         let base =  Math.floor(100000 + Math.random() * 900000);
         let eventName =  base.toString() + " FullEventName";
@@ -104,11 +105,11 @@
         let ticketThreePriceStage = "0.04";
         let ticketFourName = base.toString() +"T4";
         let ticketFourQuantity = 666;
-        let ticketFourPrice = "0.50";
+        let ticketFourPrice = "0.40";
         let ticketFourPriceStage = "0.02";
         let staffTicket = base.toString() +"staff";
         let ticketStaffQuantity = 2;
-        let ticketStaffPrice = "0.00";
+        let ticketStaffPrice = "0.23";
         let promoOneName = base.toString() +"PN1";
         let promoThreeName = base.toString() +"PN3";
         let promoCodeOne = base.toString() +"PC1";
@@ -118,9 +119,9 @@
         let ticketGroupThree = base.toString() +"TG3";
         let customerFirstName = 'cfn'+base.toString();
         let customerLastName = 'cln'+base.toString();
-        let customerEmail = "karafiloski87@aol.com"  //customerFirstName + '@' + customerLastName+'.com';
-        let customerEmail2 = "karafiloski87@yahoo.com";
-        let customerPassword = "Pero1234" //base.toString() + 'Password';
+        let customerEmail =  customerFirstName + '@' + customerLastName+'.com';
+        let customerEmail2 = customerFirstName + '@' + customerLastName+'2.com';
+        let customerPassword = "Pero1234567" //base.toString() + 'Password';
 
         beforeEach(async function(){
             driver = await new Builder().forBrowser('chrome').build();
@@ -237,8 +238,6 @@
 
         });
 
-
-
         //PORTAL -> EMBED
         it('Test_05 - should check ticket text when tickets are in the future ',async function () {
             main = new EmbedMainPage(driver);
@@ -315,8 +314,6 @@
 
         });
 
-
-
         //EMBED
         it('Test_08 - should assert create account button is disabled on create account modal in embed until fields are empty', async function () {
 
@@ -331,8 +328,6 @@
             await createAccount.assertCreateAccountButtonIsDisabledUntilFieldsArePopulated(0);
 
         });
-
-
 
         //EMBED
         it('Test_09 - should create new account on Create Account modal and assert user is logged in and Logout link is displayed', async function () {
@@ -506,8 +501,6 @@
 
         });
 
-
-
         //EMBED
         it('Test_18 - after login should arrive on Extras Page when donations are enabled', async function () {
 
@@ -571,8 +564,6 @@
             await createTicket.assertBuyerTotalEqualsTicketPriceMultipliedByTaxPercentage(savedTaxValue);
 
         });
-
-        
 
         //PORTAL
         it('Test_20 - should remove tax and add $ value fee and assert price in update modal', async function () {
@@ -728,8 +719,6 @@
 
         });
         
-
-
         //EMBED
         it('Test_25 - should make payment with new card in embed and assert Sold Out message is displayed after purchase',async function () {
 
@@ -902,10 +891,8 @@
             await embedTickets.assertDropDownElementsEquals("26");
         });
         
-
-
-        // PORTAL -> EMBED Reported as a bug
-        it('Test_22 - should get exceeding limitation message when user have already purchased tickets and asks for more then limit', async function () {
+        // PORTAL -> EMBED
+        it('Test_30 - should get exceeding limitation message when user have already purchased tickets and asks for more then limit', async function () {
             portalLogin = new PortalLoginPage(driver);
             dashboard = new DashboardPage(driver);
             myEvents = new MyEventsPage(driver);
@@ -947,11 +934,8 @@
             await extras.isAtExtrasPage();
         });
 
-
-
-
         //PORTAL
-        it('Test_30 - should remove limitation on tickets per account ',async function () {
+        it('Test_31 - should remove limitation on tickets per account ',async function () {
             
             portalLogin = new PortalLoginPage(driver);
             dashboard = new DashboardPage(driver);
@@ -984,11 +968,8 @@
 
         });
 
-
-
-
         //EMBED
-        it('Test_31 - should make payment with card and assert elements on Confirmation page', async function () {
+        it('Test_32 - should make payment with card and assert elements on Confirmation page', async function () {
 
             main = new EmbedMainPage(driver);
             embedTickets = new TicketsComponent(driver);
@@ -1015,10 +996,8 @@
 
         });
 
-
-
         //PORTAL
-        it('Test_32 - should create three more tickets and ticket groups, then assert data in tickets table ',async function () {
+        it('Test_33 - should create three more tickets and ticket groups, then assert data in tickets table ',async function () {
 
             portalLogin = new PortalLoginPage(driver);
             dashboard = new DashboardPage(driver);
@@ -1099,10 +1078,8 @@
 
         });
 
-
-
         // PORTAL -> EMBED
-        it('Test_33 - should assert that ticket terms elements in embed are not displayed when not created in portal', async function () {
+        it('Test_34 - should assert that ticket terms elements in embed are not displayed when not created in portal', async function () {
             main = new EmbedMainPage(driver);
             embedTickets = new TicketsComponent(driver);
             embedLogin = new LoginPage(driver);
@@ -1137,7 +1114,7 @@
         });
 
         // PORTAL
-        it('Test_34 - should set ticket terms in the portal and assert entered tags and text', async function () {
+        it('Test_35 - should set ticket terms in the portal and assert entered tags and text', async function () {
             portalLogin = new PortalLoginPage(driver);
             dashboard = new DashboardPage(driver);
             myEvents = new MyEventsPage(driver);
@@ -1165,7 +1142,7 @@
         });
 
         // EMBED
-        it('Test_35 - should assert that ticket terms are displayed', async function () {
+        it('Test_36 - should assert that ticket terms are displayed', async function () {
             main = new EmbedMainPage(driver);
             embedTickets = new TicketsComponent(driver);
             embedLogin = new LoginPage(driver);
@@ -1177,9 +1154,9 @@
 
         });
 
-
         // EMBED
-        it('Test_36 - should assert correct ticket terms behaviour and image placeholder', async function () {
+        it('Test_37 - should assert correct ticket terms behaviour and image placeholder', async function () {
+
             main = new EmbedMainPage(driver);
             embedTickets = new TicketsComponent(driver);
             embedLogin = new LoginPage(driver);
@@ -1202,7 +1179,7 @@
         });
 
         // PORTAL
-        it('Test_37 - should set event banner in the portal', async function () {
+        it('Test_38 - should set event banner in the portal', async function () {
 
             portalLogin = new PortalLoginPage(driver);
             dashboard = new DashboardPage(driver);
@@ -1226,7 +1203,7 @@
         });
 
         // PORTAL -> EMBED
-        it('Test_38 - should assert event banner image is present in the ticket terms modal', async function () {
+        it('Test_39 - should assert event banner image is present in the ticket terms modal', async function () {
             main = new EmbedMainPage(driver);
             embedTickets = new TicketsComponent(driver);
             embedLogin = new LoginPage(driver);
@@ -1259,7 +1236,7 @@
         });
 
         // PORTAL
-        it('Test_39 - should remove event banner in the portal', async function () {
+        it('Test_40 - should remove event banner in the portal', async function () {
             portalLogin = new PortalLoginPage(driver);
             dashboard = new DashboardPage(driver);
             myEvents = new MyEventsPage(driver);
@@ -1282,7 +1259,7 @@
         });
 
         // EMBED
-        it('Test_40 - should assert terms image placeholder is returned after banner is removed in the portal', async function () {
+        it('Test_41 - should assert terms image placeholder is returned after banner is removed in the portal', async function () {
             main = new EmbedMainPage(driver);
             embedLogin = new LoginPage(driver);
             termsModal = new TicketTermsModal(driver);
@@ -1294,15 +1271,15 @@
             await main.ticketTermsLabelIsDisplayedAndAssertText();
             await main.assertLabelColorChangedToRedAfterClickNextAndNoTicketsSelected();
             await main.clickTermsLabel();
-            await termsModal.assertImagePlaceholderIsDisplayedInTheModal("https://events.stage.uppedevents.com/assets/images/placeholder2.png");
-
+            if(environment === "stage"){
+                await termsModal.assertImagePlaceholderIsDisplayedInTheModal("https://events.stage.uppedevents.com/assets/images/placeholder2.png");
+            } else {
+                await termsModal.assertImagePlaceholderIsDisplayedInTheModal("https://events.dev.uppedevents.com/assets/images/placeholder2.png");
+            }
         });
 
-
-        
-
         //PORTAL - > EMBED
-        it('Test_41 - should assert elements on donation page in the embed',async function () {
+        it('Test_42 - should assert elements on donation page in the embed',async function () {
 
             portalLogin = new PortalLoginPage(driver);
             dashboard = new DashboardPage(driver);
@@ -1350,7 +1327,7 @@
         });
 
         //EMBED
-        it('Test_42 - should assert when donation button is clicked the amount is visible in donation input in the embed',async function () {
+        it('Test_43 - should assert when donation button is clicked the amount is visible in donation input in the embed',async function () {
 
             main = new EmbedMainPage(driver);
             embedLogin = new LoginPage(driver);
@@ -1374,7 +1351,7 @@
         });
 
         //EMBED
-        it('Test_43 - should assert when donation is added to order the amount is visible in Order Total in the embed',async function () {
+        it('Test_44 - should assert when donation is added to order the amount is visible in Order Total in the embed',async function () {
 
             main = new EmbedMainPage(driver);
             embedLogin = new LoginPage(driver);
@@ -1402,7 +1379,7 @@
         });
 
         //EMBED
-        it('Test_44 - should assert when custom donation is added to order the amount is visible in Order Total in the embed',async function () {
+        it('Test_45 - should assert when custom donation is added to order the amount is visible in Order Total in the embed',async function () {
 
             main = new EmbedMainPage(driver);
             embedLogin = new LoginPage(driver);
@@ -1423,7 +1400,7 @@
         });
 
         //EMBED
-        it('Test_45 - should assert when donation is added to order calculates correctly in Order Total in the embed',async function () {
+        it('Test_46 - should assert when donation is added to order calculates correctly in Order Total in the embed',async function () {
 
             main = new EmbedMainPage(driver);
             embedLogin = new LoginPage(driver);
@@ -1443,8 +1420,8 @@
 
         });
 
-        //EMBED reported
-        it('Test_46 - should assert add / reset buttons disabled scenarios',async function () {
+        //EMBED
+        it('Test_47 - should assert add / reset buttons disabled scenarios',async function () {
 
             main = new EmbedMainPage(driver);
             embedLogin = new LoginPage(driver);
@@ -1466,8 +1443,8 @@
 
         });
 
-        //PORTAL reported
-        it('Test_47 - should create first promotion with $ value and assert data on promotions page and update promotion modal', async function () {
+        //PORTAL  reported
+        it('Test_48 - should create first promotion with $ value and assert data on promotions page and update promotion modal', async function () {
 
             portalLogin = new PortalLoginPage(driver);
             dashboard = new DashboardPage(driver);
@@ -1500,7 +1477,7 @@
         });
 
         //PORTAL
-        it('Test_48 - should create promotion for 3 tickets and limit qty on two', async function () {
+        it('Test_49 - should create promotion for 3 tickets and limit qty on two', async function () {
 
             portalLogin = new PortalLoginPage(driver);
             dashboard = new DashboardPage(driver);
@@ -1536,10 +1513,8 @@
 
         });
 
-
-
         //PORTAL -> EMBED
-        it('Test_49 - should disable promotion and check for error message on embed', async function () {
+        it('Test_50 - should disable promotion and check for error message on embed', async function () {
             portalLogin = new PortalLoginPage(driver);
             dashboard = new DashboardPage(driver);
             myEvents = new MyEventsPage(driver);
@@ -1585,9 +1560,8 @@
 
         });
 
-
-        //PORTAL -> EMBED reported shaheer
-        it('Test_50 - should enable promotion and check promotion is applied and promo code is displayed in order total', async function () {
+        //PORTAL -> EMBED
+        it('Test_51 - should enable promotion and check promotion is applied and promo code is displayed in order total', async function () {
             portalLogin = new PortalLoginPage(driver);
             dashboard = new DashboardPage(driver);
             myEvents = new MyEventsPage(driver);
@@ -1633,7 +1607,7 @@
         });
 
         //EMBED
-        it('Test_51 - should add promo code and assert discount value + new price equals original ticket price in summary', async function () {
+        it('Test_52 - should add promo code and assert discount value + new price equals original ticket price in summary', async function () {
 
             main = new EmbedMainPage(driver);
             embedLogin = new LoginPage(driver);
@@ -1662,7 +1636,7 @@
         });
 
         //EMBED
-        it('Test_52 - should add promo code and assert new price and original price are displayed on tickets page next to ticket name', async function () {
+        it('Test_53 - should add promo code and assert new price and original price are displayed on tickets page next to ticket name', async function () {
 
             main = new EmbedMainPage(driver);
             embedLogin = new LoginPage(driver);
@@ -1697,7 +1671,7 @@
         });
 
         //EMBED
-        it('Test_53 - should assert selected ticket quantity is displayed in the Order Total correctly', async function () {
+        it('Test_54 - should assert selected ticket quantity is displayed in the Order Total correctly', async function () {
 
             main = new EmbedMainPage(driver);
             embedTickets = new TicketsComponent(driver);
@@ -1713,7 +1687,7 @@
         });
 
         //EMBED
-        it('Test_54 - should make regular purchase with three different tickets and quantities and assert tickets on receipt', async function () {
+        it('Test_55 - should make regular purchase with three different tickets and quantities and assert tickets on receipt', async function () {
 
             main = new EmbedMainPage(driver);
             embedLogin = new LoginPage(driver);
@@ -1747,7 +1721,7 @@
         });
 
         //EMBED
-        it('Test_55 - should make regular purchase and check event name and date of purchase', async function () {
+        it('Test_56 - should make regular purchase and check event name and date of purchase', async function () {
 
             main = new EmbedMainPage(driver);
             embedLogin = new LoginPage(driver);
@@ -1780,7 +1754,7 @@
         });
 
         //EMBED
-        it('Test_56 - should assert text on navbar on all pages', async function () {
+        it('Test_57 - should assert text on navbar on all pages', async function () {
 
             main = new EmbedMainPage(driver);
             embedLogin = new LoginPage(driver);
@@ -1814,7 +1788,7 @@
         });
 
         //EMBED
-        it('Test_57 - should assert previous page button text', async function () {
+        it('Test_58 - should assert previous page button text', async function () {
 
             main = new EmbedMainPage(driver);
             embedLogin = new LoginPage(driver);
@@ -1841,7 +1815,7 @@
         });
 
         //EMBED
-        it('Test_58 - should get alert danger "Please select a ticket first" when no tickets selected and next button is clicked', async function () {
+        it('Test_59 - should get alert danger "Please select a ticket first" when no tickets selected and next button is clicked', async function () {
 
             main = new EmbedMainPage(driver);
             embedLogin = new LoginPage(driver);
@@ -1858,7 +1832,7 @@
         });
 
         //EMBED
-        it('Test_59 - should get alert danger "Please select a payment method!" when next button clicked and payment method not selected', async function () {
+        it('Test_60 - should get alert danger "Please select a payment method!" when next button clicked and payment method not selected', async function () {
 
             main = new EmbedMainPage(driver);
             embedLogin = new LoginPage(driver);
@@ -1884,7 +1858,7 @@
         });
 
         //EMBED
-        it('Test_60 - should assert steps names when no ticket questions', async function () {
+        it('Test_61 - should assert steps names when no ticket questions', async function () {
 
             main = new EmbedMainPage(driver);
             steps = new StepsComponent(driver);
@@ -1897,7 +1871,7 @@
         });
 
         //EMBED
-        it('Test_61 - should assert completed steps count and current step name', async function () {
+        it('Test_62 - should assert completed steps count and current step name', async function () {
 
             main = new EmbedMainPage(driver);
             embedLogin = new LoginPage(driver);
@@ -1933,7 +1907,7 @@
         });
 
         //EMBED
-        it('Test_62 - should assert completed step checkmark image is displayed on three steps when no ticket questions', async function () {
+        it('Test_63 - should assert completed step checkmark image is displayed on three steps when no ticket questions', async function () {
 
             main = new EmbedMainPage(driver);
             embedLogin = new LoginPage(driver);
@@ -1965,7 +1939,7 @@
         });
 
         //EMBED
-        it('Test_63 - should assert proper steps behaviour with fillin class on navbar on all pages', async function () {
+        it('Test_64 - should assert proper steps behaviour with fillin class on navbar on all pages', async function () {
 
             main = new EmbedMainPage(driver);
             embedLogin = new LoginPage(driver);
@@ -2018,7 +1992,7 @@
         });
 
         //EMBED
-        it('Test_64 - should assert proper steps behaviour with active class on navbar on all pages', async function () {
+        it('Test_65 - should assert proper steps behaviour with active class on navbar on all pages', async function () {
 
             main = new EmbedMainPage(driver);
             embedLogin = new LoginPage(driver);
@@ -2069,7 +2043,6 @@
             await steps.checkIfActiveClassIsAppliedToStep(4,true);
 
         });
-
         //EMBED
         it('Test_66 - should make purchase for two tickets of same type with donation and promotion and assert data on the receipt', async function () {
 
@@ -2094,7 +2067,7 @@
             await embedLogin.loginWithEmailAndPassword(customerEmail, customerPassword, 0);
             await extras.isAtExtrasPage();
             await donate.clickOneDonationValueButton(2);
-            await donate.addCustomDonationAndReturnValue();
+            await donate.addCustomDonation();
             await main.clickNextPageButton();
             await payment.isAtPaymentPage();
             await payment.applyPromotion(promoCodeOne);
@@ -2116,7 +2089,7 @@
         });
 
         //EMBED
-        it('Test_68 - should make purchase with four tickets exceeding the limit of promotion assert promotion applied to only 3 tickets', async function () {
+        it('Test_67 - should make purchase with four tickets exceeding the limit of promotion assert promotion applied to only 3 tickets', async function () {
 
             main = new EmbedMainPage(driver);
             embedLogin = new LoginPage(driver);
@@ -2159,8 +2132,8 @@
 
         });
 
-        //EMBED when finished the error is not displayed on the field it self
-        it('Test_69 - should apply the promotion code when promotion qty is finished and get promo error message and assert input field still visible', async function () {
+        //EMBED
+        it('Test_68 - should apply the promotion code when promotion qty is finished and get promo error message and assert input field still visible', async function () {
 
             main = new EmbedMainPage(driver);
             embedLogin = new LoginPage(driver);
@@ -2186,7 +2159,7 @@
         });
         
         //PORTAL
-        it('Test_70 - should get promoCode error validation when promotion code exists for current event', async function () {
+        it('Test_69 - should get promoCode error validation when promotion code exists for current event', async function () {
 
             portalLogin = new PortalLoginPage(driver);
             dashboard = new DashboardPage(driver);
@@ -2216,7 +2189,7 @@
         });
         
         //EMBED
-        it('Test_71 - should assert that percentage taxes are recalculated and dollar value fees are same when promotion is applied', async function () {
+        it('Test_70 - should assert that percentage taxes are recalculated and dollar value fees are same when promotion is applied', async function () {
 
             main = new EmbedMainPage(driver);
             embedLogin = new LoginPage(driver);
@@ -2245,7 +2218,7 @@
         });
         
         //PORTAL
-        it('Test_72 - should create staff ticket in portal', async function () {
+        it('Test_71 - should create staff ticket in portal', async function () {
             
             portalLogin = new PortalLoginPage(driver);
             dashboard = new DashboardPage(driver);
@@ -2276,7 +2249,7 @@
         });
 
         //EMBED
-        it('Test_73 - should select account limit quantity for all tickets that have promotion in promotion with limit then add promo code and assert only highest price ticket gets discount when subtotal calculated in order total', async function () {
+        it('Test_72 - should select account limit quantity for all tickets that have promotion in promotion with limit then add promo code and assert only highest price ticket gets discount when subtotal calculated in order total', async function () {
 
             main = new EmbedMainPage(driver);
             embedLogin = new LoginPage(driver);
@@ -2307,7 +2280,7 @@
         });
 
         //EMBED
-        it('Test_74 - should select total of account limit quantity for limited tickets that have promotion in promotion with limit then add promo code and assert subtotal equals tickets discounted prices times quantity', async function () {
+        it('Test_73 - should select total of account limit quantity for limited tickets that have promotion in promotion with limit then add promo code and assert subtotal equals tickets discounted prices times quantity', async function () {
 
             main = new EmbedMainPage(driver);
             embedLogin = new LoginPage(driver);
@@ -2339,7 +2312,7 @@
         });
 
         //EMBED
-        it('Test_75 - should select more then total of account limit quantity for limited tickets that have promotion in promotion with limit then add promo code and ' +
+        it('Test_74 - should select more then total of account limit quantity for limited tickets that have promotion in promotion with limit then add promo code and ' +
             'assert subtotal equals tickets discounted prices times quantity + regular price for cheaper ticket times exceeding limit qty + assert exceeding promo message', async function () {
 
             main = new EmbedMainPage(driver);
@@ -2373,7 +2346,7 @@
         });
 
         //EMBED
-        it('Test_76 - should select more then total of account limit quantity for not limited ticket that have promotion ' +
+        it('Test_75 - should select more then total of account limit quantity for not limited ticket that have promotion ' +
             'in promotion with limit then add promo code and assert subtotal equals tickets discounted prices times quantity ', async function () {
 
             main = new EmbedMainPage(driver);
@@ -2406,7 +2379,7 @@
         });
 
         //EMBED
-        it('Test_77 - should select more then promotion available qty for not limited ticket that have promotion in promotion with limit then add promo code and' +
+        it('Test_76 - should select more then promotion available qty for not limited ticket that have promotion in promotion with limit then add promo code and' +
             ' assert subtotal equals available promotion tickets qty discounted price + regular price for exceeding qty and get exceeding info message ', async function () {
 
             main = new EmbedMainPage(driver);
@@ -2439,7 +2412,7 @@
         });
 
         //EMBED
-        it('Test_78 - should select 25 tickets, 11 for limited 14 for not limited, top of limited priced and 13 of not limited should get discount, limited as cheapest will not ', async function () {
+        it('Test_77 - should select 25 tickets, 11 for limited 14 for not limited, top of limited priced and 13 of not limited should get discount, limited as cheapest will not ', async function () {
 
             main = new EmbedMainPage(driver);
             embedLogin = new LoginPage(driver);
@@ -2473,7 +2446,7 @@
         });
 
         //EMBED
-        it('Test_79 - should select 30 tickets, 10 for each, should get discount on total 20 - top priced from limited * 10 and not limited *10 , second limited regular price ', async function () {
+        it('Test_78 - should select 30 tickets, 10 for each, should get discount on total 20 - top priced from limited * 10 and not limited *10 , second limited regular price ', async function () {
 
             main = new EmbedMainPage(driver);
             embedLogin = new LoginPage(driver);
@@ -2507,7 +2480,7 @@
         });
 
         //EMBED
-        it('Test_80 - should select 30 tickets, 12 for top priced in limited, 12 for not limited, 6 for lower priced limited should get discount' +
+        it('Test_79 - should select 30 tickets, 12 for top priced in limited, 12 for not limited, 6 for lower priced limited should get discount' +
             ' on total 20 - top priced from limited * 10 and not limited *10 , second limited regular price, 2 tickets from discounted on regular ', async function () {
 
             main = new EmbedMainPage(driver);
@@ -2542,7 +2515,7 @@
         });
 
         //EMBED
-        it('Test_81 - should make purchase for 9 tickets with promotion with limits and assert total discounted value per ticket is displayed', async function () {
+        it('Test_80 - should make purchase for 9 tickets with promotion with limits and assert total discounted value per ticket is displayed', async function () {
 
             main = new EmbedMainPage(driver);
             embedLogin = new LoginPage(driver);
@@ -2581,7 +2554,7 @@
         });
 
         //EMBED
-        it('Test_82 - should make purchase for 16 tickets exceeding account limit and promotion limit and assert exceeding message and discount is applied only for quantity inside limits', async function () {
+        it('Test_81 - should make purchase for 16 tickets exceeding account limit and promotion limit and assert exceeding message and discount is applied only for quantity inside limits', async function () {
 
             main = new EmbedMainPage(driver);
             embedLogin = new LoginPage(driver);
@@ -2621,7 +2594,7 @@
         });
 
         //EMBED
-        it('Test_83 - should try to make purchase for 12 tickets when promo quantity is completed and receive promo no longer valid', async function () {
+        it('Test_82 - should try to make purchase for 12 tickets when promo quantity is completed and receive promo no longer valid', async function () {
 
             main = new EmbedMainPage(driver);
             embedLogin = new LoginPage(driver);
@@ -2649,7 +2622,7 @@
         });
 
         //EMBED
-        it('Test_84 - should assert on staff ticket only one ticket can be selected', async function () {
+        it('Test_83 - should assert on staff ticket only one ticket can be selected', async function () {
 
             main = new EmbedMainPage(driver);
             embedTickets = new TicketsComponent(driver);
@@ -2667,7 +2640,7 @@
         });
 
         //EMBED
-        it('Test_85 - should check staff modal elements and submit fully filled form', async function () {
+        it('Test_84 - should check staff modal elements and submit fully filled form', async function () {
 
             main = new EmbedMainPage(driver);
             embedTickets = new TicketsComponent(driver);
@@ -2696,11 +2669,9 @@
             await confirm.isAtConfirmPage()
 
         });
-        
-        
 
         //PORTAL
-        it('Test_86 - should set ticket Simple Yes No question and assert saved data on questions table in portal', async function () {
+        it('Test_85 - should set ticket Simple Yes No question and assert saved data on questions table in portal', async function () {
             portalLogin = new PortalLoginPage(driver);
             dashboard = new DashboardPage(driver);
             myEvents = new MyEventsPage(driver);
@@ -2729,10 +2700,8 @@
 
         });
         
-        
-
         //EMBED
-        it('Test_87 - should check ticket questions modal for Yes/No question and submit answers in embed', async function () {
+        it('Test_86 - should check ticket questions modal for Yes/No question and submit answers in embed', async function () {
 
             main = new EmbedMainPage(driver);
             embedTickets = new TicketsComponent(driver);
@@ -2764,7 +2733,7 @@
         });
 
         //PORTAL
-        it('Test_88 - should set ticket question with asked input text', async function () {
+        it('Test_87 - should set ticket question with asked input text', async function () {
             portalLogin = new PortalLoginPage(driver);
             dashboard = new DashboardPage(driver);
             myEvents = new MyEventsPage(driver);
@@ -2796,7 +2765,7 @@
         });
 
         //EMBED
-        it('Test_89 - should answer ticket questions for question with input', async function () {
+        it('Test_88 - should answer ticket questions for question with input', async function () {
 
             main = new EmbedMainPage(driver);
             embedTickets = new TicketsComponent(driver);
@@ -2828,7 +2797,7 @@
         });
 
         //PORTAL
-        it('Test_90 - should check for first two ticket questions responses made in embed', async function () {
+        it('Test_89 - should check for first two ticket questions responses made in embed', async function () {
 
             portalLogin = new PortalLoginPage(driver);
             dashboard = new DashboardPage(driver);
@@ -2856,7 +2825,7 @@
         });
 
         //PORTAL
-        it('Test_91 - should update first ticket question with asked input text', async function () {
+        it('Test_90 - should update first ticket question with asked input text', async function () {
             
             portalLogin = new PortalLoginPage(driver);
             dashboard = new DashboardPage(driver);
@@ -2888,7 +2857,7 @@
         });
 
         //EMBED
-        it('Test_92 - should login with facebook assert updated ticket questions for first question , answer and submit answers', async function () {
+        it('Test_91 - should login with facebook assert updated ticket questions for first question , answer and submit answers', async function () {
 
             main = new EmbedMainPage(driver);
             embedTickets = new TicketsComponent(driver);
@@ -2930,7 +2899,7 @@
         });
 
         //PORTAL
-        it('Test_93 - should check response provided for the updated question', async function () {
+        it('Test_92 - should check response provided for the updated question', async function () {
 
             portalLogin = new PortalLoginPage(driver);
             dashboard = new DashboardPage(driver);
@@ -2957,7 +2926,7 @@
         });
 
         //EMBED
-        it('Test_94 - should assert tickets groups in embed', async function () {
+        it('Test_93 - should assert tickets groups in embed', async function () {
 
             main = new EmbedMainPage(driver);
             embedTickets = new TicketsComponent(driver);
@@ -2970,7 +2939,7 @@
         });
 
         //EMBED
-        it('Test_95 - should assert tickets by groups and active class is applied when clicked on group in embed', async function () {
+        it('Test_94 - should assert tickets by groups and active class is applied when clicked on group in embed', async function () {
 
             main = new EmbedMainPage(driver);
             embedTickets = new TicketsComponent(driver);
@@ -2983,7 +2952,7 @@
         });
 
         //PORTAL
-        it('Test_96 - should change ticket order in portal', async function () {
+        it('Test_95 - should change ticket order in portal', async function () {
             portalLogin = new PortalLoginPage(driver);
             dashboard = new DashboardPage(driver);
             myEvents = new MyEventsPage(driver);
@@ -3010,7 +2979,7 @@
         });
 
         //PORTAL
-        it('Test_97 - should change ticket location from one group 2 to group 1 in portal and assert change', async function () {
+        it('Test_96 - should change ticket location from one group 2 to group 1 in portal and assert change', async function () {
             portalLogin = new PortalLoginPage(driver);
             dashboard = new DashboardPage(driver);
             myEvents = new MyEventsPage(driver);
@@ -3038,8 +3007,8 @@
 
         });
 
-        //EMBED - reported issue - 5
-        it('Test_98 - should assert tickets by groups when order and ticket group is changed in embed', async function () {
+        //EMBED
+        it('Test_97 - should assert tickets by groups when order and ticket group is changed in embed', async function () {
 
             main = new EmbedMainPage(driver);
             embedTickets = new TicketsComponent(driver);
@@ -3048,6 +3017,20 @@
             await main.isInFrame(eventName);
             await embedTickets.ticketListIsDisplayed();
             await embedTickets.assertTicketsByGroupsWhenOrderIsChangedOnFullEmbed(base);
+
+        });
+
+        //EMBED
+        it('Test_98 - should return invalid email alerts on Forget Password page',async function () {
+
+            main = new EmbedMainPage(driver);
+            embedLogin = new LoginPage(driver);
+            await main.openEmbedPage();
+            await main.switchToIframe();
+            await main.isInFrame(eventName);
+            await main.clickLoginLink();
+            await embedLogin.registerNowButtonIsDisplayed();
+
 
         });
 

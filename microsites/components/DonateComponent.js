@@ -4,12 +4,11 @@
     const DONATION_INPUT = { name: 'donation'};
     const DONATE_HEADER = { className: 'donate-heading' };
     const DONATE_TO_HEADER = { xpath: "//div[@class='text-container']//span" };
-    const DONATE_EVENT_NAME = { xpath: "(//embed-donation-tab//div)[2]" };
-    const DONATION_MESSAGE = { xpath: "(//embed-donation-tab//div)[3]" };
-    const OTHER_TEXT = { xpath: "//embed-donation-tab//div[@class='mt-4']" };
-    const DOLLAR_INPUT_SYMBOL = { xpath: "//embed-donation-tab//span[@class='input']" }
-    const USD_TEXT = { xpath: "(//embed-donation-tab//div)[7]" };
-    const MINIMUM_DONATION_TEXT = { xpath: "(//embed-donation-tab//div)[9]" };
+    const DONATE_ORGANIZATION = { xpath: "(//div[@class='single-donation']//div)[1]" };
+    const ORGANIZATION_DESCRIPTION = { xpath: "(//div[@class='single-donation']//div)[2]" };
+    const DOLLAR_INPUT_SYMBOL = { xpath: "(//div[@class='single-donation']//div)//span" }
+    const USD_TEXT = { xpath: "(//div[@class='single-donation']//div)[6]" };
+    const MINIMUM_DONATION_TEXT = { xpath: "(//div[@class='single-donation']//div)[8]" };
     const DONATE_BUTTONS = { className: 'donations-button' }; //list
     const ADD_DONATION_BUTTON = { className: 'donation-order-button' };
     const RESET_DONATION_BUTTON = { className: 'donation-reset-button' };
@@ -35,22 +34,20 @@
             }else {
                 assert.equal(donateToHeader, "Donate to the");
             }
-            let event = await this.getElementText(DONATE_EVENT_NAME);
+            let event = await this.getElementText(DONATE_ORGANIZATION);
             assert.equal(event, eventName);
-            let donateMessage = await this.getElementText(DONATION_MESSAGE);
+            let donateMessage = await this.getElementText(ORGANIZATION_DESCRIPTION);
             assert.equal(donateMessage, message);
             let donationButtonsCount = await this.returnElementsCount(DONATE_BUTTONS);
             assert.equal(donationButtonsCount, 4);
             let $20 = await this.getElementTextFromAnArrayByIndex(DONATE_BUTTONS ,0);
-            assert.equal($20, "$10");
+            assert.equal($20, "$1");
             let $35 = await this.getElementTextFromAnArrayByIndex(DONATE_BUTTONS ,1);
-            assert.equal($35, "$20");
+            assert.equal($35, "$10");
             let $50 = await this.getElementTextFromAnArrayByIndex(DONATE_BUTTONS ,2);
-            assert.equal($50, "$30");
+            assert.equal($50, "$20");
             let $100 = await this.getElementTextFromAnArrayByIndex(DONATE_BUTTONS ,3);
-            assert.equal($100, "$100");
-            let other = await this.getElementText(OTHER_TEXT);
-            assert.equal(other, "Other:");
+            assert.equal($100, "$30");
             let input = await this.getEnteredTextInTheInput(DONATION_INPUT);
             assert.equal(input, "0");
             let $ = await this.getElementText(DOLLAR_INPUT_SYMBOL);
@@ -58,36 +55,6 @@
             let usdText = await this.getElementText(USD_TEXT);
             assert.equal(usdText, "USD");
             let minimum = await this.getElementText(MINIMUM_DONATION_TEXT);
-            assert.equal(minimum, "($1 minimum donation)");
-            let resetButtonDisplayed = await this.returnElementsCount(RESET_DONATION_BUTTON)
-            if(resetButtonDisplayed > 0 ){
-                let resetButton = await this.getElementText(RESET_DONATION_BUTTON);
-                assert.equal(resetButton, "Reset");
-            }
-            let addButton = await this.getElementText(ADD_DONATION_BUTTON);
-            assert.equal(addButton, "Add to Order");
-
-        }
-
-        async assertElementsOnDonateModal(eventName, message){
-            await this.donateScreenIsVisible()
-            let event = await this.getElementText(BOX_DONATE_EVENT_NAME);
-            assert.equal(event, eventName);
-            let donateMessage = await this.getElementText(BOX_DONATION_MESSAGE);
-            assert.equal(donateMessage, message);
-            let donationButtonsCount = await this.returnElementsCount(DONATE_BUTTONS);
-            assert.equal(donationButtonsCount, 4);
-            let $20 = await this.getElementTextFromAnArrayByIndex(DONATE_BUTTONS ,0);
-            assert.equal($20, "$10");
-            let $35 = await this.getElementTextFromAnArrayByIndex(DONATE_BUTTONS ,1);
-            assert.equal($35, "$20");
-            let $50 = await this.getElementTextFromAnArrayByIndex(DONATE_BUTTONS ,2);
-            assert.equal($50, "$30");
-            let $100 = await this.getElementTextFromAnArrayByIndex(DONATE_BUTTONS ,3);
-            assert.equal($100, "$100");
-            let input = await this.getEnteredTextInTheInput(DONATION_INPUT);
-            assert.equal(input, "0");
-            let minimum = await this.getElementText(BOX_MIN_DONATION_MESSAGE);
             assert.equal(minimum, "($1 minimum donation)");
             let resetButtonDisplayed = await this.returnElementsCount(RESET_DONATION_BUTTON)
             if(resetButtonDisplayed > 0 ){
@@ -168,6 +135,9 @@
         async addCustomDonationAndReturnValue() {
             await this.donateScreenIsVisible()
             await this.clearInputField(DONATION_INPUT);
+            await this.clickBackspaceKey(DONATION_INPUT);
+            await this.clickBackspaceKey(DONATION_INPUT);
+            await this.timeout(1000)
             await this.sentKeys(DONATION_INPUT, "1.1");
             await this.timeout(500);
             let enteredDonation = await this.getEnteredTextInTheInput(DONATION_INPUT);
@@ -177,6 +147,17 @@
             return parsedEntered;
         }
 
+        async addCustomDonation() {
+            await this.donateScreenIsVisible();
+            await this.clearInputField(DONATION_INPUT);
+            await this.clickBackspaceKey(DONATION_INPUT);
+            await this.clickBackspaceKey(DONATION_INPUT);
+            await this.timeout(1000)
+            await this.sentKeys(DONATION_INPUT, "1");
+            await this.timeout(500);
+            await this.click(ADD_DONATION_BUTTON);
+
+        }
         async calculateTheOrderTotalAfterDonationIsAdded(){
             await this.donateScreenIsVisible()
             await this.clickElementReturnedFromAnArray(DONATE_BUTTONS,2);

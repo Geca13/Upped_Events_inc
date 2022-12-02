@@ -80,9 +80,9 @@ const TICKET_SCROLLER_BUTTON = { xpath: "//div[contains(@class, 'selection-conta
             let ticketOneQuestionOne = await this.getElementTextFromAnArrayByIndex(QUESTION_TEXT,0);
             assert.equal(ticketOneQuestionOne, "General Question");
             let ticketOneQuestionTwo = await this.getElementTextFromAnArrayByIndex(QUESTION_TEXT,1);
-            assert.equal(ticketOneQuestionTwo, "1 Ticket 1 - 660880T1");
+            assert.equal(ticketOneQuestionTwo, "1 Ticket 1 - " + ticketOneName);
             let ticketTwoQuestionOne = await this.getElementTextFromAnArrayByIndex(QUESTION_TEXT,2);
-            assert.equal(ticketTwoQuestionOne, "2 Ticket 2 - 660880T3");
+            assert.equal(ticketTwoQuestionOne, "2 Ticket 2 - " + ticketThreeName);
 
 
             let responseContainers = await this.returnElementsCount(QUESTION_ANSWERING_FORM);

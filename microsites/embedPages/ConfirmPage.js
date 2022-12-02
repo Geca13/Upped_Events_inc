@@ -8,9 +8,6 @@
     const TOTAL = { className: "total-text"}
     const SHARE_HEADER = { className: "share"}
     const SHARE_INFO_MESSAGE = { xpath: "//div[@class='share']/following-sibling::div"}
-    const FACEBOOK_LOGO= { xpath: "//div[@class='mt-3']//img[1]"}
-    const PLAY_IMAGE= { xpath: "//div[@class='mt-3']//img[2]"}
-    const APP_IMAGE= { xpath: "//div[@class='mt-3']//img[3]"}
     const DOWNLOAD_APPS_HEADER = { className: "download-text"}
     const FACEBOOK_GOOGLE_APPLE = { xpath: "//div[@class='mt-3']//img" }
 
@@ -39,7 +36,11 @@
             "has been sent to your email. You can also view all of your orders in the purchases" +
             " page of your account whenever you want. You are on your way to experience the future of events!");
         let total = await this.getElementText(TOTAL);
-        assert.equal(total, "Total:$0.27");
+        if(await this.environment() === "stage"){
+            assert.equal(total, "Total:$0.27");
+        }else{
+            assert.equal(total, "Total:$2.30");
+        }
         let receiptButton = await this.getElementText(VIEW_RECEIPT_BUTTON);
         assert.equal(receiptButton, "View Receipt");
         let shareHeader = await this.getElementText(SHARE_HEADER);
@@ -53,11 +54,17 @@
             "and is your portal to entering and purchasing items at upped events. " +
             "Download on the App Store or Google Play Store, or send a link to your phone!");
         let facebookSrc = await this.returnImgSrcAttributeByIndex(FACEBOOK_GOOGLE_APPLE,0);
-        assert.equal(facebookSrc, "https://events.pr-tickets.uppedevents.com/assets/images/facebook1.png");
         let googleSrc = await this.returnImgSrcAttributeByIndex(FACEBOOK_GOOGLE_APPLE,1);
-        assert.equal(googleSrc, "https://events.pr-tickets.uppedevents.com/assets/images/playstore.png");
         let appSrc = await this.returnImgSrcAttributeByIndex(FACEBOOK_GOOGLE_APPLE,2);
-        assert.equal(appSrc, "https://events.pr-tickets.uppedevents.com/assets/images/appstore.png");
+        if(await this.environment() === "stage"){
+            assert.equal(facebookSrc, "https://events.stage.uppedevents.com/assets/images/facebook1.png");
+            assert.equal(googleSrc, "https://events.stage.uppedevents.com/assets/images/playstore.png");
+            assert.equal(appSrc, "https://events.stage.uppedevents.com/assets/images/appstore.png");
+        }else{
+            assert.equal(facebookSrc, "https://events.dev.uppedevents.com/assets/images/facebook1.png");
+            assert.equal(googleSrc, "https://events.dev.uppedevents.com/assets/images/playstore.png");
+            assert.equal(appSrc, "https://events.dev.uppedevents.com/assets/images/appstore.png");
+        }
 
     }
     async goBackToStartPage(){

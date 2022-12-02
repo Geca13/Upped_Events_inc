@@ -105,7 +105,6 @@
         }
 
         async assertDiscountElementsAreDisplayed(promoCodeOne){
-            await this.driver.executeScript("document.getElementsByClassName('total-screen-mobile')[0].style.display='none'");
             let title = await this.returnElementsCount(DISCOUNT_TITLE);
             let value = await this.returnElementsCount(DISCOUNT_VALUE);
             let code = await this.returnElementsCount(APPLIED_DISCOUNT_CODE);
@@ -178,7 +177,7 @@
         }
 
         async calculateAndAssertTotalEquals10PromotedTicketsByEachTicketPromotedPricePlusExceedingTicketsByRegularPrice(ticketTwoPrice, ticketFourPrice){
-            await this.timeout(500)
+            await this.timeout(1000)
             let toBeDiscountedOne = parseFloat(ticketTwoPrice) - (parseFloat(ticketTwoPrice) * (75/100));
             let discountedOneTotal = toBeDiscountedOne.toFixed(2) * 4;
             let toBeDiscountedTwo = parseFloat(ticketFourPrice) - (parseFloat(ticketFourPrice) * (75/100));
@@ -191,7 +190,7 @@
         }
 
         async calculateAndAssertTotalEquals15PromotedTicketsForNotLimitedTicket(ticketThreePrice){
-            await this.timeout(500)
+            await this.timeout(1000)
             let toBeDiscountedOne = parseFloat(ticketThreePrice) - (parseFloat(ticketThreePrice) * (75/100));
             let discountedOneTotal = toBeDiscountedOne.toFixed(2) * 15;
             let summaryTicketsTotal = await this.getTicketsTotal();
@@ -199,7 +198,7 @@
         }
 
         async calculateAndAssertTotalEquals20PromotedTicketsPlus5RegularPriceForNotLimitedTicket(ticketThreePrice){
-            await this.timeout(500)
+            await this.timeout(1000)
             let toBeDiscountedOne = parseFloat(ticketThreePrice) - (parseFloat(ticketThreePrice) * (75/100));
             let discountedOneTotal = toBeDiscountedOne.toFixed(2) * 20;
             let notToBeDiscounted = parseFloat(ticketThreePrice) * 5 ;
@@ -210,7 +209,7 @@
         }
 
         async calculateAndAssertTotalEquals20PromotedTicketsByEachTicketPromotedPricePlusExceeding5TicketsByRegularPrice(ticketTwoPrice, ticketThreePrice, ticketFourPrice){
-            await this.timeout(500);
+            await this.timeout(1000);
             let toBeDiscountedOne = parseFloat(ticketTwoPrice) - (parseFloat(ticketTwoPrice) * (75/100));
             let discountedOneTotal = toBeDiscountedOne.toFixed(2) * 7;
             let toBeDiscountedTwo = parseFloat(ticketThreePrice) - (parseFloat(ticketThreePrice) * (75/100));
@@ -224,7 +223,7 @@
         }
 
         async calculateAndAssertTotalEquals20PromotedTicketsTopPrice10NotLimited10(ticketTwoPrice, ticketThreePrice, ticketFourPrice){
-            await this.timeout(500);
+            await this.timeout(1000);
             let toBeDiscountedOne = parseFloat(ticketTwoPrice) - (parseFloat(ticketTwoPrice) * (75/100));
             let discountedOneTotal = toBeDiscountedOne.toFixed(2) * 10;
             let notToBeDiscounted = parseFloat(ticketFourPrice) * 10 ;
@@ -237,7 +236,7 @@
         }
 
         async calculateAndAssertTotalEquals20PromotedTicketsTopPrice10NotLimited10RestOnRegular(ticketTwoPrice, ticketThreePrice, ticketFourPrice){
-            await this.timeout(500);
+            await this.timeout(1000);
             let toBeDiscountedOne = parseFloat(ticketTwoPrice) - (parseFloat(ticketTwoPrice) * (75/100));
             let discountedOneTotal = toBeDiscountedOne.toFixed(2) * 10;
             let notToBeDiscounted = parseFloat(ticketTwoPrice) * 2 ;

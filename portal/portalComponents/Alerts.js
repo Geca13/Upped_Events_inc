@@ -100,6 +100,14 @@
         await this.timeout(1000);
     }
 
+    async alertIsNotDisplayed(){
+        let alerts = await this.findAll(TOAST_MESSAGE);
+        if( alerts.length > 0 ){
+            await this.alertIsNotDisplayed();
+            await this.timeout(500);
+        }
+    }
+
 
 
 

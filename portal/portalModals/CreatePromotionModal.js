@@ -157,7 +157,7 @@
             await this.enabledStatusIsDisplayed();
             await this.click(ENABLED_STATUS_OPTION);
             await this.sentKeys(PROMO_LIMIT_QUANTITY_INPUT,"5");
-            await this.sentKeys(PROMO_$_VALUE_INPUT,"0.1");
+            await this.sentKeys(PROMO_$_VALUE_INPUT,"0.11");
             await this.sentKeys(PROMO_CODE_NAME_INPUT,promoCode);
             await this.driver.executeScript("document.getElementsByClassName('btn-sticky')[0].style.visibility='hidden'");
             //await this.driver.executeScript("document.body.style.zoom = '80%'")
@@ -215,6 +215,8 @@
             let updateQuantity = await this.getEnteredTextInTheInput(PROMO_LIMIT_QUANTITY_INPUT);
             let updateOrigPrice = await this.getElementText(CURRENT_PRICE);
             let updateAdjustment = await this.returnNumberWith$Sign(PROMO_$_VALUE_INPUT);
+            console.log(updateAdjustment + "  adj")
+            console.log(promotion[5] + "  adj5")
             let updateDiscounted = await this.getElementText(DISCOUNTED_PRICE);
             assert.equal(updateName, promotion[0]);
             assert.equal(updateDescription, promotion[1]);
