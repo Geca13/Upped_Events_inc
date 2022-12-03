@@ -1,12 +1,8 @@
 name: Portal_Full_Embed CI
 
 on:
-  push:
-    branches: [ "main" ]
-    paths:
-      - '**/PortalAndEmbedTests.js'
-  schedule:
-  - cron: '28 23 * * *'
+ schedule:
+  - cron: '37 23 * * *'
 
 jobs:
   build:
