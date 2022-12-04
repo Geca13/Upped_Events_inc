@@ -7,8 +7,8 @@
     "test": "test"
   },
   "scripts": {
-    "test1": "mocha './test/PortalAndEmbedTests.js'",
-    "test2": "mocha './test/PortalBox-OfficeTests.js'"
+    "test1": "mocha --spec './test/PortalAndEmbedTests.js' --reporter mochawesome",
+    "test2": "mocha --spec './test/PortalBox-OfficeTests.js'"
   },
   "author": "Marjan Karafiloski",
   "license": "ISC",
@@ -20,5 +20,9 @@
     "moment": "^2.29.4",
     "rootrequire": "^1.0.0",
     "selenium-webdriver": "^4.6.0"
+  },
+  "devDependencies": {
+    "mochawesome": "^7.1.3",
+    "mochawesome-report-generator": "^6.2.0"
   }
 }

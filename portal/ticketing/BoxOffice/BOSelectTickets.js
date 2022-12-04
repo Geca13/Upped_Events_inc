@@ -25,9 +25,9 @@
             super(driver);
         }
 
-        async openBoxOfficeDirectly(eventId){
+        async openBoxOfficeDirectly(eventId, env){
             await this.timeout(1000)
-            await this.visit("https://stage.portal.uppedevents.com/dashboard/event/" + eventId + "/ticket/box-office")
+            await this.visit("https://" + env + ".portal.uppedevents.com/dashboard/event/" + eventId + "/ticket/box-office")
             await this.isOnBoxOfficePage();
         }
 
@@ -126,9 +126,9 @@
         }
 
         async select23TicketsForPromotionWithLimits(){
-            await this.sendKeysToElementReturnedFromAnArray(COLUMN_SELECTS,0,"7");
-            await this.sendKeysToElementReturnedFromAnArray(COLUMN_SELECTS,2,"6");
-            await this.sendKeysToElementReturnedFromAnArray(COLUMN_SELECTS,3,"10");
+            await this.sendKeysToElementReturnedFromAnArray(COLUMN_SELECTS,1,"6");
+            await this.sendKeysToElementReturnedFromAnArray(COLUMN_SELECTS,2,"10");
+            await this.sendKeysToElementReturnedFromAnArray(COLUMN_SELECTS,3,"7");
             await this.click(SAVE_BUTTON);
         }
 

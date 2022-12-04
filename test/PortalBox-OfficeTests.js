@@ -45,10 +45,10 @@
         let sectionsNavs;
         let donation;
         let createDonation;
-        let eventId = "579";
+        let eventId = "1861";
 
 
-        let base = 898629 // Math.floor(100000 + Math.random() * 900000);
+        let base = 636310 // Math.floor(100000 + Math.random() * 900000);
         let eventName =  base.toString() + " FullEventName";
         let shortName = base.toString();
         let ticketOneName = base.toString() +"T1";
@@ -76,6 +76,7 @@
         let ticketGroupOne = base.toString() +"TG1";
         let ticketGroupTwo = base.toString() +"TG2";
         let ticketGroupThree = base.toString() +"TG3";
+        let environment = 'dev';
 
         beforeEach(async function(){
             //driver = await new Builder().forBrowser('chrome').setChromeOptions(new chrome.Options().addArguments('--headless')).build();
@@ -96,9 +97,11 @@
             sideMenu = new SideMenu(driver);
             sectionsNavs = new SectionsNavs(driver);
 
-            await portalLogin.loadPortalUrl();
-            await portalLogin.isAtPortalLoginPage();
-            await portalLogin.enterValidCredentialsAndLogin();
+            if(environment === "stage"){
+                await portalLogin.loadAndLoginToStagePortal()
+            } else {
+                await portalLogin.loadAndLoginToDevPortal();
+            }
             await dashboard.isAtDashboardPage();
 
         });
@@ -151,28 +154,28 @@
 
         it('should assert box-office navigation steps names',async function () {
 
-            await bosTickets.openBoxOfficeDirectly(eventId);
+            await bosTickets.openBoxOfficeDirectly(eventId, environment);
             await bosTickets.assertNavigationButtonsCountAndText();
 
         });
 
         it('should get red error message when tickets are not selected and user clicks on the save button',async function () {
 
-            await bosTickets.openBoxOfficeDirectly(eventId);
+            await bosTickets.openBoxOfficeDirectly(eventId, environment);
             await bosTickets.clickSaveButtonWhenTicketsNotSelectedAssertErrorMessage();
 
         });
 
         it('should get red error message when tickets are not selected and user clicks on the Add Extras Step Nav',async function () {
 
-            await bosTickets.openBoxOfficeDirectly(eventId);
+            await bosTickets.openBoxOfficeDirectly(eventId, environment);
             await bosTickets.clickAddExtrasNavButtonWhenTicketsNotSelectedAssertErrorMessage();
 
         });
 
         it('should land on Extras page when user selects tickets and click on Save button',async function () {
 
-            await bosTickets.openBoxOfficeDirectly(eventId);
+            await bosTickets.openBoxOfficeDirectly(eventId, environment);
             await bosTickets.selectTicketByIndexSendQuantityAndSave(0, 2);
             await bosExtras.isOnExtrasScreen();
 
@@ -180,7 +183,7 @@
 
         it('should land on Extras page when user selects tickets and click on Extras Step Nav',async function () {
 
-            await bosTickets.openBoxOfficeDirectly(eventId);
+            await bosTickets.openBoxOfficeDirectly(eventId, environment);
             await bosTickets.selectTicketByIndexSendQuantityAndSave(0, 2);
             await bosTickets.clickNavButtonByIndexWhenTicketsSelected(1);
             await bosExtras.isOnExtrasScreen();
@@ -189,7 +192,7 @@
 
         it('should land on Details page when user selects tickets and click on Details Step Nav',async function () {
 
-            await bosTickets.openBoxOfficeDirectly(eventId);
+            await bosTickets.openBoxOfficeDirectly(eventId, environment);
             await bosTickets.selectTicketByIndexSendQuantityAndSave(0, 2);
             await bosTickets.clickNavButtonByIndexWhenTicketsSelected(2);
             await bosDetails.isOnDetailsPage();
@@ -198,7 +201,7 @@
 
         it('should land on Payment page when user selects tickets and click on Review Step Nav',async function () {
 
-            await bosTickets.openBoxOfficeDirectly(eventId);
+            await bosTickets.openBoxOfficeDirectly(eventId, environment);
             await bosTickets.selectTicketByIndexSendQuantityAndSave(0, 2);
             await bosTickets.clickNavButtonByIndexWhenTicketsSelected(3);
             await bosReview.isOnReviewPage();
@@ -207,7 +210,7 @@
 
         it('should set and assert new price and its font color', async function () {
 
-            await bosTickets.openBoxOfficeDirectly(eventId);
+            await bosTickets.openBoxOfficeDirectly(eventId, environment);
             await bosTickets.isOnBoxOfficePage();
             await bosTickets.addNewQuantityAndSetNewPrice();
 
@@ -215,7 +218,7 @@
 
         it('should navigate to Extras page and assert elements',async function () {
 
-            await bosTickets.openBoxOfficeDirectly(eventId);
+            await bosTickets.openBoxOfficeDirectly(eventId, environment);
             await bosTickets.selectTicketByIndexSendQuantityAndSave(0, 2);
             await bosExtras.assertElementsOnExtrasPage();
 
@@ -223,7 +226,7 @@
 
         it('should get blue donation not enabled when clicked donation option and donation not enabled in portal',async function () {
 
-            await bosTickets.openBoxOfficeDirectly(eventId);
+            await bosTickets.openBoxOfficeDirectly(eventId, environment);
             await bosTickets.selectTicketByIndexSendQuantityAndSave(0, 2);
             await bosExtras.clickDonationOptionAndReceiveDonationNotEnabledMessage();
 
@@ -248,16 +251,18 @@
             await donation.clickAddDonationButton();
             await createDonation.createDonation();
             await donation.donationPageIsVisible();
-            await bosTickets.openBoxOfficeDirectly(eventId);
+            await bosTickets.openBoxOfficeDirectly(eventId, environment);
             await bosTickets.selectTicketByIndexSendQuantityAndSave(0, 2);
             await bosExtras.clickOnDonationOptionAndAssertElements(eventName)
 
         });
 
 
+
+
         it('should assert when donation value button is clicked the value is displayed in input',async function () {
 
-            await bosTickets.openBoxOfficeDirectly(eventId);
+            await bosTickets.openBoxOfficeDirectly(eventId, environment);
             await bosTickets.selectTicketByIndexSendQuantityAndSave(0, 2);
             await bosExtras.clickDonationOptionAndAssertWhenDonationButtonClickedValueAddedToInput();
 
@@ -265,7 +270,7 @@
 
         it('should enter custom amount, click add to order button and assert green added donation message',async function () {
 
-            await bosTickets.openBoxOfficeDirectly(eventId);
+            await bosTickets.openBoxOfficeDirectly(eventId, environment);
             await bosTickets.selectTicketByIndexSendQuantityAndSave(0, 2);
             await bosExtras.clickDonationOptionAddCustomDonationAndAssertAddedDonationMessage();
 
@@ -273,7 +278,7 @@
 
         it('should add custom donation add to order, open the modal and check if value is still in input',async function () {
 
-            await bosTickets.openBoxOfficeDirectly(eventId);
+            await bosTickets.openBoxOfficeDirectly(eventId, environment);
             await bosTickets.selectTicketByIndexSendQuantityAndSave(0, 2);
             await bosExtras.checkDonationAmountIsSavedInDonationModal();
 
@@ -281,7 +286,7 @@
 
         it('should click Select Tickets nav from Extras page to go back to Tickets page and assert previously selected ticket value is still selected',async function () {
 
-            await bosTickets.openBoxOfficeDirectly(eventId);
+            await bosTickets.openBoxOfficeDirectly(eventId, environment);
             await bosTickets.selectTicketByIndexSendQuantityAndSave(0, 2);
             await bosExtras.clickNavButtonByIndexWhenOnExtrasPage(0);
             await bosTickets.assertSelectedQtyByIndex(0, 2);
@@ -290,7 +295,7 @@
 
         it('should click Add Details nav from Extras page to go to Details tab',async function () {
 
-            await bosTickets.openBoxOfficeDirectly(eventId);
+            await bosTickets.openBoxOfficeDirectly(eventId, environment);
             await bosTickets.selectTicketByIndexSendQuantityAndSave(0, 2);
             await bosExtras.clickNavButtonByIndexWhenOnExtrasPage(2);
             await bosDetails.isOnDetailsPage();
@@ -299,7 +304,7 @@
 
         it('should click Review and Pay nav from Extras page to go to Review page',async function () {
 
-            await bosTickets.openBoxOfficeDirectly(eventId);
+            await bosTickets.openBoxOfficeDirectly(eventId, environment);
             await bosTickets.selectTicketByIndexSendQuantityAndSave(0, 2);
             await bosExtras.clickNavButtonByIndexWhenOnExtrasPage(3);
             await bosReview.isOnReviewPage();
@@ -308,7 +313,7 @@
 
         it('should assert elements on Order Details page when only 1 ticket selected and no taxes , fees, donation, promotion and ticket questions',async function () {
 
-            await bosTickets.openBoxOfficeDirectly(eventId);
+            await bosTickets.openBoxOfficeDirectly(eventId, environment);
             await bosTickets.selectTicketByIndexSendQuantityAndSave(0, 1);
             await bosTickets.clickNavButtonByIndexWhenTicketsSelected(2);
             await bosDetails.assertElementsOnOrderDetailsWithOnlyBasicTicket(ticketOneName);
@@ -317,22 +322,24 @@
 
         it('should assert elements on Review and Pay page when only 1 ticket selected and no taxes , fees, donation or promotion',async function () {
 
-            await bosTickets.openBoxOfficeDirectly(eventId);
+            await bosTickets.openBoxOfficeDirectly(eventId, environment);
             await bosTickets.selectTicketByIndexSendQuantityAndSave(0, 1);
             await bosTickets.clickNavButtonByIndexWhenTicketsSelected(3);
             await bosReview.assertElementsOnReviewAndPayPageWhenOneTicketSelected(ticketOneName);
 
         });
 
+
+
         it('should add excluded tax and check if bayer total is updated in ticket summary', async function () {
 
             taxesAndFees = new TaxesAndFeesPage(driver);
 
-            await taxesAndFees.openTaxesAndFeesDirectly(eventId);
+            await taxesAndFees.openTaxesAndFeesDirectly(eventId, environment);
             await taxesAndFees.addOneTaxForTickets();
             await taxesAndFees.clickSaveTaxesAndFeesButton();
             let savedTaxValue = await taxesAndFees.getFloatNumberForTaxOrFee(1,1);
-            await bosTickets.openBoxOfficeDirectly(eventId);
+            await bosTickets.openBoxOfficeDirectly(eventId, environment);
             await bosTickets.selectTicketByIndexSendQuantityAndSave(0, 2);
             await bosTickets.clickNavButtonByIndexWhenTicketsSelected(2);
             await bosDetails.assertTaxValueAndTicketTotalMultipliedByTaxEqualsTotal(savedTaxValue);
@@ -343,13 +350,13 @@
 
             taxesAndFees = new TaxesAndFeesPage(driver);
 
-            await taxesAndFees.openTaxesAndFeesDirectly(eventId);
+            await taxesAndFees.openTaxesAndFeesDirectly(eventId, environment);
             await taxesAndFees.clickRemoveTaxOrFeeButtonByIndex(0);
             await taxesAndFees.clickSaveTaxesAndFeesButton();
             await taxesAndFees.set$FeeForTickets("Check $ Fee", ".02");
             await taxesAndFees.clickSaveTaxesAndFeesButton();
             let saved$FeeValue = await taxesAndFees.get$FeeFromInputByIndex(1);
-            await bosTickets.openBoxOfficeDirectly(eventId);
+            await bosTickets.openBoxOfficeDirectly(eventId, environment);
             await bosTickets.selectTicketByIndexSendQuantityAndSave(0, 2);
             await bosTickets.clickNavButtonByIndexWhenTicketsSelected(2);
             await bosDetails.assertFeeValueThenTicketTotalPlusFeeTimesTicketQtyEqualsTotal(saved$FeeValue);
@@ -360,13 +367,13 @@
 
             taxesAndFees = new TaxesAndFeesPage(driver);
 
-            await taxesAndFees.openTaxesAndFeesDirectly(eventId);
+            await taxesAndFees.openTaxesAndFeesDirectly(eventId, environment);
             await taxesAndFees.addOneTaxForTickets();
             await taxesAndFees.clickSaveTaxesAndFeesButton();
             let savedTaxValue = await taxesAndFees.getFloatNumberForTaxOrFee(1,1);
             let saved$FeeValue = await taxesAndFees.get$FeeFromInputByIndex(2);
             let cleanedFee = saved$FeeValue.substring(1)
-            await bosTickets.openBoxOfficeDirectly(eventId);
+            await bosTickets.openBoxOfficeDirectly(eventId, environment);
             await bosTickets.selectTicketByIndexSendQuantityAndSave(0, 2);
             await bosTickets.clickNavButtonByIndexWhenTicketsSelected(2);
             await bosDetails.assertFeeAndTaxValuesThenAssertTicketTotalPlusFeesAndTaxesEqualsTotal(savedTaxValue, cleanedFee);
@@ -448,7 +455,7 @@
 
         it('should return invalid promo code applied message when promo code start time is in the future', async function () {
 
-            await bosTickets.openBoxOfficeDirectly(eventId);
+            await bosTickets.openBoxOfficeDirectly(eventId, environment);
             await bosTickets.select3Tickets();
             await bosExtras.isOnExtrasScreen();
             await bosExtras.clickNextButton();
@@ -480,35 +487,35 @@
 
         it('should assert tickets groups in box-office', async function () {
 
-            await bosTickets.openBoxOfficeDirectly(eventId);
+            await bosTickets.openBoxOfficeDirectly(eventId, environment);
             await bosTickets.assertTicketGroupsTabsCountAndNames(ticketGroupOne, ticketGroupTwo, ticketGroupThree);
 
         });
 
         it('should assert tickets order in box-office', async function () {
 
-            await bosTickets.openBoxOfficeDirectly(eventId);
+            await bosTickets.openBoxOfficeDirectly(eventId, environment);
             await bosTickets.assertTicketsOrder(ticketOneName, ticketTwoName, ticketThreeName, ticketFourName, staffTicket);
 
         });
 
         it('should assert ticket quantity by group equals tickets in table', async function () {
 
-            await bosTickets.openBoxOfficeDirectly(eventId);
+            await bosTickets.openBoxOfficeDirectly(eventId, environment);
             await bosTickets.assertTicketQuantityByGroup();
 
         });
 
         it('should assert ticket quantity in Group All equals sum of individual groups count', async function () {
 
-            await bosTickets.openBoxOfficeDirectly(eventId);
+            await bosTickets.openBoxOfficeDirectly(eventId, environment);
             await bosTickets.assertTicketCountInAllTabEqualsSumOfIndividualGroups();
 
         });
 
         it('should assert tickets by groups in box-office', async function () {
 
-            await bosTickets.openBoxOfficeDirectly(eventId);
+            await bosTickets.openBoxOfficeDirectly(eventId, environment);
             await bosTickets.assertTicketsByGroups(ticketOneName, ticketTwoName, ticketThreeName, ticketFourName);
 
         });
@@ -523,7 +530,7 @@
             await sideMenu.clickTicketingTab();
             await ticketsNav.addTicketButtonIsDisplayed();
             await ticketsNav.dragThirdTicketInTopPosition();
-            await bosTickets.openBoxOfficeDirectly(eventId);
+            await bosTickets.openBoxOfficeDirectly(eventId, environment);
             await bosTickets.assertTicketsOrderAfterChangedOrder(ticketOneName, ticketTwoName, ticketThreeName, ticketFourName);
 
         });
@@ -559,10 +566,12 @@
 
         });
 
+
+
         it('Should make purchase with card when user has account and additional email is provided and check purchase emails in inbox', async function () {
             inbox = new Inbox(driver);
 
-            await bosTickets.openBoxOfficeDirectly(eventId);
+            await bosTickets.openBoxOfficeDirectly(eventId, environment);
             await bosTickets.selectTwoTickets();
             await bosExtras.isOnExtrasScreen();
             await bosExtras.clickNextButton();
@@ -596,7 +605,7 @@
 
         it('Should make purchase with cash when user has account and additional email is provided', async function () {
 
-            await bosTickets.openBoxOfficeDirectly(eventId);
+            await bosTickets.openBoxOfficeDirectly(eventId, environment);
             await bosTickets.selectTwoTickets();
             await bosExtras.isOnExtrasScreen();
             await bosExtras.clickNextButton();
@@ -607,7 +616,7 @@
 
         it('should return invalid promo code when wrong promo code', async function () {
 
-            await bosTickets.openBoxOfficeDirectly(eventId);
+            await bosTickets.openBoxOfficeDirectly(eventId, environment);
             await bosTickets.select3Tickets();
             await bosExtras.isOnExtrasScreen();
             await bosExtras.clickNextButton();
@@ -617,7 +626,7 @@
 
         it('should return green promo code applied message when promo code is valid', async function () {
 
-            await bosTickets.openBoxOfficeDirectly(eventId);
+            await bosTickets.openBoxOfficeDirectly(eventId, environment);
             await bosTickets.select3Tickets();
             await bosExtras.isOnExtrasScreen();
             await bosExtras.clickNextButton();
@@ -629,7 +638,7 @@
 
         it('Should check calculation on subtotal and total and check if tickets are displayed', async function () {
 
-            await bosTickets.openBoxOfficeDirectly(eventId);
+            await bosTickets.openBoxOfficeDirectly(eventId, environment);
             await bosTickets.isOnBoxOfficePage();
             await bosTickets.getSelectedTicketsNames(ticketOneName,ticketTwoName,ticketThreeName,ticketFourName, staffTicket);
             await bosTickets.selectFourIndividualTickets();
@@ -641,8 +650,9 @@
 
         });
 
+
         it('Should make purchase with 100 percent promotion in box-office', async function () {
-            await bosTickets.openBoxOfficeDirectly(eventId);
+            await bosTickets.openBoxOfficeDirectly(eventId, environment);
             await bosTickets.isOnBoxOfficePage();
             await bosTickets.select18Tickets();
             await bosExtras.clickNextButton();
@@ -653,7 +663,7 @@
         });
 
         it('Should make calculation for promotion with limits , exceed limit , assert totals', async function () {
-            await bosTickets.openBoxOfficeDirectly(eventId);
+            await bosTickets.openBoxOfficeDirectly(eventId, environment);
             await bosTickets.isOnBoxOfficePage();
             await bosTickets.select23TicketsForPromotionWithLimits();
             await bosExtras.isOnExtrasScreen();
@@ -663,7 +673,7 @@
         });
 
         it('Should assert that order details on add details equals on review page when promotion and donation is added', async function () {
-            await bosTickets.openBoxOfficeDirectly(eventId);
+            await bosTickets.openBoxOfficeDirectly(eventId, environment);
             await bosTickets.isOnBoxOfficePage();
             await bosTickets.select18Tickets();
             await bosExtras.add10$ToOrderOnExtrasPage();
@@ -672,7 +682,7 @@
         });
 
         it('Should make payment for promotion with limits , and buy all promoted tickets', async function () {
-            await bosTickets.openBoxOfficeDirectly(eventId);
+            await bosTickets.openBoxOfficeDirectly(eventId, environment);
             await bosTickets.isOnBoxOfficePage();
             await bosTickets.select23TicketsForPromotionWithLimits();
             await bosExtras.isOnExtrasScreen();
@@ -684,7 +694,7 @@
         });
 
         it('should get invalid promotion message when promotion with limited qty is over', async function () {
-            await bosTickets.openBoxOfficeDirectly(eventId);
+            await bosTickets.openBoxOfficeDirectly(eventId, environment);
             await bosTickets.isOnBoxOfficePage();
             await bosTickets.select23TicketsForPromotionWithLimits();
             await bosExtras.isOnExtrasScreen();
@@ -695,10 +705,10 @@
         });
 
         it('should assert that the sold tickets for each ticket in box office table equals the values in tickets main table', async function () {
-            await bosTickets.openBoxOfficeDirectly(eventId);
+            await bosTickets.openBoxOfficeDirectly(eventId, environment);
             await bosTickets.isOnBoxOfficePage();
             let soldBoxOffice = await bosTickets.getSoldTicketsNumberForEachTicket();
-            await ticketsNav.openTicketsPageDirectly(eventId)
+            await ticketsNav.openTicketsPageDirectly(eventId, environment)
             await ticketsNav.addTicketButtonIsDisplayed();
             await ticketsNav.assertTicketsSoldInBoxOfficeEqualsSoldTicketsInTicketsNav(soldBoxOffice);
 
@@ -743,13 +753,13 @@
         });
 
         it('should assert tickets count in box office, delete in portal, assert deletion in box-office', async function () {
-            await bosTickets.openBoxOfficeDirectly(eventId);
+            await bosTickets.openBoxOfficeDirectly(eventId, environment);
             await bosTickets.isOnBoxOfficePage();
             let tickets = await bosTickets.returnTotalTicketsInBox();
-            await ticketsNav.openTicketsPageDirectly(eventId);
+            await ticketsNav.openTicketsPageDirectly(eventId, environment);
             await ticketsNav.addTicketButtonIsDisplayed();
             await ticketsNav.clickDeleteTicketButtonByTicketName(ticketToBeDeleted);
-            await bosTickets.openBoxOfficeDirectly(eventId);
+            await bosTickets.openBoxOfficeDirectly(eventId, environment);
             await bosTickets.assertTicketsCount(tickets);
 
         });

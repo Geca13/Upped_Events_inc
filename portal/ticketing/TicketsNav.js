@@ -27,8 +27,8 @@
             super(driver);
         }
 
-        async openTicketsPageDirectly(eventId){
-            await this.visit("https://dev.portal.uppedevents.com/dashboard/event/" + eventId + "/tickets")
+        async openTicketsPageDirectly(eventId, env){
+            await this.visit("https://" + env + ".portal.uppedevents.com/dashboard/event/" + eventId + "/tickets")
             await this.addTicketButtonIsDisplayed();
         }
         

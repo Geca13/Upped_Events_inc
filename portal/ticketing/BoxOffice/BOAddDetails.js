@@ -151,27 +151,24 @@
         }
 
         async assertTotalValueBeforeAndAfterPromotionWhenLimitsWereExceeded(ticketTwoPrice,  ticketThreePrice,ticketFourPrice, promoCodeThree){
+
             let totalTax = 0.00;
             let ticketTwoTotal = 6 * ticketTwoPrice;
             let ticketTwoTax = (parseFloat(ticketTwoPrice) * (13.17/100));
-            let totalTaxTwo = parseFloat(ticketTwoTax.toFixed(2)) * 6;
-            totalTax = totalTax + totalTaxTwo;
+            totalTax = totalTax + (ticketTwoTax * 6);
             let ticketFourTotal = 7 * ticketFourPrice;
             let ticketFourTax = (parseFloat(ticketFourPrice) * (13.17/100));
-            let totalTaxFour = parseFloat(ticketFourTax.toFixed(2)) * 7;
-            totalTax = totalTax + totalTaxFour;
+            totalTax = totalTax + (ticketFourTax * 7);
             let ticketThreeTotal = 10 * ticketThreePrice;
             let ticketThreeTax = (parseFloat(ticketThreePrice) * (13.17/100));
-            let totalTaxThree = parseFloat(ticketThreeTax.toFixed(2)) * 10;
-            totalTax = totalTax + totalTaxThree
-            //totalTax = parseFloat(totalTaxTwo.toFixed(2)) + parseFloat(totalTaxFour.toFixed(2)) + parseFloat(totalTaxThree.toFixed(2));
+            totalTax = totalTax + (ticketThreeTax * 10)
             let totalFee = 23 * 0.02;
 
             let subtotal = parseFloat(ticketTwoTotal.toFixed(2)) + parseFloat(ticketFourTotal.toFixed(2)) + parseFloat(ticketThreeTotal.toFixed(2));
             let total = parseFloat(subtotal.toFixed(2)) + parseFloat(totalTax.toFixed(2)) + parseFloat(totalFee.toFixed(2));
-            let extT2 = await this.getElementTextFromAnArrayByIndex(VALUES, 1);
-            let extT3 = await this.getElementTextFromAnArrayByIndex(VALUES, 2);
-            let extT4 = await this.getElementTextFromAnArrayByIndex(VALUES, 0);
+            let extT3 = await this.getElementTextFromAnArrayByIndex(VALUES, 1);
+            let extT4 = await this.getElementTextFromAnArrayByIndex(VALUES, 2);
+            let extT2 = await this.getElementTextFromAnArrayByIndex(VALUES, 0);
             let extTax = await this.getElementTextFromAnArrayByIndex(VALUES, 6);
             let extFee = await this.getElementTextFromAnArrayByIndex(VALUES, 7);
             let extSub = await this.getElementTextFromAnArrayByIndex(VALUES, 5);
@@ -202,10 +199,10 @@
             let newTicketThreeTax = parseFloat((ticketThreePrice * 0.25).toFixed(2)) * (13.17/100);
             let newTicketFourTax = parseFloat((ticketFourPrice * 0.25).toFixed(2)) * (13.17/100);
             ticketFourTax = (parseFloat(ticketFourPrice) * (13.17/100));
-            totalTaxTwo = newTicketTwoTax * 6;
-            totalTaxThree = newTicketThreeTax * 10;
-            totalTaxFour = (parseFloat(ticketFourTax.toFixed(2)) * 3) + (parseFloat(newTicketFourTax.toFixed(2)) * 4);
-            totalTax = parseFloat(totalTaxTwo.toFixed(2)) + parseFloat(totalTaxFour.toFixed(2)) + parseFloat(totalTaxThree.toFixed(2));
+            let totalTaxTwo = newTicketTwoTax * 6;
+            let totalTaxThree = newTicketThreeTax * 10;
+            let totalTaxFour = (ticketFourTax * 3) + (newTicketFourTax * 4);
+            totalTax = totalTaxTwo + totalTaxFour + totalTaxThree
             extTax = await this.getElementTextFromAnArrayByIndex(VALUES, 6);
             extFee = await this.getElementTextFromAnArrayByIndex(VALUES, 7);
             assert.equal(extTax.substring(1), totalTax.toFixed(2));
@@ -358,21 +355,21 @@
 
         async confirmAllValuesAreZeroesAfter100PercentPromotionAndConfirmCompletion(promoCode){
             let beforeRawSubTotal = await this.getElementText(SUBTOTAL);
-            let beforeRawSubTotalSubString = beforeRawSubTotal.substring(2);
+            let beforeRawSubTotalSubString = beforeRawSubTotal.substring(1);
             let beforeSubtotal = parseFloat(beforeRawSubTotalSubString);
 
             let beforeRawTaxes = await this.getElementTextFromAnArrayByIndex(VALUES, 7);
             let beforeRawFees = await this.getElementTextFromAnArrayByIndex(VALUES, 8);
 
-            let beforeRawTaxesSubString = beforeRawTaxes.substring(2)
+            let beforeRawTaxesSubString = beforeRawTaxes.substring(1)
             let beforeTaxes = parseFloat(beforeRawTaxesSubString);
 
-            let beforeFeesSubString = beforeRawFees.substring(2);
+            let beforeFeesSubString = beforeRawFees.substring(1);
             let beforeFees = parseFloat(beforeFeesSubString);
 
             let beforeRawDonation = await this.getElementTextFromAnArrayByIndex(VALUES, 10);
 
-            let beforeRawDonationSubString = beforeRawDonation.substring(2);
+            let beforeRawDonationSubString = beforeRawDonation.substring(1);
             let beforeDonation = parseFloat(beforeRawDonationSubString);
             assert.notEqual(0.00, beforeSubtotal);
             assert.notEqual(0.00, beforeTaxes);
@@ -381,21 +378,21 @@
             await this.addPromotionToTickets(promoCode);
             await this.timeout(1000);
             let afterRawSubTotal = await this.getElementText(SUBTOTAL);
-            let afterRawSubTotalSubString = afterRawSubTotal.substring(2);
+            let afterRawSubTotalSubString = afterRawSubTotal.substring(1);
             let afterSubtotal = parseFloat(afterRawSubTotalSubString);
 
             let afterRawTaxes = await this.getElementTextFromAnArrayByIndex(VALUES, 7);
             let afterRawFees = await this.getElementTextFromAnArrayByIndex(VALUES, 8);
 
-            let afterRawTaxesSubString = afterRawTaxes.substring(2)
+            let afterRawTaxesSubString = afterRawTaxes.substring(1)
             let afterTaxes = parseFloat(afterRawTaxesSubString);
 
-            let afterFeesSubString = afterRawFees.substring(2);
+            let afterFeesSubString = afterRawFees.substring(1);
             let afterFees = parseFloat(afterFeesSubString);
 
             let afterRawDonation = await this.getElementTextFromAnArrayByIndex(VALUES, 10);
 
-            let afterRawDonationSubString = afterRawDonation.substring(2);
+            let afterRawDonationSubString = afterRawDonation.substring(1);
             let afterDonation = parseFloat(afterRawDonationSubString);
             assert.equal( afterSubtotal,0.00);
             assert.equal( afterTaxes, 0.00);

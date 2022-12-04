@@ -74,7 +74,7 @@
            await this.isDisplayed(EXTRAS_OPTIONS, 5000);
            await this.clickElementReturnedFromAnArray(EXTRAS_OPTIONS,1);
            let donation = new DonateComponent(this.driver);
-           await donation.assertElementsOnDonateModal("UPPED EVENTS INC", "UPPED EVENTS INC DESCRIPTION");
+           await donation.assertElementsOnDonateTab("UPPED EVENTS INC", "UPPED EVENTS INC DESCRIPTION");
 
         }
 

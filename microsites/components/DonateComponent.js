@@ -9,14 +9,14 @@
     const DOLLAR_INPUT_SYMBOL = { xpath: "(//div[@class='single-donation']//div)//span" }
     const USD_TEXT = { xpath: "(//div[@class='single-donation']//div)[6]" };
     const MINIMUM_DONATION_TEXT = { xpath: "(//div[@class='single-donation']//div)[8]" };
+    const USD_TEXT_BOX = { xpath: "(//div[@class='single-donation']//div)[10]" };
+    const MINIMUM_DONATION_TEXT_BOX = { xpath: "(//div[@class='single-donation']//div)[11]" };
     const DONATE_BUTTONS = { className: 'donations-button' }; //list
     const ADD_DONATION_BUTTON = { className: 'donation-order-button' };
     const RESET_DONATION_BUTTON = { className: 'donation-reset-button' };
     const SAVE_DONATION_BUTTON = { className: 'donation-save-button' };
     const RESET_ALL_DONATION_BUTTON = { className: 'donation-reset-all-button' };
-    const BOX_DONATE_EVENT_NAME = { xpath: "(//div[@class='single-donation']//div)[1]" };
-    const BOX_DONATION_MESSAGE = { xpath: "(//div[@class='single-donation']//div)[2]" };
-    const BOX_MIN_DONATION_MESSAGE = { xpath: "(//div[@class='single-donation']//div)[11]" };
+
 
 
     class DonateComponent extends BasePage {
@@ -26,36 +26,52 @@
 
         async assertElementsOnDonateTab(eventName, message){
             await this.donateScreenIsVisible()
-            let donateHeader = await this.getElementText(DONATE_HEADER);
-            assert.equal(donateHeader, "Donate");
-            let donateToHeader = await this.getElementText(DONATE_TO_HEADER);
-            if(donateToHeader.length < 10 ){
-                assert.equal(donateToHeader, "Donate to");
-            }else {
-                assert.equal(donateToHeader, "Donate to the");
-            }
+            let donate = await this.returnElementsCount(DONATE_HEADER)
+                if(donate > 0 ){
+                    let donateHeader = await this.getElementText(DONATE_HEADER);
+                    assert.equal(donateHeader, "Donate");
+                    let donateToHeader = await this.getElementText(DONATE_TO_HEADER);
+                    if(donateToHeader.length < 10 ){
+                        assert.equal(donateToHeader, "Donate to");
+                    }else {
+                        assert.equal(donateToHeader, "Donate to the");
+                    }
+                }
+
             let event = await this.getElementText(DONATE_ORGANIZATION);
             assert.equal(event, eventName);
             let donateMessage = await this.getElementText(ORGANIZATION_DESCRIPTION);
             assert.equal(donateMessage, message);
             let donationButtonsCount = await this.returnElementsCount(DONATE_BUTTONS);
             assert.equal(donationButtonsCount, 4);
-            let $20 = await this.getElementTextFromAnArrayByIndex(DONATE_BUTTONS ,0);
-            assert.equal($20, "$1");
-            let $35 = await this.getElementTextFromAnArrayByIndex(DONATE_BUTTONS ,1);
-            assert.equal($35, "$10");
-            let $50 = await this.getElementTextFromAnArrayByIndex(DONATE_BUTTONS ,2);
-            assert.equal($50, "$20");
-            let $100 = await this.getElementTextFromAnArrayByIndex(DONATE_BUTTONS ,3);
-            assert.equal($100, "$30");
+            let $1 = await this.getElementTextFromAnArrayByIndex(DONATE_BUTTONS ,0);
+            assert.equal($1, "$1");
+            let $10 = await this.getElementTextFromAnArrayByIndex(DONATE_BUTTONS ,1);
+            assert.equal($10, "$10");
+            let $20 = await this.getElementTextFromAnArrayByIndex(DONATE_BUTTONS ,2);
+            assert.equal($20, "$20");
+            let $30 = await this.getElementTextFromAnArrayByIndex(DONATE_BUTTONS ,3);
+            assert.equal($30, "$30");
             let input = await this.getEnteredTextInTheInput(DONATION_INPUT);
             assert.equal(input, "0");
             let $ = await this.getElementText(DOLLAR_INPUT_SYMBOL);
             assert.equal($, "$");
-            let usdText = await this.getElementText(USD_TEXT);
-            assert.equal(usdText, "USD");
-            let minimum = await this.getElementText(MINIMUM_DONATION_TEXT);
-            assert.equal(minimum, "($1 minimum donation)");
+            if(donate > 0 ){
+                let usdText = await this.getElementText(USD_TEXT);
+                assert.equal(usdText, "USD");
+                let minimum = await this.getElementText(MINIMUM_DONATION_TEXT);
+                assert.equal(minimum, "($1 minimum donation)");
+            }else{
+                let usdText = await this.getElementText(USD_TEXT_BOX);
+                assert.equal(usdText, "USD");
+                let minimum = await this.getElementText(MINIMUM_DONATION_TEXT_BOX);
+                assert.equal(minimum, "($1 minimum donation)");
+                let resetAllButton = await this.getElementText(RESET_ALL_DONATION_BUTTON);
+                assert.equal(resetAllButton, "Reset All");
+                let saveButton = await this.getElementText(SAVE_DONATION_BUTTON);
+                assert.equal(saveButton, "Save");
+            }
+
             let resetButtonDisplayed = await this.returnElementsCount(RESET_DONATION_BUTTON)
             if(resetButtonDisplayed > 0 ){
                 let resetButton = await this.getElementText(RESET_DONATION_BUTTON);

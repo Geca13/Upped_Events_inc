@@ -12,22 +12,19 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0f4661ab-f48b-4ba5-9b91-545ca496b723" name="Changes" comment="Unversioned Files">
-      <change afterPath="$PROJECT_DIR$/microsites/components/ForgotPassword.js" afterDir="false" />
+    <list default="true" id="0f4661ab-f48b-4ba5-9b91-545ca496b723" name="Changes" comment="Go again in cloud 2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BasePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/BasePage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/microsites/components/DonateComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/microsites/components/DonateComponent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/microsites/components/NewCardComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/microsites/components/NewCardComponent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/microsites/components/StepsComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/microsites/components/StepsComponent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/microsites/components/SummaryComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/microsites/components/SummaryComponent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/microsites/components/TicketTermsModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/microsites/components/TicketTermsModal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/microsites/embedPages/ConfirmPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/microsites/embedPages/ConfirmPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/microsites/embedPages/EmbedQuestionsPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/microsites/embedPages/EmbedQuestionsPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portal/eventOverview/GeneralDetailsTab.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/eventOverview/GeneralDetailsTab.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portal/portalComponents/Alerts.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/portalComponents/Alerts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portal/portalModals/CreateDonationModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/portalModals/CreateDonationModal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portal/portalModals/CreatePromotionModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/portalModals/CreatePromotionModal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/PortalAndEmbedTests.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/PortalAndEmbedTests.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOAddDetails.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOAddDetails.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOAddExtras.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOAddExtras.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOReviewAndPay.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOReviewAndPay.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOSelectTickets.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOSelectTickets.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portal/ticketing/SettingsNav/TaxesAndFeesPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/ticketing/SettingsNav/TaxesAndFeesPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portal/ticketing/TicketsNav.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/ticketing/TicketsNav.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/PortalBox-OfficeTests.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/PortalBox-OfficeTests.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,7 +70,8 @@
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs.mocha.mocha_node_package_dir&quot;: &quot;D:/Upped_Events_Inc/node_modules/mocha&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\CLion 2022.2.4\\plugins\\JavaScriptLanguage\\jsLanguageServicesImpl\\external&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -81,8 +79,8 @@
       <recent name="D:\Upped_Events_Inc" />
     </key>
   </component>
-  <component name="RunManager" selected="Mocha.Should do embed tests.Test_97 - should assert tickets by groups when order and ticket group is changed in embed">
-    <configuration name="Should do embed tests.Test_94 - should assert tickets by groups and active class is applied when clicked on group in embed" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Mocha.Should do box office related tests.Should make purchase with 100 percent promotion in box-office">
+    <configuration name="Should do box office related tests" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
       <node-interpreter>project</node-interpreter>
       <node-options />
       <mocha-package>$PROJECT_DIR$/node_modules/mocha</mocha-package>
@@ -90,15 +88,14 @@
       <pass-parent-env>true</pass-parent-env>
       <ui>bdd</ui>
       <extra-mocha-options />
-      <test-kind>TEST</test-kind>
-      <test-file>$PROJECT_DIR$/test/PortalAndEmbedTests.js</test-file>
+      <test-kind>SUITE</test-kind>
+      <test-file>$PROJECT_DIR$/test/PortalBox-OfficeTests.js</test-file>
       <test-names>
-        <name value="Should do embed tests" />
-        <name value="Test_94 - should assert tickets by groups and active class is applied when clicked on group in embed" />
+        <name value="Should do box office related tests" />
       </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="Should do embed tests.Test_95 - should change ticket order in portal" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
+    <configuration name="Should do box office related tests.Should make calculation for promotion with limits , exceed limit , assert totals" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
       <node-interpreter>project</node-interpreter>
       <node-options />
       <mocha-package>$PROJECT_DIR$/node_modules/mocha</mocha-package>
@@ -107,14 +104,14 @@
       <ui>bdd</ui>
       <extra-mocha-options />
       <test-kind>TEST</test-kind>
-      <test-file>$PROJECT_DIR$/test/PortalAndEmbedTests.js</test-file>
+      <test-file>$PROJECT_DIR$/test/PortalBox-OfficeTests.js</test-file>
       <test-names>
-        <name value="Should do embed tests" />
-        <name value="Test_95 - should change ticket order in portal" />
+        <name value="Should do box office related tests" />
+        <name value="Should make calculation for promotion with limits , exceed limit , assert totals" />
       </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="Should do embed tests.Test_96 - should change ticket location from one group 2 to group 1 in portal and assert change" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
+    <configuration name="Should do box office related tests.Should make purchase with 100 percent promotion in box-office" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
       <node-interpreter>project</node-interpreter>
       <node-options />
       <mocha-package>$PROJECT_DIR$/node_modules/mocha</mocha-package>
@@ -123,14 +120,14 @@
       <ui>bdd</ui>
       <extra-mocha-options />
       <test-kind>TEST</test-kind>
-      <test-file>$PROJECT_DIR$/test/PortalAndEmbedTests.js</test-file>
+      <test-file>$PROJECT_DIR$/test/PortalBox-OfficeTests.js</test-file>
       <test-names>
-        <name value="Should do embed tests" />
-        <name value="Test_96 - should change ticket location from one group 2 to group 1 in portal and assert change" />
+        <name value="Should do box office related tests" />
+        <name value="Should make purchase with 100 percent promotion in box-office" />
       </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="Should do embed tests.Test_97 - should assert tickets by groups when order and ticket group is changed in embed" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
+    <configuration name="Should do box office related tests.should enable donation in portal and assert donation component is displayed and assert elements" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
       <node-interpreter>project</node-interpreter>
       <node-options />
       <mocha-package>$PROJECT_DIR$/node_modules/mocha</mocha-package>
@@ -139,14 +136,14 @@
       <ui>bdd</ui>
       <extra-mocha-options />
       <test-kind>TEST</test-kind>
-      <test-file>$PROJECT_DIR$/test/PortalAndEmbedTests.js</test-file>
+      <test-file>$PROJECT_DIR$/test/PortalBox-OfficeTests.js</test-file>
       <test-names>
-        <name value="Should do embed tests" />
-        <name value="Test_97 - should assert tickets by groups when order and ticket group is changed in embed" />
+        <name value="Should do box office related tests" />
+        <name value="should enable donation in portal and assert donation component is displayed and assert elements" />
       </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="Should do embed tests.'Test_74 - should select more then total of account limit quantity for limited tickets that have promotion in promotion with limit then add promo code and ' +&#10;            'assert subtotal equals tickets discounted prices times quantity + regular price for cheaper ticket times exceeding limit qty + assert exceeding promo message'" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
+    <configuration name="Should do embed tests" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
       <node-interpreter>project</node-interpreter>
       <node-options />
       <mocha-package>$PROJECT_DIR$/node_modules/mocha</mocha-package>
@@ -154,21 +151,20 @@
       <pass-parent-env>true</pass-parent-env>
       <ui>bdd</ui>
       <extra-mocha-options />
-      <test-kind>TEST</test-kind>
+      <test-kind>SUITE</test-kind>
       <test-file>$PROJECT_DIR$/test/PortalAndEmbedTests.js</test-file>
       <test-names>
         <name value="Should do embed tests" />
-        <name value="'Test_74 - should select more then total of account limit quantity for limited tickets that have promotion in promotion with limit then add promo code and ' +&#10;            'assert subtotal equals tickets discounted prices times quantity + regular price for cheaper ticket times exceeding limit qty + assert exceeding promo message'" />
       </test-names>
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Mocha.Should do embed tests.Test_97 - should assert tickets by groups when order and ticket group is changed in embed" />
-        <item itemvalue="Mocha.Should do embed tests.Test_96 - should change ticket location from one group 2 to group 1 in portal and assert change" />
-        <item itemvalue="Mocha.Should do embed tests.Test_95 - should change ticket order in portal" />
-        <item itemvalue="Mocha.Should do embed tests.Test_94 - should assert tickets by groups and active class is applied when clicked on group in embed" />
-        <item itemvalue="Mocha.Should do embed tests.'Test_74 - should select more then total of account limit quantity for limited tickets that have promotion in promotion with limit then add promo code and ' +&#10;            'assert subtotal equals tickets discounted prices times quantity + regular price for cheaper ticket times exceeding limit qty + assert exceeding promo message'" />
+        <item itemvalue="Mocha.Should do box office related tests.Should make purchase with 100 percent promotion in box-office" />
+        <item itemvalue="Mocha.Should do box office related tests.Should make calculation for promotion with limits , exceed limit , assert totals" />
+        <item itemvalue="Mocha.Should do embed tests" />
+        <item itemvalue="Mocha.Should do box office related tests" />
+        <item itemvalue="Mocha.Should do box office related tests.should enable donation in portal and assert donation component is displayed and assert elements" />
       </list>
     </recent_temporary>
   </component>
@@ -193,7 +189,9 @@
       <workItem from="1669706825393" duration="14803000" />
       <workItem from="1669828496807" duration="16382000" />
       <workItem from="1669929203381" duration="2966000" />
-      <workItem from="1669966683658" duration="14420000" />
+      <workItem from="1669966683658" duration="24761000" />
+      <workItem from="1670058139671" duration="12399000" />
+      <workItem from="1670139576345" duration="1000" />
     </task>
     <task id="LOCAL-00001" summary="Rebuild whole project to match new workflow">
       <created>1669752944280</created>
@@ -209,7 +207,28 @@
       <option name="project" value="LOCAL" />
       <updated>1669753085447</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Go again in cloud">
+      <created>1670018273448</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1670018273448</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Go again in cloud 2">
+      <created>1670018410285</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1670018410285</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Go again in cloud 2">
+      <created>1670018495500</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1670018495500</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -229,7 +248,9 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Rebuild whole project to match new workflow" />
     <MESSAGE value="Unversioned Files" />
-    <option name="LAST_COMMIT_MESSAGE" value="Unversioned Files" />
+    <MESSAGE value="Go again in cloud" />
+    <MESSAGE value="Go again in cloud 2" />
+    <option name="LAST_COMMIT_MESSAGE" value="Go again in cloud 2" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -251,12 +272,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/test/PortalAndEmbedTests.js</url>
-          <line>1980</line>
+          <line>1981</line>
           <option name="timeStamp" value="39" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/test/PortalAndEmbedTests.js</url>
-          <line>1981</line>
+          <line>1982</line>
           <option name="timeStamp" value="41" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -307,20 +328,107 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/microsites/components/TicketsComponent.js</url>
           <line>235</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="52" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/microsites/components/TicketsComponent.js</url>
           <line>234</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="53" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/microsites/components/TicketsComponent.js</url>
           <line>233</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="54" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/microsites/components/DonateComponent.js</url>
+          <line>40</line>
+          <option name="timeStamp" value="56" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/microsites/components/DonateComponent.js</url>
+          <line>41</line>
+          <option name="timeStamp" value="57" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/microsites/components/DonateComponent.js</url>
+          <line>42</line>
+          <option name="timeStamp" value="58" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/microsites/components/DonateComponent.js</url>
+          <line>43</line>
+          <option name="timeStamp" value="59" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/microsites/components/DonateComponent.js</url>
+          <line>44</line>
+          <option name="timeStamp" value="60" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/microsites/components/DonateComponent.js</url>
+          <line>45</line>
+          <option name="timeStamp" value="61" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/microsites/components/DonateComponent.js</url>
+          <line>46</line>
+          <option name="timeStamp" value="62" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/microsites/components/DonateComponent.js</url>
+          <line>47</line>
+          <option name="timeStamp" value="63" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/microsites/components/DonateComponent.js</url>
+          <line>48</line>
+          <option name="timeStamp" value="64" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/microsites/components/DonateComponent.js</url>
+          <line>49</line>
+          <option name="timeStamp" value="65" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/microsites/components/DonateComponent.js</url>
+          <line>50</line>
+          <option name="timeStamp" value="66" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/microsites/components/DonateComponent.js</url>
+          <line>51</line>
+          <option name="timeStamp" value="67" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/microsites/components/DonateComponent.js</url>
+          <line>52</line>
+          <option name="timeStamp" value="68" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/microsites/components/DonateComponent.js</url>
+          <line>53</line>
+          <option name="timeStamp" value="69" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/microsites/components/DonateComponent.js</url>
+          <line>54</line>
+          <option name="timeStamp" value="70" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/microsites/components/DonateComponent.js</url>
+          <line>55</line>
+          <option name="timeStamp" value="71" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/microsites/components/DonateComponent.js</url>
+          <line>56</line>
+          <option name="timeStamp" value="72" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/microsites/components/DonateComponent.js</url>
+          <line>57</line>
+          <option name="timeStamp" value="73" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

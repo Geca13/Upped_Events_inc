@@ -19,8 +19,8 @@
             super(driver);
         }
 
-        async openTaxesAndFeesDirectly(eventId){
-            await this.visit("https://stage.portal.uppedevents.com/dashboard/event/" + eventId + "/ticket/settings?tab=taxes")
+        async openTaxesAndFeesDirectly(eventId, env){
+            await this.visit("https://" + env + ".portal.uppedevents.com/dashboard/event/" + eventId + "/ticket/settings?tab=taxes")
             await this.includeExcludeIsVisible();
         }
 
