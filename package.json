@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "test1": "mocha --spec './test/PortalAndEmbedTests.js' --reporter mochawesome",
+    "test1": "mocha './test/PortalAndEmbedTests.js'",
     "test2": "mocha --spec './test/PortalBox-OfficeTests.js'"
   },
   "author": "Marjan Karafiloski",
