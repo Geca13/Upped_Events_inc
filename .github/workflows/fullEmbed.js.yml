@@ -2,7 +2,7 @@ name: Portal_Full_Embed CI
 
 on:
  schedule:
-  - cron: '05 12 * * *'
+  - cron: '00 15 * * *'
 
 jobs:
   build:
@@ -26,5 +26,5 @@ jobs:
         cache: 'npm'
     - run: npm ci
       shell: cmd
-    - run: npx mocha --spec './test/PortalAndEmbedTests.js' --reporter mochawesome
+    - run: npm run test1
       shell: cmd
