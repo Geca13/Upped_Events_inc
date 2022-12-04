@@ -124,11 +124,9 @@
         let customerPassword = "Pero1234567" //base.toString() + 'Password';
 
         beforeEach(async function(){
-            //driver = await new Builder().forBrowser('chrome').setChromeOptions(new chrome.Options().addArguments('--headless')).build();
-            //await driver.manage().window().setRect({width: 1300, height: 1080});
-
-            driver = await new Builder().forBrowser('chrome').build();
+            driver = await new Builder().forBrowser('chrome').setChromeOptions(new chrome.Options().addArguments('--headless')).build();
             await driver.manage().window().setRect({width: 1300, height: 1080});
+
 
         });
 
