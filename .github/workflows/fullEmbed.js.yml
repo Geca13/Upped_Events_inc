@@ -2,7 +2,7 @@ name: Portal_Full_Embed CI
 
 on:
  schedule:
-  - cron: '10 5 * * *'
+  - cron: '50 8 * * *'
 
 jobs:
   build:
@@ -26,5 +26,5 @@ jobs:
         cache: 'npm'
     - run: npm ci
       shell: cmd
-    - run: npm run test1
+    - run: npx run test1
       shell: cmd
