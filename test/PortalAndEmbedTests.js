@@ -40,6 +40,7 @@
     const EmbedQuestionsPage = require('../microsites/embedPages/EmbedQuestionsPage')
     const CreateDonationModal = require('../portal/portalModals/CreateDonationModal')
     const ForgotPassword = require('../microsites/components/ForgotPassword')
+    const ResetPassword = require('../microsites/eventsPages/ResetPassword')
     
 
     describe('Should do embed tests', function () {
@@ -85,9 +86,11 @@
         let questions;
         let createDonation;
         let embedQuestions;
+        let forgotPassword;
+        let resetPassword;
         let environment = "stage1";
 
-        let base =  Math.floor(100000 + Math.random() * 900000);
+        let base = Math.floor(100000 + Math.random() * 900000);
         let eventName =  base.toString() + " FullEventName";
         let shortName = base.toString();
         let ticketOneName = base.toString() +"T1";
@@ -121,18 +124,19 @@
         let customerLastName = 'cln'+base.toString();
         let customerEmail =  customerFirstName + '@' + customerLastName+'.com';
         let customerEmail2 = customerFirstName + '@' + customerLastName+'2.com';
-        let customerPassword = "Pero1234567" //base.toString() + 'Password';
+        let customerPassword = base.toString() + 'Password';
+        let customerPassword2 = base.toString() + 'Password2';
 
         beforeEach(async function(){
             driver = await new Builder().forBrowser('chrome').setChromeOptions(new chrome.Options().addArguments('--headless')).build();
             await driver.manage().window().setRect({width: 1300, height: 1080});
-
 
         });
 
         afterEach(async function(){
             await driver.quit()
         })
+
 
         //PORTAL
         it('Test_01 - should create new event and verify data in events page and General Details',async function () {
@@ -1872,7 +1876,7 @@
 
         });
 
-        //EMBED
+       /* //EMBED
         it('Test_62 - should assert completed steps count and current step name', async function () {
 
             main = new EmbedMainPage(driver);
@@ -1907,7 +1911,7 @@
             await steps.numberOfCompletedStepsAndCurrentStepName("All Done!",3);
 
         });
-
+*/
         //EMBED
         it('Test_63 - should assert completed step checkmark image is displayed on three steps when no ticket questions', async function () {
 
@@ -1993,7 +1997,7 @@
 
         });
 
-        //EMBED
+       /* //EMBED
         it('Test_65 - should assert proper steps behaviour with active class on navbar on all pages', async function () {
 
             main = new EmbedMainPage(driver);
@@ -2044,7 +2048,7 @@
             await steps.checkIfActiveClassIsAppliedToStep(3,false);
             await steps.checkIfActiveClassIsAppliedToStep(4,true);
 
-        });
+        });*/
         //EMBED
         it('Test_66 - should make purchase for two tickets of same type with donation and promotion and assert data on the receipt', async function () {
 
@@ -2641,7 +2645,7 @@
 
         });
 
-        //EMBED
+      /*  //EMBED
         it('Test_84 - should check staff modal elements and submit fully filled form', async function () {
 
             main = new EmbedMainPage(driver);
@@ -2670,7 +2674,7 @@
             await questionsModal.shouldAnswerStaffFormWithRandomButValidData(base);
             await confirm.isAtConfirmPage()
 
-        });
+        });*/
 
         //PORTAL
         it('Test_85 - should set ticket Simple Yes No question and assert saved data on questions table in portal', async function () {
@@ -3027,13 +3031,75 @@
 
             main = new EmbedMainPage(driver);
             embedLogin = new LoginPage(driver);
+            forgotPassword = new ForgotPassword(driver)
             await main.openEmbedPage();
             await main.switchToIframe();
             await main.isInFrame(eventName);
             await main.clickLoginLink();
             await embedLogin.registerNowButtonIsDisplayed();
+            await embedLogin.clickForgotPasswordLink()
+            await forgotPassword.forgetPasswordScenarioWithInvalidAlerts();
 
 
+        });
+
+        //EMBED
+        it('Test_100 - should make forgot password request from embed',async function () {
+
+            main = new EmbedMainPage(driver);
+            embedLogin = new LoginPage(driver);
+            forgotPassword = new ForgotPassword(driver)
+            await main.openEmbedPage();
+            await main.switchToIframe();
+            await main.isInFrame(eventName);
+            await main.clickLoginLink();
+            await embedLogin.registerNowButtonIsDisplayed();
+            await embedLogin.clickForgotPasswordLink()
+            await forgotPassword.getSuccessResetEmailMessageWhenValidEmail(customerEmail);
+
+
+        });
+
+        //EMBED
+        it('Test_101 - should change the password and get redirected to embed',async function () {
+            inbox = new Inbox(driver);
+            main = new EmbedMainPage(driver);
+            resetPassword = new ResetPassword(driver);
+
+            await inbox.loadInbox();
+            await inbox.elementIsDisplayedInInbox('<'+customerEmail+'>');
+            await inbox.findAndClickTheEmailForNewAccount('<'+customerEmail+'>');
+            await inbox.switchToInboxIFrame();
+            await inbox.clickResetPasswordButton();
+            await driver.switchTo().defaultContent();
+            await main.getNewlyOpenedTab(originalWindow);
+            await resetPassword.isOnResetPasswordPage()
+            await resetPassword.completeChangingPassword(customerPassword2);
+            await main.switchToIframe();
+            await main.isInFrame(eventName);
+        });
+
+        //EMBED
+        it('Test_102 - should unpublish the event',async function () {
+            portalLogin = new PortalLoginPage(driver);
+            dashboard = new DashboardPage(driver);
+            myEvents = new MyEventsPage(driver);
+            eventDetails = new GeneralDetailsTab(driver);
+
+            if(environment === "stage"){
+                await portalLogin.loadAndLoginToStagePortal()
+            } else {
+                await portalLogin.loadAndLoginToDevPortal();
+            }
+            await dashboard.isAtDashboardPage();
+            await dashboard.clickMyEventsTab();
+            await myEvents.eventsTableIsDisplayed();
+            await driver.sleep(1000);
+            await myEvents.createdEventIsInTheTable(eventName);
+            await myEvents.clickTheNewCreatedEventInTheTable(eventName);
+            await eventDetails.unpublishButtonIsDisplayed();
+            await eventDetails.clickUnpublishButton();
+            await eventDetails.publishButtonIsDisplayed();
         });
 
     });

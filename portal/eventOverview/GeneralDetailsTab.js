@@ -36,6 +36,11 @@
             await this.click(PUBLISH_EVENT_BUTTON)
         }
 
+        async clickUnpublishButton(){
+            await this.timeout(500);
+            await this.click(UNPUBLISH_EVENT_BUTTON)
+        }
+
         async verifyDetailsInGeneralDetailsPageAfterCreation(shortName,naMe,loCation,startDate,endDate,atTendees, desCription){
             
             await this.timeout(2500)

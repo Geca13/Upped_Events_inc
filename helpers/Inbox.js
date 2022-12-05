@@ -1,6 +1,7 @@
     const BasePage = require('../BasePage');
     const assert = require("assert");
     const VERIFY_EMAIL_BUTTON = { xpath: "//*[text()='Verify email address']"}
+    const RESET_PASSWORD_BUTTON = { xpath: "//*[text()='Reset Password']"}
     const INBOX_FRAME = { tagName:'iframe'}
     const INBOX_TABLE_ROWS = { xpath: "//tbody//tr" }
     
@@ -26,6 +27,12 @@
         }
         async findAndClickTheEmailForNewAccount(email){
             await this.locateElementByTextAndClick(email);
+        }
+
+        async clickResetPasswordButton(){
+            await this.isDisplayed(RESET_PASSWORD_BUTTON, 5000)
+            await this.click(RESET_PASSWORD_BUTTON)
+            await this.timeout(1000);
         }
         async getOriginalWindow(){
             await this.getOriginalWindowOrTab()

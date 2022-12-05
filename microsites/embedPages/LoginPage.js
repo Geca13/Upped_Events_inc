@@ -59,6 +59,10 @@
             await this.timeout(3000)
         }
 
+        async clickForgotPasswordLink(){
+            await this.click(FORGET_PASSWORD);
+        }
+
 
 
 

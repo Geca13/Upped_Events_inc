@@ -17,6 +17,7 @@
 
         async termsPageIsDisplayed(){
             await this.isDisplayed(TICKET_TERMS_INPUT,5000);
+            await this.timeout(500)
         }
         async heading3IsDisplayed(){
             await this.isDisplayed(TEXT_SELECTOR_HEADING_3,5000);

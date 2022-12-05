@@ -8,6 +8,7 @@
     const SAVED_QUESTION = { xpath: "//td[contains(@class, 'column-title')]//span" } //list
     const MANDATORY = { xpath: "//td[contains(@class, 'column-ismandatory')]//span" }
     const SELECTED_TICKETS = { xpath: "//td[contains(@class, 'column-tickettypes')]//span" }
+    const QUESTIONS_TABLE = { id: "dataTable" }
 
     class TicketQuestionsPage extends BasePage{
         constructor(driver) {
@@ -15,18 +16,20 @@
         }
 
         async clickActivateQuestionButton(index){
+            await this.isOnTicketQuestionsPage();
             await this.isDisplayed(QUESTION_OFF_TOGGLE,5000);
             await this.clickElementReturnedFromAnArray(QUESTION_OFF_TOGGLE,index);
             await this.driver.sleep(500);
         }
         async clickDeactivateQuestionButton(index){
             await this.isDisplayed(QUESTION_ON_TOGGLE,5000);
+            await this.timeout(500);
             await this.clickElementReturnedFromAnArray(QUESTION_ON_TOGGLE,index);
             await this.driver.sleep(500);
         }
 
         async isOnTicketQuestionsPage(){
-            await this.isDisplayed(ADD_BUTTON,5000);
+            await this.isDisplayed(QUESTIONS_TABLE,5000);
         }
         async createSimpleYesNoQuestionAndAssertSavedDataAndElements(base, ticketOneName, ticketThreeName){
             await this.isOnTicketQuestionsPage();

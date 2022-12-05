@@ -12,19 +12,31 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0f4661ab-f48b-4ba5-9b91-545ca496b723" name="Changes" comment="Go again in cloud 2">
+    <list default="true" id="0f4661ab-f48b-4ba5-9b91-545ca496b723" name="Changes" comment="Revert back 2">
+      <change afterPath="$PROJECT_DIR$/microsites/eventsPages/ResetPassword.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/microsites/components/DonateComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/microsites/components/DonateComponent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOAddDetails.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOAddDetails.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOAddExtras.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOAddExtras.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOReviewAndPay.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOReviewAndPay.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOSelectTickets.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOSelectTickets.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portal/ticketing/SettingsNav/TaxesAndFeesPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/ticketing/SettingsNav/TaxesAndFeesPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portal/ticketing/TicketsNav.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/ticketing/TicketsNav.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/PortalBox-OfficeTests.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/PortalBox-OfficeTests.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helpers/Inbox.js" beforeDir="false" afterPath="$PROJECT_DIR$/helpers/Inbox.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/microsites/components/ForgotPassword.js" beforeDir="false" afterPath="$PROJECT_DIR$/microsites/components/ForgotPassword.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/microsites/embedPages/EmbedMainPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/microsites/embedPages/EmbedMainPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/microsites/embedPages/LoginPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/microsites/embedPages/LoginPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mochawesome-report/assets/MaterialIcons-Regular.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mochawesome-report/assets/MaterialIcons-Regular.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mochawesome-report/assets/app.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mochawesome-report/assets/app.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mochawesome-report/assets/app.js.LICENSE.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mochawesome-report/assets/roboto-light-webfont.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mochawesome-report/assets/roboto-light-webfont.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mochawesome-report/assets/roboto-medium-webfont.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mochawesome-report/assets/roboto-medium-webfont.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mochawesome-report/assets/roboto-regular-webfont.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mochawesome-report/assets/roboto-regular-webfont.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mochawesome-report/mochawesome.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mochawesome-report/mochawesome.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portal/eventOverview/GeneralDetailsTab.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/eventOverview/GeneralDetailsTab.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portal/portalComponents/Alerts.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/portalComponents/Alerts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portal/ticketing/SettingsNav/TicketQuestionsPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/ticketing/SettingsNav/TicketQuestionsPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portal/ticketing/SettingsNav/TicketTermsPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/ticketing/SettingsNav/TicketTermsPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/PortalAndEmbedTests.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/PortalAndEmbedTests.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +54,7 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -79,70 +92,7 @@
       <recent name="D:\Upped_Events_Inc" />
     </key>
   </component>
-  <component name="RunManager" selected="Mocha.Should do box office related tests.Should make purchase with 100 percent promotion in box-office">
-    <configuration name="Should do box office related tests" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
-      <node-interpreter>project</node-interpreter>
-      <node-options />
-      <mocha-package>$PROJECT_DIR$/node_modules/mocha</mocha-package>
-      <working-directory>$PROJECT_DIR$</working-directory>
-      <pass-parent-env>true</pass-parent-env>
-      <ui>bdd</ui>
-      <extra-mocha-options />
-      <test-kind>SUITE</test-kind>
-      <test-file>$PROJECT_DIR$/test/PortalBox-OfficeTests.js</test-file>
-      <test-names>
-        <name value="Should do box office related tests" />
-      </test-names>
-      <method v="2" />
-    </configuration>
-    <configuration name="Should do box office related tests.Should make calculation for promotion with limits , exceed limit , assert totals" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
-      <node-interpreter>project</node-interpreter>
-      <node-options />
-      <mocha-package>$PROJECT_DIR$/node_modules/mocha</mocha-package>
-      <working-directory>$PROJECT_DIR$</working-directory>
-      <pass-parent-env>true</pass-parent-env>
-      <ui>bdd</ui>
-      <extra-mocha-options />
-      <test-kind>TEST</test-kind>
-      <test-file>$PROJECT_DIR$/test/PortalBox-OfficeTests.js</test-file>
-      <test-names>
-        <name value="Should do box office related tests" />
-        <name value="Should make calculation for promotion with limits , exceed limit , assert totals" />
-      </test-names>
-      <method v="2" />
-    </configuration>
-    <configuration name="Should do box office related tests.Should make purchase with 100 percent promotion in box-office" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
-      <node-interpreter>project</node-interpreter>
-      <node-options />
-      <mocha-package>$PROJECT_DIR$/node_modules/mocha</mocha-package>
-      <working-directory>$PROJECT_DIR$</working-directory>
-      <pass-parent-env>true</pass-parent-env>
-      <ui>bdd</ui>
-      <extra-mocha-options />
-      <test-kind>TEST</test-kind>
-      <test-file>$PROJECT_DIR$/test/PortalBox-OfficeTests.js</test-file>
-      <test-names>
-        <name value="Should do box office related tests" />
-        <name value="Should make purchase with 100 percent promotion in box-office" />
-      </test-names>
-      <method v="2" />
-    </configuration>
-    <configuration name="Should do box office related tests.should enable donation in portal and assert donation component is displayed and assert elements" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
-      <node-interpreter>project</node-interpreter>
-      <node-options />
-      <mocha-package>$PROJECT_DIR$/node_modules/mocha</mocha-package>
-      <working-directory>$PROJECT_DIR$</working-directory>
-      <pass-parent-env>true</pass-parent-env>
-      <ui>bdd</ui>
-      <extra-mocha-options />
-      <test-kind>TEST</test-kind>
-      <test-file>$PROJECT_DIR$/test/PortalBox-OfficeTests.js</test-file>
-      <test-names>
-        <name value="Should do box office related tests" />
-        <name value="should enable donation in portal and assert donation component is displayed and assert elements" />
-      </test-names>
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Mocha.Should do embed tests.Test_96 - should change ticket location from one group 2 to group 1 in portal and assert change">
     <configuration name="Should do embed tests" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
       <node-interpreter>project</node-interpreter>
       <node-options />
@@ -158,13 +108,77 @@
       </test-names>
       <method v="2" />
     </configuration>
+    <configuration name="Should do embed tests.Test_102 - should unpublish the event" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <mocha-package>$PROJECT_DIR$/node_modules/mocha</mocha-package>
+      <working-directory>$PROJECT_DIR$</working-directory>
+      <pass-parent-env>true</pass-parent-env>
+      <ui>bdd</ui>
+      <extra-mocha-options />
+      <test-kind>TEST</test-kind>
+      <test-file>$PROJECT_DIR$/test/PortalAndEmbedTests.js</test-file>
+      <test-names>
+        <name value="Should do embed tests" />
+        <name value="Test_102 - should unpublish the event" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="Should do embed tests.Test_85 - should set ticket Simple Yes No question and assert saved data on questions table in portal" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <mocha-package>$PROJECT_DIR$/node_modules/mocha</mocha-package>
+      <working-directory>$PROJECT_DIR$</working-directory>
+      <pass-parent-env>true</pass-parent-env>
+      <ui>bdd</ui>
+      <extra-mocha-options />
+      <test-kind>TEST</test-kind>
+      <test-file>$PROJECT_DIR$/test/PortalAndEmbedTests.js</test-file>
+      <test-names>
+        <name value="Should do embed tests" />
+        <name value="Test_85 - should set ticket Simple Yes No question and assert saved data on questions table in portal" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="Should do embed tests.Test_87 - should set ticket question with asked input text" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <mocha-package>$PROJECT_DIR$/node_modules/mocha</mocha-package>
+      <working-directory>$PROJECT_DIR$</working-directory>
+      <pass-parent-env>true</pass-parent-env>
+      <ui>bdd</ui>
+      <extra-mocha-options />
+      <test-kind>TEST</test-kind>
+      <test-file>$PROJECT_DIR$/test/PortalAndEmbedTests.js</test-file>
+      <test-names>
+        <name value="Should do embed tests" />
+        <name value="Test_87 - should set ticket question with asked input text" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="Should do embed tests.Test_96 - should change ticket location from one group 2 to group 1 in portal and assert change" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <mocha-package>$PROJECT_DIR$/node_modules/mocha</mocha-package>
+      <working-directory>$PROJECT_DIR$</working-directory>
+      <pass-parent-env>true</pass-parent-env>
+      <ui>bdd</ui>
+      <extra-mocha-options />
+      <test-kind>TEST</test-kind>
+      <test-file>$PROJECT_DIR$/test/PortalAndEmbedTests.js</test-file>
+      <test-names>
+        <name value="Should do embed tests" />
+        <name value="Test_96 - should change ticket location from one group 2 to group 1 in portal and assert change" />
+      </test-names>
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Mocha.Should do box office related tests.Should make purchase with 100 percent promotion in box-office" />
-        <item itemvalue="Mocha.Should do box office related tests.Should make calculation for promotion with limits , exceed limit , assert totals" />
+        <item itemvalue="Mocha.Should do embed tests.Test_96 - should change ticket location from one group 2 to group 1 in portal and assert change" />
         <item itemvalue="Mocha.Should do embed tests" />
-        <item itemvalue="Mocha.Should do box office related tests" />
-        <item itemvalue="Mocha.Should do box office related tests.should enable donation in portal and assert donation component is displayed and assert elements" />
+        <item itemvalue="Mocha.Should do embed tests.Test_87 - should set ticket question with asked input text" />
+        <item itemvalue="Mocha.Should do embed tests.Test_85 - should set ticket Simple Yes No question and assert saved data on questions table in portal" />
+        <item itemvalue="Mocha.Should do embed tests.Test_102 - should unpublish the event" />
       </list>
     </recent_temporary>
   </component>
@@ -191,7 +205,8 @@
       <workItem from="1669929203381" duration="2966000" />
       <workItem from="1669966683658" duration="24761000" />
       <workItem from="1670058139671" duration="12399000" />
-      <workItem from="1670139576345" duration="1000" />
+      <workItem from="1670139576345" duration="12352000" />
+      <workItem from="1670226504446" duration="6853000" />
     </task>
     <task id="LOCAL-00001" summary="Rebuild whole project to match new workflow">
       <created>1669752944280</created>
@@ -228,7 +243,28 @@
       <option name="project" value="LOCAL" />
       <updated>1670018495500</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Testing Mocha">
+      <created>1670140088899</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1670140088899</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Revert back">
+      <created>1670165692311</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1670165692311</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Revert back 2">
+      <created>1670168624845</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1670168624845</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -250,7 +286,10 @@
     <MESSAGE value="Unversioned Files" />
     <MESSAGE value="Go again in cloud" />
     <MESSAGE value="Go again in cloud 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="Go again in cloud 2" />
+    <MESSAGE value="Testing Mocha" />
+    <MESSAGE value="Revert back" />
+    <MESSAGE value="Revert back 2" />
+    <option name="LAST_COMMIT_MESSAGE" value="Revert back 2" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -269,16 +308,6 @@
           <url>file://$PROJECT_DIR$/microsites/embedPages/PaymentPage.js</url>
           <line>117</line>
           <option name="timeStamp" value="14" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/test/PortalAndEmbedTests.js</url>
-          <line>1981</line>
-          <option name="timeStamp" value="39" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/test/PortalAndEmbedTests.js</url>
-          <line>1982</line>
-          <option name="timeStamp" value="41" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/microsites/components/SummaryComponent.js</url>
@@ -429,6 +458,72 @@
           <url>file://$PROJECT_DIR$/microsites/components/DonateComponent.js</url>
           <line>57</line>
           <option name="timeStamp" value="73" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/test/PortalAndEmbedTests.js</url>
+          <line>3068</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="74" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/test/PortalAndEmbedTests.js</url>
+          <line>3069</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="75" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/test/PortalAndEmbedTests.js</url>
+          <line>3070</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="76" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/test/PortalAndEmbedTests.js</url>
+          <line>3071</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="77" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/test/PortalAndEmbedTests.js</url>
+          <line>3072</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="78" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/test/PortalAndEmbedTests.js</url>
+          <line>3073</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="79" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/test/PortalAndEmbedTests.js</url>
+          <line>3074</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="80" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/test/PortalAndEmbedTests.js</url>
+          <line>3075</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="81" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/test/PortalAndEmbedTests.js</url>
+          <line>3076</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="82" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/test/PortalAndEmbedTests.js</url>
+          <line>3077</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="83" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/test/PortalAndEmbedTests.js</url>
+          <line>3078</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="84" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
