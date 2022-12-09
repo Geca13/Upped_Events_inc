@@ -5,7 +5,7 @@
     const SUBTOTAL_TOTAL = { xpath: "//div[contains(@class , 'sub-total')]//div[@id='subTotalAmt']" }
     const TAXES_TOTAL = { id: "taxesAmt" }
     const FEES_TOTAL = { id: "feesAmt" }
-    const TOTAL_TOTAL = { xpath: "//div[contains(@class , 'grand-total')]//div[contains(@class , 'w-30')]" }
+    const TOTAL_TOTAL = { xpath: "//div[contains(@class , 'grand-total')]//div[contains(@class , 'w-30')] | //div[contains(@class , 'grand-total')]//div[contains(@class , 'w-40')]" }
     const DONATIONS_TOTAL = { xpath: "//div[@class='w-30']//div[@id='donationsTotal']" }
     const DISCOUNT_TITLE = { id: "discount"}
     const DISCOUNT_VALUE = { id: "discountAmt" }
@@ -149,7 +149,7 @@
         async assertTaxesAndFeesAreRefactoredToMatchNewPrice(fees,taxes){
             let afterPromoTaxes = await this.getTaxesValue();
             let afterPromoFees = await this.getFeesValue();
-            expect(parseFloat(fees)).to.equal(parseFloat(afterPromoFees));
+            expect(parseFloat(fees)).to.be.greaterThan(parseFloat(afterPromoFees));
             expect(parseFloat(taxes)).to.be.greaterThan(parseFloat(afterPromoTaxes));
         }
 

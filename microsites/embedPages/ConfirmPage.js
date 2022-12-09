@@ -39,7 +39,7 @@
         if(await this.environment() === "stage"){
             assert.equal(total, "Total:$0.27");
         }else{
-            assert.equal(total, "Total:$2.30");
+            assert.equal(total, "Total:$3.34");
         }
         let receiptButton = await this.getElementText(VIEW_RECEIPT_BUTTON);
         assert.equal(receiptButton, "View Receipt");

@@ -90,7 +90,7 @@
         let resetPassword;
         let environment = "stage1";
 
-        let base = Math.floor(100000 + Math.random() * 900000);
+        let base = 666925//Math.floor(100000 + Math.random() * 900000);
         let eventName =  base.toString() + " FullEventName";
         let shortName = base.toString();
         let ticketOneName = base.toString() +"T1";
@@ -113,6 +113,13 @@
         let staffTicket = base.toString() +"staff";
         let ticketStaffQuantity = 2;
         let ticketStaffPrice = "0.23";
+        let uppedFeePercent = 2;
+        let uppedFee$ = 0.5;
+        let addedTax = 13.17;
+        let addedTaxName = "Tax"
+        let addedFee = 0.02;
+        let addedFeeName = "Fee";
+
         let promoOneName = base.toString() +"PN1";
         let promoThreeName = base.toString() +"PN3";
         let promoCodeOne = base.toString() +"PC1";
@@ -128,7 +135,9 @@
         let customerPassword2 = base.toString() + 'Password2';
 
         beforeEach(async function(){
-            driver = await new Builder().forBrowser('chrome').setChromeOptions(new chrome.Options().addArguments('--headless')).build();
+            driver = await new Builder().forBrowser('chrome').build();
+
+            //driver = await new Builder().forBrowser('chrome').setChromeOptions(new chrome.Options().addArguments('--headless')).build();
             await driver.manage().window().setRect({width: 1300, height: 1080});
 
         });
@@ -350,6 +359,8 @@
             
         });
 
+
+
         //EMBED
         it('Test_10 - when sign in clicked on Create Account modal, Login modal should appear',async function () {
 
@@ -365,6 +376,8 @@
             await embedLogin.registerNowButtonIsDisplayed();
 
         });
+
+
 
         //EMBED
         it('Test_11 - should assert create and login components are displayed on one page after ticketing', async function () {
@@ -384,6 +397,7 @@
             await createAccount.isOnCreateAccountEmbedPage();
 
         });
+
 
         //EMBED
         it('Test_12 - when register now clicked on Login modal, create account should appear',async function () {
@@ -529,7 +543,7 @@
         });
 
         //PORTAL
-        it('Test_19 - should add excluded tax and check if bayer total is updated in ticket update modal', async function () {
+        it('Test_19 - should calculate ticket price with UppedEvents fees only', async function () {
             portalLogin = new PortalLoginPage(driver);
             dashboard = new DashboardPage(driver);
             myEvents = new MyEventsPage(driver);
@@ -555,21 +569,47 @@
             await sideMenu.clickTicketingTab();
             await ticketsNav.addTicketButtonIsDisplayed();
             await ticketsNav.clickEditTicketButtonByTicketName(ticketOneName);
-            await createTicket.ticketNameInputIsDisplayed();
-            await createTicket.assertTicketPriceEqualsBuyerTotalPriceWhenNoTaxesOrFees();
-            await createTicket.closeCreateUpdateTicketModal();
+            await createTicket.assertBuyerTotalEqualsTicketPriceMultipliedByTaxPercentageAndAdded$Fee(uppedFeePercent, uppedFee$ , null, null);
+
+        });
+
+        //PORTAL
+        it('Test_19 - should add excluded tax and check if bayer total is updated in ticket update modal', async function () {
+            portalLogin = new PortalLoginPage(driver);
+            dashboard = new DashboardPage(driver);
+            myEvents = new MyEventsPage(driver);
+            eventDetails = new GeneralDetailsTab(driver);
+            sideMenu = new SideMenu(driver);
+            sectionsNavs = new SectionsNavs(driver)
+            ticketsNav = new TicketsNav(driver);
+            createTicket = new CreateTicketModal(driver);
+            ticketSettings = new SettingsNav(driver);
+            taxesAndFees = new TaxesAndFeesPage(driver);
+
+            if(environment === "stage"){
+                await portalLogin.loadAndLoginToStagePortal()
+            } else {
+                await portalLogin.loadAndLoginToDevPortal();
+            }
+            await dashboard.isAtDashboardPage();
+            await sectionsNavs.clickNavByIndex(1);
+            await myEvents.eventsTableIsDisplayed();
+            await myEvents.createdEventIsInTheTable(eventName);
+            await myEvents.clickTheNewCreatedEventInTheTable(eventName);
+            await eventDetails.unpublishButtonIsDisplayed();
+            await sideMenu.clickTicketingTab();
             await ticketsNav.addTicketButtonIsDisplayed();
             await sectionsNavs.clickNavByText("Settings")
             await ticketSettings.taxesAndFeesSubTabIsDisplayed();
             await ticketSettings.clickTaxesAndFeesSubNav();
-            await taxesAndFees.addOneTaxForTickets();
+            await taxesAndFees.addOneTaxForTickets(addedTaxName,addedTax);
             await taxesAndFees.clickSaveTaxesAndFeesButton();
-            let savedTaxValue = await taxesAndFees.getFloatNumberForTaxOrFee(1,1);
             await sectionsNavs.scrollAndClickOnNavLinkByText("Tickets")
             await ticketsNav.clickEditTicketButtonByTicketName(ticketOneName);
-            await createTicket.assertBuyerTotalEqualsTicketPriceMultipliedByTaxPercentage(savedTaxValue);
+            await createTicket.assertBuyerTotalEqualsTicketPriceMultipliedByTaxPercentageAndAdded$Fee(uppedFeePercent, uppedFee$ , addedTax, null)
 
         });
+
 
         //PORTAL
         it('Test_20 - should remove tax and add $ value fee and assert price in update modal', async function () {
@@ -602,21 +642,11 @@
             await ticketSettings.clickTaxesAndFeesSubNav();
             await taxesAndFees.clickRemoveTaxOrFeeButtonByIndex(0);
             await taxesAndFees.clickSaveTaxesAndFeesButton();
-            await sectionsNavs.scrollAndClickOnNavLinkByText("Tickets")
-            await ticketsNav.clickEditTicketButtonByTicketName(ticketOneName);
-            await createTicket.ticketNameInputIsDisplayed();
-            await createTicket.assertTicketPriceEqualsBuyerTotalPriceWhenNoTaxesOrFees();
-            await createTicket.closeCreateUpdateTicketModal();
-            await ticketsNav.addTicketButtonIsDisplayed();
-            await sectionsNavs.clickNavByText("Settings")
-            await ticketSettings.taxesAndFeesSubTabIsDisplayed();
-            await ticketSettings.clickTaxesAndFeesSubNav();
-            await taxesAndFees.set$FeeForTickets("Check $ Fee", ".02");
+            await taxesAndFees.set$FeeForTickets(addedFeeName, addedFee);
             await taxesAndFees.clickSaveTaxesAndFeesButton();
-            let saved$FeeValue = await taxesAndFees.get$FeeFromInputByIndex(1);
             await sectionsNavs.scrollAndClickOnNavLinkByText("Tickets")
             await ticketsNav.clickEditTicketButtonByTicketName(ticketOneName);
-            await createTicket.assertBuyerTotalEqualsTicketPricePlus$Fee(saved$FeeValue);
+            await createTicket.assertBuyerTotalEqualsTicketPriceMultipliedByTaxPercentageAndAdded$Fee(uppedFeePercent, uppedFee$ , null, addedFee);
 
         });
 
@@ -649,13 +679,11 @@
             await sectionsNavs.clickNavByText("Settings")
             await ticketSettings.taxesAndFeesSubTabIsDisplayed();
             await ticketSettings.clickTaxesAndFeesSubNav();
-            await taxesAndFees.addOneTaxForTickets();
+            await taxesAndFees.addOneTaxForTickets(addedTaxName,addedTax);
             await taxesAndFees.clickSaveTaxesAndFeesButton();
-            let savedTaxValue = await taxesAndFees.getFloatNumberForTaxOrFee(1,1);
-            let saved$FeeValue = await taxesAndFees.get$FeeFromInputByIndex(2);
             await sectionsNavs.scrollAndClickOnNavLinkByText("Tickets")
             await ticketsNav.clickEditTicketButtonByTicketName(ticketOneName);
-            await createTicket.assertBuyerTotalEqualsTicketPriceMultipliedByTaxPercentageAndAdded$Fee(savedTaxValue, saved$FeeValue);
+            await createTicket.assertBuyerTotalEqualsTicketPriceMultipliedByTaxPercentageAndAdded$Fee(uppedFeePercent, uppedFee$ , addedTax, addedFee);
 
         });
 
@@ -1417,11 +1445,11 @@
             await main.switchToIframe();
             await main.isInFrame(eventName);
             await embedTickets.ticketListIsDisplayed();
-            await embedTickets.sentKeysToTicketInputByTicketName(ticketTwoName, '2');
+            await embedTickets.sentKeysToTicketInputByTicketName(ticketTwoName, '4');
             await main.clickTicketTermsCheckbox();
             await main.clickNextPageButton();
             await embedLogin.isAtLoginPage();
-            await embedLogin.loginWithEmailAndPassword(customerEmail, customerPassword, 0);
+            await embedLogin.loginWithEmailAndPassword("parma99@parma.it", "Pero1234", 0);
             await donate.calculateTheOrderTotalAfterDonationIsAdded();
 
         });
@@ -2195,7 +2223,7 @@
         });
         
         //EMBED
-        it('Test_70 - should assert that percentage taxes are recalculated and dollar value fees are same when promotion is applied', async function () {
+        it('Test_70 - should assert that percentage taxes and fees are recalculated when promotion is applied', async function () {
 
             main = new EmbedMainPage(driver);
             embedLogin = new LoginPage(driver);
@@ -2883,14 +2911,14 @@
             await main.clickTicketTermsCheckbox();
             await main.clickNextPageButton();
             await embedLogin.isAtLoginPage();
-            await driver.sleep(1000);
-            await embedLogin.completeSwitchTo();
+            await embedLogin.loginWithEmailAndPassword("parma99@parma.it", "Pero1234", 0);
+          /*  await embedLogin.completeSwitchTo();
             await embedLogin.isAtFacebookPage();
             await driver.sleep(5000);
             await embedLogin.completeSignInWithFacebook();
             await driver.switchTo().window(originalWindow);
             await driver.sleep(7000);
-            await main.switchToIframe();
+            await main.switchToIframe();*/
             await extras.isAtExtrasPage();
             await main.clickNextPageButton();
             await embedQuestions.isOnTicketQuestionPage();

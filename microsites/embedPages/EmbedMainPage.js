@@ -17,6 +17,7 @@
    const CREATE_LOGIN_MODAL = { xpath: "//div[@class='modal-content']" }
    const LOGOUT_LINK = { linkText: "Logout" }
    const WELCOME_MESSAGE = { xpath: "//p[contains(@class, 'login_text')]" }
+   const DUMMY_SLIDER = { className: "slider" }
 
 
 
@@ -44,7 +45,7 @@
       }
 
       async isInFrame(eventName){
-         await this.driver.executeScript("document.body.style.transform='scale(0.8, 0.8)'");
+         await this.driver.executeScript("document.body.style.transform='scale(0.9, 0.9)'");
          await this.isDisplayed(EVENT_NAME,10000);
          let extractedEventName = await this.getElementText(EVENT_NAME);
          assert.equal(eventName,extractedEventName)
@@ -77,7 +78,10 @@
       }
       
       async clickConfirmPaymentButton(){
+         await this.jumpInAndOutOfFrame(CONFIRM_PAYMENT_BUTTON)
+
          await this.isDisplayed(CONFIRM_PAYMENT_BUTTON, 5000);
+         await this.moveToElement(CONFIRM_PAYMENT_BUTTON)
          await this.click(CONFIRM_PAYMENT_BUTTON)
       }
 
@@ -185,6 +189,10 @@
       async clickSelectPaymentButton(){
          await this.isDisplayed(SELECT_PAYMENT_BUTTON, 5000)
          await this.click(SELECT_PAYMENT_BUTTON);
+      }
+
+      async getOutAndGetInTheFrame(){
+         await this.jumpInAndOutOfFrame(DUMMY_SLIDER, IFRAME, )
       }
 
       

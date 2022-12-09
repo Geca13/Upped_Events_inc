@@ -30,6 +30,7 @@
     const EMAILS_ON_CONFIRM_MODAL = { className: "single-email" } //list
     const PAY_WITH_CASH_CHECKBOX = { xpath: "(//input[@type='checkbox'])[2]"}
     const SEND_COPY_CHECKBOX = { xpath: "(//input[@type='checkbox'])[5]"}
+    const NO_ACCOUNT_CHECKBOX = { xpath: "(//input[@type='checkbox'])[4]"}
     const CARD_FORM = { id: "cardForm" }
     const OPEN_ORDER_DETAILS = { xpath: "//i[contains(@class, 'icon-angle-right')]" }
     const ORDER_TOTAL = { id: "orderheading" };
@@ -207,12 +208,13 @@
 
         async makePaymentWithCard(base){
             await this.isOnReviewPage();
-            await this.sentKeys(CARDHOLDER_NAME,base +" Geca");
-            await this.sentKeys(CARD_NUMBER,"4111111111111111");
-            await this.sentKeys(CVC,"900");
+            await this.sentKeys(CARDHOLDER_NAME,"Mark Kozlowski");
+            await this.sentKeys(CARD_NUMBER,"4034 9400 8984 8054");
+            await this.sentKeys(CVC,"862");
             await this.sentKeys(EXPIRATION,"March" + Key.TAB + "2025");
-            await this.sentKeys(ADDRESS,"Main 100");
+            await this.sentKeys(ADDRESS,"100 Timber Ridge Road, Newton PA");
             await this.sentKeys(ZIP,"18940");
+            await this.sentKeys(STATE,"Pennsylvania");
             await this.fillUserDataForCardAdditionalEmailNoCopy(base);
             await this.click(PLACE_ORDER_BUTTON);
             await this.isDisplayed(CONFIRMATION_MODAL,55000);
@@ -269,10 +271,11 @@
         }
 
         async fillUserDataForCardAdditionalEmailNoCopy(base) {
-            await this.sentKeys(FIRST_NAME,base);
+            await this.sentKeys(FIRST_NAME,"Mark");
             await this.sentKeys(LAST_NAME,base);
             await this.sentKeys(BIRTH_DATE,"01012000");
-            await this.sentKeys(EMAIL,base+'@'+base+".mk");
+            await this.sentKeys(EMAIL,base+'Mark@'+base+".mk");
+            await this.click(NO_ACCOUNT_CHECKBOX)
             await this.click(SEND_COPY_CHECKBOX)
             await this.sentKeys(ADDITIONAL_EMAIL,base+'ad@ad'+base+".mk");
             await this.click(ADD_BUTTON);

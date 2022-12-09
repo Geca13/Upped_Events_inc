@@ -130,14 +130,27 @@
 
         }
 
-        async assertBuyerTotalEqualsTicketPriceMultipliedByTaxPercentageAndAdded$Fee(savedTaxValue, saved$FeeValue){
+        async assertBuyerTotalEqualsTicketPriceMultipliedByTaxPercentageAndAdded$Fee(savedTaxValue, saved$FeeValue, addedTax, addedFee){
             await this.ticketNameInputIsDisplayed();
             let price = await this.getTicketPriceValue();
-            let feeSubstring = saved$FeeValue.substring(1);
-            let feeParsed = parseFloat(feeSubstring);
-            let buyerCalculated = (parseFloat(price) + parseFloat(price) / 100 * savedTaxValue) + feeParsed ;
-            let buyerTotal = await this.getTicketBuyerPriceValue();
-            assert.equal(buyerCalculated.toFixed(2), buyerTotal )
+            if(addedFee === null && addedTax === null){
+                let buyerCalculated = (parseFloat(price) + parseFloat(price) / 100 * savedTaxValue) + saved$FeeValue ;
+                let buyerTotal = await this.getTicketBuyerPriceValue();
+                assert.equal(buyerCalculated.toFixed(2), buyerTotal )
+            }else if(addedFee === null && addedTax !== null){
+                let buyerCalculated =parseFloat(price) + (parseFloat(price) / 100 * addedTax) + (parseFloat(price) / 100 * savedTaxValue) + saved$FeeValue ;
+                let buyerTotal = await this.getTicketBuyerPriceValue();
+                assert.equal(buyerCalculated.toFixed(2), buyerTotal )
+            } else if(addedFee !== null && addedTax === null){
+                let buyerCalculated = (parseFloat(price) + parseFloat(price) / 100 * savedTaxValue) + saved$FeeValue + addedFee ;
+                let buyerTotal = await this.getTicketBuyerPriceValue();
+                assert.equal(buyerCalculated.toFixed(2), buyerTotal )
+            } else {
+                let buyerCalculated =parseFloat(price) + (parseFloat(price) / 100 * addedTax) + (parseFloat(price) / 100 * savedTaxValue) + saved$FeeValue + addedFee ;
+                let buyerTotal = await this.getTicketBuyerPriceValue();
+                assert.equal(buyerCalculated.toFixed(2), buyerTotal )
+            }
+
         }
 
         async getTicketPriceValue(){

@@ -10,10 +10,10 @@
     const PASSWORD_INPUT = { id: 'password'}
     const VERIFY_PASSWORD_INPUT = { name:'confirmPassword'}
     const AGREE_TERMS_CHECKBOX = { xpath: "//input[@formcontrolname='terms_agree_status']" }
-    const CREATE_ACCOUNT_BUTTON = { xpath: "//*[text()=' Create Account ']"}
+    const CREATE_ACCOUNT_BUTTON = { xpath: "//*[text()=' Create Account '] | //*[text()=' Sign Up ']"}
     const SIGN_UP_BUTTON = { xpath: "//*[text()=' Sign Up ']"}
-    const SIGN_IN_LINK = { xpath: "//*[text()='Sign In']" }
-    const EMAIL_OPTION_BUTTON = { xpath: "//span[text()='Sign up with Email']"}
+    const SIGN_IN_LINK = { xpath: "//*[text()='Login'] | //*[text()='Sign In']" }
+    const EMAIL_OPTION_BUTTON = { xpath: "//div[contains(@class, 'email-btn')]"}
 
 
 
@@ -32,13 +32,29 @@
         }
         
         async clickSignInButton(){
-            await this.click(SIGN_IN_LINK);
+            let signIn = await this.returnElementsCount(SIGN_IN_LINK)
+            if( signIn > 1 ){
+                await this.clickElementReturnedFromAnArray(SIGN_IN_LINK, 1)
+            }else {
+                await this.click(SIGN_IN_LINK);
+            }
+
+        }
+
+        async openEmailSignUpFormOnEmbed(){
+            await this.isOnCreateAccountEmbedPage();
+            await this.click(EMAIL_OPTION_BUTTON);
+            await this.isDisplayed(FIRST_NAME_INPUT, 5000)
         }
 
         async openEmailSignUpForm(){
             await this.isOnCreateAccountEmbedPage();
             await this.click(EMAIL_OPTION_BUTTON);
-            await this.isDisplayed(FIRST_NAME_INPUT, 5000)
+            let email = await this.returnElementsCount(EMAIL_OPTION_BUTTON);
+                 if(email > 0){
+                     await this.click(EMAIL_OPTION_BUTTON);
+                 }
+             await this.isDisplayed(FIRST_NAME_INPUT, 5000)
         }
 
         async assertCreateAccountButtonIsDisabledUntilFieldsArePopulated(index){
@@ -64,6 +80,7 @@
             assert.equal(await createButton.isEnabled(), false);
             await this.sendKeysToElementReturnedFromAnArray(VERIFY_PASSWORD_INPUT,index , "P@ssword123");
             assert.equal(await createButton.isEnabled(), false);
+            await this.moveToElement(CREATE_ACCOUNT_BUTTON);
             await this.clickElementReturnedFromAnArray(AGREE_TERMS_CHECKBOX, index);
             await this.timeout(500)
             assert.equal(await createButton.isEnabled(), true);
@@ -83,14 +100,9 @@
             await this.sendKeysToElementReturnedFromAnArray(DOB_INPUT, index, '11112000');
             await this.sendKeysToElementReturnedFromAnArray(PASSWORD_INPUT, index, password);
             await this.sendKeysToElementReturnedFromAnArray(VERIFY_PASSWORD_INPUT, index, password);
-            await this.clickElementReturnedFromAnArray(AGREE_TERMS_CHECKBOX, index);
             await this.timeout(1500);
-            let createButtonCount = await this.returnElementsCount(CREATE_ACCOUNT_BUTTON);
-            if(createButtonCount > 0){
-                await this.click(CREATE_ACCOUNT_BUTTON);
-            }else{
-                await this.click(SIGN_UP_BUTTON);
-            }
+            await this.click(AGREE_TERMS_CHECKBOX);
+            await this.click(CREATE_ACCOUNT_BUTTON);
             await this.timeout(1500);
             
         }

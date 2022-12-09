@@ -3,9 +3,9 @@
     const FACEBOOK_SIGN_IN_BUTTON = { className: "facebook-login"}
     const EMAIL_INPUT = { xpath: "//input[@placeholder='Email or Username']" };
     const PASSWORD_INPUT = { xpath: "//input[@placeholder='Enter Password']" };
-    const LOGIN_BUTTON = { xpath: "//*[text()='Login Now']" }
+    const LOGIN_BUTTON = { xpath: "//button[contains(@class, 'login-btn')]" }
     const AGREE_BUTTON = { xpath: "//*[text()='Agree']" }
-    const REGISTER_NOW_LINK = { xpath: "//span[contains(@class, 'register')]" }
+    const REGISTER_NOW_LINK = { xpath: "//*[text()='Register Now']" }
     const FACEBOOK_CONTENT = { id: 'content' }
     const FACEBOOK_EMAIL_INPUT = { id: 'email' }
     const FACEBOOK_PASSWORD_INPUT = { id: 'pass' }
@@ -19,7 +19,7 @@
         }
 
         async isAtLoginPage(){
-            await this.isDisplayed(FORGET_PASSWORD, 5000);
+            await this.isDisplayed(EMAIL_INPUT, 5000);
         }
 
         async loginWithEmailAndPassword(email, password, index){

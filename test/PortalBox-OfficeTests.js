@@ -45,10 +45,10 @@
         let sectionsNavs;
         let donation;
         let createDonation;
-        let eventId = "1861";
+        let eventId;
 
 
-        let base = 636310 // Math.floor(100000 + Math.random() * 900000);
+        let base =  Math.floor(100000 + Math.random() * 900000);
         let eventName =  base.toString() + " FullEventName";
         let shortName = base.toString();
         let ticketOneName = base.toString() +"T1";
@@ -76,7 +76,7 @@
         let ticketGroupOne = base.toString() +"TG1";
         let ticketGroupTwo = base.toString() +"TG2";
         let ticketGroupThree = base.toString() +"TG3";
-        let environment = 'dev';
+        let environment = 'stage1';
 
         beforeEach(async function(){
             //driver = await new Builder().forBrowser('chrome').setChromeOptions(new chrome.Options().addArguments('--headless')).build();
@@ -118,6 +118,7 @@
             }
 
         })
+
         it('should create new event',async function () {
             let split ;
             createEvent = new CreateEventModal(driver);
@@ -330,7 +331,6 @@
         });
 
 
-
         it('should add excluded tax and check if bayer total is updated in ticket summary', async function () {
 
             taxesAndFees = new TaxesAndFeesPage(driver);
@@ -371,7 +371,7 @@
             await taxesAndFees.addOneTaxForTickets();
             await taxesAndFees.clickSaveTaxesAndFeesButton();
             let savedTaxValue = await taxesAndFees.getFloatNumberForTaxOrFee(1,1);
-            let saved$FeeValue = await taxesAndFees.get$FeeFromInputByIndex(2);
+            let saved$FeeValue = await taxesAndFees.get$FeeFromInputByIndex(4);
             let cleanedFee = saved$FeeValue.substring(1)
             await bosTickets.openBoxOfficeDirectly(eventId, environment);
             await bosTickets.selectTicketByIndexSendQuantityAndSave(0, 2);

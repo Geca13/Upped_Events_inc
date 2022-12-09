@@ -39,7 +39,7 @@
             let donation = new DonateComponent(this.driver);
             await donation.addCustomDonationToInputAndAddItToOrder();
             let alert = new Alerts(this.driver);
-            await alert.correctInfoMessageIsDisplayed("Donation Added for UPPED EVENTS INC")
+            await alert.correctInfoMessageIsDisplayed("Donation added for UPPED EVENTS INC")
             
         }
 

@@ -13,7 +13,7 @@ class BasePage {
     }
 
     async environment(){
-        return "stage1";
+        return "dev";
     }
     
     find(locator) {
@@ -137,6 +137,7 @@ class BasePage {
     async switchToAnIframe(locator){
         let frame = await this.find(locator)
         await this.driver.switchTo().frame(frame);
+        console.log("InFrane")
     }
     
     async isDisplayed(locator,timeout) {
@@ -375,6 +376,19 @@ class BasePage {
 
     async getSubstringOfInboxEmailString(text){
         return text.substring(1, text.length - 1);
+    }
+
+    async jumpInAndOutOfFrame(locator, frame, buttonLocator){
+       let size = await this.driver.manage().window().getRect();
+       if(size.width < 1000 ){
+           await this.driver.switchTo().defaultContent();
+           await this.timeout(2000)
+           await this.scrollToView(locator);
+           await this.switchToAnIframe(frame);
+           await this.timeout(2000)
+           await this.scrollToView(buttonLocator)
+       }
+
     }
 
 }

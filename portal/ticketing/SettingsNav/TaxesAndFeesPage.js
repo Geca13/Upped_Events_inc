@@ -28,8 +28,8 @@
             await this.isDisplayed(INCLUDED_TAXES_RADIO, 5000);
         }
 
-        async addOneTaxForTickets(){
-            await this.setFirstTaxForTickets("Check Tax", "13.17");
+        async addOneTaxForTickets(taxName ,addedTax){
+            await this.setFirstTaxForTickets(taxName,addedTax);
         }
 
         async setFirstTaxForTickets(taxName, taxValue){
@@ -41,8 +41,9 @@
 
         async set$FeeForTickets(feeName, feeValue){
             await this.timeout(1500);
+            await this.moveToElement(SAVE_TAXES_AND_FEES_BUTTON)
             await this.sentKeys(FEE_NAME_INPUT, feeName);
-            await this.sentKeys(FEE_$_VALUE_INPUT, feeValue);
+            await this.sendKeysToElementReturnedFromAnArray(FEE_$_VALUE_INPUT, 1, feeValue);
             await this.clickElementReturnedFromAnArray(ADD_BUTTONS,1)
 
         }
