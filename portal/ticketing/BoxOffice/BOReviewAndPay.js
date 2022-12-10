@@ -209,7 +209,7 @@
         async makePaymentWithCard(base){
             await this.isOnReviewPage();
             await this.sentKeys(CARDHOLDER_NAME,"Mark Kozlowski");
-            await this.sentKeys(CARD_NUMBER,"2223000010309711");
+            await this.sentKeys(CARD_NUMBER,"2223000010309703");
             await this.sentKeys(CVC,"862");
             await this.sentKeys(EXPIRATION,"March" + Key.TAB + "2025");
             await this.sentKeys(ADDRESS,"100 Timber Ridge Road, Newton PA");

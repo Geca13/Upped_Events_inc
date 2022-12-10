@@ -12,8 +12,8 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0f4661ab-f48b-4ba5-9b91-545ca496b723" name="Changes" comment="fixes">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="0f4661ab-f48b-4ba5-9b91-545ca496b723" name="Changes" comment="fixes5">
+      <change beforePath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOReviewAndPay.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOReviewAndPay.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -188,7 +188,7 @@
       <workItem from="1670402371621" duration="15867000" />
       <workItem from="1670491193048" duration="11578000" />
       <workItem from="1670572793561" duration="17324000" />
-      <workItem from="1670631093321" duration="4000" />
+      <workItem from="1670631093321" duration="332000" />
     </task>
     <task id="LOCAL-00001" summary="Rebuild whole project to match new workflow">
       <created>1669752944280</created>
@@ -260,7 +260,35 @@
       <option name="project" value="LOCAL" />
       <updated>1670625401934</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="fixes2">
+      <created>1670631159304</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1670631159304</updated>
+    </task>
+    <task id="LOCAL-00012" summary="fixes3">
+      <created>1670631233419</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1670631233419</updated>
+    </task>
+    <task id="LOCAL-00013" summary="fixes4">
+      <created>1670631407103</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1670631407103</updated>
+    </task>
+    <task id="LOCAL-00014" summary="fixes5">
+      <created>1670631423662</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1670631423667</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -287,7 +315,11 @@
     <MESSAGE value="Revert back 2" />
     <MESSAGE value="forget password tests" />
     <MESSAGE value="fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixes" />
+    <MESSAGE value="fixes2" />
+    <MESSAGE value="fixes3" />
+    <MESSAGE value="fixes4" />
+    <MESSAGE value="fixes5" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixes5" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
