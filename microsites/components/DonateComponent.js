@@ -25,6 +25,7 @@
         }
 
         async assertElementsOnDonateTab(eventName, message){
+            await this.timeout(2000)
             await this.donateScreenIsVisible()
             let donate = await this.returnElementsCount(DONATE_HEADER)
                 if(donate > 0 ){
