@@ -76,7 +76,7 @@
         let ticketGroupOne = base.toString() +"TG1";
         let ticketGroupTwo = base.toString() +"TG2";
         let ticketGroupThree = base.toString() +"TG3";
-        let environment = 'stage1';
+        let environment = 'dev';
 
         beforeEach(async function(){
             driver = await new Builder().forBrowser('chrome').setChromeOptions(new chrome.Options().addArguments('--headless')).build();
