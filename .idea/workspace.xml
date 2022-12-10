@@ -12,22 +12,8 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0f4661ab-f48b-4ba5-9b91-545ca496b723" name="Changes" comment="forget password tests">
-      <change afterPath="$PROJECT_DIR$/test/PortalAndMobileViewEmbed.js" afterDir="false" />
+    <list default="true" id="0f4661ab-f48b-4ba5-9b91-545ca496b723" name="Changes" comment="fixes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BasePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/BasePage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/microsites/components/NewCardComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/microsites/components/NewCardComponent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/microsites/components/SummaryComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/microsites/components/SummaryComponent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/microsites/embedPages/ConfirmPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/microsites/embedPages/ConfirmPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/microsites/embedPages/CreateAccountPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/microsites/embedPages/CreateAccountPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/microsites/embedPages/EmbedMainPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/microsites/embedPages/EmbedMainPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/microsites/embedPages/LoginPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/microsites/embedPages/LoginPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portal/portalModals/CreateTicketModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/portalModals/CreateTicketModal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOAddExtras.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOAddExtras.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOReviewAndPay.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOReviewAndPay.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portal/ticketing/SettingsNav/TaxesAndFeesPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/ticketing/SettingsNav/TaxesAndFeesPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/PortalAndEmbedTests.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/PortalAndEmbedTests.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/PortalBox-OfficeTests.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/PortalBox-OfficeTests.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -201,7 +187,8 @@
       <workItem from="1670324015933" duration="9518000" />
       <workItem from="1670402371621" duration="15867000" />
       <workItem from="1670491193048" duration="11578000" />
-      <workItem from="1670572793561" duration="16924000" />
+      <workItem from="1670572793561" duration="17324000" />
+      <workItem from="1670631093321" duration="4000" />
     </task>
     <task id="LOCAL-00001" summary="Rebuild whole project to match new workflow">
       <created>1669752944280</created>
@@ -266,7 +253,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670269539851</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="fixes">
+      <created>1670625401934</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1670625401934</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -292,7 +286,8 @@
     <MESSAGE value="Revert back" />
     <MESSAGE value="Revert back 2" />
     <MESSAGE value="forget password tests" />
-    <option name="LAST_COMMIT_MESSAGE" value="forget password tests" />
+    <MESSAGE value="fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -465,79 +460,66 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/portal/portalModals/CreateTicketModal.js</url>
           <line>140</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="86" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/portal/portalModals/CreateTicketModal.js</url>
           <line>141</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="87" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/portal/portalModals/CreateTicketModal.js</url>
           <line>142</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="88" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/microsites/components/SummaryComponent.js</url>
           <line>93</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="89" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/microsites/components/SummaryComponent.js</url>
           <line>92</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="90" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/microsites/components/SummaryComponent.js</url>
           <line>91</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="91" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/microsites/components/SummaryComponent.js</url>
           <line>90</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="92" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/microsites/components/SummaryComponent.js</url>
           <line>89</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="93" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/microsites/components/SummaryComponent.js</url>
           <line>88</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="94" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/microsites/components/SummaryComponent.js</url>
           <line>87</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="95" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/microsites/components/SummaryComponent.js</url>
           <line>86</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="96" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/microsites/components/SummaryComponent.js</url>
           <line>85</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="97" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/microsites/components/SummaryComponent.js</url>
           <line>84</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="98" />
         </line-breakpoint>
       </breakpoints>
