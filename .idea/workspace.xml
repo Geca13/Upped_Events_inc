@@ -12,8 +12,8 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0f4661ab-f48b-4ba5-9b91-545ca496b723" name="Changes" comment="fixes5">
-      <change beforePath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOReviewAndPay.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOReviewAndPay.js" afterDir="false" />
+    <list default="true" id="0f4661ab-f48b-4ba5-9b91-545ca496b723" name="Changes" comment="fixes6">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +69,7 @@
       <recent name="D:\Upped_Events_Inc" />
     </key>
   </component>
-  <component name="RunManager" selected="Mocha.Should do embed tests.Test_15 - should create account on Login/Create account page and assert redirection to payment">
+  <component name="RunManager" selected="Mocha.Should do embed tests">
     <configuration name="Should do embed tests" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
       <node-interpreter>project</node-interpreter>
       <node-options />
@@ -151,11 +151,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Mocha.Should do embed tests" />
         <item itemvalue="Mocha.Should do embed tests.Test_15 - should create account on Login/Create account page and assert redirection to payment" />
         <item itemvalue="Mocha.Should do embed tests.Test_92 - should check response provided for the updated question" />
         <item itemvalue="Mocha.Should do embed tests.Test_91 - should login with facebook assert updated ticket questions for first question , answer and submit answers" />
         <item itemvalue="Mocha.Should do embed tests.Test_46 - should assert when donation is added to order calculates correctly in Order Total in the embed" />
-        <item itemvalue="Mocha.Should do embed tests" />
       </list>
     </recent_temporary>
   </component>
@@ -188,7 +188,8 @@
       <workItem from="1670402371621" duration="15867000" />
       <workItem from="1670491193048" duration="11578000" />
       <workItem from="1670572793561" duration="17324000" />
-      <workItem from="1670631093321" duration="332000" />
+      <workItem from="1670631093321" duration="415000" />
+      <workItem from="1670659363908" duration="1000" />
     </task>
     <task id="LOCAL-00001" summary="Rebuild whole project to match new workflow">
       <created>1669752944280</created>
@@ -288,7 +289,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670631423667</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="fixes6">
+      <created>1670631445010</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1670631445010</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -319,7 +327,8 @@
     <MESSAGE value="fixes3" />
     <MESSAGE value="fixes4" />
     <MESSAGE value="fixes5" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixes5" />
+    <MESSAGE value="fixes6" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixes6" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
