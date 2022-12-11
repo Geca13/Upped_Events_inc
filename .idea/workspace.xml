@@ -12,8 +12,16 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0f4661ab-f48b-4ba5-9b91-545ca496b723" name="Changes" comment="fixes9">
+    <list default="true" id="0f4661ab-f48b-4ba5-9b91-545ca496b723" name="Changes" comment="fixes stale">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BasePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/BasePage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helpers/Inbox.js" beforeDir="false" afterPath="$PROJECT_DIR$/helpers/Inbox.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOAddDetails.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOAddDetails.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOReviewAndPay.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOReviewAndPay.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOSelectTickets.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOSelectTickets.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portal/ticketing/SettingsNav/TaxesAndFeesPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/ticketing/SettingsNav/TaxesAndFeesPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/PortalAndEmbedTests.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/PortalAndEmbedTests.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/PortalBox-OfficeTests.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/PortalBox-OfficeTests.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,39 +77,8 @@
       <recent name="D:\Upped_Events_Inc" />
     </key>
   </component>
-  <component name="RunManager" selected="Mocha.Should do embed tests">
-    <configuration name="Should do embed tests" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
-      <node-interpreter>project</node-interpreter>
-      <node-options />
-      <mocha-package>$PROJECT_DIR$/node_modules/mocha</mocha-package>
-      <working-directory>$PROJECT_DIR$</working-directory>
-      <pass-parent-env>true</pass-parent-env>
-      <ui>bdd</ui>
-      <extra-mocha-options />
-      <test-kind>SUITE</test-kind>
-      <test-file>$PROJECT_DIR$/test/PortalAndEmbedTests.js</test-file>
-      <test-names>
-        <name value="Should do embed tests" />
-      </test-names>
-      <method v="2" />
-    </configuration>
-    <configuration name="Should do embed tests.Test_15 - should create account on Login/Create account page and assert redirection to payment" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
-      <node-interpreter>project</node-interpreter>
-      <node-options />
-      <mocha-package>$PROJECT_DIR$/node_modules/mocha</mocha-package>
-      <working-directory>$PROJECT_DIR$</working-directory>
-      <pass-parent-env>true</pass-parent-env>
-      <ui>bdd</ui>
-      <extra-mocha-options />
-      <test-kind>TEST</test-kind>
-      <test-file>$PROJECT_DIR$/test/PortalAndMobileViewEmbed.js</test-file>
-      <test-names>
-        <name value="Should do embed tests" />
-        <name value="Test_15 - should create account on Login/Create account page and assert redirection to payment" />
-      </test-names>
-      <method v="2" />
-    </configuration>
-    <configuration name="Should do embed tests.Test_46 - should assert when donation is added to order calculates correctly in Order Total in the embed" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Mocha.Should do embed tests.Test_33 - should create three more tickets and ticket groups, then assert data in tickets table ">
+    <configuration name="Should do embed tests.Test_09 - should create new account on Create Account modal and assert user is logged in and Logout link is displayed" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
       <node-interpreter>project</node-interpreter>
       <node-options />
       <mocha-package>$PROJECT_DIR$/node_modules/mocha</mocha-package>
@@ -113,11 +90,11 @@
       <test-file>$PROJECT_DIR$/test/PortalAndEmbedTests.js</test-file>
       <test-names>
         <name value="Should do embed tests" />
-        <name value="Test_46 - should assert when donation is added to order calculates correctly in Order Total in the embed" />
+        <name value="Test_09 - should create new account on Create Account modal and assert user is logged in and Logout link is displayed" />
       </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="Should do embed tests.Test_91 - should login with facebook assert updated ticket questions for first question , answer and submit answers" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
+    <configuration name="Should do embed tests.Test_20 - should remove tax and add $ value fee and assert price in update modal" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
       <node-interpreter>project</node-interpreter>
       <node-options />
       <mocha-package>$PROJECT_DIR$/node_modules/mocha</mocha-package>
@@ -129,11 +106,11 @@
       <test-file>$PROJECT_DIR$/test/PortalAndEmbedTests.js</test-file>
       <test-names>
         <name value="Should do embed tests" />
-        <name value="Test_91 - should login with facebook assert updated ticket questions for first question , answer and submit answers" />
+        <name value="Test_20 - should remove tax and add $ value fee and assert price in update modal" />
       </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="Should do embed tests.Test_92 - should check response provided for the updated question" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
+    <configuration name="Should do embed tests.Test_21 - should add excluded tax again and check if bayer total is updated in ticket update modal" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
       <node-interpreter>project</node-interpreter>
       <node-options />
       <mocha-package>$PROJECT_DIR$/node_modules/mocha</mocha-package>
@@ -145,17 +122,49 @@
       <test-file>$PROJECT_DIR$/test/PortalAndEmbedTests.js</test-file>
       <test-names>
         <name value="Should do embed tests" />
-        <name value="Test_92 - should check response provided for the updated question" />
+        <name value="Test_21 - should add excluded tax again and check if bayer total is updated in ticket update modal" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="Should do embed tests.Test_25 - should make payment with new card in embed and assert Sold Out message is displayed after purchase" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <mocha-package>$PROJECT_DIR$/node_modules/mocha</mocha-package>
+      <working-directory>$PROJECT_DIR$</working-directory>
+      <pass-parent-env>true</pass-parent-env>
+      <ui>bdd</ui>
+      <extra-mocha-options />
+      <test-kind>TEST</test-kind>
+      <test-file>$PROJECT_DIR$/test/PortalAndEmbedTests.js</test-file>
+      <test-names>
+        <name value="Should do embed tests" />
+        <name value="Test_25 - should make payment with new card in embed and assert Sold Out message is displayed after purchase" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="Should do embed tests.Test_33 - should create three more tickets and ticket groups, then assert data in tickets table " type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <mocha-package>$PROJECT_DIR$/node_modules/mocha</mocha-package>
+      <working-directory>$PROJECT_DIR$</working-directory>
+      <pass-parent-env>true</pass-parent-env>
+      <ui>bdd</ui>
+      <extra-mocha-options />
+      <test-kind>TEST</test-kind>
+      <test-file>$PROJECT_DIR$/test/PortalAndEmbedTests.js</test-file>
+      <test-names>
+        <name value="Should do embed tests" />
+        <name value="Test_33 - should create three more tickets and ticket groups, then assert data in tickets table " />
       </test-names>
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Mocha.Should do embed tests" />
-        <item itemvalue="Mocha.Should do embed tests.Test_15 - should create account on Login/Create account page and assert redirection to payment" />
-        <item itemvalue="Mocha.Should do embed tests.Test_92 - should check response provided for the updated question" />
-        <item itemvalue="Mocha.Should do embed tests.Test_91 - should login with facebook assert updated ticket questions for first question , answer and submit answers" />
-        <item itemvalue="Mocha.Should do embed tests.Test_46 - should assert when donation is added to order calculates correctly in Order Total in the embed" />
+        <item itemvalue="Mocha.Should do embed tests.Test_33 - should create three more tickets and ticket groups, then assert data in tickets table " />
+        <item itemvalue="Mocha.Should do embed tests.Test_25 - should make payment with new card in embed and assert Sold Out message is displayed after purchase" />
+        <item itemvalue="Mocha.Should do embed tests.Test_09 - should create new account on Create Account modal and assert user is logged in and Logout link is displayed" />
+        <item itemvalue="Mocha.Should do embed tests.Test_21 - should add excluded tax again and check if bayer total is updated in ticket update modal" />
+        <item itemvalue="Mocha.Should do embed tests.Test_20 - should remove tax and add $ value fee and assert price in update modal" />
       </list>
     </recent_temporary>
   </component>
@@ -189,7 +198,8 @@
       <workItem from="1670491193048" duration="11578000" />
       <workItem from="1670572793561" duration="17324000" />
       <workItem from="1670631093321" duration="415000" />
-      <workItem from="1670659363908" duration="2167000" />
+      <workItem from="1670659363908" duration="21077000" />
+      <workItem from="1670746466042" duration="21801000" />
     </task>
     <task id="LOCAL-00001" summary="Rebuild whole project to match new workflow">
       <created>1669752944280</created>
@@ -317,7 +327,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670660301141</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="fixes stale">
+      <created>1670668515528</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1670668515529</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -352,7 +369,8 @@
     <MESSAGE value="fixes7" />
     <MESSAGE value="fixes8" />
     <MESSAGE value="fixes9" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixes9" />
+    <MESSAGE value="fixes stale" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixes stale" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -373,51 +391,6 @@
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/microsites/components/SummaryComponent.js</url>
-          <line>167</line>
-          <option name="timeStamp" value="43" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/microsites/components/SummaryComponent.js</url>
-          <line>168</line>
-          <option name="timeStamp" value="44" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/microsites/components/SummaryComponent.js</url>
-          <line>169</line>
-          <option name="timeStamp" value="45" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/microsites/components/SummaryComponent.js</url>
-          <line>170</line>
-          <option name="timeStamp" value="46" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/microsites/components/SummaryComponent.js</url>
-          <line>171</line>
-          <option name="timeStamp" value="47" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/microsites/components/SummaryComponent.js</url>
-          <line>172</line>
-          <option name="timeStamp" value="48" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/microsites/components/SummaryComponent.js</url>
-          <line>173</line>
-          <option name="timeStamp" value="49" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/microsites/components/SummaryComponent.js</url>
-          <line>174</line>
-          <option name="timeStamp" value="50" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/microsites/components/SummaryComponent.js</url>
-          <line>175</line>
-          <option name="timeStamp" value="51" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/microsites/components/TicketsComponent.js</url>
           <line>235</line>
           <option name="timeStamp" value="52" />
@@ -434,92 +407,92 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/microsites/components/DonateComponent.js</url>
-          <line>40</line>
+          <line>41</line>
           <option name="timeStamp" value="56" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/microsites/components/DonateComponent.js</url>
-          <line>41</line>
+          <line>42</line>
           <option name="timeStamp" value="57" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/microsites/components/DonateComponent.js</url>
-          <line>42</line>
+          <line>43</line>
           <option name="timeStamp" value="58" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/microsites/components/DonateComponent.js</url>
-          <line>43</line>
+          <line>44</line>
           <option name="timeStamp" value="59" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/microsites/components/DonateComponent.js</url>
-          <line>44</line>
+          <line>45</line>
           <option name="timeStamp" value="60" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/microsites/components/DonateComponent.js</url>
-          <line>45</line>
+          <line>46</line>
           <option name="timeStamp" value="61" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/microsites/components/DonateComponent.js</url>
-          <line>46</line>
+          <line>47</line>
           <option name="timeStamp" value="62" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/microsites/components/DonateComponent.js</url>
-          <line>47</line>
+          <line>48</line>
           <option name="timeStamp" value="63" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/microsites/components/DonateComponent.js</url>
-          <line>48</line>
+          <line>49</line>
           <option name="timeStamp" value="64" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/microsites/components/DonateComponent.js</url>
-          <line>49</line>
+          <line>50</line>
           <option name="timeStamp" value="65" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/microsites/components/DonateComponent.js</url>
-          <line>50</line>
+          <line>51</line>
           <option name="timeStamp" value="66" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/microsites/components/DonateComponent.js</url>
-          <line>51</line>
+          <line>52</line>
           <option name="timeStamp" value="67" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/microsites/components/DonateComponent.js</url>
-          <line>52</line>
+          <line>53</line>
           <option name="timeStamp" value="68" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/microsites/components/DonateComponent.js</url>
-          <line>53</line>
+          <line>54</line>
           <option name="timeStamp" value="69" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/microsites/components/DonateComponent.js</url>
-          <line>54</line>
+          <line>55</line>
           <option name="timeStamp" value="70" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/microsites/components/DonateComponent.js</url>
-          <line>55</line>
+          <line>56</line>
           <option name="timeStamp" value="71" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/microsites/components/DonateComponent.js</url>
-          <line>56</line>
+          <line>57</line>
           <option name="timeStamp" value="72" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/microsites/components/DonateComponent.js</url>
-          <line>57</line>
+          <line>58</line>
           <option name="timeStamp" value="73" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -538,54 +511,33 @@
           <option name="timeStamp" value="88" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/microsites/components/SummaryComponent.js</url>
-          <line>93</line>
-          <option name="timeStamp" value="89" />
+          <url>file://$PROJECT_DIR$/portal/ticketing/BoxOffice/BOReviewAndPay.js</url>
+          <line>283</line>
+          <option name="timeStamp" value="105" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/microsites/components/SummaryComponent.js</url>
-          <line>92</line>
-          <option name="timeStamp" value="90" />
+          <url>file://$PROJECT_DIR$/portal/ticketing/BoxOffice/BOAddDetails.js</url>
+          <line>206</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="127" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/microsites/components/SummaryComponent.js</url>
-          <line>91</line>
-          <option name="timeStamp" value="91" />
+          <url>file://$PROJECT_DIR$/portal/ticketing/BoxOffice/BOAddDetails.js</url>
+          <line>207</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="128" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/microsites/components/SummaryComponent.js</url>
-          <line>90</line>
-          <option name="timeStamp" value="92" />
+          <url>file://$PROJECT_DIR$/portal/ticketing/BoxOffice/BOAddDetails.js</url>
+          <line>208</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="129" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/microsites/components/SummaryComponent.js</url>
-          <line>89</line>
-          <option name="timeStamp" value="93" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/microsites/components/SummaryComponent.js</url>
-          <line>88</line>
-          <option name="timeStamp" value="94" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/microsites/components/SummaryComponent.js</url>
-          <line>87</line>
-          <option name="timeStamp" value="95" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/microsites/components/SummaryComponent.js</url>
-          <line>86</line>
-          <option name="timeStamp" value="96" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/microsites/components/SummaryComponent.js</url>
-          <line>85</line>
-          <option name="timeStamp" value="97" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/microsites/components/SummaryComponent.js</url>
-          <line>84</line>
-          <option name="timeStamp" value="98" />
+          <url>file://$PROJECT_DIR$/portal/ticketing/TicketsNav.js</url>
+          <line>57</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="130" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

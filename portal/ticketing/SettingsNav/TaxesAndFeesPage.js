@@ -59,6 +59,12 @@
             return await this.getElementTextFromAnArrayByIndex(GET_TAX_OR_FEE_VALUE, index);
         }
 
+        async addPercentTaxAndDollarFee(taxName, taxValue, feeName, feeValue){
+            await this.setFirstTaxForTickets(taxName, taxValue);
+            await this.set$FeeForTickets(feeName, feeValue);
+            await this.clickSaveTaxesAndFeesButton()
+        }
+
         async getTaxOrFeeValueByIndex(parentIndex, childIndex){
             return await this.getChildTextByParentIndexAndChildIndex(TAXES_AND_FEES_VALUES, parentIndex, childIndex);
         }

@@ -88,7 +88,7 @@
         let embedQuestions;
         let forgotPassword;
         let resetPassword;
-        let environment = "stage1";
+        let environment = "dev";
 
         let base = Math.floor(100000 + Math.random() * 900000);
         let eventName =  base.toString() + " FullEventName";

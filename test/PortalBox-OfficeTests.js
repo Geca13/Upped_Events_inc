@@ -45,7 +45,7 @@
         let sectionsNavs;
         let donation;
         let createDonation;
-        let eventId;
+        let eventId ;
 
 
         let base =  Math.floor(100000 + Math.random() * 900000);
@@ -53,19 +53,30 @@
         let shortName = base.toString();
         let ticketOneName = base.toString() +"T1";
         let ticketOneQuantity = 999;
-        let ticketOnePrice = 0.10;
+        let ticketOnePrice = "1.00";
+        let ticketOnePriceStage = "0.10";
         let ticketTwoName = base.toString() +"T2";
         let ticketTwoQuantity = 888;
-        let ticketTwoPrice = 0.12;
+        let ticketTwoPrice = "1.20";
+        let ticketTwoPriceStage = "0.12";
         let ticketThreeName = base.toString() +"T3";
         let ticketThreeQuantity = 777;
-        let ticketThreePrice = 0.07;
+        let ticketThreePrice = "0.75";
+        let ticketThreePriceStage = "0.04";
         let ticketFourName = base.toString() +"T4";
         let ticketFourQuantity = 666;
-        let ticketFourPrice = 0.04;
+        let ticketFourPrice = "0.40";
+        let ticketFourPriceStage = "0.02";
         let staffTicket = base.toString() +"staff";
-        let ticketStaffQuantity = 5;
-        let ticketStaffPrice = 0.25;
+        let ticketStaffQuantity = 2;
+        let ticketStaffPrice = "0.23";
+        let uppedFeePercent = 2;
+        let uppedFee$ = 0.5;
+        let addedTax = 13.17;
+        let addedTaxName = "Tax"
+        let addedFee = 0.02;
+        let addedFeeName = "Fee";
+
         let ticketToBeDeleted = base.toString() +"delete";
         let ticketToBeDeletedQuantity = 666;
         let ticketToBeDeletedPrice = 0.25;
@@ -117,7 +128,6 @@
             }
 
         })
-
         it('should create new event',async function () {
             let split ;
             createEvent = new CreateEventModal(driver);
@@ -143,14 +153,24 @@
             await sideMenu.clickTicketingTab();
             await ticketsNav.addTicketButtonIsDisplayed();
             await ticketsNav.clickAddTicketButton();
-            await createTicket.createNewTicket(ticketOneName,ticketOnePrice, ticketOneQuantity);
+
+            if(environment === "stage"){
+                await createTicket.createNewTicket(ticketOneName,ticketOnePriceStage, ticketOneQuantity);
+            } else {
+                await createTicket.createNewTicket(ticketOneName,ticketOnePrice, ticketOneQuantity);
+            }
+
             await ticketsNav.addTicketButtonIsDisplayed();
             await ticketsNav.clickActivateTicketToggle(ticketOneName);
             await sectionsNavs.clickNavByText("Box Office");
-            await bosTickets.assertTicketDataByTicketName(ticketOneName,ticketOnePrice.toFixed(2), ticketOneQuantity);
+            if(environment === "stage"){
+                await bosTickets.assertTicketDataByTicketName(ticketOneName,ticketOnePriceStage, ticketOneQuantity);
+            } else {
+                await bosTickets.assertTicketDataByTicketName(ticketOneName,ticketOnePrice, ticketOneQuantity);
+            }
+
 
         });
-        
 
         it('should assert box-office navigation steps names',async function () {
 
@@ -212,7 +232,8 @@
 
             await bosTickets.openBoxOfficeDirectly(eventId, environment);
             await bosTickets.isOnBoxOfficePage();
-            await bosTickets.addNewQuantityAndSetNewPrice();
+            await bosTickets.overrideTheOriginalPriceForTicketByIndex(0);
+            await bosTickets.assertNewPriceAndTextFontColor();
 
         });
 
@@ -234,7 +255,7 @@
 
         it('should enable donation in portal and assert donation component is displayed and assert elements',async function () {
 
-            
+
             sectionsNavs = new SectionsNavs(driver)
             donation = new DonationPage(driver);
             createDonation = new CreateDonationModal(driver);
@@ -256,9 +277,6 @@
             await bosExtras.clickOnDonationOptionAndAssertElements(eventName)
 
         });
-
-
-
 
         it('should assert when donation value button is clicked the value is displayed in input',async function () {
 
@@ -311,79 +329,59 @@
 
         });
 
-        it('should assert elements on Order Details page when only 1 ticket selected and no taxes , fees, donation, promotion and ticket questions',async function () {
+        it('should assert elements on Order Details page when only 1 ticket selected and only uppedFees included',async function () {
 
             await bosTickets.openBoxOfficeDirectly(eventId, environment);
             await bosTickets.selectTicketByIndexSendQuantityAndSave(0, 1);
             await bosTickets.clickNavButtonByIndexWhenTicketsSelected(2);
-            await bosDetails.assertElementsOnOrderDetailsWithOnlyBasicTicket(ticketOneName);
+
+            if(environment === "stage"){
+                await bosDetails.assertElementsOnOrderDetailsWithOnlyBasicTicket(ticketOneName, ticketOnePriceStage, uppedFee$,uppedFeePercent);
+            } else {
+                await bosDetails.assertElementsOnOrderDetailsWithOnlyBasicTicket(ticketOneName, ticketOnePrice, uppedFee$,uppedFeePercent);
+            }
 
         });
 
-        it('should assert elements on Review and Pay page when only 1 ticket selected and no taxes , fees, donation or promotion',async function () {
+        it('should assert elements on Review and Pay page when only 1 ticket selected and only uppedFees included',async function () {
 
             await bosTickets.openBoxOfficeDirectly(eventId, environment);
             await bosTickets.selectTicketByIndexSendQuantityAndSave(0, 1);
             await bosTickets.clickNavButtonByIndexWhenTicketsSelected(3);
-            await bosReview.assertElementsOnReviewAndPayPageWhenOneTicketSelected(ticketOneName);
+            if(environment === "stage"){
+                await bosReview.assertElementsOnReviewAndPayPageWhenOneTicketSelected(ticketOneName, ticketOnePriceStage, uppedFee$,uppedFeePercent);
+            } else {
+                await bosReview.assertElementsOnReviewAndPayPageWhenOneTicketSelected(ticketOneName, ticketOnePrice, uppedFee$,uppedFeePercent);
+            }
 
         });
 
 
-        it('should add excluded tax and check if bayer total is updated in ticket summary', async function () {
+        it('should add excluded percentage tax and $ fee and assert if bayer total is updated in ticket summary', async function () {
 
             taxesAndFees = new TaxesAndFeesPage(driver);
 
             await taxesAndFees.openTaxesAndFeesDirectly(eventId, environment);
-            await taxesAndFees.addOneTaxForTickets();
-            await taxesAndFees.clickSaveTaxesAndFeesButton();
-            let savedTaxValue = await taxesAndFees.getFloatNumberForTaxOrFee(1,1);
+            await taxesAndFees.addPercentTaxAndDollarFee(addedTaxName, addedTax, addedFeeName, addedFee)
             await bosTickets.openBoxOfficeDirectly(eventId, environment);
-            await bosTickets.selectTicketByIndexSendQuantityAndSave(0, 2);
+            await bosTickets.selectTicketByIndexSendQuantityAndSave(0, 1);
             await bosTickets.clickNavButtonByIndexWhenTicketsSelected(2);
-            await bosDetails.assertTaxValueAndTicketTotalMultipliedByTaxEqualsTotal(savedTaxValue);
+
+            if(environment === "stage"){
+                await bosDetails.assertAddedTaxAndFeesReflectsTheNewTotal(ticketOnePriceStage,uppedFeePercent, uppedFee$, addedTax,  addedFee);
+            }else{
+                await bosDetails.assertAddedTaxAndFeesReflectsTheNewTotal(ticketOnePrice,uppedFeePercent, uppedFee$, addedTax,  addedFee);
+            }
 
         });
 
-        it('should remove tax and add $ value fee and assert price in order total', async function () {
 
-            taxesAndFees = new TaxesAndFeesPage(driver);
-
-            await taxesAndFees.openTaxesAndFeesDirectly(eventId, environment);
-            await taxesAndFees.clickRemoveTaxOrFeeButtonByIndex(0);
-            await taxesAndFees.clickSaveTaxesAndFeesButton();
-            await taxesAndFees.set$FeeForTickets("Check $ Fee", ".02");
-            await taxesAndFees.clickSaveTaxesAndFeesButton();
-            let saved$FeeValue = await taxesAndFees.get$FeeFromInputByIndex(1);
-            await bosTickets.openBoxOfficeDirectly(eventId, environment);
-            await bosTickets.selectTicketByIndexSendQuantityAndSave(0, 2);
-            await bosTickets.clickNavButtonByIndexWhenTicketsSelected(2);
-            await bosDetails.assertFeeValueThenTicketTotalPlusFeeTimesTicketQtyEqualsTotal(saved$FeeValue);
-
-        });
-
-        it('should add excluded tax again and check correct calculation for total', async function () {
-
-            taxesAndFees = new TaxesAndFeesPage(driver);
-
-            await taxesAndFees.openTaxesAndFeesDirectly(eventId, environment);
-            await taxesAndFees.addOneTaxForTickets();
-            await taxesAndFees.clickSaveTaxesAndFeesButton();
-            let savedTaxValue = await taxesAndFees.getFloatNumberForTaxOrFee(1,1);
-            let saved$FeeValue = await taxesAndFees.get$FeeFromInputByIndex(4);
-            let cleanedFee = saved$FeeValue.substring(1)
-            await bosTickets.openBoxOfficeDirectly(eventId, environment);
-            await bosTickets.selectTicketByIndexSendQuantityAndSave(0, 2);
-            await bosTickets.clickNavButtonByIndexWhenTicketsSelected(2);
-            await bosDetails.assertFeeAndTaxValuesThenAssertTicketTotalPlusFeesAndTaxesEqualsTotal(savedTaxValue, cleanedFee);
-
-        });
 
         it('should create ticket groups and three more tickets',async function () {
 
             createTicket = new CreateTicketModal(driver);
 
-            await dashboard.clickMyEventsTab();
+            await sectionsNavs.clickNavByIndex(1);
             await myEvents.eventsTableIsDisplayed();
             await myEvents.createdEventIsInTheTable(eventName);
             await myEvents.clickTheNewCreatedEventInTheTable(eventName);
@@ -398,14 +396,22 @@
             await ticketsNav.addTicketButtonIsDisplayed();
             await ticketsNav.clickAddTicketButton();
             await createTicket.ticketNameInputIsDisplayed();
-            await createTicket.createNewTicket(ticketTwoName,ticketTwoPrice,ticketTwoQuantity);
+            if(environment === "stage"){
+                await createTicket.createNewTicket(ticketTwoName,ticketTwoPriceStage,ticketTwoQuantity);
+            }else{
+                await createTicket.createNewTicket(ticketTwoName,ticketTwoPrice,ticketTwoQuantity);
+            }
             await ticketsNav.addTicketButtonIsDisplayed();
             await ticketsNav.createdTicketIsInTheTable(ticketTwoName);
             await ticketsNav.clickActivateTicketToggle(ticketTwoName);
             await ticketsNav.addTicketButtonIsDisplayed();
             await ticketsNav.clickAddTicketButton();
             await createTicket.ticketNameInputIsDisplayed();
-            await createTicket.createNewTicket(ticketThreeName,ticketThreePrice,ticketThreeQuantity);
+            if(environment === "stage"){
+                await createTicket.createNewTicket(ticketThreeName,ticketThreePriceStage,ticketThreeQuantity);
+            }else{
+                await createTicket.createNewTicket(ticketThreeName,ticketThreePrice,ticketThreeQuantity);
+            }
             await ticketsNav.addTicketButtonIsDisplayed();
             await ticketsNav.createdTicketIsInTheTable(ticketThreeName);
             await ticketsNav.clickActivateTicketToggle(ticketThreeName);
@@ -415,11 +421,27 @@
             await ticketsNav.addTicketButtonIsDisplayed();
             await ticketsNav.clickAddTicketButton();
             await createTicket.ticketNameInputIsDisplayed();
-            await createTicket.createNewTicket(ticketFourName,ticketFourPrice,ticketFourQuantity);
+            if(environment === "stage"){
+                await createTicket.createNewTicket(ticketFourName,ticketFourPriceStage,ticketFourQuantity);
+            }else{
+                await createTicket.createNewTicket(ticketFourName,ticketFourPrice,ticketFourQuantity);
+            }
             await ticketsNav.addTicketButtonIsDisplayed();
             await ticketsNav.createdTicketIsInTheTable(ticketFourName);
             await ticketsNav.clickActivateTicketToggle(ticketFourName);
             await ticketsNav.clickGroupTabByIndex(0);
+            await ticketsNav.assertTicketGroupNames(ticketGroupOne, ticketGroupTwo, ticketGroupThree);
+            if(environment === "stage"){
+                await ticketsNav.assertTicketNamePriceAndQuantity(ticketOneName,ticketOnePriceStage,ticketOneQuantity);
+                await ticketsNav.assertTicketNamePriceAndQuantity(ticketTwoName,ticketTwoPriceStage,ticketTwoQuantity);
+                await ticketsNav.assertTicketNamePriceAndQuantity(ticketThreeName,ticketThreePriceStage,ticketThreeQuantity);
+                await ticketsNav.assertTicketNamePriceAndQuantity(ticketFourName,ticketFourPriceStage,ticketFourQuantity);
+            }else{
+                await ticketsNav.assertTicketNamePriceAndQuantity(ticketOneName,ticketOnePrice,ticketOneQuantity);
+                await ticketsNav.assertTicketNamePriceAndQuantity(ticketTwoName,ticketTwoPrice,ticketTwoQuantity);
+                await ticketsNav.assertTicketNamePriceAndQuantity(ticketThreeName,ticketThreePrice,ticketThreeQuantity);
+                await ticketsNav.assertTicketNamePriceAndQuantity(ticketFourName,ticketFourPrice,ticketFourQuantity);
+            }
 
         });
         
@@ -635,6 +657,8 @@
 
         });
 
+
+
         it('Should check calculation on subtotal and total and check if tickets are displayed', async function () {
 
             await bosTickets.openBoxOfficeDirectly(eventId, environment);
@@ -655,19 +679,22 @@
             await bosTickets.isOnBoxOfficePage();
             await bosTickets.select18Tickets();
             await bosExtras.clickNextButton();
-            await bosDetails.confirmAllValuesAreZeroesAfter100PercentPromotionAndConfirmCompletion(promoCodeFive);
+            await bosDetails.confirmTotalTaxesAndFeesAreZeroedAndTheSubtotalRemainsTheSameAndDiscountEqualsSubtotal(promoCodeFive);
             await bosDetails.continueToPayment();
             await bosReview.paymentWith100DiscountAndPaymentCard(base);
 
         });
-
         it('Should make calculation for promotion with limits , exceed limit , assert totals', async function () {
             await bosTickets.openBoxOfficeDirectly(eventId, environment);
             await bosTickets.isOnBoxOfficePage();
             await bosTickets.select23TicketsForPromotionWithLimits();
             await bosExtras.isOnExtrasScreen();
             await bosExtras.clickNextButton();
-            await bosDetails.assertTotalValueBeforeAndAfterPromotionWhenLimitsWereExceeded(ticketTwoPrice, ticketThreePrice, ticketFourPrice, promoCodeThree);
+            if(environment === "stage"){
+                await bosDetails.assertTotalValueBeforeAndAfterPromotionWhenLimitsWereExceeded(ticketTwoPriceStage, ticketThreePriceStage, ticketFourPriceStage, promoCodeThree);
+            }else{
+                await bosDetails.assertTotalValueBeforeAndAfterPromotionWhenLimitsWereExceeded(ticketTwoPrice, ticketThreePrice, ticketFourPrice, promoCodeThree);
+            }
 
         });
 
@@ -763,6 +790,15 @@
 
         });
 
+        it('should set new price and make payment assert taxes and fees are updated and make payment', async function () {
 
+            await bosTickets.openBoxOfficeDirectly(eventId, environment);
+            await bosTickets.isOnBoxOfficePage();
+            await bosTickets.overrideTheOriginalPriceForTicketByIndex(1);
+            await bosTickets.selectTicketByIndex(1, 1);
+            let newPrice = await bosTickets.getOverridenPriceBiIndex(0);
+            await bosTickets.clickNavButtonByIndexWhenTicketsSelected(2);
+            await bosDetails.assertWhenPriceChangedTaxesAndFeesAreRecalculatedCorrectly(newPrice, uppedFee$, uppedFeePercent, addedFee, addedTax)
 
+        });
     });

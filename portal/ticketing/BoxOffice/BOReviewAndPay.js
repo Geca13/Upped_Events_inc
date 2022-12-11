@@ -57,7 +57,7 @@
             await this.isDisplayed(PLACE_ORDER_BUTTON, 5000);
         }
 
-        async assertElementsOnReviewAndPayPageWhenOneTicketSelected(ticketName){
+        async assertElementsOnReviewAndPayPageWhenOneTicketSelected(ticketName, ticketPrice, uppedFee$, uppedFeePercent){
             try {
 
             await this.isOnReviewPage();
@@ -105,6 +105,7 @@
             let donationValue = await this.getElementTextFromAnArrayByIndex(VALUES, 4);
             let shippingValue = await this.getElementTextFromAnArrayByIndex(VALUES, 5);
             let discountValue = await this.getElementTextFromAnArrayByIndex(VALUES, 6);
+            let ticketFee = ((parseFloat(ticketPrice) + parseFloat(ticketPrice) / 100 * uppedFeePercent) + uppedFee$) - parseFloat(ticketPrice)
 
             assert.equal( rawTicketOne.substring(0,8), ticketName);
             assert.equal( cCardLabel,"Pay by credit card");
@@ -139,14 +140,15 @@
             assert.equal( discountExample, "Discount code: xxxxx-xxxx-xxx");
             assert.equal( donationsHeader ,"Donation:");
             assert.equal(subtotalHeader, "Subtotal");
-            assert.equal(ticketsValue, "$ 1.00");
+            assert.equal(ticketsValue, "$ " + ticketPrice);
             assert.equal( donationValue, "$ 0.00");
-            assert.equal( subtotalValue ,"$ 1.00");
+            assert.equal( subtotalValue ,"$ " + ticketPrice);
             assert.equal(taxesValue, "$ 0.00");
-            assert.equal(feesValue, "$ 0.00");
+            assert.equal(feesValue, "$ " + ticketFee.toFixed(2));
             assert.equal( shippingValue ,"$ 0.00");
             assert.equal(discountValue, "$ 0.00");
-            assert.equal(totalValue, "$ 1.00");
+            let total = parseFloat(ticketPrice) + ticketFee;
+            assert.equal(totalValue, "$ "+ (total).toString());
             }catch (error) {
 
             }
@@ -271,11 +273,10 @@
         }
 
         async fillUserDataForCardAdditionalEmailNoCopy(base) {
-            await this.sentKeys(FIRST_NAME,"Mark");
+            await this.sentKeys(FIRST_NAME,base);
             await this.sentKeys(LAST_NAME,base);
             await this.sentKeys(BIRTH_DATE,"01012000");
-            await this.sentKeys(EMAIL,base+'Mark@'+base+".mk");
-            await this.click(NO_ACCOUNT_CHECKBOX)
+            await this.sentKeys(EMAIL,base+'@'+base+".mk");
             await this.click(SEND_COPY_CHECKBOX)
             await this.sentKeys(ADDITIONAL_EMAIL,base+'ad@ad'+base+".mk");
             await this.click(ADD_BUTTON);

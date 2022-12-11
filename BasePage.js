@@ -63,7 +63,7 @@ class BasePage {
     }
     async returnNumberWith$Sign(locator){
         let number = await this.getEnteredTextInTheInput(locator);
-        return '$'+number;
+        return '$'+parseFloat(number).toFixed(2);
     }
 
     async getEnteredTextInTheInput(locator){
@@ -299,7 +299,7 @@ class BasePage {
             priceString = priceString.substring(1);
         }
         let convertedPrice = parseFloat(priceString);
-        return convertedPrice.toFixed(2);
+        return convertedPrice;
     }
 
     async dateTimeNow(){

@@ -47,6 +47,7 @@
         async assertTicketDataByTicketName(ticketName,ticketPrice, ticketQuantity){
 
             await this.isOnBoxOfficePage();
+            await this.assertBoxOfficeTicketsTableHeaders();
             let i = await this.returnIndexWhenTextIsKnown(COLUMN_TICKET_NAME, ticketName);
             let ticketOne = await this.getTextFromElementOfArray(COLUMN_TICKET_NAME,i);
             let description = await this.getTextFromElementOfArray(COLUMN_DESCRIPTION,i);
@@ -112,6 +113,13 @@
             await this.click(SAVE_BUTTON);
         }
 
+        async selectTicketByIndex(index, quantity){
+            await this.isOnBoxOfficePage();
+            await this.timeout(500);
+            await this.sendKeysToElementReturnedFromAnArray(COLUMN_SELECTS,index,quantity);
+
+        }
+
         async selectTwoTickets(){
             await this.isOnBoxOfficePage();
             await this.timeout(1000);
@@ -126,9 +134,9 @@
         }
 
         async select23TicketsForPromotionWithLimits(){
-            await this.sendKeysToElementReturnedFromAnArray(COLUMN_SELECTS,1,"6");
-            await this.sendKeysToElementReturnedFromAnArray(COLUMN_SELECTS,2,"10");
-            await this.sendKeysToElementReturnedFromAnArray(COLUMN_SELECTS,3,"7");
+            await this.sendKeysToElementReturnedFromAnArray(COLUMN_SELECTS,2,"6");
+            await this.sendKeysToElementReturnedFromAnArray(COLUMN_SELECTS,3,"10");
+            await this.sendKeysToElementReturnedFromAnArray(COLUMN_SELECTS,0,"7");
             await this.click(SAVE_BUTTON);
         }
 
@@ -142,9 +150,8 @@
           
         }
 
-        async addNewQuantityAndSetNewPrice(){
-            
-            await this.clickElementReturnedFromAnArray(COLUMN_OVERRIDE,0);
+        async overrideTheOriginalPriceForTicketByIndex(index){
+            await this.clickElementReturnedFromAnArray(COLUMN_OVERRIDE,index);
             let override = new OverrideTicketModal(this.driver);
             await override.overrideModalIsDisplayed();
             await override.loginToTheOverrideModal();
@@ -152,11 +159,22 @@
             await override.setNewPrice('5');
             await override.clickSaveChangesButton();
             await this.timeout(1500);
+
+        }
+
+        async assertNewPriceAndTextFontColor(){
             let newPrice = await this.getElementText(OVERRIDEN_TICKET_PRICE);
-            assert.equal(newPrice,'$0.15');
+            if(await this.environment() === "stage"){
+                assert.equal(newPrice,'$0.15');
+            }else{
+                assert.equal(newPrice,'$15.00');
+            }
             let fontColor = await this.getFontColorFromAnArray(OVERRIDEN_TICKET_PRICE,0);
             assert.equal(fontColor,'rgba(255, 0, 0, 1)');
+        }
 
+        async getOverridenPriceBiIndex(index){
+            return await this.getElementTextFromAnArrayByIndex(OVERRIDEN_TICKET_PRICE, index)
         }
         
         async selectFourIndividualTickets(){

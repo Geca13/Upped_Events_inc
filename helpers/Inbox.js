@@ -52,7 +52,7 @@
 
             let rawEmail = await this.getChildTextByParentIndexAndChildIndex(INBOX_TABLE_ROWS,1,1);
             let email = await this.getSubstringOfInboxEmailString(rawEmail);
-            assert.equal(base+'@'+base+".mk", email);
+            assert.equal( email, base+'@'+base+".mk");
 
         }
 
