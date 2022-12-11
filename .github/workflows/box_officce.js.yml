@@ -1,10 +1,8 @@
 name: Portal_Box_Office CI
 
 on:
-  push:
-    branches: [ "main" ]
-    paths:
-      - '**/PortalBox-OfficeTests.js'
+  schedule:
+  - cron: '45 5 * * *'
 
 jobs:
   build:
