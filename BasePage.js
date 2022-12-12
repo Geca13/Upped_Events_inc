@@ -137,7 +137,7 @@ class BasePage {
     async switchToAnIframe(locator){
         let frame = await this.find(locator)
         await this.driver.switchTo().frame(frame);
-        console.log("InFrane")
+        
     }
     
     async isDisplayed(locator,timeout) {

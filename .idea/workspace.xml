@@ -12,14 +12,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0f4661ab-f48b-4ba5-9b91-545ca496b723" name="Changes" comment="fixes stale">
+    <list default="true" id="0f4661ab-f48b-4ba5-9b91-545ca496b723" name="Changes" comment="fixed box-office">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BasePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/BasePage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helpers/Inbox.js" beforeDir="false" afterPath="$PROJECT_DIR$/helpers/Inbox.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOAddDetails.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOAddDetails.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOReviewAndPay.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOReviewAndPay.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOSelectTickets.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOSelectTickets.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portal/ticketing/SettingsNav/TaxesAndFeesPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/ticketing/SettingsNav/TaxesAndFeesPage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/PortalAndEmbedTests.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/PortalAndEmbedTests.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/PortalBox-OfficeTests.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/PortalBox-OfficeTests.js" afterDir="false" />
     </list>
@@ -77,7 +72,22 @@
       <recent name="D:\Upped_Events_Inc" />
     </key>
   </component>
-  <component name="RunManager" selected="Mocha.Should do embed tests.Test_33 - should create three more tickets and ticket groups, then assert data in tickets table ">
+  <component name="RunManager" selected="Mocha.Should do embed tests">
+    <configuration name="Should do embed tests" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <mocha-package>$PROJECT_DIR$/node_modules/mocha</mocha-package>
+      <working-directory>$PROJECT_DIR$</working-directory>
+      <pass-parent-env>true</pass-parent-env>
+      <ui>bdd</ui>
+      <extra-mocha-options />
+      <test-kind>SUITE</test-kind>
+      <test-file>$PROJECT_DIR$/test/PortalAndEmbedTests.js</test-file>
+      <test-names>
+        <name value="Should do embed tests" />
+      </test-names>
+      <method v="2" />
+    </configuration>
     <configuration name="Should do embed tests.Test_09 - should create new account on Create Account modal and assert user is logged in and Logout link is displayed" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
       <node-interpreter>project</node-interpreter>
       <node-options />
@@ -91,22 +101,6 @@
       <test-names>
         <name value="Should do embed tests" />
         <name value="Test_09 - should create new account on Create Account modal and assert user is logged in and Logout link is displayed" />
-      </test-names>
-      <method v="2" />
-    </configuration>
-    <configuration name="Should do embed tests.Test_20 - should remove tax and add $ value fee and assert price in update modal" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
-      <node-interpreter>project</node-interpreter>
-      <node-options />
-      <mocha-package>$PROJECT_DIR$/node_modules/mocha</mocha-package>
-      <working-directory>$PROJECT_DIR$</working-directory>
-      <pass-parent-env>true</pass-parent-env>
-      <ui>bdd</ui>
-      <extra-mocha-options />
-      <test-kind>TEST</test-kind>
-      <test-file>$PROJECT_DIR$/test/PortalAndEmbedTests.js</test-file>
-      <test-names>
-        <name value="Should do embed tests" />
-        <name value="Test_20 - should remove tax and add $ value fee and assert price in update modal" />
       </test-names>
       <method v="2" />
     </configuration>
@@ -160,11 +154,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Mocha.Should do embed tests" />
         <item itemvalue="Mocha.Should do embed tests.Test_33 - should create three more tickets and ticket groups, then assert data in tickets table " />
         <item itemvalue="Mocha.Should do embed tests.Test_25 - should make payment with new card in embed and assert Sold Out message is displayed after purchase" />
         <item itemvalue="Mocha.Should do embed tests.Test_09 - should create new account on Create Account modal and assert user is logged in and Logout link is displayed" />
         <item itemvalue="Mocha.Should do embed tests.Test_21 - should add excluded tax again and check if bayer total is updated in ticket update modal" />
-        <item itemvalue="Mocha.Should do embed tests.Test_20 - should remove tax and add $ value fee and assert price in update modal" />
       </list>
     </recent_temporary>
   </component>
@@ -199,7 +193,9 @@
       <workItem from="1670572793561" duration="17324000" />
       <workItem from="1670631093321" duration="415000" />
       <workItem from="1670659363908" duration="21077000" />
-      <workItem from="1670746466042" duration="21801000" />
+      <workItem from="1670746466042" duration="23307000" />
+      <workItem from="1670826887728" duration="3369000" />
+      <workItem from="1670886511208" duration="1000" />
     </task>
     <task id="LOCAL-00001" summary="Rebuild whole project to match new workflow">
       <created>1669752944280</created>
@@ -334,7 +330,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670668515529</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="fixed box-office">
+      <created>1670799794357</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1670799794357</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -370,7 +373,8 @@
     <MESSAGE value="fixes8" />
     <MESSAGE value="fixes9" />
     <MESSAGE value="fixes stale" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixes stale" />
+    <MESSAGE value="fixed box-office" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed box-office" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -518,25 +522,21 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/portal/ticketing/BoxOffice/BOAddDetails.js</url>
           <line>206</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="127" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/portal/ticketing/BoxOffice/BOAddDetails.js</url>
           <line>207</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="128" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/portal/ticketing/BoxOffice/BOAddDetails.js</url>
           <line>208</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="129" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/portal/ticketing/TicketsNav.js</url>
           <line>57</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="130" />
         </line-breakpoint>
       </breakpoints>
