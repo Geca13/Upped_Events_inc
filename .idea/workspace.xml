@@ -12,8 +12,10 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0f4661ab-f48b-4ba5-9b91-545ca496b723" name="Changes" comment="added codes in box office tests">
+    <list default="true" id="0f4661ab-f48b-4ba5-9b91-545ca496b723" name="Changes" comment="added codes in box office tests7">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portal/ticketing/SettingsNav/TicketQuestionsPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/ticketing/SettingsNav/TicketQuestionsPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/PortalAndEmbedTests.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/PortalAndEmbedTests.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -195,7 +197,7 @@
       <workItem from="1670886511208" duration="785000" />
       <workItem from="1670913564310" duration="3381000" />
       <workItem from="1670943642930" duration="1000" />
-      <workItem from="1670948061403" duration="1000" />
+      <workItem from="1670948061403" duration="1206000" />
     </task>
     <task id="LOCAL-00001" summary="Rebuild whole project to match new workflow">
       <created>1669752944280</created>
@@ -344,7 +346,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670886697015</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="added codes in box office tests7">
+      <created>1670948307071</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1670948307071</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -382,7 +391,8 @@
     <MESSAGE value="fixes stale" />
     <MESSAGE value="fixed box-office" />
     <MESSAGE value="added codes in box office tests" />
-    <option name="LAST_COMMIT_MESSAGE" value="added codes in box office tests" />
+    <MESSAGE value="added codes in box office tests7" />
+    <option name="LAST_COMMIT_MESSAGE" value="added codes in box office tests7" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -506,21 +516,6 @@
           <url>file://$PROJECT_DIR$/microsites/components/DonateComponent.js</url>
           <line>58</line>
           <option name="timeStamp" value="73" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/portal/portalModals/CreateTicketModal.js</url>
-          <line>140</line>
-          <option name="timeStamp" value="86" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/portal/portalModals/CreateTicketModal.js</url>
-          <line>141</line>
-          <option name="timeStamp" value="87" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/portal/portalModals/CreateTicketModal.js</url>
-          <line>142</line>
-          <option name="timeStamp" value="88" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/portal/ticketing/BoxOffice/BOReviewAndPay.js</url>

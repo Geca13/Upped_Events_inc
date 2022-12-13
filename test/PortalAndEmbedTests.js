@@ -2792,7 +2792,6 @@
             await myEvents.eventsTableIsDisplayed();
             await myEvents.createdEventIsInTheTable(eventName);
             await myEvents.clickTheNewCreatedEventInTheTable(eventName);
-            await driver.sleep(5000);
             await eventDetails.unpublishButtonIsDisplayed();
             await sideMenu.clickTicketingTab();
             await sectionsNavs.clickNavByText("Settings")

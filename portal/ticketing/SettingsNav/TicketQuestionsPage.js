@@ -17,9 +17,10 @@
 
         async clickActivateQuestionButton(index){
             await this.isOnTicketQuestionsPage();
+            await this.timeout(2000);
             await this.isDisplayed(QUESTION_OFF_TOGGLE,5000);
             await this.clickElementReturnedFromAnArray(QUESTION_OFF_TOGGLE,index);
-            await this.driver.sleep(500);
+            await this.timeout(500);
         }
         async clickDeactivateQuestionButton(index){
             await this.timeout(2000);
