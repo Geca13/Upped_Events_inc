@@ -14,7 +14,6 @@
   <component name="ChangeListManager">
     <list default="true" id="0f4661ab-f48b-4ba5-9b91-545ca496b723" name="Changes" comment="added codes in box office tests">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/PortalAndEmbedTests.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/PortalAndEmbedTests.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -195,6 +194,8 @@
       <workItem from="1670826887728" duration="3369000" />
       <workItem from="1670886511208" duration="785000" />
       <workItem from="1670913564310" duration="3381000" />
+      <workItem from="1670943642930" duration="1000" />
+      <workItem from="1670948061403" duration="1000" />
     </task>
     <task id="LOCAL-00001" summary="Rebuild whole project to match new workflow">
       <created>1669752944280</created>

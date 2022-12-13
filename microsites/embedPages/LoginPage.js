@@ -26,6 +26,7 @@
             await this.sendKeysToElementReturnedFromAnArray(EMAIL_INPUT,index, email);
             await this.sendKeysToElementReturnedFromAnArray(PASSWORD_INPUT,index, password);
             await this.clickElementReturnedFromAnArray(LOGIN_BUTTON, index);
+            await this.timeout(2000);
         }
 
         async clickRegisterLink(){

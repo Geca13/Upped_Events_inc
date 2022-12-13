@@ -34,6 +34,7 @@
             await this.isDisplayed(QUESTIONS_TABLE,5000);
         }
         async createSimpleYesNoQuestionAndAssertSavedDataAndElements(base, ticketOneName, ticketThreeName){
+            await this.timeout(2000)
             await this.isOnTicketQuestionsPage();
             await this.click(ADD_BUTTON);
             let createQuestionModal = new CreateTicketQuestionPage(this.driver);

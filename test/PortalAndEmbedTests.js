@@ -1377,6 +1377,7 @@
             await main.clickNextPageButton();
             await embedLogin.isAtLoginPage();
             await embedLogin.loginWithEmailAndPassword(customerEmail, customerPassword, 0);
+            await driver.sleep(2000)
             await donate.assertCorrectValuesInInputAfterDonationButtonIsClicked(0);
             await donate.assertCorrectValuesInInputAfterDonationButtonIsClicked(1);
             await donate.assertCorrectValuesInInputAfterDonationButtonIsClicked(2);
@@ -1401,6 +1402,7 @@
             await main.clickNextPageButton();
             await embedLogin.isAtLoginPage();
             await embedLogin.loginWithEmailAndPassword(customerEmail, customerPassword, 0);
+            await driver.sleep(2000)
             await donate.addDonationToOrderAndAssertDataInOrderTotal(0);
             await donate.clickResetDonationButtonAndAssertInputIsReset();
             await donate.addDonationToOrderAndAssertDataInOrderTotal(1);
@@ -1429,6 +1431,7 @@
             await main.clickNextPageButton();
             await embedLogin.isAtLoginPage();
             await embedLogin.loginWithEmailAndPassword(customerEmail, customerPassword, 0);
+            await driver.sleep(2000)
             await donate.addCustomDonationAndAssertIsAddedInOrderTotal();
 
         });
@@ -1450,6 +1453,7 @@
             await main.clickNextPageButton();
             await embedLogin.isAtLoginPage();
             await embedLogin.loginWithEmailAndPassword("parma99@parma.it", "Pero1234", 0);
+            await driver.sleep(2000)
             await donate.calculateTheOrderTotalAfterDonationIsAdded();
 
         });
@@ -1471,6 +1475,7 @@
             await main.clickNextPageButton();
             await embedLogin.isAtLoginPage();
             await embedLogin.loginWithEmailAndPassword(customerEmail, customerPassword, 0);
+            await driver.sleep(2000)
             await donate.checkWhenInputValue0AddDonationButtonIsDisabledAndResetEnabled();
             await donate.clickOneDonationValueButton(2)
             await donate.checkWhenInputValueNot0AddDonationButtonIsEnabledAndResetDisabled();
