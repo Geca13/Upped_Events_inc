@@ -51,7 +51,7 @@
         }
 
         async sentKeysToTicketInputByTicketName(ticketName, qty){
-            await this.isDisplayed(TICKET_SELECT, 5000)
+            await this.isDisplayed(TICKET_SELECT, 15000)
             let i = await this.getTicketIndexByTicketName(ticketName);
             await this.timeout(1500)
             await this.sentKeysToChildByIndexAndParentIndex(TICKET_QUANTITY_CONTAINER, i, 0, qty)
