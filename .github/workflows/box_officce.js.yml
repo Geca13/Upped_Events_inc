@@ -2,7 +2,7 @@ name: Portal_Box_Office CI
 
 on:
   schedule:
-  - cron: '15 7 * * *'
+  - cron: '15 6 * * *'
 
 jobs:
   build:
