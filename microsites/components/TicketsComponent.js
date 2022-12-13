@@ -51,16 +51,14 @@
         }
 
         async sentKeysToTicketInputByTicketName(ticketName, qty){
-            await this.isDisplayed(TICKET_QUANTITY_CONTAINER, 5000);
+            await this.isDisplayed(TICKET_NAME_AND_PRICE, 5000)
             let i = await this.getTicketIndexByTicketName(ticketName);
-            await this.timeout(500);
-            await this.isDisplayed(TICKET_QUANTITY_CONTAINER, 5000);
+            await this.timeout(1500)
             await this.sentKeysToChildByIndexAndParentIndex(TICKET_QUANTITY_CONTAINER, i, 0, qty)
             await this.timeout(1000)
         }
 
         async getTicketIndexByTicketName(ticketName) {
-            await this.isDisplayed(TICKET_NAME_AND_PRICE, 5000);
             let tickets = await this.findAll(TICKET_NAME_AND_PRICE);
             for(let i = 0; i < tickets.length; i++){
                 let ticket = await this.getElementTextFromAnArrayByIndex(TICKET_NAME_AND_PRICE,i);
