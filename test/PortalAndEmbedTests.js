@@ -2734,7 +2734,8 @@
             await sideMenu.clickTicketingTab();
             await sectionsNavs.clickNavByText("Settings");
             await ticketTerms.termsPageIsDisplayed();
-            await sectionsNavs.clickSubNavByText("Ticket Questions")
+            await sectionsNavs.clickSubNavByText("Ticket Questions");
+            console.log("ticket question clicked")
             await questions.createSimpleYesNoQuestionAndAssertSavedDataAndElements(base, ticketOneName, ticketThreeName);
 
         });
@@ -2797,7 +2798,9 @@
             await sectionsNavs.clickNavByText("Settings")
             await ticketTerms.termsPageIsDisplayed();
             await sectionsNavs.clickSubNavByText("Ticket Questions")
+            console.log("ticket question clicked")
             await questions.clickDeactivateQuestionButton(0);
+            console.log("DeActivated tq")
             await questions.createQuestionWithInput(base);
 
         });
@@ -2889,7 +2892,9 @@
             await sectionsNavs.clickNavByText("Settings")
             await ticketTerms.termsPageIsDisplayed();
             await sectionsNavs.clickSubNavByText("Ticket Questions")
+            console.log("Ticket Questions clicked")
             await questions.clickActivateQuestionButton(0);
+            console.log("Activated tq")
             await questions.updateFirstQuestionToIncludeInputAndForEachTicket(base);
 
         });

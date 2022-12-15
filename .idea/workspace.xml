@@ -12,10 +12,20 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0f4661ab-f48b-4ba5-9b91-545ca496b723" name="Changes" comment="added codes in box office tests7">
+    <list default="true" id="0f4661ab-f48b-4ba5-9b91-545ca496b723" name="Changes" comment="added codes in box office tests8">
+      <change afterPath="$PROJECT_DIR$/portal/filters/TransactionCenterFilters.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/portal/portalComponents/PaginationComponent.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/portal/portalModals/OrderDetailsModal.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/portal/transactionCentar/AllTransactions.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/PortalAndTransactionsTests.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portal/ticketing/SettingsNav/TicketQuestionsPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/ticketing/SettingsNav/TicketQuestionsPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/PortalAndEmbedTests.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/PortalAndEmbedTests.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BasePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/BasePage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/microsites/embedPages/EmbedMainPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/microsites/embedPages/EmbedMainPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portal/portalComponents/SectionsNavs.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/portalComponents/SectionsNavs.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portal/portalComponents/TableComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/portalComponents/TableComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOReviewAndPay.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOReviewAndPay.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOSelectTickets.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOSelectTickets.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/PortalAndMobileViewEmbed.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/PortalAndMobileViewEmbed.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +53,9 @@
     <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2HtbJoCsnDPgNUkY3vayBdzDDbm" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -55,7 +68,7 @@
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Upped_Events_Inc&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Upped_Events_Inc/portal/filters&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -68,10 +81,14 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Upped_Events_Inc\portal\filters" />
+      <recent name="D:\Upped_Events_Inc\portal\portalComponents" />
+      <recent name="D:\Upped_Events_Inc\portal\portalModals" />
+      <recent name="D:\Upped_Events_Inc\portal" />
       <recent name="D:\Upped_Events_Inc" />
     </key>
   </component>
-  <component name="RunManager" selected="Mocha.Should do embed tests">
+  <component name="RunManager" selected="Mocha.Should do embed tests.PT_10_should make cash transaction">
     <configuration name="Should do embed tests" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
       <node-interpreter>project</node-interpreter>
       <node-options />
@@ -81,13 +98,13 @@
       <ui>bdd</ui>
       <extra-mocha-options />
       <test-kind>SUITE</test-kind>
-      <test-file>$PROJECT_DIR$/test/PortalAndEmbedTests.js</test-file>
+      <test-file>$PROJECT_DIR$/test/PortalAndTransactionsTests.js</test-file>
       <test-names>
         <name value="Should do embed tests" />
       </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="Should do embed tests.Test_09 - should create new account on Create Account modal and assert user is logged in and Logout link is displayed" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
+    <configuration name="Should do embed tests.PT_07_should make card transaction" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
       <node-interpreter>project</node-interpreter>
       <node-options />
       <mocha-package>$PROJECT_DIR$/node_modules/mocha</mocha-package>
@@ -96,14 +113,14 @@
       <ui>bdd</ui>
       <extra-mocha-options />
       <test-kind>TEST</test-kind>
-      <test-file>$PROJECT_DIR$/test/PortalAndEmbedTests.js</test-file>
+      <test-file>$PROJECT_DIR$/test/PortalAndTransactionsTests.js</test-file>
       <test-names>
         <name value="Should do embed tests" />
-        <name value="Test_09 - should create new account on Create Account modal and assert user is logged in and Logout link is displayed" />
+        <name value="PT_07_should make card transaction" />
       </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="Should do embed tests.Test_21 - should add excluded tax again and check if bayer total is updated in ticket update modal" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
+    <configuration name="Should do embed tests.PT_08_should navigate to Transactions page and assert transaction payment mode and status" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
       <node-interpreter>project</node-interpreter>
       <node-options />
       <mocha-package>$PROJECT_DIR$/node_modules/mocha</mocha-package>
@@ -112,14 +129,14 @@
       <ui>bdd</ui>
       <extra-mocha-options />
       <test-kind>TEST</test-kind>
-      <test-file>$PROJECT_DIR$/test/PortalAndEmbedTests.js</test-file>
+      <test-file>$PROJECT_DIR$/test/PortalAndTransactionsTests.js</test-file>
       <test-names>
         <name value="Should do embed tests" />
-        <name value="Test_21 - should add excluded tax again and check if bayer total is updated in ticket update modal" />
+        <name value="PT_08_should navigate to Transactions page and assert transaction payment mode and status" />
       </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="Should do embed tests.Test_25 - should make payment with new card in embed and assert Sold Out message is displayed after purchase" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
+    <configuration name="Should do embed tests.PT_09_should assert refund button is displayed right after cash transaction" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
       <node-interpreter>project</node-interpreter>
       <node-options />
       <mocha-package>$PROJECT_DIR$/node_modules/mocha</mocha-package>
@@ -128,14 +145,14 @@
       <ui>bdd</ui>
       <extra-mocha-options />
       <test-kind>TEST</test-kind>
-      <test-file>$PROJECT_DIR$/test/PortalAndEmbedTests.js</test-file>
+      <test-file>$PROJECT_DIR$/test/PortalAndTransactionsTests.js</test-file>
       <test-names>
         <name value="Should do embed tests" />
-        <name value="Test_25 - should make payment with new card in embed and assert Sold Out message is displayed after purchase" />
+        <name value="PT_09_should assert refund button is displayed right after cash transaction" />
       </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="Should do embed tests.Test_33 - should create three more tickets and ticket groups, then assert data in tickets table " type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
+    <configuration name="Should do embed tests.PT_10_should make cash transaction" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
       <node-interpreter>project</node-interpreter>
       <node-options />
       <mocha-package>$PROJECT_DIR$/node_modules/mocha</mocha-package>
@@ -144,20 +161,20 @@
       <ui>bdd</ui>
       <extra-mocha-options />
       <test-kind>TEST</test-kind>
-      <test-file>$PROJECT_DIR$/test/PortalAndEmbedTests.js</test-file>
+      <test-file>$PROJECT_DIR$/test/PortalAndTransactionsTests.js</test-file>
       <test-names>
         <name value="Should do embed tests" />
-        <name value="Test_33 - should create three more tickets and ticket groups, then assert data in tickets table " />
+        <name value="PT_10_should make cash transaction" />
       </test-names>
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Mocha.Should do embed tests.PT_10_should make cash transaction" />
         <item itemvalue="Mocha.Should do embed tests" />
-        <item itemvalue="Mocha.Should do embed tests.Test_33 - should create three more tickets and ticket groups, then assert data in tickets table " />
-        <item itemvalue="Mocha.Should do embed tests.Test_25 - should make payment with new card in embed and assert Sold Out message is displayed after purchase" />
-        <item itemvalue="Mocha.Should do embed tests.Test_09 - should create new account on Create Account modal and assert user is logged in and Logout link is displayed" />
-        <item itemvalue="Mocha.Should do embed tests.Test_21 - should add excluded tax again and check if bayer total is updated in ticket update modal" />
+        <item itemvalue="Mocha.Should do embed tests.PT_09_should assert refund button is displayed right after cash transaction" />
+        <item itemvalue="Mocha.Should do embed tests.PT_08_should navigate to Transactions page and assert transaction payment mode and status" />
+        <item itemvalue="Mocha.Should do embed tests.PT_07_should make card transaction" />
       </list>
     </recent_temporary>
   </component>
@@ -197,7 +214,10 @@
       <workItem from="1670886511208" duration="785000" />
       <workItem from="1670913564310" duration="3381000" />
       <workItem from="1670943642930" duration="1000" />
-      <workItem from="1670948061403" duration="1206000" />
+      <workItem from="1670948061403" duration="12631000" />
+      <workItem from="1671049548492" duration="9997000" />
+      <workItem from="1671061425123" duration="11000" />
+      <workItem from="1671092389349" duration="331000" />
     </task>
     <task id="LOCAL-00001" summary="Rebuild whole project to match new workflow">
       <created>1669752944280</created>
@@ -353,7 +373,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670948307071</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="added codes in box office tests8">
+      <created>1670953330304</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1670953330304</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -392,7 +419,8 @@
     <MESSAGE value="fixed box-office" />
     <MESSAGE value="added codes in box office tests" />
     <MESSAGE value="added codes in box office tests7" />
-    <option name="LAST_COMMIT_MESSAGE" value="added codes in box office tests7" />
+    <MESSAGE value="added codes in box office tests8" />
+    <option name="LAST_COMMIT_MESSAGE" value="added codes in box office tests8" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -519,7 +547,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/portal/ticketing/BoxOffice/BOReviewAndPay.js</url>
-          <line>283</line>
+          <line>288</line>
           <option name="timeStamp" value="105" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">

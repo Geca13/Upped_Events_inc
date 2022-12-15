@@ -40,6 +40,7 @@
         async clickSubNavByText(text){
             await this.timeout(2500);
             await this.locateElementByTextAndClick(text)
+            await this.timeout(2500);
             
         }
 

@@ -17,16 +17,24 @@
 
         async clickActivateQuestionButton(index){
             await this.isOnTicketQuestionsPage();
+            console.log("Is in ticket q page")
             await this.timeout(2000);
             await this.isDisplayed(QUESTION_OFF_TOGGLE,5000);
+            console.log("QUESTION_OFF_TOGGLE enabled")
             await this.clickElementReturnedFromAnArray(QUESTION_OFF_TOGGLE,index);
+            console.log("clicked off toggle")
             await this.timeout(500);
         }
+
         async clickDeactivateQuestionButton(index){
+            await this.isOnTicketQuestionsPage();
+            console.log("Is in ticket q page")
             await this.timeout(2000);
             await this.isDisplayed(QUESTION_ON_TOGGLE,5000);
+            console.log("QUESTION_ON_TOGGLE enabled")
             await this.timeout(500);
             await this.clickElementReturnedFromAnArray(QUESTION_ON_TOGGLE,index);
+            console.log("clicked on toggle")
             await this.timeout(500);
         }
 
@@ -37,6 +45,7 @@
         async createSimpleYesNoQuestionAndAssertSavedDataAndElements(base, ticketOneName, ticketThreeName){
             await this.timeout(2000)
             await this.isOnTicketQuestionsPage();
+
             await this.click(ADD_BUTTON);
             let createQuestionModal = new CreateTicketQuestionPage(this.driver);
             await createQuestionModal.createYesNoQuestion(base);
