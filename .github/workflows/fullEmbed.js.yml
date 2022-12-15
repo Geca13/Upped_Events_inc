@@ -2,7 +2,7 @@ name: Portal_Full_Embed CI
 
 on:
  schedule:
-  - cron: '10 5 * * *'
+  - cron: '40 8 * * *'
 
 jobs:
   build:
