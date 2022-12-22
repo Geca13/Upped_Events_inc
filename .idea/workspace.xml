@@ -12,22 +12,20 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0f4661ab-f48b-4ba5-9b91-545ca496b723" name="Changes" comment="log on ticket q">
+    <list default="true" id="0f4661ab-f48b-4ba5-9b91-545ca496b723" name="Changes" comment="log on ticket qb">
       <change afterPath="$PROJECT_DIR$/portal/filters/TransactionCenterFilters.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/portal/portalComponents/PaginationComponent.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/portal/portalComponents/TablePillFilter.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/portal/portalModals/OrderDetailsModal.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/portal/transactionCentar/AllTransactions.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/test/PortalAndTransactionsTests.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BasePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/BasePage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/microsites/components/NewCardComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/microsites/components/NewCardComponent.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/microsites/embedPages/EmbedMainPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/microsites/embedPages/EmbedMainPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portal/portalComponents/SectionsNavs.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/portalComponents/SectionsNavs.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/portal/portalComponents/TableComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/portalComponents/TableComponent.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOReviewAndPay.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOReviewAndPay.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOSelectTickets.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOSelectTickets.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/portal/ticketing/TicketsNav.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/ticketing/TicketsNav.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/PortalAndEmbedTests.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/PortalAndEmbedTests.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/PortalAndMobileViewEmbed.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/PortalAndMobileViewEmbed.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -223,7 +221,7 @@
       <workItem from="1671491957762" duration="5800000" />
       <workItem from="1671563970809" duration="11189000" />
       <workItem from="1671645839801" duration="6720000" />
-      <workItem from="1671729638868" duration="2000" />
+      <workItem from="1671729638868" duration="353000" />
     </task>
     <task id="LOCAL-00001" summary="Rebuild whole project to match new workflow">
       <created>1669752944280</created>
@@ -393,7 +391,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671093227925</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="log on ticket qb">
+      <created>1671729987935</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1671729987935</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -434,7 +439,8 @@
     <MESSAGE value="added codes in box office tests7" />
     <MESSAGE value="added codes in box office tests8" />
     <MESSAGE value="log on ticket q" />
-    <option name="LAST_COMMIT_MESSAGE" value="log on ticket q" />
+    <MESSAGE value="log on ticket qb" />
+    <option name="LAST_COMMIT_MESSAGE" value="log on ticket qb" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
