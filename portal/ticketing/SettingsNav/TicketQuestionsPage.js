@@ -29,7 +29,7 @@
         async clickDeactivateQuestionButton(index){
             await this.isOnTicketQuestionsPage();
             console.log("Is in ticket q page")
-            await this.timeout(2000);
+            await this.timeout(3000);
             await this.isDisplayed(QUESTION_ON_TOGGLE,5000);
             console.log("QUESTION_ON_TOGGLE enabled")
             await this.timeout(500);

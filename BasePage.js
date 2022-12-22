@@ -359,6 +359,18 @@ class BasePage {
         return await elements[index].getText();
     }
 
+    async returnUniqueStringValues(locator){
+        let unique = [];
+        let array = await this.findAll(locator);
+        for (let i = 0; i < array.length; i++){
+            let string = await this.getElementTextFromAnArrayByIndex(locator, i);
+            if(!unique.includes(string)){
+                unique.push(string)
+            }
+        }
+        return unique;
+    }
+
     async elementIsEnabled(locator){
         let element = await this.find(locator);
         return element.isEnabled();
@@ -389,6 +401,88 @@ class BasePage {
            await this.scrollToView(buttonLocator)
        }
 
+    }
+
+    async assertNumberedArrayIsSortedDescending(locator){
+        let array = await this.convertStringArrayToNumberWithLocator(locator);
+        if(array.length === 1){
+            return true;
+        }
+        for (let i = 0; i < array.length-1; i++) {
+            if (array[i] >= array[i + 1]) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    async convertStringArrayToNumberWithLocator(locator){
+        let converted = [];
+        let original = await this.findAll(locator);
+        for (let i = 0; i < original.length ; i++){
+            let elementText = await this.getElementTextFromAnArrayByIndex(locator, i);
+            if(elementText.includes('$')){
+                elementText = elementText.substring(1);
+            }
+            let elementNumber = parseFloat(elementText);
+            converted.push(elementNumber);
+        }
+        return converted;
+    }
+
+    async assertNumberedArrayIsSortedAscending(locator){
+        let array = await this.convertStringArrayToNumberWithLocator(locator);
+        if(array.length === 1){
+            return true;
+        }
+        for (let i = 0; i < array.length-1; i++) {
+            if (array[i] <= array[i + 1]) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    async getCurrentTimeAndDateFullYear(){
+        let dateAndTime = new Date();
+        let month = dateAndTime.getMonth();
+        let day = dateAndTime.getDate();
+        let hours = dateAndTime.getHours();
+        let year = dateAndTime.getFullYear();
+        let am_pm = "AM"
+        if(hours > 12 ){
+            hours = hours - 12
+            am_pm = "PM"
+        }
+        let minutes = dateAndTime.getMinutes();
+        let converted = hours + ':' + minutes + " " + am_pm + ", " + (month + 1).toString() + '/' + day.toString() + '/' + year.toString();
+        console.log(converted);
+        return converted;
+    }
+
+    async getCurrentDateAndTime$$Year(){
+        let dateAndTime = new Date();
+        let month = dateAndTime.getMonth();
+        let day = dateAndTime.getDate();
+        let hours = dateAndTime.getHours();
+        let year = dateAndTime.getFullYear().toString();
+        let cutYear = year.substring(2)
+        let am_pm = "AM"
+        if(hours > 12 ){
+            hours = hours - 12
+            am_pm = "PM"
+        }
+        let minutes = dateAndTime.getMinutes();
+        let converted = (month + 1).toString() + '/' + day.toString() + '/' + cutYear + ", " + hours + ':' + minutes + " " + am_pm;
+        console.log(converted);
+        return converted;
+    }
+
+    async getTableDataValueByTableRowAndTableColumn(row, column){
+        let element = await this.driver.findElement(By.xpath(`(//tbody//tr)[${row}]//td[${column}]`));
+        return element.getText();
     }
 
 }

@@ -12,19 +12,22 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0f4661ab-f48b-4ba5-9b91-545ca496b723" name="Changes" comment="added codes in box office tests8">
+    <list default="true" id="0f4661ab-f48b-4ba5-9b91-545ca496b723" name="Changes" comment="log on ticket q">
       <change afterPath="$PROJECT_DIR$/portal/filters/TransactionCenterFilters.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/portal/portalComponents/PaginationComponent.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/portal/portalComponents/TablePillFilter.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/portal/portalModals/OrderDetailsModal.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/portal/transactionCentar/AllTransactions.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/test/PortalAndTransactionsTests.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BasePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/BasePage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/microsites/components/NewCardComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/microsites/components/NewCardComponent.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/microsites/embedPages/EmbedMainPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/microsites/embedPages/EmbedMainPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portal/portalComponents/SectionsNavs.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/portalComponents/SectionsNavs.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/portal/portalComponents/TableComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/portalComponents/TableComponent.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOReviewAndPay.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOReviewAndPay.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOSelectTickets.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/ticketing/BoxOffice/BOSelectTickets.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portal/ticketing/TicketsNav.js" beforeDir="false" afterPath="$PROJECT_DIR$/portal/ticketing/TicketsNav.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/PortalAndEmbedTests.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/PortalAndEmbedTests.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/PortalAndMobileViewEmbed.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/PortalAndMobileViewEmbed.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -88,7 +91,22 @@
       <recent name="D:\Upped_Events_Inc" />
     </key>
   </component>
-  <component name="RunManager" selected="Mocha.Should do embed tests.PT_10_should make cash transaction">
+  <component name="RunManager" selected="Mocha.Should do embed tests.PT_15_should make full refund for last transaction with ticket reinstate on the fourth ticket and assert ticket was reinstated  ">
+    <configuration name="Should do embed tests (1)" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <mocha-package>$PROJECT_DIR$/node_modules/mocha</mocha-package>
+      <working-directory>$PROJECT_DIR$</working-directory>
+      <pass-parent-env>true</pass-parent-env>
+      <ui>bdd</ui>
+      <extra-mocha-options />
+      <test-kind>SUITE</test-kind>
+      <test-file>$PROJECT_DIR$/test/PortalAndEmbedTests.js</test-file>
+      <test-names>
+        <name value="Should do embed tests" />
+      </test-names>
+      <method v="2" />
+    </configuration>
     <configuration name="Should do embed tests" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
       <node-interpreter>project</node-interpreter>
       <node-options />
@@ -104,7 +122,7 @@
       </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="Should do embed tests.PT_07_should make card transaction" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
+    <configuration name="Should do embed tests.PT_11_should make new card transaction" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
       <node-interpreter>project</node-interpreter>
       <node-options />
       <mocha-package>$PROJECT_DIR$/node_modules/mocha</mocha-package>
@@ -116,11 +134,11 @@
       <test-file>$PROJECT_DIR$/test/PortalAndTransactionsTests.js</test-file>
       <test-names>
         <name value="Should do embed tests" />
-        <name value="PT_07_should make card transaction" />
+        <name value="PT_11_should make new card transaction" />
       </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="Should do embed tests.PT_08_should navigate to Transactions page and assert transaction payment mode and status" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
+    <configuration name="Should do embed tests.PT_12_should navigate to Transactions page and assert transaction user and value" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
       <node-interpreter>project</node-interpreter>
       <node-options />
       <mocha-package>$PROJECT_DIR$/node_modules/mocha</mocha-package>
@@ -132,11 +150,11 @@
       <test-file>$PROJECT_DIR$/test/PortalAndTransactionsTests.js</test-file>
       <test-names>
         <name value="Should do embed tests" />
-        <name value="PT_08_should navigate to Transactions page and assert transaction payment mode and status" />
+        <name value="PT_12_should navigate to Transactions page and assert transaction user and value" />
       </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="Should do embed tests.PT_09_should assert refund button is displayed right after cash transaction" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
+    <configuration name="Should do embed tests.PT_15_should make full refund for last transaction with ticket reinstate on the fourth ticket and assert ticket was reinstated  " type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
       <node-interpreter>project</node-interpreter>
       <node-options />
       <mocha-package>$PROJECT_DIR$/node_modules/mocha</mocha-package>
@@ -148,33 +166,17 @@
       <test-file>$PROJECT_DIR$/test/PortalAndTransactionsTests.js</test-file>
       <test-names>
         <name value="Should do embed tests" />
-        <name value="PT_09_should assert refund button is displayed right after cash transaction" />
-      </test-names>
-      <method v="2" />
-    </configuration>
-    <configuration name="Should do embed tests.PT_10_should make cash transaction" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
-      <node-interpreter>project</node-interpreter>
-      <node-options />
-      <mocha-package>$PROJECT_DIR$/node_modules/mocha</mocha-package>
-      <working-directory>$PROJECT_DIR$</working-directory>
-      <pass-parent-env>true</pass-parent-env>
-      <ui>bdd</ui>
-      <extra-mocha-options />
-      <test-kind>TEST</test-kind>
-      <test-file>$PROJECT_DIR$/test/PortalAndTransactionsTests.js</test-file>
-      <test-names>
-        <name value="Should do embed tests" />
-        <name value="PT_10_should make cash transaction" />
+        <name value="PT_15_should make full refund for last transaction with ticket reinstate on the fourth ticket and assert ticket was reinstated  " />
       </test-names>
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Mocha.Should do embed tests.PT_10_should make cash transaction" />
+        <item itemvalue="Mocha.Should do embed tests.PT_15_should make full refund for last transaction with ticket reinstate on the fourth ticket and assert ticket was reinstated  " />
         <item itemvalue="Mocha.Should do embed tests" />
-        <item itemvalue="Mocha.Should do embed tests.PT_09_should assert refund button is displayed right after cash transaction" />
-        <item itemvalue="Mocha.Should do embed tests.PT_08_should navigate to Transactions page and assert transaction payment mode and status" />
-        <item itemvalue="Mocha.Should do embed tests.PT_07_should make card transaction" />
+        <item itemvalue="Mocha.Should do embed tests (1)" />
+        <item itemvalue="Mocha.Should do embed tests.PT_12_should navigate to Transactions page and assert transaction user and value" />
+        <item itemvalue="Mocha.Should do embed tests.PT_11_should make new card transaction" />
       </list>
     </recent_temporary>
   </component>
@@ -217,7 +219,11 @@
       <workItem from="1670948061403" duration="12631000" />
       <workItem from="1671049548492" duration="9997000" />
       <workItem from="1671061425123" duration="11000" />
-      <workItem from="1671092389349" duration="331000" />
+      <workItem from="1671092389349" duration="9383000" />
+      <workItem from="1671491957762" duration="5800000" />
+      <workItem from="1671563970809" duration="11189000" />
+      <workItem from="1671645839801" duration="6720000" />
+      <workItem from="1671729638868" duration="2000" />
     </task>
     <task id="LOCAL-00001" summary="Rebuild whole project to match new workflow">
       <created>1669752944280</created>
@@ -380,7 +386,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670953330304</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="log on ticket q">
+      <created>1671093227925</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1671093227925</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -420,7 +433,8 @@
     <MESSAGE value="added codes in box office tests" />
     <MESSAGE value="added codes in box office tests7" />
     <MESSAGE value="added codes in box office tests8" />
-    <option name="LAST_COMMIT_MESSAGE" value="added codes in box office tests8" />
+    <MESSAGE value="log on ticket q" />
+    <option name="LAST_COMMIT_MESSAGE" value="log on ticket q" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -567,7 +581,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/portal/ticketing/TicketsNav.js</url>
-          <line>57</line>
+          <line>63</line>
           <option name="timeStamp" value="130" />
         </line-breakpoint>
       </breakpoints>
