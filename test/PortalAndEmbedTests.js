@@ -88,7 +88,7 @@
         let embedQuestions;
         let forgotPassword;
         let resetPassword;
-        let environment = "stage";
+        let environment = "dev";
 
         let base =  Math.floor(100000 + Math.random() * 900000);
         let eventName =  base.toString() + " FullEventName";
@@ -135,9 +135,9 @@
         let customerPassword2 = base.toString() + 'Password2';
 
         beforeEach(async function(){
-            driver = await new Builder().forBrowser('chrome').build();
+            //driver = await new Builder().forBrowser('chrome').build();
 
-            //driver = await new Builder().forBrowser('chrome').setChromeOptions(new chrome.Options().addArguments('--headless')).build();
+            driver = await new Builder().forBrowser('chrome').setChromeOptions(new chrome.Options().addArguments('--headless')).build();
             await driver.manage().window().setRect({width: 1300, height: 1080});
 
         });
