@@ -88,9 +88,9 @@
         let embedQuestions;
         let forgotPassword;
         let resetPassword;
-        let environment = "dev";
+        let environment = "stage";
 
-        let base = Math.floor(100000 + Math.random() * 900000);
+        let base =  Math.floor(100000 + Math.random() * 900000);
         let eventName =  base.toString() + " FullEventName";
         let shortName = base.toString();
         let ticketOneName = base.toString() +"T1";
@@ -114,7 +114,7 @@
         let ticketStaffQuantity = 2;
         let ticketStaffPrice = "0.23";
         let uppedFeePercent = 2;
-        let uppedFee$ = 0.5;
+        let uppedFee$ = 0.02;
         let addedTax = 13.17;
         let addedTaxName = "Tax"
         let addedFee = 0.02;
@@ -135,9 +135,9 @@
         let customerPassword2 = base.toString() + 'Password2';
 
         beforeEach(async function(){
-            //driver = await new Builder().forBrowser('chrome').build();
+            driver = await new Builder().forBrowser('chrome').build();
 
-            driver = await new Builder().forBrowser('chrome').setChromeOptions(new chrome.Options().addArguments('--headless')).build();
+            //driver = await new Builder().forBrowser('chrome').setChromeOptions(new chrome.Options().addArguments('--headless')).build();
             await driver.manage().window().setRect({width: 1300, height: 1080});
 
         });
@@ -254,7 +254,7 @@
         });
 
         //PORTAL -> EMBED
-        it('Test_05 - should check ticket text when tickets are in the future ',async function () {
+        it('Test_05 - should assert ticket availability text when tickets are in the future and assert ticket name and price format ',async function () {
             main = new EmbedMainPage(driver);
             embedTickets = new TicketsComponent(driver);
             portalLogin = new PortalLoginPage(driver);
@@ -380,7 +380,7 @@
 
 
         //EMBED
-        it('Test_11 - should assert create and login components are displayed on one page after ticketing', async function () {
+        it('Test_11 - should assert create and login components are displayed on next page after ticketing when user is not logged in', async function () {
 
             main = new EmbedMainPage(driver);
             embedTickets = new TicketsComponent(driver);
@@ -522,7 +522,7 @@
         });
 
         //EMBED
-        it('Test_18 - after login should arrive on Extras Page when donations are enabled', async function () {
+        it('Test_18 - when donations are enabled after login user should arrive on Extras Page', async function () {
 
             main = new EmbedMainPage(driver);
             embedTickets = new TicketsComponent(driver);
@@ -574,7 +574,7 @@
         });
 
         //PORTAL
-        it('Test_19 - should add excluded tax and check if bayer total is updated in ticket update modal', async function () {
+        it('Test_20 - should add excluded tax and check if bayer total is updated in ticket update modal', async function () {
             portalLogin = new PortalLoginPage(driver);
             dashboard = new DashboardPage(driver);
             myEvents = new MyEventsPage(driver);
@@ -612,7 +612,7 @@
 
 
         //PORTAL
-        it('Test_20 - should remove tax and add $ value fee and assert price in update modal', async function () {
+        it('Test_21 - should remove tax and add $ value fee and assert price in update modal', async function () {
             portalLogin = new PortalLoginPage(driver);
             dashboard = new DashboardPage(driver);
             myEvents = new MyEventsPage(driver);
@@ -650,7 +650,7 @@
 
         });
 
-        it('Test_21 - should add excluded tax again and check if bayer total is updated in ticket update modal', async function () {
+        it('Test_22 - should add excluded tax again and check if buyer total is updated in ticket update modal', async function () {
 
             portalLogin = new PortalLoginPage(driver);
             dashboard = new DashboardPage(driver);
@@ -688,7 +688,7 @@
         });
 
         //EMBED
-        it('Test_22 - should calculate subtotal and total on one ticket quantity 2 with tax and fee in embed', async function () {
+        it('Test_23 - should assert tickets total equal subtotal when no extras and total equals subtotal plus tax and fee in embed for two tickets', async function () {
 
             main = new EmbedMainPage(driver);
             embedTickets = new TicketsComponent(driver);
@@ -702,7 +702,7 @@
         });
 
         //EMBED
-        it('Test_23 - should check if subtotal equals before and after login on embed', async function () {
+        it('Test_24 - should check if subtotal equals before and after login on embed', async function () {
 
             main = new EmbedMainPage(driver);
             embedTickets = new TicketsComponent(driver);
@@ -727,7 +727,7 @@
         });
 
         //EMBED
-        it('Test_24 - should assert elements on Payment screen component in embed when user has no cards', async function () {
+        it('Test_25 - should assert elements on Payment screen component in embed when user has no cards', async function () {
 
             main = new EmbedMainPage(driver);
             embedTickets = new TicketsComponent(driver);
@@ -754,7 +754,7 @@
         });
         
         //EMBED
-        it('Test_25 - should make payment with new card in embed and assert Sold Out message is displayed after purchase',async function () {
+        it('Test_26 - should make payment with new card for two tickets and assert Sold Out message is displayed after purchase',async function () {
 
             main = new EmbedMainPage(driver);
             embedTickets = new TicketsComponent(driver);
@@ -785,7 +785,7 @@
         });
 
         //PORTAL -> EMBED
-        it('Test_26 - should assert tickets column equals sold column', async function () {
+        it('Test_27 - should assert tickets column equals sold column', async function () {
             portalLogin = new PortalLoginPage(driver);
             dashboard = new DashboardPage(driver);
             myEvents = new MyEventsPage(driver);
